@@ -1,8 +1,8 @@
 # 苍澜群岛 · Canglan Islands
 
-**A three-sided campaign wargame that runs entirely in your browser. Red, Blue and Green each have their own machine staff and their own picture of the battle; unit motion, engagement resolution and Monte Carlo estimates are all computed on the page, with no application server in the loop.**
+**A three-sided campaign wargame that runs in your browser. Red, Blue and Green each get their own machine staff — and their own picture of the battle.** Per-seat fog of war has four levels: the same contact can be under live tracking for one side and completely invisible to another. Take command of any side mid-run; every order carries its intent into the decision log, and any earlier moment can be replayed.
 
-**Coastlines, hulls, aircraft and missile batteries are generated in code when the page loads — the repository contains no 3D model files. The live demo writes replay logs to a cloud database; that is the only networked part, and the simulation does not depend on it.**
+**Ten screens form one chain** — pre-war configuration, quantified course-of-action comparison, the 3D battlefield, and post-run review. Coastlines, hulls, aircraft and missile batteries are generated in code when the page loads, and every record carries its sources and a confidence grade.
 
 Red / Blue / Green each get a machine staff. The island chain, the fleets, the missile
 defence zones and the timing windows are assembled from **open source material only**:
