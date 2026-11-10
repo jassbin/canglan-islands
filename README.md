@@ -1,8 +1,8 @@
 # 苍澜群岛 · Canglan Islands
 
-**A three-sided campaign wargame that runs entirely in your browser — no build, no server, no backend.**
+**A three-sided campaign wargame that runs entirely in your browser. Red, Blue and Green each have their own machine staff and their own picture of the battle; unit motion, engagement resolution and Monte Carlo estimates are all computed on the page, with no application server in the loop.**
 
-**Everything on screen — coastline, hulls, aircraft, missile batteries — is generated in code when the page loads. No 3D model files are ever downloaded.**
+**Coastlines, hulls, aircraft and missile batteries are generated in code when the page loads — the repository contains no 3D model files. The live demo writes replay logs to a cloud database; that is the only networked part, and the simulation does not depend on it.**
 
 Red / Blue / Green each get a machine staff. The island chain, the fleets, the missile
 defence zones and the timing windows are assembled from **open source material only**:
