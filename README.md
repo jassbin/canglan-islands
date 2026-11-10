@@ -2,6 +2,8 @@
 
 **A three-sided campaign wargame that runs entirely in your browser — no build, no server, no backend.**
 
+**Everything on screen — coastline, hulls, aircraft, missile batteries — is generated in code when the page loads. No 3D model files are ever downloaded.**
+
 Red / Blue / Green each get a machine staff. The island chain, the fleets, the missile
 defence zones and the timing windows are assembled from **open source material only**:
 news reports, ministry-of-defence publications, think-tank tables, encyclopedic entries and
@@ -16,7 +18,9 @@ public bathymetric grids. What you click is a simulation, not a leak.
 
 ## Run it
 
-Any static file server will do — the pages use ES modules, so `file://` will not:
+**Just want to see it?** [Open the live demo →](https://canglan-wargame.app.workbuddy.host/?sharecode=H5AAFF5PHX) — no install, no account, nothing to build.
+
+Otherwise, any static file server will do — the pages use ES modules, so `file://` will not:
 
 ```
 npx serve .
