@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 战术层 · H-Hour 作战序列</title>
+<link rel="stylesheet" href="js/page.css">
+<style>
+
+.tc-intro{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(90deg,var(--dim,rgba(255,255,255,.04)),transparent);border-left:3px solid var(--ac);padding:10px 14px;margin:14px 0 4px;border-radius:0 8px 8px 0}
+.tc-intro b{color:var(--tx1,#e8f2f8)}
+.tc-intro p{margin:0;font-size:12.5px;color:#a9c1d2;line-height:1.7}
+.tc-intro .tc-h{flex:0 0 auto;font-size:12px;padding:3px 10px;border-radius:12px;background:var(--ac);color:#0b1118;font-weight:700;letter-spacing:.5px}
+.tc-sec{margin:22px 0 10px;display:flex;align-items:baseline;gap:10px}
+.tc-sec h2{font-size:15px;margin:0;color:var(--tx1,#e8f2f8)}
+.tc-sec small{color:#7b93a6;font-size:11.5px}
+
+.tc-org{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:10px}
+.tc-orgc{position:relative;background:rgba(13,22,32,.55);border:1px solid rgba(120,160,190,.14);border-radius:10px;padding:12px 14px;transition:border-color .15s}
+.tc-orgc:hover{border-color:var(--ac)}
+.tc-orgc .tc-oc-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tc-orgc .tc-oc-h b{font-size:13.5px}
+.tc-orgc .tc-oc-h .tagc{font-size:10.5px}
+.tc-orgc .tc-oc-line{margin:6px 0 4px;font-size:11.5px;color:#7fa8c0}
+.tc-orgc .tc-oc-units{font-size:12px;color:#a9c1d2;line-height:1.75;margin:4px 0 8px}
+.tc-orgc .tc-oc-src{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tc-orgc a.tc-oc-fl{font-size:11px;color:var(--ac);text-decoration:none;border:1px solid var(--ac);padding:1px 8px;border-radius:10px}
+
+.tc-phase{margin:14px 0;border:1px solid rgba(120,160,190,.14);border-radius:12px;overflow:hidden;background:rgba(10,17,26,.4)}
+.tc-ph-h{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(90deg,var(--dim,rgba(120,160,190,.08)),transparent 70%);border-left:4px solid var(--ac)}
+.tc-ph-t{flex:0 0 auto;font-weight:800;font-size:13px;color:var(--ac);letter-spacing:.5px}
+.tc-ph-n{font-weight:700;font-size:14px}
+.tc-ph-goal{margin-left:auto;font-size:11.5px;color:#a9c1d2;max-width:46%;text-align:right}
+.tc-ph-gate{padding:6px 14px;font-size:11.5px;color:#d9b98a;background:rgba(255,200,97,.05);border-bottom:1px solid rgba(255,200,97,.12)}
+.tc-ph-gate b{color:#ffc861}
+
+.tc-card{display:grid;grid-template-columns:76px 148px 1fr;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(120,160,190,.09);transition:background .12s}
+.tc-card:last-child{border-bottom:0}
+.tc-card:hover{background:rgba(120,170,210,.05)}
+.tc-t{font-weight:800;font-size:12.5px;color:var(--ac);align-self:flex-start;padding-top:1px;white-space:pre-line}
+.tc-t.star{color:#ffd08a;text-shadow:0 0 12px rgba(255,200,97,.25)}
+.tc-who{display:flex;flex-direction:column;gap:4px}
+.tc-chip{font-size:10.5px;line-height:1.45;padding:2px 8px;border-radius:8px;background:rgba(120,160,190,.1);border:1px solid rgba(120,160,190,.18);color:#bcd6e6;cursor:pointer;text-decoration:none;white-space:normal}
+.tc-chip:hover{border-color:var(--ac);color:var(--ac)}
+.tc-body b.tcb-n{font-size:13px;display:block;margin-bottom:3px}
+.tc-body .tcb-what{font-size:12.5px;color:#c9dce8;line-height:1.7;margin:0}
+.tc-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:11.5px;color:#8fa8ba}
+.tc-meta i{font-style:normal}
+.tc-meta .tm-where::before{content:'📍 '}
+.tc-meta .tm-sync::before{content:'⇄ '}
+.tc-conts{display:inline-flex;gap:5px;flex-wrap:wrap}
+.tc-zap{font-size:10.5px;padding:1px 8px;border-radius:9px;background:rgba(255,156,110,.12);border:1px solid rgba(255,156,110,.35);color:#ff9c6e;text-decoration:none;cursor:pointer}
+.tc-zap:hover{background:rgba(255,156,110,.25)}
+.tc-srcs{display:inline-flex;gap:5px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.tc-srcc{font-size:10px;padding:1px 7px;border-radius:8px;border:1px solid rgba(120,160,190,.25);color:#9fb8c9;cursor:help}
+.tc-srcc.conf-A{border-color:rgba(127,214,143,.5);color:#7fd68f}
+.tc-srcc.conf-B{border-color:rgba(255,200,97,.4);color:#d9c48a}
+.tc-srcc.conf-C{border-color:rgba(255,140,140,.4);color:#d99}
+
+.tc-opord{border:1px solid rgba(120,160,190,.16);border-radius:12px;overflow:hidden;background:rgba(10,17,26,.4)}
+.tc-op-h{padding:10px 14px;font-weight:700;font-size:14px;background:linear-gradient(90deg,var(--dim,rgba(120,160,190,.08)),transparent 70%);border-left:4px solid var(--ac)}
+.tc-op{display:grid;grid-template-columns:150px 1fr;border-top:1px solid rgba(120,160,190,.09)}
+.tc-op-k{padding:10px 14px;font-weight:700;font-size:12px;color:var(--ac);border-right:1px solid rgba(120,160,190,.09)}
+.tc-op-k small{display:block;color:#7b93a6;font-weight:400;margin-top:2px}
+.tc-op-v{padding:10px 14px 10px 4px}
+.tc-op-v p{margin:0 0 6px;font-size:12.5px;color:#c9dce8;line-height:1.75}
+.tc-op-v p:last-child{margin:0}
+@media(max-width:900px){
+  .tc-card{grid-template-columns:64px 1fr;grid-auto-rows:auto}
+  .tc-who{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+  .tc-ph-goal{max-width:100%;margin-left:0;text-align:left}
+  .tc-op{grid-template-columns:1fr}
+  .tc-op-k{border-right:0;border-bottom:1px solid rgba(120,160,190,.09)}
+  .tc-op-v{padding-left:14px}
+}
+</style>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<div class="page-wrap">
+  <div class="page-head">
+    <h1>战术层 · H-Hour 作战序列</h1>
+    <span class="ph-sub" id="phSub">战略（打哪条线）× 编成（谁来打）落到带时刻的任务序列（何时·何地·做什么·打不通怎么办）</span>
+    <span class="ph-sp"></span>
+    <div class="ph-tabs" id="sideTabs"></div>
+  </div>
+  <div id="tcRoot"></div>
+</div>
+
+<script type="module">
+import { nav, S, esc, initTips } from './js/theme.js';
+
+const qs = new URLSearchParams(location.search);
+const side = qs.get('side') === 'blue' ? 'blue' : qs.get('side') === 'green' ? 'green' : 'red';
+const sd = S(side);
+document.getElementById('navSlot').outerHTML = nav('tactical', side);
+document.body.style.setProperty('--ac', sd.color);
+document.body.style.setProperty('--dim', sd.dim);
+document.title = '苍澜群岛 · 战术层 · ' + sd.cn + ' [v0.4]';
+initTips();
+
+document.getElementById('sideTabs').innerHTML =
+  `<button data-s="red" class="${side === 'red' ? 'on' : ''}">◆ 红方·突击序列</button>` +
+  `<button data-s="blue" class="${side === 'blue' ? 'on' : ''}">▲ 蓝方·拒止序列</button>` +
+  `<button data-s="green" class="${side === 'green' ? 'on' : ''}">● 绿方·介入序列</button>`;
+document.querySelectorAll('#sideTabs button').forEach(b => {
+  b.onclick = () => { location.href = 'tactical.html?side=' + b.dataset.s; };
+});
+
+
+const j = async f => (await fetch('data/' + f + '?v=' + Date.now())).json();
+const [L6, L5] = await Promise.all([j('L6_tactical.json'), j('L5_strategy_ops.json')]);
+const D = L6.sides[side];
+const REFS = L6.refs;
+
+const CONT = {};
+for (const c of (L5.v3?.contingencies?.red || [])) CONT[c.id] = { ...c, side: 'red' };
+for (const c of (L5.v3?.contingencies?.blue || [])) CONT[c.id] = { ...c, side: 'blue' };
+for (const c of (L5.v3?.contingencies?.green || [])) CONT[c.id] = { ...c, side: 'green' };
+const ORG = {};
+D.taskorg.forEach(o => { ORG[o.id] = o; });
+
+
+const root = document.getElementById('tcRoot');
+const cut = (s, n) => (s.length > n ? s.slice(0, n) + '…' : s);
+
+function srcChips(keys) {
+  return (keys || []).map(k => {
+    const r = REFS[k];
+    if (!r) return '';
+    const tip = esc(r.ref) + (r.url ? `<br><span style='opacity:.65'>${esc(r.url)}</span> · ${esc(r.date || '')}` : '');
+    return `<span class="tc-srcc conf-${esc(r.conf || 'C')}" data-tip="${tip.replace(/"/g, '&quot;')}">${esc(r.conf || 'C')} · ${esc(cut(k.toUpperCase(), 10))}</span>`;
+  }).join('');
+}
+
+function whoChips(ids) {
+  return (ids || []).map(id => {
+    const o = ORG[id];
+    if (!o) return '';
+    return `<a class="tc-chip" href="${o.fleet || '#'}" title="查看该编队实际番号">${esc(o.n)}</a>`;
+  }).join('');
+}
+
+function zapChips(ids) {
+  return (ids || []).map(id => {
+    const c = CONT[id];
+    const tip = c
+      ? `<b>⚡ ${esc(c.n)}</b><br>触发：${esc(typeof c.trigger === 'object' ? (c.trigger.txt || '') : (c.trigger || ''))}<br><span style='opacity:.65'>点开进战略层图B看全部应对分支（▸ branches &amp; sequels）</span>`
+      : '战略层图B 应变卡';
+    return `<a class="tc-zap" href="strategy.html?side=${side}" data-tip="${tip.replace(/"/g, '&quot;')}">⚡${esc(id)}</a>`;
+  }).join('');
+}
+
+function phaseHtml(ph) {
+  const cards = ph.cards.map(c => `
+    <div class="tc-card" id="card-${esc(c.id)}">
+      <div class="tc-t ${c.t.includes('H+0') || c.t.includes('H-Hour') ? 'star' : ''}">${esc(c.t)}</div>
+      <div class="tc-who">${whoChips(c.who)}</div>
+      <div class="tc-body">
+        <b class="tcb-n">${esc(c.n)}</b>
+        <p class="tcb-what">${esc(c.what)}</p>
+        <div class="tc-meta">
+          <i class="tm-where">${esc(c.where)}</i>
+          ${c.sync ? `<i class="tm-sync">${esc(c.sync)}</i>` : ''}
+          ${c.cont && c.cont.length ? `<span class="tc-conts">${zapChips(c.cont)}</span>` : ''}
+          <span class="tc-srcs">${srcChips(c.src)}</span>
+        </div>
+      </div>
+    </div>`).join('');
+  return `
+    <section class="tc-phase">
+      <div class="tc-ph-h">
+        <span class="tc-ph-t">${esc(ph.t)}</span>
+        <span class="tc-ph-n">${esc(ph.n)}</span>
+        <span class="tc-ph-goal">${esc(ph.goal)}</span>
+      </div>
+      ${ph.gate ? `<div class="tc-ph-gate"><b>◆ 判断门</b>　${esc(ph.gate)}</div>` : ''}
+      ${cards}
+    </section>`;
+}
+
+function orgHtml() {
+  return D.taskorg.map(o => `
+    <div class="tc-orgc">
+      <div class="tc-oc-h"><b>${esc(o.n)}</b><span class="tagc">${esc(o.sub)}</span></div>
+      <div class="tc-oc-line">作战线：${esc(o.line)}</div>
+      <div class="tc-oc-units">${esc(o.units)}</div>
+      <div class="tc-oc-src">
+        <a class="tc-oc-fl" href="${o.fleet || '#'}">⛵ 编队番号 →</a>
+        <span class="tc-srcs">${srcChips(o.src)}</span>
+      </div>
+    </div>`).join('');
+}
+
+function opordHtml() {
+  const o = D.opord;
+  const blk = (k, t, sub, arr) => arr && arr.length ? `
+    <div class="tc-op">
+      <div class="tc-op-k">${esc(k)}<small>${esc(sub)}</small></div>
+      <div class="tc-op-v">${arr.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+    </div>` : '';
+  return `
+    <div class="tc-opord">
+      <div class="tc-op-h">${esc(o.h)}</div>
+      ${blk('1 情势', 'SITUATION', '敌情·判断', o.s)}
+      ${blk('2 任务', 'MISSION', '目标一句话', o.m)}
+      ${blk('3 执行', 'EXECUTION', '概念·主线·应变', o.e)}
+      ${blk('4 支援', 'SUSTAINMENT', '后勤·卫勤·信息', o.a)}
+      ${blk('5 指挥', 'COMMAND', '指挥关系·时刻基准', o.c)}
+    </div>`;
+}
+
+const nCards = D.phases.reduce((a, p) => a + p.cards.length, 0);
+root.innerHTML = `
+  <div class="tc-intro">
+    <span class="tc-h">${D.tnote ? '时刻基准' : 'H 时刻基准'}</span>
+    <p>${esc(D.tnote || L6.hhour_def)}　方法论＝登陆作战三件套：<b>任务编组</b>（下方，实际番号）＋ <b>H-Hour 作战序列表</b>（中部，诺曼底/塔拉瓦波次模式）＋ <b>OPORD 五段式</b>（底部，SMEAC）。每张任务卡答五问：谁 · 何时 · 做什么 · 在哪 · 打不通怎么办（⚡ 联动战略层图B 应变卡）。矩阵是战役层对位预估工具，在本层不适用——战术层要的是时刻表，不是胜率表。</p>
+  </div>
+  <div class="tc-sec"><h2>① 任务编组</h2><small>作战线分配 · 点番号进舰队编成页</small></div>
+  <div class="tc-org">${orgHtml()}</div>
+  <div class="tc-sec"><h2>② H-Hour 作战序列</h2><small>${D.phases.length} 阶段 · ${nCards} 张任务卡 · ◆＝阶段判断门（不通过 → ⚡ 应变）</small></div>
+  ${D.phases.map(phaseHtml).join('')}
+  <div class="tc-sec"><h2>③ 作战命令（OPORD · 五段式）</h2><small>战略→战术的一致性载体</small></div>
+  ${opordHtml()}
+  <p style="margin:18px 0 30px;font-size:11.5px;color:#7b93a6;line-height:1.8">
+    依据分级：<span class="tc-srcc conf-A">A</span> 官方/多方一致 ·
+    <span class="tc-srcc conf-B">B</span> 单一权威或公开战史 ·
+    <span class="tc-srcc conf-C">C</span> 推演设定。历史战例（诺曼底/塔拉瓦）用于时刻刻度模式，不等于兵力对照。
+    序列时刻为相对 H 的计划值，实际执行以各阶段判断门为准——这正是图B 应变树存在的意义。
+  </p>`;
+initTips();
+
+
+if (qs.has('diag')) {
+  try {
+    document.title = 'TC|' + side
+      + '|org=' + D.taskorg.length
+      + '|ph=' + D.phases.length
+      + '|cards=' + nCards
+      + '|opord=' + ['s', 'm', 'e', 'a', 'c'].filter(k => (D.opord[k] || []).length).length
+      + '|conts=' + document.querySelectorAll('.tc-zap').length
+      + '|chips=' + document.querySelectorAll('.tc-chip').length
+      + '|err=';
+  } catch (e) { document.title = 'TC|' + side + '|err=' + e.message; }
+}
+</script>
+</body>
+</html>

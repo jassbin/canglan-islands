@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 战术层 · 作战方案台</title>
+<link rel="stylesheet" href="js/planboard.css">
+<link rel="stylesheet" href="js/page.css">
+<script type="importmap">{"imports":{"three":"./lib/three.module.js"}}</script>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<script type="module">
+import { nav, S, initTips } from './js/theme.js';
+import { mountPlanBoard } from './js/planboard.js';
+
+const qs = new URLSearchParams(location.search);
+const side = qs.get('side') === 'blue' ? 'blue' : 'red';
+const sd = S(side);
+const foe = S(sd.enemy);
+
+document.getElementById('navSlot').outerHTML = nav('plan', side);
+document.title = '苍澜群岛 · 战术层 · 作战方案台 · ' + sd.cn + ' [v0.4]';
+
+
+const snSide = document.querySelector('.site-nav .sn-side');
+if (snSide) {
+  snSide.innerHTML =
+    `<a class="sn-chip ${side === 'red' ? 'on' : ''}" href="plan.html?side=red" title="以红方指挥员身份制定突击方案">◆ 红方</a>` +
+    `<a class="sn-chip ${side === 'blue' ? 'on' : ''}" href="plan.html?side=blue" title="以蓝方指挥员身份制定拒止方案">▲ 蓝方</a>` +
+    `<a class="sn-chip ghost" href="strategy.html?side=${side}" title="回到战略层：登陆方向/推进样式/拒止绿方/防卫构想">◬ 战略层</a>` +
+    `<a class="sn-chip ghost" href="tactical.html?side=${side}" title="战术层：任务编组 + H-Hour 作战序列 + OPORD 五段式">⊖ 战术层</a>` +
+    `<a class="sn-chip ghost" href="fleet.html?side=${side}">⛵ 编成</a>`;
+}
+
+initTips();
+
+await mountPlanBoard({
+  side,
+  accent: sd.color,
+  accent2: sd.second,
+  pageMode: true,
+  isRunning: () => true,
+  onStart: () => {
+    
+    
+    const url = 'index.html';
+    const w = window.open(url, '_blank');
+    if (!w) location.href = url;             
+    document.title = '已开战 · 战场已在新标签页打开（顶栏「我方」可切红/蓝/绿/全部）';
+  },
+  onPause: () => {},
+  onResume: () => {},
+  onAbort: () => {}
+});
+
+
+if (new URLSearchParams(location.search).get('diag') === 'mtx') {
+  setTimeout(() => {
+    const t = id => (document.querySelector(id) || {}).textContent || '(missing)';
+    document.title = 'MTX|corner=' + t('.pb-mtx-corner').replace(/\s+/g, ' ')
+      + '|axis=' + t('#pbAxis').replace(/\s+/g, ' ').slice(0, 46)
+      + '|sum=' + t('#pbMtxSum').replace(/\s+/g, ' ').slice(0, 90)
+      + '|cells=' + document.querySelectorAll('.pb-cell').length;
+  }, 2600);
+}
+
+
+if (qs.has('diag')) {
+  setTimeout(() => {
+    const nv = document.querySelector('.site-nav').getBoundingClientRect();
+    const hd = document.querySelector('.pb-head').getBoundingClientRect();
+    document.title = 'DIAG navB=' + nv.bottom.toFixed(0) + ' headT=' + hd.top.toFixed(0)
+      + ' overlap=' + (hd.top < nv.bottom - 1 ? 'YES-BAD' : 'no-ok');
+  }, 900);
+}
+</script>
+</body>
+</html>

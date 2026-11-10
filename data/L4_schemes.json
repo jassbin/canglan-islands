@@ -1,0 +1,781 @@
+{
+ "kind": "L4_schemes",
+ "theater": "canglan",
+ "title": "作战方案层（双方候选方案 COA）",
+ "version": "1.0.0",
+ "updated": "2026-11-05",
+ "note": "每个方案 = 一套可执行的兵力节奏与战法参数，均有真实条令/概念出处。方案本身是主观选择（L4），其预估结果由 L3 交战模型算得，属可证伪的拟合输出。params 是运行时注入推演引擎的字段，不是文案。 每套方案的 codename 配 codeNote（英文全称 + 中文释义），界面以悬浮释义形式呈现。",
+ "epistemology": {
+  "scheme": "主观策略（选哪套打法）",
+  "params": "方案的量化表达（波次/暴露度/射程策略）",
+  "forecast": "L3 模型对该方案 × 对手方案的期望结果，带区间，非承诺",
+  "chooseReason": "对局检验：换方案的理由是战场结果，不是拟合精度"
+ },
+ "red": {
+  "sideName": "红方 · 两栖突击群",
+  "schemes": [
+   {
+    "id": "b_stom",
+    "name": "超地平线直取",
+    "codename": "STOM",
+    "style": "aggressive",
+    "styleCn": "激进",
+    "tagline": "不夺滩头，气垫艇从视距外直插纵深要点",
+    "summary": "船团停在 160km 外，气垫艇与直升机同时放出，不在滩头纠缠，直接冲向岛内交通枢纽与港口。目标是让守方来不及完成火力分配就被穿透。",
+    "doctrine": "Ship-to-Objective Maneuver（STOM）/ Operational Maneuver from the Sea",
+    "doctrineCn": "船到目标机动：以海为机动空间，从超地平线攻击阵位直接投送战斗编组到纵深目标，不再逐段建立登陆场。",
+    "params": {
+     "stopKm": 100,
+     "x0": [
+      160,
+      186
+     ],
+     "lcacSpd": 1.25,
+     "prepFire": 0.3,
+     "jam": [
+      0.86,
+      0.42,
+      250,
+      2000
+     ],
+     "airEvery": 180,
+     "escortMul": 1.0,
+     "beachKm": 287,
+     "waves": [
+      {
+       "t": 240,
+       "z": [
+        188,
+        214
+       ],
+       "ships": [
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 6
+        }
+       ],
+       "note": "第一梯队：护航舰前置 + 6 艇快速突击"
+      },
+      {
+       "t": 900,
+       "z": [
+        196,
+        236
+       ],
+       "ships": [
+        {
+         "k": "lpd",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 10
+        }
+       ],
+       "note": "第二梯队：主力上陆，压缩间隔"
+      },
+      {
+       "t": 1620,
+       "z": [
+        212,
+        258
+       ],
+       "ships": [
+        {
+         "k": "lha",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 12
+        }
+       ],
+       "note": "第三梯队：垂直与水面同时投送"
+      }
+     ]
+    },
+    "forecast": {
+     "risk": "high",
+     "riskCn": "高",
+     "upside": "航渡窗口短、波次密集，守方装填周期跟不上；一旦穿透，守方预备队来不及展开",
+     "downside": "出发距离远、在海上暴露时间长，反舰弹有充分飞行时间；护航舰被抽薄"
+    },
+    "src": [
+     {
+      "ref": "MCWP 3-1 Ground Combat Operations：OMFTS/STOM，超地平线发起、以海为机动空间、分散兵力多入口",
+      "url": "https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-1/mcwp3-1.pdf",
+      "conf": "A"
+     },
+     {
+      "ref": "TBS B4V1000 Littoral Maneuver：STOM 五项要则（seabasing 减岸上足迹、dispersed forces）",
+      "url": "https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B4V1000%20Littoral%20Maneuver%20and%20Integrated%20Maritime%20Operations.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Ship-to-Objective Maneuver",
+     "cn": "船到目标机动。不建立登陆场，气垫艇从超地平线阵位直接投送战斗编组到纵深目标。"
+    },
+    "pros": [
+     "航渡窗口最短，守方来不及走完火力分配与装填循环",
+     "气垫艇直插纵深，跳过滩头阻绝与岸炮杀伤区",
+     "同时压向多个纵深要点，守方预备队无法判断主攻方向"
+    ],
+    "cons": [
+     "出发阵位在 160km 外，反舰弹飞行时间充裕、可多次拦截",
+     "护航舰被摊到各波次，单波次防空容量被抽薄",
+     "气垫艇本身脆弱，一旦被近距火力覆盖损失集中"
+    ],
+    "riskNote": "穿透失败就没有退路：不建登陆场，第一波被歼时后续梯队仍在海上。",
+    "bestWhen": "守方雷达网与指挥链已被压制、反舰弹消耗过半，且己方掌握绝对制空权。"
+   },
+   {
+    "id": "b_phasal",
+    "name": "分阶段滩头强袭",
+    "codename": "PHASAL",
+    "style": "conservative",
+    "styleCn": "保守",
+    "tagline": "先夺滩头、建立登陆场，再向内陆推进",
+    "summary": "经典两栖突击：火力准备—扫雷破障—第一波抢滩—建立登陆场—后续梯队上陆。不求快，求稳，把风险压在可控的滩头正面。",
+    "doctrine": "Phased Amphibious Assault / Lodgment",
+    "doctrineCn": "分阶段两栖突击：以滩头登陆场为支点逐波积累兵力，用火力与工兵优势抵消守方反舰火力。",
+    "params": {
+     "stopKm": 45,
+     "x0": [
+      104,
+      126
+     ],
+     "lcacSpd": 0.85,
+     "prepFire": 0.24,
+     "jam": [
+      0.72,
+      0.34,
+      400,
+      2600
+     ],
+     "airEvery": 300,
+     "escortMul": 1.35,
+     "beachKm": 287,
+     "waves": [
+      {
+       "t": 300,
+       "z": [
+        190,
+        210
+       ],
+       "ships": [
+        {
+         "k": "ddg",
+         "n": 3
+        },
+        {
+         "k": "lcac",
+         "n": 4
+        }
+       ],
+       "note": "第一波：护航舰抵近压制 + 4 艇试滩"
+      },
+      {
+       "t": 1500,
+       "z": [
+        200,
+        240
+       ],
+       "ships": [
+        {
+         "k": "lpd",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 3
+        },
+        {
+         "k": "lcac",
+         "n": 9
+        }
+       ],
+       "note": "第二波：建立登陆场"
+      },
+      {
+       "t": 2900,
+       "z": [
+        212,
+        252
+       ],
+       "ships": [
+        {
+         "k": "lha",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 11
+        }
+       ],
+       "note": "第三波：后续梯队与重装"
+      }
+     ]
+    },
+    "forecast": {
+     "risk": "low",
+     "riskCn": "低",
+     "upside": "出发距离近、航渡时间短，暴露窗口最小；护航火力厚，压制效果好",
+     "downside": "波次间隔大，守方有完整装填与转移阵地的余裕；一旦滩头被钉住，后续梯队堆在海上是活靶"
+    },
+    "src": [
+     {
+      "ref": "MCWP 3-1：amphibious assault 需在综合防御中集中压倒性战斗力打开缺口，随后由登陆部队扩张战果",
+      "url": "https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-1/mcwp3-1.pdf",
+      "conf": "A"
+     },
+     {
+      "ref": "Littoral Maneuver（TBS）：登陆场 lodgment 与滩头后勤的传统范式",
+      "url": "https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B4V1000%20Littoral%20Maneuver%20and%20Integrated%20Maritime%20Operations.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Phased Assault",
+     "cn": "分阶段强袭登陆。传统登陆场范式：先夺滩头、再逐批卸载、最后向内陆推进。"
+    },
+    "pros": [
+     "航渡距离短、暴露窗口最小，可被拦截的次数最少",
+     "护航火力最厚（1.35 倍），对岸防火力的压制效果最好",
+     "登陆场一旦建立，后续梯队有依托、能持续投入"
+    ],
+    "cons": [
+     "波次间隔大，守方有完整时间装填并转移发射车",
+     "滩头正面固定，守方可预先标定射击诸元",
+     "后续梯队在海面等待卸载，是被打击的高价值目标"
+    ],
+    "riskNote": "被钉在滩头：正面打不开、后续梯队又下不来，损失会随时间累积。",
+    "bestWhen": "必须稳定拿下港口或机场，且己方有持续制空、扫雷与破障能力。"
+   },
+   {
+    "id": "b_dispersed",
+    "name": "多点分散上陆",
+    "codename": "SPREAD",
+    "style": "unorthodox",
+    "styleCn": "另类",
+    "tagline": "五路小股同时上陆，让守方无法集中火力",
+    "summary": "把 26 艘气垫艇拆成 5 个小批次，沿 60km 正面多点同时抢滩。任何一点都吃不掉守方全部火力，只要有两三处站住脚，防线就被撕开。",
+    "doctrine": "Distributed Maritime Operations / STOM「dispersed forces, multiple entry points」",
+    "doctrineCn": "分布式海上作战：以分散求生存、以多点求破口，避免被一次性火力覆盖。",
+    "params": {
+     "stopKm": 70,
+     "x0": [
+      138,
+      160
+     ],
+     "lcacSpd": 1.0,
+     "prepFire": 0.2,
+     "jam": [
+      0.8,
+      0.4,
+      300,
+      2200
+     ],
+     "airEvery": 240,
+     "escortMul": 0.9,
+     "beachKm": 287,
+     "waves": [
+      {
+       "t": 300,
+       "z": [
+        172,
+        196
+       ],
+       "ships": [
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 4
+        }
+       ],
+       "note": "北段：4 艇"
+      },
+      {
+       "t": 420,
+       "z": [
+        205,
+        226
+       ],
+       "ships": [
+        {
+         "k": "lcac",
+         "n": 5
+        }
+       ],
+       "note": "中段：5 艇"
+      },
+      {
+       "t": 540,
+       "z": [
+        234,
+        258
+       ],
+       "ships": [
+        {
+         "k": "lcac",
+         "n": 5
+        }
+       ],
+       "note": "南段：5 艇"
+      },
+      {
+       "t": 1180,
+       "z": [
+        186,
+        246
+       ],
+       "ships": [
+        {
+         "k": "lpd",
+         "n": 1
+        },
+        {
+         "k": "lcac",
+         "n": 6
+        }
+       ],
+       "note": "第二梯次：宽正面补投"
+      },
+      {
+       "t": 1900,
+       "z": [
+        196,
+        262
+       ],
+       "ships": [
+        {
+         "k": "lha",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 6
+        }
+       ],
+       "note": "第三梯次：宽正面补投"
+      }
+     ]
+    },
+    "forecast": {
+     "risk": "medium",
+     "riskCn": "中",
+     "upside": "守方火力分配被摊薄，单点被歼不影响全局；反炮兵难以锁定主攻方向",
+     "downside": "每批兵力单薄，若守方集中火力各个击破，可能被逐批清空且无战果"
+    },
+    "src": [
+     {
+      "ref": "TBS B4V1000：STOM 用 multiple entry points 与 mission-dictated force packages 制造局部优势窗口",
+      "url": "https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B4V1000%20Littoral%20Maneuver%20and%20Integrated%20Maritime%20Operations.pdf",
+      "conf": "A"
+     },
+     {
+      "ref": "MCWP 3-1：从分散阵位发起决定性机动以混淆主攻方向、增加守方瞄准难度",
+      "url": "https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-1/mcwp3-1.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Distributed Amphibious Assault",
+     "cn": "分散两栖突击。多入口、小编组、同时上陆，对应美军「分布式海上作战 DMO」。"
+    },
+    "pros": [
+     "守方火力被摊薄到 60km 正面，单点损失不影响全局",
+     "反炮兵难以锁定主攻方向，火力分配效率下降",
+     "五六处中只要两三处站住脚，防线就被撕开"
+    ],
+    "cons": [
+     "每批兵力单薄，被各个击破时可能逐批清空",
+     "多路协同与引导复杂，通信压力大",
+     "单点防空与护航薄弱，气垫艇损失率高"
+    ],
+    "riskNote": "分散即无重点：守方若集中火力打其中一路，会出现\"处处上陆、处处不足\"。",
+    "bestWhen": "守方火力通道有限、雷达引导能力受损，而己方兵力数量占优。"
+   },
+   {
+    "id": "b_deception",
+    "name": "佯动牵制 + 垂直包围",
+    "codename": "HAMMER",
+    "style": "balanced",
+    "styleCn": "均衡",
+    "tagline": "北面大张旗鼓佯攻，直升机从南翼机降夺港",
+    "summary": "以北段高调佯动吸住守方主力与火控通道，主力从南翼低空机降夺取港口，气垫艇随后直接进港卸载——绕过滩头。",
+    "doctrine": "Amphibious Demonstration + Vertical Envelopment",
+    "doctrineCn": "两栖佯动欺骗 + 垂直包围：用示范性登陆诱导守方错误配置，以直升机机降夺取关键节点。",
+    "params": {
+     "stopKm": 80,
+     "x0": [
+      128,
+      150
+     ],
+     "lcacSpd": 1.05,
+     "prepFire": 0.26,
+     "jam": [
+      0.84,
+      0.4,
+      300,
+      2200
+     ],
+     "airEvery": 150,
+     "escortMul": 1.1,
+     "beachKm": 287,
+     "waves": [
+      {
+       "t": 300,
+       "z": [
+        178,
+        196
+       ],
+       "ships": [
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 3
+        }
+       ],
+       "note": "北段佯动：制造主攻假象"
+      },
+      {
+       "t": 780,
+       "z": [
+        240,
+        264
+       ],
+       "ships": [
+        {
+         "k": "lpd",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 8
+        }
+       ],
+       "note": "南翼主攻：机降后气垫艇直接进港"
+      },
+      {
+       "t": 1680,
+       "z": [
+        232,
+        262
+       ],
+       "ships": [
+        {
+         "k": "lha",
+         "n": 1
+        },
+        {
+         "k": "ddg",
+         "n": 2
+        },
+        {
+         "k": "lcac",
+         "n": 10
+        }
+       ],
+       "note": "扩张战果"
+      }
+     ]
+    },
+    "forecast": {
+     "risk": "medium",
+     "riskCn": "中",
+     "upside": "守方若按北段配置火力，南翼几乎无抵抗；航空兵压制能牵制防空",
+     "downside": "佯动兵力是真金白银，若被识破则主攻方向兵力不足；依赖航空兵生存性"
+    },
+    "src": [
+     {
+      "ref": "MCWP 3-1：amphibious demonstration 以显示武力诱使敌方采取不利处置，力量可随时转用于其他方向",
+      "url": "https://www.globalsecurity.org/military/library/policy/usmc/mcwp/3-1/mcwp3-1.pdf",
+      "conf": "A"
+     },
+     {
+      "ref": "STOM 要则：以航空与水面同时投送、绕过滩头直取纵深节点",
+      "url": "https://www.mca-marines.org/gazette/an-implementing-concept-for-operational-maneuver-from-the-sea/",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Deception + Vertical Envelopment",
+     "cn": "佯动牵制 + 垂直包围。一路佯攻吸住守备，主力以直升机机降夺取后方要点。"
+    },
+    "pros": [
+     "守方按佯动配置火力时，南翼几乎无抵抗",
+     "直升机机降绕过滩头阻绝，直接夺占港口",
+     "航空兵压制可同时牵制守方防空与雷达"
+    ],
+    "cons": [
+     "佯动投入的是真实兵力，被识破则主攻方向兵力不足",
+     "高度依赖航空兵生存性与低空突防成功率",
+     "两路协同复杂，指挥失误的代价大"
+    ],
+    "riskNote": "欺骗失败：佯动被看穿后，两路都不足以独立完成任务。",
+    "bestWhen": "守方指挥集中、依赖单一判断，而己方掌握制空权与电子战优势。"
+   }
+  ]
+ },
+ "blue": {
+  "sideName": "蓝方 · 岛内拒止",
+  "schemes": [
+   {
+    "id": "r_littoral",
+    "name": "滨海决胜",
+    "codename": "LITTORAL",
+    "style": "aggressive",
+    "styleCn": "激进",
+    "tagline": "一进射程就打，把战场压在海上",
+    "summary": "反舰火力从最大射程开始层层拦击，不等敌接近。用最早的拦截窗口换取最多的射击次数，代价是阵地暴露早、易被反炮兵点名。",
+    "doctrine": "整体防卫构想 ODC「滨海决胜」",
+    "doctrineCn": "把决胜点推到滨海与水域，以不对称火力在敌上陆前消耗其登陆兵力。",
+    "params": {
+     "holdKm": 0,
+     "need": 2,
+     "pkMul": 1.0,
+     "evBonus": 0,
+     "preHit": 0.22,
+     "jamResist": 0,
+     "reserve": 0.15,
+     "landNeed": 8,
+     "expose": 1.0
+    },
+    "forecast": {
+     "risk": "high",
+     "riskCn": "高",
+     "upside": "射击窗口最长，总发射弹数最多；对多点分散上陆尤其有效",
+     "downside": "远距离开火暴露阵地，红方反炮兵与电子战收益最大；弹药消耗快，末段可能无弹可用"
+    },
+    "src": [
+     {
+      "ref": "李喜明「整体防卫构想」ODC：战力防护—滨海决胜—滩岸歼敌—纵深防御四层",
+      "url": "http://its.taiwan.cssn.cn/cgzs/xzlz/dtzc/202506/t20250618_5879759.shtml",
+      "conf": "B"
+     },
+     {
+      "ref": "2025 四年期国防总检讨 QDR：multi-domain denial，拒止而非控制（by denying instead of controlling）",
+      "url": "https://www.mnd.gov.tw/InformationServices/QDRFile/6/2/2025QDR%E8%8B%B1%E6%96%87%E7%89%88.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Littoral Decisive Engagement",
+     "cn": "滨海决胜。在敌尚未上陆的航渡段集中反舰火力决胜，即「击敌于半渡」。"
+    },
+    "pros": [
+     "射击窗口最长，总发射弹数最多",
+     "对多点分散上陆尤其有效，火力覆盖整个接战正面",
+     "把消耗战放在海上，避免滩头近战"
+    ],
+    "cons": [
+     "远距开火提前暴露阵地，反炮兵与电子战收益最大",
+     "弹药消耗快，末段可能无弹可用",
+     "远距命中率低，单发效费比差"
+    ],
+    "riskNote": "打完即暴露：阵地位置一旦被反推，后续波次将面对已校准的反炮兵火力。",
+    "bestWhen": "阵地分散且能机动转移、弹药储备充足时。"
+   },
+   {
+    "id": "r_beach",
+    "name": "滩岸歼敌",
+    "codename": "BEACH",
+    "style": "conservative",
+    "styleCn": "保守",
+    "tagline": "隐蔽待机，等敌进 60km 内再集火",
+    "summary": "发射车全程静默、只接受被动探测引导，等船团进入 60km 才开火。近距制导精度高、阵地暴露时间短，但留给自己的射击次数少。",
+    "doctrine": "ODC「滩岸歼敌」+ 战力防护",
+    "doctrineCn": "以隐蔽与机动保存战力，把有限弹药用在命中率最高的近距窗口。",
+    "params": {
+     "holdKm": 60,
+     "need": 4,
+     "pkMul": 1.1,
+     "evBonus": 0,
+     "preHit": 0.22,
+     "jamResist": 0.05,
+     "reserve": 0.2,
+     "landNeed": 8,
+     "expose": 0.35
+    },
+    "forecast": {
+     "risk": "low",
+     "riskCn": "低",
+     "upside": "阵地生存性最好，单发命中率最高；红方反炮兵几乎找不到目标",
+     "downside": "射击窗口极短，遇到高航速突击可能来不及打完；一旦漏网就是直接上陆"
+    },
+    "src": [
+     {
+      "ref": "ODC 战力防护与滩岸歼敌的顺序：先求存活，再在近距高命中窗口歼敌",
+      "url": "http://its.taiwan.cssn.cn/cgzs/xzlz/dtzc/202506/t20250618_5879759.shtml",
+      "conf": "B"
+     },
+     {
+      "ref": "2025 QDR：resilience defense —— 战力先保存、择机反击",
+      "url": "https://www.mnd.gov.tw/InformationServices/QDRFile/6/2/2025QDR%E8%8B%B1%E6%96%87%E7%89%88.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Beach Defense",
+     "cn": "滩岸歼敌。放敌接近至极近距离再打，压缩其反应时间，以近距伏击换命中率。"
+    },
+    "pros": [
+     "阵地生存性最好，全程静默难以被定位",
+     "近距制导精度最高，单发命中率最高",
+     "弹药利用率高，适合储备有限的情况"
+    ],
+    "cons": [
+     "射击窗口极短，高航速突击可能来不及打完",
+     "放弃远距拦截，敌可从容组织编队与护航",
+     "一旦漏网就是直接上陆，没有第二次机会"
+    ],
+    "riskNote": "窗口太窄：气垫艇 60 节冲刺时，从进入 60km 到上陆只有十几分钟。",
+    "bestWhen": "弹药有限、阵地暴露后难以转移，且敌主攻方向判断明确。"
+   },
+   {
+    "id": "r_indepth",
+    "name": "纵深防御 · 持久消耗",
+    "codename": "INDEPTH",
+    "style": "unorthodox",
+    "styleCn": "另类",
+    "tagline": "放它上来，用纵深、障碍与城镇把它磨死",
+    "summary": "不追求滩头全歼，反舰弹省着打，把上陆兵力放进来，用雷霆2000、岸炮、阻绝与城镇据点逐段消耗。承认滩头可能失守，换取持久作战的主动权。",
+    "doctrine": "「延伸防卫纵深」+ 汉光41/42 纵深防御与持久作战",
+    "doctrineCn": "以空间换时间：滩岸阻绝、关键桥梁爆破、城镇据点消耗，使登陆部队无法达成战役目标。",
+    "params": {
+     "holdKm": 30,
+     "need": 5,
+     "pkMul": 1.05,
+     "evBonus": 0.05,
+     "preHit": 0.22,
+     "jamResist": 0.1,
+     "reserve": 0.45,
+     "landNeed": 12,
+     "indepth": true,
+     "expose": 0.5
+    },
+    "forecast": {
+     "risk": "medium",
+     "riskCn": "中",
+     "upside": "最不怕多点分散上陆；弹药留给高价值目标，末段仍有成建制火力",
+     "downside": "主动放弃滩头，上陆兵力天然更多；一旦纵深被快速穿透则全盘崩"
+    },
+    "src": [
+     {
+      "ref": "2023 国防报告书「延伸防卫纵深」、汉光41 首次演练登陆后纵深作战（淡水河阻绝、万板大桥封闭）",
+      "url": "https://mmedia.com.tw/%e6%89%bf%e8%aa%8d%e5%8f%b0%e7%81%a3%e6%9c%ac%e5%9c%9f%e5%b0%87%e6%88%90%e7%82%ba%e6%88%b0%e5%a0%b4%ef%bc%9a%e5%b7%a5%e5%85%b5%e7%82%b8%e6%a9%8b%e6%bc%94%e7%b7%b4%e7%9c%8b%e5%9c%8b%e8%bb%8d%e9%98%b2",
+      "conf": "A"
+     },
+     {
+      "ref": "2025 QDR：作战阶段含 Littoral and Coastal Combat / Defense in Depth / Protracted Operations",
+      "url": "https://www.mnd.gov.tw/InformationServices/QDRFile/6/2/2025QDR%E8%8B%B1%E6%96%87%E7%89%88.pdf",
+      "conf": "A"
+     }
+    ],
+    "codeNote": {
+     "en": "Defense in Depth",
+     "cn": "纵深防御。不在一线硬顶，逐层消耗、放进来打，靠预备队反击收口。"
+    },
+    "pros": [
+     "最不怕多点分散上陆，纵深处处有抵抗",
+     "弹药留给高价值目标，末段仍有成建制火力",
+     "把战斗拖进城镇与障碍区，抵消敌火力优势"
+    ],
+    "cons": [
+     "主动放弃滩头，上陆兵力天然更多",
+     "纵深被快速穿透则全盘崩溃",
+     "依赖工事与阻绝的准备时间，临时转入代价大"
+    ],
+    "riskNote": "放进来容易赶出去难：敌一旦在纵深站稳并夺占港口，战役目标即达成。",
+    "bestWhen": "滩头正面守不住、但纵深有城镇与地形可用，且准备时间充足。"
+   },
+   {
+    "id": "r_decentral",
+    "name": "分散机动 · 去中心化",
+    "codename": "DECENTRAL",
+    "style": "balanced",
+    "styleCn": "均衡",
+    "tagline": "小群多路、打了就跑，靠冗余活下来",
+    "summary": "发射车以连排为单位散配置、打完即转移，雷达网冗余布设并接受被动探测引导。牺牲集中指挥的效率，换取在电子战与反炮兵下持续作战的能力。",
+    "doctrine": "2025 QDR「decentralized operation」+ 冗余配置",
+    "doctrineCn": "去中心化作战：以冗余配置与分散机动提高生存性，用任务式指挥替代集中火力管制。",
+    "params": {
+     "holdKm": 45,
+     "need": 4,
+     "pkMul": 1.0,
+     "evBonus": 0.02,
+     "preHit": 0.22,
+     "jamResist": 0.22,
+     "reserve": 0.25,
+     "landNeed": 8,
+     "expose": 0.35
+    },
+    "forecast": {
+     "risk": "low",
+     "riskCn": "低",
+     "upside": "抗电子战与反炮兵最强，全程火力输出平滑，不依赖单一雷达",
+     "downside": "火力集中度低，对高价值大目标（船坞舰）打击力不足"
+    },
+    "src": [
+     {
+      "ref": "2025 QDR：asymmetric methods / decentralized operation / redundant configuration",
+      "url": "https://www.mnd.gov.tw/InformationServices/QDRFile/6/2/2025QDR%E8%8B%B1%E6%96%87%E7%89%88.pdf",
+      "conf": "A"
+     },
+     {
+      "ref": "汉光41 六阶段与「有想定、无剧本」实战化：强调快速动员与去中心化执行",
+      "url": "http://its.taiwan.cssn.cn/cgzs/zyhd/202601/t20260123_5970509.shtml",
+      "conf": "B"
+     }
+    ],
+    "codeNote": {
+     "en": "Decentralized Operations",
+     "cn": "分散机动 / 去中心化。小群多点、打了就跑、被动探测，降低被电子战与反炮兵压制的损失。"
+    },
+    "pros": [
+     "抗电子战与反炮兵最强，不依赖单一雷达",
+     "全程火力输出平滑，没有明显的战力断崖",
+     "小群独立作战，指挥节点被毁仍能持续"
+    ],
+    "cons": [
+     "火力集中度低，对船坞舰等高价值大目标打击不足",
+     "分散配置使弹药补给与维修更困难",
+     "任务式指挥对基层素质要求高"
+    ],
+    "riskNote": "打不痛：火力分散后难以形成饱和，敌大舰可能带伤突入。",
+    "bestWhen": "己方雷达与指挥节点已被压制、需要长期持续作战时。"
+   }
+  ]
+ }
+}

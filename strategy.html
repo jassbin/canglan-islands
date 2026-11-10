@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 战略层</title>
+<link rel="stylesheet" href="js/page.css">
+<style>
+
+:root { --ac: #4fc3d9; --ok: #57c46a; --bad: #e8786a; }
+.sg-wrap { max-width: 1720px; margin: 0 auto; padding: 18px 22px 60px; }
+
+
+.sg-posture { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 4px 0 14px; padding: 10px 14px; border: 1px solid var(--line);
+  border-radius: 10px; background: linear-gradient(90deg, rgba(87,196,106,.07), transparent 70%); }
+.sg-posture b { color: #c2f0c9; font-size: 13px; letter-spacing: .5px; }
+.sg-posture .pp { padding: 6px 12px; border: 1px solid var(--line2); border-radius: 7px;
+  font-size: 12.5px; cursor: pointer; color: #b6cbdb; background: rgba(10,24,36,.6); transition: .15s; }
+.sg-posture .pp:hover { color: #eaf6ff; border-color: var(--ac); }
+.sg-posture .pp.on { background: color-mix(in srgb, #57c46a 22%, transparent);
+  border-color: #57c46a; color: #d8ffd9; box-shadow: 0 0 0 1px rgba(87,196,106,.25) inset; }
+.sg-posture .pp small { display: block; opacity: .65; font-size: 10.5px; }
+.sg-posture .pdesc { flex: 1 1 300px; font-size: 12px; color: #8fa8ba; line-height: 1.6; }
+
+
+.sg-views { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.sg-views button { padding: 7px 16px; border: 1px solid var(--line2); border-radius: 8px;
+  background: rgba(10,24,36,.6); color: #b6cbdb; font-size: 12.5px; cursor: pointer; transition: .15s; }
+.sg-views button:hover { color: #eaf6ff; border-color: var(--ac); }
+.sg-views button.on { background: color-mix(in srgb, var(--ac) 16%, transparent);
+  border-color: var(--ac); color: #eaf6ff; font-weight: 600; }
+.sg-views .vw-note { font-size: 11px; color: #6f899b; margin-left: auto; line-height: 1.5; }
+
+.sg-layout { display: grid; grid-template-columns: 430px minmax(0,1fr); gap: 16px; align-items: start; }
+@media (max-width: 1240px) { .sg-layout { grid-template-columns: 1fr; } }
+
+.sg-layout.tvfull { grid-template-columns: minmax(0,1fr); }
+.sg-layout.tvfull > #optCol { display: none; }
+.sg-layout.tvfull.tv-opt > #optCol { display: block; position: fixed; left: 14px; top: 62px; bottom: 14px; width: 438px;
+  overflow: auto; z-index: 55; background: rgba(10,20,32,.985); border: 1px solid var(--line2); border-radius: 12px;
+  padding: 2px 12px 12px; box-shadow: 12px 0 40px rgba(0,0,0,.55); }
+.sg-layout.tvfull.tv-opt > #optCol::before { content: '☰ 变量卡（点击右上「☰ 变量卡」收起）'; display: block;
+  font-size: 11px; color: #7b93a6; padding: 8px 2px 4px; letter-spacing: .5px; }
+
+
+.sg-sum { padding: 12px 14px; margin-bottom: 12px; }
+.sg-sum h3 { margin: 0 0 8px; font-size: 13px; letter-spacing: 1px; color: var(--ac); font-weight: 600; }
+.sg-sum .row { display: flex; gap: 8px; font-size: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(120,180,220,.12); }
+.sg-sum .row:last-of-type { border: 0; }
+.sg-sum .row i { color: #6f899b; font-style: normal; flex: 0 0 92px; }
+.sg-sum .row span { color: #dceaf5; }
+.sg-presets { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.sg-presets button { padding: 6px 11px; border: 1px solid var(--line2); border-radius: 7px;
+  background: rgba(10,24,36,.6); color: #b6cbdb; font-size: 12px; cursor: pointer; transition: .15s; }
+.sg-presets button:hover { border-color: var(--ac); color: #eaf6ff; }
+.sg-presets button.on { border-color: var(--ac); background: color-mix(in srgb, var(--ac) 14%, transparent); color: #eaf6ff; }
+.sg-conflict { margin-top: 10px; padding: 8px 10px; border: 1px solid rgba(232,120,106,.5);
+  border-radius: 7px; background: rgba(232,120,106,.08); font-size: 11.5px; color: #ffc9c1; line-height: 1.7; }
+.sg-conflict:empty { display: none; }
+.sg-opp { margin-top: 10px; font-size: 11.5px; color: #8fa8ba; line-height: 1.8; }
+.sg-opp .op-chip { display: inline-block; padding: 2px 8px; border-radius: 5px; margin: 0 3px;
+  border: 1px solid var(--line2); background: rgba(10,24,36,.6); color: #cfe3f2; font-size: 11px; }
+.sg-opp a { color: #6fa8c8; text-decoration: none; }
+
+
+.sg-cat { padding: 12px 14px 10px; margin-bottom: 12px; }
+.sg-cat h4 { margin: 0 0 2px; font-size: 13px; color: #cfe3f2; font-weight: 600; }
+.sg-cat .hint { display: block; font-size: 11px; color: #7b93a6; margin-bottom: 10px; line-height: 1.55; }
+.sg-item { border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; margin-bottom: 8px;
+  cursor: pointer; background: rgba(10,24,36,.5); transition: .15s; }
+.sg-item:hover { border-color: var(--line2); background: rgba(20,42,60,.7); }
+.sg-item.on { border-color: var(--ac); background: color-mix(in srgb, var(--ac) 12%, rgba(10,24,36,.6));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ac) 35%, transparent) inset; }
+.sg-item.bad { border-color: rgba(232,120,106,.55); }
+.sg-item .t { display: flex; align-items: baseline; gap: 8px; }
+.sg-item .t b { font-size: 13px; color: #e6f1fa; font-weight: 600; }
+.sg-item .t em { margin-left: auto; font-style: normal; font-size: 10.5px; color: #6f899b; }
+.sg-item .tl { font-size: 11.5px; color: #93aec2; margin: 4px 0 5px; line-height: 1.55; }
+.effs { display: flex; gap: 4px; flex-wrap: wrap; margin: 4px 0; }
+.effs u { text-decoration: none; font-size: 10px; padding: 1px 6px; border-radius: 4px;
+  font-family: Consolas, monospace; border: 1px solid var(--line); }
+.effs u.pos { color: #8fe0a2; border-color: rgba(87,196,106,.4); }
+.effs u.neg { color: #f0a49a; border-color: rgba(232,120,106,.4); }
+.effs u.zro { color: #5f7d92; }
+.reqw { font-size: 10.5px; color: #ffc861; margin: 3px 0; }
+.sg-item ul { margin: 6px 0 0; padding: 0; list-style: none; }
+.sg-item li { font-size: 11.5px; line-height: 1.6; color: #9fb6c8; padding-left: 14px; position: relative; }
+.sg-item li.p::before { content: '＋'; position: absolute; left: 0; color: #6fcf97; }
+.sg-item li.c::before { content: '－'; position: absolute; left: 0; color: #e8887a; }
+.sg-item .src { margin-top: 6px; font-size: 10.5px; color: #5f7d92; line-height: 1.5; }
+.sg-item .src a { color: #6fa8c8; text-decoration: none; border-bottom: 1px dotted rgba(111,168,200,.4); }
+.sg-item.dim2 { opacity: .42; }
+.sg-item.dim2 .t b { text-decoration: line-through; text-decoration-color: rgba(232,120,106,.6); }
+
+.sg-item .t em .ft { font-style: normal; font-family: Consolas, monospace; font-weight: 700; color: #8fa8ba; }
+.sg-item .t em .ft.hi { color: #7fd68f; }
+.sg-item .t em .ft.lo { color: #c98a80; }
+.sg-item.auto { border-style: dashed; }
+
+
+.sg-rules { padding: 12px 14px; }
+.sg-rules h4 { margin: 0 0 8px; font-size: 13px; color: #cfe3f2; }
+.sg-rules .rl { font-size: 11.5px; line-height: 1.7; color: #93aec2; padding: 5px 0; border-bottom: 1px dashed rgba(120,180,220,.1); }
+.sg-rules .rl:last-child { border: 0; }
+.sg-rules .rl b { color: #d5e7f5; font-weight: 600; }
+.sg-rules .rl .why { color: #7b93a6; }
+
+
+.tk-wrap { padding: 16px 16px 20px; overflow-x: auto; }
+.tk-wrap h3 { margin: 0 0 2px; font-size: 14px; color: var(--ac); letter-spacing: .5px; }
+.tk-wrap .tsub { font-size: 11.5px; color: #7b93a6; line-height: 1.6; margin-bottom: 14px; }
+.tk-flow { display: flex; gap: 0; align-items: stretch; min-width: 900px; }
+.tk-col { flex: 1 1 0; min-width: 205px; display: flex; flex-direction: column; position: relative; padding-right: 26px; }
+.tk-col::after { content: ''; position: absolute; right: 6px; top: 26px; width: 16px; height: 2px;
+  background: linear-gradient(90deg, var(--ac), rgba(120,180,220,.15)); }
+.tk-col:last-child { padding-right: 0; }
+.tk-col:last-child::after { display: none; }
+.tk-stage { border: 1.5px solid var(--ac); border-radius: 9px; padding: 8px 11px; background: rgba(10,24,36,.7); }
+.tk-stage .num { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; align-items: center;
+  justify-content: center; background: var(--ac); color: #0b1a24; font-size: 11px; font-weight: 700; margin-right: 6px; }
+.tk-stage b { font-size: 12.5px; color: #eaf6ff; }
+.tk-stage .tm { display: block; font-size: 10px; color: #7b93a6; margin-top: 3px; font-family: Consolas, monospace; }
+.tk-stage.ko { border-color: #ff9c6e; box-shadow: 0 0 0 1px rgba(255,156,110,.25) inset; }
+.tk-stage .kob { float: right; font-size: 9.5px; padding: 1px 6px; border-radius: 8px;
+  border: 1px solid rgba(201,138,94,.6); color: #c98a5e; }
+.tk-stage .kob.on { background: #ff9c6e; border-color: #ff9c6e; color: #2a1408; font-weight: 700; }
+.tk-route { font-size: 10.5px; color: #a9c2d6; line-height: 1.55; margin: 6px 2px 8px; padding: 6px 8px;
+  border-left: 2px solid #57c46a; background: rgba(87,196,106,.07); border-radius: 0 6px 6px 0; }
+.tk-route i { display: block; font-style: normal; font-size: 9.5px; color: #7fd68f; margin-bottom: 2px; letter-spacing: .5px; }
+.tk-goal { font-size: 11px; color: #93aec2; line-height: 1.55; margin: 6px 2px; }
+.tk-acts { margin: 0 0 6px; padding: 0 0 0 2px; list-style: none; }
+.tk-acts li { font-size: 10.5px; color: #7d95a8; line-height: 1.5; padding-left: 10px; position: relative; }
+.tk-acts li::before { content: '·'; position: absolute; left: 0; color: var(--ac); }
+.tk-dp { border: 1px dashed rgba(255,200,97,.55); border-radius: 7px; padding: 6px 9px; margin: 2px 0 8px;
+  background: rgba(255,200,97,.05); }
+.tk-dp .dq { font-size: 11px; color: #ffc861; line-height: 1.5; }
+.tk-dp .dc { font-size: 10px; color: #a08a5a; margin-top: 3px; line-height: 1.5; }
+.tk-brs { display: flex; flex-direction: column; gap: 6px; }
+.tk-br { border: 1px solid var(--line); border-radius: 7px; padding: 6px 9px; background: rgba(10,22,34,.55);
+  cursor: pointer; transition: .15s; }
+.tk-br.hit { border-color: rgba(87,196,106,.6); background: rgba(87,196,106,.09); }
+.tk-br.dim { opacity: .38; }
+.tk-br.open { border-style: dashed; }
+.tk-br.term { background: transparent; }
+.tk-br b { font-size: 11.5px; color: #cfe3f2; display: block; }
+.tk-br.hit b { color: #d5f2da; }
+.tk-br .whens { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.tk-br .whens u { text-decoration: none; font-size: 9.5px; padding: 1px 6px; border-radius: 4px;
+  border: 1px solid rgba(120,180,220,.3); color: #8fb7d0; }
+.tk-br.hit .whens u { border-color: rgba(87,196,106,.5); color: #9fd6a8; }
+.tk-br .act { font-size: 10.5px; color: #93aec2; line-height: 1.55; margin-top: 4px; }
+.tk-br .to { font-size: 10px; color: #6f899b; margin-top: 3px; }
+.tk-br.hit .to { color: #7fd68f; }
+
+
+.mx-wrap { padding: 16px 18px 20px; }
+.mx-wrap h3 { margin: 0 0 2px; font-size: 14px; color: var(--ac); }
+.mx-wrap .tsub { font-size: 11.5px; color: #7b93a6; line-height: 1.6; margin-bottom: 12px; }
+table.mx { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.mx th { text-align: left; padding: 7px 9px; color: #8fb7d0; font-weight: 600; font-size: 11px;
+  border-bottom: 1.5px solid var(--line2); letter-spacing: .5px; white-space: nowrap; }
+table.mx td { padding: 8px 9px; border-bottom: 1px solid rgba(120,180,220,.1); vertical-align: top; color: #93aec2; line-height: 1.6; }
+table.mx td.stg b { color: #dceaf5; display: block; font-size: 12px; }
+table.mx td.stg small { color: #6f899b; font-family: Consolas, monospace; font-size: 10px; }
+table.mx td.dp b { color: #ffc861; display: block; }
+table.mx td.dp i { font-style: normal; color: #a08a5a; font-size: 10.5px; }
+table.mx td .brow { display: flex; align-items: baseline; gap: 6px; padding: 2px 0; }
+table.mx td .bdot { flex: none; width: 8px; height: 8px; border-radius: 2px; margin-top: 4px; }
+.bd-hit { background: #57c46a; } .bd-dim { background: #6b4540; } .bd-open { background: transparent; border: 1px dashed #6f899b; }
+table.mx td.to-c { font-family: Consolas, monospace; color: #7fd68f; white-space: nowrap; font-size: 11px; }
+
+
+.ev-wrap { padding: 16px 18px 20px; }
+.ev-wrap h3 { margin: 0 0 2px; font-size: 14px; color: var(--ac); }
+.ev-wrap .tsub { font-size: 11.5px; color: #7b93a6; line-height: 1.6; margin-bottom: 14px; }
+.ev-score { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+.ev-score .big { font-size: 40px; font-family: Consolas, monospace; font-weight: 700; color: #eaf6ff; }
+.ev-score .lbl { font-size: 12px; color: #8fa8ba; }
+.ev-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px 18px; margin-bottom: 16px; }
+.ev-bar .bh { display: flex; justify-content: space-between; font-size: 11.5px; color: #a9c2d6; margin-bottom: 3px; }
+.ev-bar .bh b { font-family: Consolas, monospace; }
+.ev-bar .tr { height: 8px; border-radius: 4px; background: rgba(255,255,255,.07); overflow: hidden; }
+.ev-bar .tr i { display: block; height: 100%; border-radius: 4px; background: var(--ac); transition: width .4s; }
+.ev-env { font-size: 11.5px; color: #8fa8ba; line-height: 1.7; margin-bottom: 14px; padding: 8px 10px;
+  border: 1px dashed rgba(120,180,220,.25); border-radius: 7px; }
+table.ev-tb { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 8px; }
+table.ev-tb th { text-align: left; padding: 6px 9px; color: #8fb7d0; border-bottom: 1.5px solid var(--line2); font-size: 11px; }
+table.ev-tb td { padding: 7px 9px; border-bottom: 1px solid rgba(120,180,220,.1); color: #93aec2; }
+table.ev-tb td.sc { font-family: Consolas, monospace; color: #eaf6ff; font-weight: 700; }
+table.ev-tb tr.cur { background: color-mix(in srgb, var(--ac) 8%, transparent); }
+
+
+.tv-wrap { padding: 12px 14px 20px; overflow: auto; }
+.tv-wrap h3 { margin: 0 0 2px; font-size: 14px; color: var(--ac); }
+.tv-wrap .tsub { font-size: 11.5px; color: #7b93a6; line-height: 1.6; margin-bottom: 10px; }
+.tv-box { overflow: auto; border: 1px solid var(--line); border-radius: 10px; background: rgba(6,14,22,.5); }
+.tv-svg { display: block; margin: 0; }   
+.tv-svg-m { margin: 0 auto; }            
+.tv-svg .nd.stg-bar .n-rect { stroke: var(--ac); stroke-opacity: .55; fill: color-mix(in srgb, var(--ac) 9%, #0c1c2c); }   
+
+.tv-blk { margin: 0 0 4px; }
+.tv-blk-hd { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-size: 12.5px; color: #b6cbdb; margin: 2px 0 8px; padding-left: 2px; }
+.tv-blk-hd b { color: #eaf6ff; font-size: 13.5px; letter-spacing: .5px; }
+.tv-blk-hd i { font-style: normal; font-size: 10.5px; color: var(--ac); border: 1px solid rgba(79,195,217,.4);
+  border-radius: 20px; padding: 1px 8px; }
+.tv-blk-hd u { text-decoration: none; font-size: 11px; color: #6f899b; }
+.tv-blk-hd .ko-sum { margin-left: auto; color: #ff9c6e; font-size: 11.5px; }
+
+.tv-sub { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 14px auto 4px; padding: 11px 14px 0;
+  border-top: 1px dashed rgba(120,180,220,.28); max-width: 1210px; }
+.tv-sub b { color: #8fd3e6; font-size: 12.5px; letter-spacing: .5px; }
+.tv-sub span { color: #6f899b; font-size: 11px; }
+.tv-sub em { margin-left: auto; font-style: normal; font-size: 11px; color: #8fa8ba; }
+.tv-link { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; padding: 9px 12px;
+  border: 1px dashed rgba(120,180,220,.3); border-radius: 10px; background: rgba(10,24,36,.55); }
+.tv-link .lk-cap { font-size: 10.5px; color: #7b93a6; letter-spacing: .6px; }
+.tv-link .lk-chip { font-size: 11px; color: #8fa8ba; padding: 3px 8px; border-radius: 6px;
+  background: rgba(79,195,217,.07); border: 1px solid rgba(79,195,217,.16); }
+.tv-link .lk-chip b { color: #d5e7f5; font-weight: 600; }
+.tv-link .lk-sep { color: #46617a; font-size: 11px; }
+.tv-link .lk-go { margin-left: auto; font-size: 11px; color: #7fd68f; white-space: nowrap; }
+.tv-svg .nd { cursor: pointer; }
+.tv-svg .nd text { font-family: inherit; }
+.tv-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: #7b93a6; margin-top: 10px; line-height: 1.6; }
+.tv-legend i { font-style: normal; }
+
+.tv-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 2px; }
+.tv-top h3 { margin: 0; }
+.tv-tools { margin-left: auto; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.tv-tools .tv-tl { font-size: 10.5px; color: #7b93a6; letter-spacing: 1px; }
+.tv-pre { padding: 4px 11px; border-radius: 7px; cursor: pointer; font-size: 11.5px;
+  border: 1px solid var(--line2); background: rgba(255,255,255,.04); color: #a9c2d6; }
+.tv-pre:hover { border-color: var(--ac); color: #eaf6ff; }
+.tv-optbtn { padding: 4px 12px; border-radius: 7px; cursor: pointer; font-size: 11.5px;
+  border: 1px solid var(--ac); background: color-mix(in srgb, var(--ac) 12%, transparent); color: #eaf6ff; }
+
+.tv-detail { position: fixed; right: 14px; top: 62px; bottom: 14px; width: 400px; z-index: 60;
+  background: rgba(12,24,36,.98); border: 1px solid var(--line2); border-radius: 12px;
+  box-shadow: -10px 0 36px rgba(0,0,0,.55); padding: 15px 17px; overflow-y: auto; display: none; }
+.tv-detail.on { display: block; }
+.tv-detail .dh { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.tv-detail .dh b { font-size: 15px; color: #eaf6ff; line-height: 1.4; }
+.tv-detail .dh .x { margin-left: auto; cursor: pointer; color: #6f899b; font-size: 16px; padding: 2px 6px; }
+.tv-detail .dh .x:hover { color: #eaf6ff; }
+.tv-detail .knd { font-size: 10px; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
+.tv-detail .sec { font-size: 12px; color: #93aec2; line-height: 1.7; margin: 8px 0; }
+.tv-detail .sec b { color: #d5e7f5; }
+.tv-detail .pick { display: block; width: 100%; margin-top: 12px; padding: 9px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--ac); background: color-mix(in srgb, var(--ac) 14%, transparent); color: #eaf6ff; font-size: 13px; }
+.tv-detail .pick:hover { background: color-mix(in srgb, var(--ac) 26%, transparent); }
+.tv-detail .pick.off { border-color: var(--line2); background: transparent; color: #93aec2; }
+
+.tv-svg .n-rect { fill: #0c1c2c; stroke: #35506a; stroke-width: 1.2; }
+.tv-svg .nd { transition: opacity .15s; }
+.tv-svg .nd:hover .n-rect { stroke: #7fa8c4; stroke-width: 2; }
+.tv-svg .nd.sel .n-rect { stroke: var(--ac); stroke-width: 2.4; fill: var(--ac); fill-opacity: .14; }
+.tv-svg .nd.hi-to .n-rect { stroke: #7fd68f; stroke-width: 2.4; fill: rgba(87,196,106,.1); }   
+.tv-svg .nd.sel .n-t { fill: #eaf6ff; }
+.tv-svg .nd.dim { opacity: .38; }
+.tv-svg .nd.dim .n-rect { stroke-dasharray: 4 3; }
+.tv-svg .nd.air-cur .n-rect { stroke: #ffc861; stroke-width: 2.2; fill: #ffc861; fill-opacity: .1; }
+.tv-svg .nd.air-cur .n-t { fill: #ffe2a8; }
+.tv-svg .nd.sea-cur .n-rect { stroke: #5ec8c0; stroke-width: 2.2; fill: #5ec8c0; fill-opacity: .1; }
+.tv-svg .nd.sea-cur .n-t { fill: #b8ece6; }
+.tv-svg .nd.auto .n-rect { stroke-dasharray: 6 2; }
+.tv-svg .n-fit { font-size: 10.5px; font-family: Consolas, monospace; fill: #6f899b; font-weight: 700; }
+.tv-svg .n-fit.hi { fill: #7fd68f; }
+.tv-svg .n-fit.lo { fill: #c98a80; }
+.tv-svg .nd.ly-n .n-rect { stroke: #b98ce0; stroke-width: 2; fill: #b98ce0; fill-opacity: .1; }
+.tv-svg .nd.stg .n-rect { stroke: var(--ac); stroke-width: 2; }
+.tv-svg .nd.stg .n-t { fill: #eaf6ff; }
+.tv-svg .nd.ch-armed .n-rect { stroke: #ff9c6e; stroke-width: 1.8; fill: #ff9c6e; fill-opacity: .1; }
+.tv-svg .nd.ch-armed .n-t { fill: #ffc4a4; }
+.tv-svg .nd.ch-open .n-rect { stroke: #a07850; stroke-dasharray: 5 3; }
+.tv-svg .nd.ch-far { opacity: .42; }
+.tv-svg .nd.ch-far .n-rect { stroke-dasharray: 5 3; }
+.tv-svg .nd.br-hit .n-rect { stroke: #57c46a; fill: #57c46a; fill-opacity: .07; }
+.tv-svg .nd.br-far { opacity: .45; }
+.tv-svg .nd.br-far .n-rect { stroke-dasharray: 4 3; }
+.tv-svg .n-t { fill: #dceaf5; font-size: 12.5px; font-weight: 600; }
+.tv-svg .n-s { fill: #7b93a6; font-size: 9.5px; }
+.tv-svg .hd-l { fill: var(--ac); font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+.tv-svg .edge { fill: none; }
+.tv-svg .e-main { stroke: var(--ac); stroke-width: 2.8; }
+.tv-svg .e-sub { stroke: #3a556d; stroke-width: 1; opacity: .5; }
+.tv-svg .e-ch { stroke: #7a5c40; stroke-width: 1.1; stroke-dasharray: 4 3; }
+.tv-svg .e-chon { stroke: #ff9c6e; stroke-width: 1.6; }
+.tv-svg .e-br { stroke: #57c46a; stroke-width: 1.3; }
+.tv-svg .e-brf { stroke: #37485a; stroke-width: 1; stroke-dasharray: 4 4; }
+
+.tv-svg .nd.ko1 .n-rect { stroke: #ff9c6e; stroke-width: 2.6; fill: #ff9c6e; fill-opacity: .07; }
+.tv-svg .nd.ko1 .n-t { fill: #ffe2cf; }
+.tv-svg .nd.ko2 .n-rect { stroke: #c98a5e; stroke-width: 1.6; }
+.tv-svg .grp { fill: #7b93a6; font-size: 10px; letter-spacing: 1.2px; }
+
+.tv-svg .lband { fill: rgba(79,195,217,.028); stroke: rgba(79,195,217,.13); stroke-width: 1; }
+.tv-svg .lgrp.par .lband { fill: rgba(79,195,217,.06); stroke: rgba(79,195,217,.3); }
+.tv-svg .lname { fill: #9fc0d4; font-size: 10.5px; font-weight: 700; letter-spacing: .5px; }
+.tv-svg .ltag { fill: #6f899b; font-size: 9.2px; }
+.tv-svg .lpar { fill: #7fd68f; font-size: 9px; font-weight: 700; }
+.tv-svg .pdiv { stroke: rgba(127,214,143,.34); stroke-width: 1; stroke-dasharray: 3 4; }   
+
+.tv-svg .vbox { fill: rgba(140,190,230,.022); stroke: rgba(120,180,220,.16); stroke-width: 1; }
+.tv-svg .lgrp.par .vbox { fill: rgba(140,190,230,.04); stroke: rgba(120,180,220,.26); }
+
+.tv-svg .rt-t { fill: #c9dcea; font-size: 9.4px; }
+.tv-svg .rt-cell .n-rect { fill: rgba(120,180,220,.05); }
+.tv-svg .rt-br .n-rect { fill: rgba(255,156,110,.04); }
+.tv-svg .rt-br.hot .n-rect { fill: rgba(255,156,110,.1); }
+.tv-svg .nd.alt .n-rect { stroke: #ffb066; stroke-dasharray: 5 3; }
+.tv-svg .lane rect { transition: opacity .15s; }
+.tv-svg .lane:hover rect { fill-opacity: .13; }
+.tv-svg .n-route { fill: #a9c2d6; font-size: 9.2px; }
+.tv-svg .n-rtl { fill: var(--ac); font-size: 9px; font-weight: 600; }
+
+.tv-svg .rt-tick { fill: #6f899b; font-size: 8.6px; }
+.tv-svg .rt-cell.spine:hover .n-rect { stroke-width: 2.8; }
+.tv-svg .dv { stroke: rgba(120,180,220,.16); stroke-width: 1; }
+
+
+.sg-mystrat { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 12px;
+  padding: 9px 13px; border: 1px solid var(--line); border-radius: 10px;
+  background: linear-gradient(90deg, rgba(120,180,220,.09), transparent 70%); }
+.sg-mystrat .ttl { font-size: 12px; color: #cfe3f2; letter-spacing: .5px; white-space: nowrap; }
+.sg-mystrat .ttl em { font-style: normal; color: #7b93a6; font-size: 11px; margin-left: 5px; }
+.ms-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 5px 11px; border: 1px solid var(--line2);
+  border-radius: 7px; background: rgba(10,24,36,.6); color: #b6cbdb; font-size: 12px; cursor: pointer; transition: .15s; }
+.ms-chip:hover { border-color: var(--ac); color: #eaf6ff; }
+.ms-chip.on { border-color: #57c46a; background: rgba(87,196,106,.16); color: #d8ffd9; }
+.ms-chip .tag { font-size: 10px; color: #8fa8ba; }
+.ms-chip.on .tag { color: #9fd6a8; }
+.ms-chip b { font-weight: 600; }
+.ms-chip .del { font-size: 10px; color: #8a6f6a; padding-left: 2px; }
+.ms-chip .del:hover { color: #ff9a8a; }
+.ms-add { padding: 5px 11px; border: 1px dashed var(--line2); border-radius: 7px; background: transparent;
+  color: #8fd3e6; font-size: 12px; cursor: pointer; transition: .15s; }
+.ms-add:hover { border-color: var(--ac); color: #eaf6ff; }
+.ms-btn { padding: 5px 10px; border: 1px solid var(--line2); border-radius: 7px; background: rgba(10,24,36,.6);
+  color: #b6cbdb; font-size: 12px; cursor: pointer; transition: .15s; }
+.ms-btn:hover { border-color: var(--ac); color: #eaf6ff; }
+.ms-btn[disabled] { opacity: .38; cursor: not-allowed; }
+.ms-btn.warn:hover { border-color: #e8786a; color: #ffc9c1; }
+.ms-edit { display: none; align-items: center; gap: 6px; }
+.ms-edit.on { display: inline-flex; }
+.ms-edit input { background: rgba(10,24,36,.85); border: 1px solid var(--ac); border-radius: 6px; color: #eaf6ff;
+  font: 12px/1.6 "Microsoft YaHei", system-ui, sans-serif; padding: 4px 8px; width: 190px; outline: none; }
+.sg-mystrat .cur { font-size: 11px; color: #7b93a6; line-height: 1.6; flex: 1 1 280px; }
+.sg-mystrat .cur b { color: #cfe3f2; font-weight: 500; }
+.sg-mystrat .cur u { text-decoration: none; color: #8fd3e6; }
+</style>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<div class="sg-wrap">
+  <div class="page-head">
+    <h1>战略层 · 多预案决策树</h1>
+    <span class="ph-sub" id="phSub">战略层＝<b>两张图一条链</b>：<b style="color:#8fd3e6">图A 战前 · 决策收敛</b>（影响图语法 □我方决策 ∥ ○外部不确定 → ◇派生态势；敲定任一项，下游「可行 N/M」实时收窄——淘汰树）→ <b style="color:#7fd68f">图B 战时 · 执行应变</b>（同步矩阵：列＝阶段、行＝作战线；◆＝阶段判断门；⚠受阻＝branch 改走、⚡突变＝介入/政治、▸应对→sequel 转段）。方法论：影响图（决策分析）· MDMP 同步矩阵/DST（JP 5-0）· branches &amp; sequels · 情景规划研判外部不确定</span>
+    <span class="ph-sp"></span>
+    <a href="tactical.html?side=red" id="tcLink" style="font-size:12px;color:var(--ac);text-decoration:none;border:1px solid var(--ac);border-radius:12px;padding:2px 12px;white-space:nowrap" title="战术层：任务编组 + H-Hour 作战序列 + OPORD 五段式（阶段卡 r1-r5/b1-b4 的时刻表细化）">⊖ 战术序列 ↗</a>
+    <a href="preset.html?side=red" id="cfgLink" style="font-size:12px;color:#7fdcff;text-decoration:none;border:1px solid rgba(120,180,220,.5);border-radius:12px;padding:2px 12px;white-space:nowrap" title="战前配置台：把本页选定的战略+分支走向存成本地配置，战场页战略台「⚙ 自定义方案」整套应用">⚙ 战前配置 ↗</a>
+    <div class="ph-tabs" id="sideTabs"></div>
+  </div>
+
+  <div class="sg-posture" id="postureBar"></div>
+
+  
+  <div class="sg-mystrat" id="myStratBar"></div>
+
+  <div class="sg-views" id="viewBar"></div>
+
+  <div class="sg-layout" id="sgLayout">
+    <aside id="optCol"></aside>
+    <main id="mainCol"></main>
+  </div>
+</div>
+<div class="tv-detail" id="tvDetail"></div>
+
+<script type="module">
+const __hbOff=()=>Promise.resolve({ok:false,status:0,json:()=>Promise.resolve(null),text:()=>Promise.resolve('')});
+
+import { nav, S, esc, initTips } from './js/theme.js';
+import * as MS from './js/mystrat.js';   
+window.addEventListener('error', ev => { document.title = 'ERR|' + ev.message + '@' + (ev.lineno || ''); });
+
+const qs = new URLSearchParams(location.search);
+const _sv = qs.get('side');
+const side = _sv === 'blue' ? 'blue' : _sv === 'green' ? 'green' : 'red';
+const sd = S(side);
+document.getElementById('navSlot').outerHTML = nav('strategy', side);
+document.body.style.setProperty('--ac', sd.color);
+document.title = '苍澜群岛 · 战略层 · ' + sd.cn + ' [v0.4]';
+initTips();
+
+
+document.getElementById('tcLink').href = 'tactical.html?side=' + side;
+document.getElementById('cfgLink').href = 'preset.html?side=' + side;
+
+document.getElementById('sideTabs').innerHTML =  `<button data-s="red" class="${side === 'red' ? 'on' : ''}">◆ 红方·大陆</button>` +
+  `<button data-s="blue" class="${side === 'blue' ? 'on' : ''}">▲ 蓝方·岛内</button>` +
+  `<button data-s="green" class="${side === 'green' ? 'on' : ''}">● 绿方·美军</button>`;
+document.querySelectorAll('#sideTabs button').forEach(b => {
+  b.onclick = () => { location.href = 'strategy.html?side=' + b.dataset.s; };
+});
+
+const DATA = await (await fetch('data/L5_strategy_ops.json?v=' + Date.now())).json();
+const SIDES = DATA.sides;
+const sd5 = SIDES[side];
+const CRIT_N = {}; DATA.crits.forEach(c => CRIT_N[c.id] = c.n);
+
+
+const LS_P = 'sg_posture_v1', LS_S = 'sg_sel_v3', LS_A = 'sg_auto_v2', LS_M = 'sg_man_v2';
+let posture = localStorage.getItem(LS_P) || 'limited';
+let selAll = {}, autoAll = {}, manAll = {};
+try { selAll = JSON.parse(localStorage.getItem(LS_S) || '{}'); } catch { selAll = {}; }
+try { autoAll = JSON.parse(localStorage.getItem(LS_A) || '{}'); } catch { autoAll = {}; }
+try { manAll = JSON.parse(localStorage.getItem(LS_M) || '{}'); } catch { manAll = {}; }
+for (const k of ['red', 'blue', 'green']) { selAll[k] = selAll[k] || {}; autoAll[k] = autoAll[k] || {}; manAll[k] = manAll[k] || {}; }
+
+if (!localStorage.getItem(LS_M)) {
+  for (const k of ['red', 'blue', 'green']) for (const c of SIDES[k].vars) if (selAll[k][c.id]) manAll[k][c.id] = 1;
+}
+function saveState() {
+  localStorage.setItem(LS_S, JSON.stringify(selAll));
+  localStorage.setItem(LS_A, JSON.stringify(autoAll));
+  localStorage.setItem(LS_M, JSON.stringify(manAll));
+}
+let view = qs.get('view') || 'tree';
+
+function _tryPreset(sd, pid) {
+  const pr = ((DATA.presets[sd]) || []).find(p => p.id === pid);
+  if (pr) {
+    for (const c of SIDES[sd].vars) { selAll[sd][c.id] = pr.sel[c.id] ?? null; manAll[sd][c.id] = pr.sel[c.id] ? 1 : 0; }
+  }
+}
+if (qs.get('preset')) _tryPreset(side, qs.get('preset'));
+if (qs.get('opp')) { const [os, op] = qs.get('opp').split(':'); if (SIDES[os]) _tryPreset(os, op); }
+if (DATA.green_posture.some(p => p.id === qs.get('posture'))) posture = qs.get('posture');
+
+const OPP = { red: 'blue', blue: 'red', green: 'red' };   
+
+
+function valOf(key, forSide) {          
+  if (key === 'posture') return posture;
+  if (key === 'air') return calcAir();
+  if (key === 'sea') return calcSea();
+  const s = varSide(key) || forSide;
+  return selAll[s][key] ?? null;
+}
+function branchState(b, forSide) {      
+  let decided = false;
+  for (const k in b.when) {
+    const cur = valOf(k, forSide);
+    if (cur == null) continue;          
+    decided = true;
+    if (!b.when[k].includes(cur)) return { st: 'dim', failKey: k, failVal: cur };
+  }
+  return { st: decided ? 'hit' : 'open' };
+}
+
+
+function stageView(ph) {
+  if (!ph || !ph.alt) return ph;
+  if (branchState(ph.alt, side).st !== 'hit') return ph;
+  const v = Object.assign({}, ph);
+  v.n = ph.alt.n || ph.n; v.goal = ph.alt.goal || ph.goal;
+  v.route = ph.alt.route; v.routes = null; v.acts = ph.alt.acts || ph.acts; v.__alt = 1;
+  return v;
+}
+function reqFail(item, forSide) {       
+  for (const k in (item.req || {})) {
+    const cur = valOf(k, forSide);
+    if (cur != null && !item.req[k].includes(cur)) return { key: k, val: cur };
+  }
+  return null;
+}
+
+function crossConflict(forSide) {
+  const s = selAll;
+  if (forSide === 'red' && s.red.deny === 'dn_firststrike' && s.green.gposture === 'gp_forward')
+    return '「先制打击前沿」与绿方「前沿重兵」对冲：红方政治代价大增，绿方 spd/surv 双降';
+  if (forSide === 'green' && s.red.deny === 'dn_firststrike' && s.green.gposture === 'gp_forward')
+    return '红方「先制打击前沿」与我方「前沿重兵」对冲：前沿阵地首波互毁';
+  return null;
+}
+function conflicts(forSide) {
+  const out = [], own = selAll[forSide];
+  for (const cat of SIDES[forSide].vars) {
+    const it = cat.items.find(x => x.id === own[cat.id]);
+    if (!it) continue;
+    const f = reqFail(it, forSide);
+    if (f) {
+      const catN = SIDES[forSide].vars.find(c => c.items.includes(it)).n;
+      const reqTxt = Object.entries(it.req).map(([k, v]) => CRIT_VAR_N(k) + ' ∈ {' + v.map(idName).join('/') + '}').join(' 且 ');
+      out.push(`「${it.n}」要求 ${reqTxt}；当前 ${CRIT_VAR_N(f.key)} = ${idName(f.val) || '未定'}`);
+    }
+  }
+  const cc = crossConflict(forSide);
+  if (cc) out.push(cc);
+  return out;
+}
+function CRIT_VAR_N(key) {
+  if (key === 'posture') return '绿方介入深度';
+  for (const s of Object.values(SIDES)) for (const c of s.vars) if (c.id === key) return c.n;
+  return key;
+}
+function idName(id) {
+  if (!id) return '';
+  for (const s of Object.values(SIDES)) for (const c of s.vars) { const it = c.items.find(x => x.id === id); if (it) return it.n; }
+  const p = DATA.green_posture.find(p => p.id === id); if (p) return p.n;
+  return id;
+}
+
+
+function scoreSide(forSide) {
+  const raw = { spd: 0, surv: 0, pol: 0, rev: 0, syn: 0 };
+  const det = [];
+  const add = (eff, src) => { if (!eff) return; det.push({ n: src, eff }); for (const k in eff) raw[k] += eff[k] || 0; };
+  const own = selAll[forSide];
+  for (const cat of SIDES[forSide].vars) {
+    const it = cat.items.find(x => x.id === own[cat.id]);
+    add(it && it.eff, it ? it.n : null);
+  }
+  const p = DATA.green_posture.find(x => x.id === posture);
+  add(p && p.eff[forSide], '环境：' + p.n);
+  const w = DATA.weights[forSide];
+  const per = {}; let total = 0;
+  for (const c of DATA.crits) {
+    per[c.id] = Math.max(5, Math.min(95, 50 + raw[c.id] * 12));
+    total += per[c.id] * w[c.id];
+  }
+  const cf = conflicts(forSide);
+  total = Math.max(0, Math.min(100, total - cf.length * 8));
+  return { raw, per, total, det, cf };
+}
+
+
+function renderPosture() {
+  const bar = document.getElementById('postureBar');
+  const cur = DATA.green_posture.find(p => p.id === posture) || DATA.green_posture[0];
+  bar.innerHTML = `<b>全局条件 · 绿方介入深度</b>` +
+    DATA.green_posture.map(p => `<div class="pp ${p.id === posture ? 'on' : ''}" data-p="${p.id}">
+      ${esc(p.n)}<small>${esc(p.sub)}</small></div>`).join('') +
+    `<div class="pdesc">${esc(cur.desc)}${cur.src ? ' <a href="' + esc(cur.src[0].url) + '" target="_blank" rel="noopener" style="color:#6fa8c8">来源</a>' : ''}</div>`;
+  bar.querySelectorAll('.pp').forEach(el => {
+    el.onclick = () => {
+      posture = el.dataset.p; localStorage.setItem(LS_P, posture);
+      for (const s of ['red', 'blue', 'green']) autoFill(s);   
+      saveState(); renderAll();
+    };
+  });
+}
+
+
+function renderViews() {
+  const bar = document.getElementById('viewBar');
+  const VIEWS = [
+    ['tree', '❋ 交互决策树', '因果链 → 主干 → 意外分支，一整棵树；点击节点看详情/选值'],
+    ['trunk', '◉ 决策树主干', '阶段主干 + 决策点 + 分支；激活/排除随变量联动'],
+    ['matrix', '▦ 决策支持矩阵', 'DSM：决策点 / 判据 / 备选动作 / 转段（FM 101-5-1 产物）'],
+    ['eval', '◈ 组合评估', 'COA 对比：五维评分 + 预案对比 + 冲突清单'],
+  ];
+  bar.innerHTML = VIEWS.map(([v, n, d]) =>
+    `<button class="${view === v ? 'on' : ''}" data-v="${v}">${n}</button>`).join('') +
+    `<span class="vw-note">${esc((VIEWS.find(x => x[0] === view) || [])[2] || '')}</span>`;
+  bar.querySelectorAll('button').forEach(b => { b.onclick = () => { view = b.dataset.v; renderViews(); renderMain(); }; });
+}
+
+
+function effHtml(eff) {
+  if (!eff) return '';
+  return `<div class="effs">` + Object.entries(eff).filter(([, v]) => v).map(([k, v]) =>
+    `<u class="${v > 0 ? 'pos' : 'neg'}">${CRIT_N[k]}${v > 0 ? '+' : ''}${v}</u>`).join('') + `</div>`;
+}
+function renderOpts() {
+  const col = document.getElementById('optCol');
+  const own = selAll[side];
+  const sc = scoreSide(side);
+  const sum = sd5.vars.map(c => {
+    const it = c.items.find(x => x.id === own[c.id]);
+    const au = autoAll[side][c.id] && it;
+    return `<div class="row"><i>${esc(c.n)}</i><span>${it ? (au ? '⟳ ' : '') + esc(it.n) : '未选'}</span></div>`;
+  }).join('');
+  const pres = DATA.presets[side] || [];
+  const curPreset = pres.find(p => Object.entries(p.sel).every(([k, v]) => own[k] === v) &&
+    Object.values(own).filter(Boolean).length === Object.keys(p.sel).length);
+  const cfHtml = sc.cf.length ? `<div class="sg-conflict">⚠ 联动冲突：${sc.cf.map(c => esc(c)).join('；')}</div>` : '';
+  const oppKey = OPP[side];
+  const oppChips = SIDES[oppKey].vars.map(c => {
+    const v = selAll[oppKey][c.id];
+    return `<span class="op-chip" title="跨页共享：在 ${esc(SIDES[oppKey].cn)} 页可修改">${esc(c.n)}：${v ? esc(idName(v)) : '未定'}</span>`;
+  }).join('');
+  col.innerHTML =
+    `<section class="panel-x sg-sum"><h3>战略组合 · ${esc(sd5.cn)}</h3>${sum}
+       <div style="font-size:11.5px;color:#7b93a6;line-height:1.65;margin-top:8px">${esc(sd5.intent)}</div>
+       ${pres.length ? `<div class="sg-presets">多预案：` + pres.map((p, i) =>
+         `<button data-p="${i}" class="${curPreset && curPreset.id === p.id ? 'on' : ''}" title="${esc(p.desc)}">${esc(p.n)}</button>`).join('') + `</div>` : ''}
+       ${cfHtml}
+       <div class="sg-opp">联动引用 · ${esc(SIDES[oppKey].cn)}设定（分支条件可直接引用）：${oppChips}
+         <a href="strategy.html?side=${oppKey}">去设定 ↗</a></div>
+     </section>` +
+    sd5.vars.map(c => `<section class="panel-x sg-cat">
+      <h4>${esc(c.n)}</h4><span class="hint">${esc(c.hint || '')}</span>
+      ${c.items.map(it => {
+        const bad = !!reqFail(it, side);
+        const flt = filterFor(c.id);
+        const dimd = flt.excluded.has(it.id);
+        const f = it.fit ? fitScore(it, side) : null;
+        const isAuto = !!autoAll[side][c.id] && own[c.id] === it.id;
+        return `<div class="sg-item ${own[c.id] === it.id ? 'on' : ''} ${isAuto ? 'auto' : ''} ${bad ? 'bad' : ''} ${dimd ? 'dim2' : ''}" data-cat="${c.id}" data-id="${it.id}" title="${bad ? '前置条件未满足' : dimd ? '被级联筛选排除：' + (flt.whys[it.id] || '') : ''}">
+        <div class="t"><b>${isAuto ? '⟳ ' : ''}${esc(it.n)}</b><em>${f ? `<u class="ft ${f.score >= 68 ? 'hi' : f.score <= 34 ? 'lo' : ''}">${f.score}</u> · ` : ''}置信 ${esc(it.conf || '—')}</em></div>
+        <div class="tl">${esc(it.tl || '')}</div>
+        ${dimd ? `<div class="reqw" style="color:#e8a49a">⚠ 筛选：${esc(flt.whys[it.id] || '')}</div>` : ''}
+        ${effHtml(it.eff)}
+        ${bad ? `<div class="reqw">⚠ 前置：${Object.entries(it.req).map(([k, v]) => esc(CRIT_VAR_N(k)) + ' ∈ {' + v.map(x => esc(idName(x))).join('/') + '}').join('，')}</div>` : ''}
+        ${(own[c.id] === it.id && (it.pros.length || it.cons.length)) ? `<ul>${it.pros.map(p => `<li class="p">${esc(p)}</li>`).join('')}${it.cons.map(p => `<li class="c">${esc(p)}</li>`).join('')}</ul>` : ''}
+        ${own[c.id] === it.id && it.src && it.src.length ? `<div class="src">来源：${it.src.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc((s.ref || '').slice(0, 42))}…</a>`).join(' · ')}</div>` : ''}
+      </div>`; }).join('')}
+    </section>`).join('') +
+    `<section class="panel-x sg-rules"><h4>联动规则（主干为什么这么长）</h4>` +
+      DATA.rules.map(r => `<div class="rl"><b>${esc(r.if)}</b>
+        ${r.req ? ` → 要求 <b>${esc(r.req)}</b>` : ''}${r.then ? ` → <b>${esc(r.then)}</b>` : ''}${r.vs ? ` × <b>${esc(r.vs)}</b>` : ''}
+        <span class="why">｜${esc(r.why)}</span></div>`).join('') + `</section>`;
+
+  col.querySelectorAll('.sg-item').forEach(el => {
+    el.onclick = () => {
+      const c = el.dataset.cat, id = el.dataset.id;
+      if (selAll[side][c] === id) { selAll[side][c] = null; delete manAll[side][c]; }
+      else { selAll[side][c] = id; manAll[side][c] = 1; }
+      delete autoAll[side][c];
+      autoFill(side); saveState(); renderAll();
+    };
+  });
+  col.querySelectorAll('.sg-presets button').forEach(el => {
+    el.onclick = () => {
+      const p = pres[+el.dataset.p];
+      const keys = Object.keys(p.sel);
+      for (const c of sd5.vars) {
+        selAll[side][c.id] = keys.includes(c.id) ? p.sel[c.id] : null;
+        manAll[side][c.id] = keys.includes(c.id) ? 1 : 0;
+        delete autoAll[side][c.id];
+      }
+      autoFill(side); saveState(); renderAll();
+    };
+  });
+}
+
+
+function branchHtml(b, forSide) {
+  const bs = branchState(b, forSide);
+  const whens = Object.entries(b.when).map(([k, v]) =>
+    `<u title="分支条件">${esc(CRIT_VAR_N(k))}=${esc(v.map(idName).join('/'))}</u>`).join('');
+  return `<div class="tk-br ${bs.st} ${b.to === '-' ? 'term' : ''}" title="${esc(b.act)}">
+    <b>${esc(b.n)}</b>
+    ${whens ? `<div class="whens">${whens}</div>` : ''}
+    <div class="act">${esc(b.act)}</div>
+    <div class="to">${b.to === '-' ? '── 终局' : '→ ' + esc((SIDES[forSide].trunk.find(x => x.id === b.to) || {}).n || b.to)}${bs.st === 'dim' ? '（条件不满足）' : bs.st === 'open' ? '（条件待定）' : ''}</div>
+  </div>`;
+}
+function renderTrunk() {
+  const col = document.getElementById('mainCol');
+  const trunk = sd5.trunk;
+  const chosen = sd5.vars.map(c => { const it = c.items.find(x => x.id === selAll[side][c.id]); return it ? it.n : null; }).filter(Boolean);
+  const pickLine = chosen.length
+    ? `当前组合：<b style="color:#d5e7f5">${esc(chosen.join(' ＋ '))}</b>　｜　分支着色：<span style="color:#8fe0a2">绿=激活</span> · <span style="color:#7b93a6">灰=条件排除</span> · <span style="color:#8fb7d0">虚线=待定</span>`
+    : `左侧选择宏观变量后，主干各决策点的分支会按条件自动激活/排除（分支条件可引用对手设定与全局深度）`;
+  col.innerHTML = `<section class="panel-x tk-wrap">
+    <h3>决策树主干 · ${esc(sd5.cn)}</h3><div class="tsub">${pickLine}</div>
+    <div class="tk-flow">${trunk.map((pv, i) => {
+      const ph = stageView(pv);
+      const ax = selAll[side].axis, rt = ph.routes ? (ax ? ph.routes[ax] : '') : (ph.route || '');
+      return `
+      <div class="tk-col">
+        <div class="tk-stage ${ph.ko && ph.ko.lv === 1 ? 'ko' : ''}"><span class="num">${i + 1}</span><b>${esc(ph.n)}</b>
+          ${ph.ko ? `<span class="kob ${ph.ko.lv === 1 ? 'on' : ''}" title="${esc(ph.ko.why)}">${ph.ko.lv === 1 ? '⚔ 胜负手' : '▏关键'}</span>` : ''}
+          <span class="tm">${esc(ph.time || '')}</span></div>
+        <div class="tk-goal">${esc(ph.goal || '')}</div>
+        ${rt ? `<div class="tk-route"><i>${ph.routes ? '路线 · ' + esc(idName(ax) || '待定') : (ph.__alt ? '封锁态 · 路径' : '作战路径')}</i>${esc(rt)}</div>` : ''}
+        <ul class="tk-acts">${(ph.acts || []).map(a => `<li>${esc(a)}</li>`).join('')}</ul>
+        <div class="tk-dp"><div class="dq">◆ ${esc(ph.dp.q)}</div>
+          <div class="dc">判据：${esc((ph.dp.crit || []).join(' ／ '))}</div></div>
+        <div class="tk-brs">${ph.branches.map(b => branchHtml(b, side)).join('')}</div>
+      </div>`; }).join('')}
+    </div>
+    <div class="tsub" style="margin-top:12px">范式：美军 MDMP 产物——主干=作战线（Lines of Operation）与阶段（belt 法推进），
+      决策点=FM 101-5-1 的 Decision Support Template/Matrix，分支=branches（条件变化时改道）与 sequels（后续行动）。分支条件引用三方共享设定，改一处全树联动。</div>
+  </section>`;
+}
+
+
+function renderMatrix() {
+  const col = document.getElementById('mainCol');
+  const DOT = { hit: 'bd-hit', dim: 'bd-dim', open: 'bd-open' };
+  col.innerHTML = `<section class="panel-x mx-wrap">
+    <h3>决策支持矩阵 · ${esc(sd5.cn)}</h3>
+    <div class="tsub">FM 101-5-1 决策支持矩阵（DSM）：每个决策点列出判据、备选动作与转段；圆点颜色 = 该动作在当前变量组合下的状态（绿激活 / 灰排除 / 空待定）。</div>
+    <table class="mx">
+      <thead><tr><th style="width:150px">阶段</th><th style="width:190px">决策点 / 判据</th><th>备选动作（branches &amp; sequels）</th><th style="width:110px">转段</th></tr></thead>
+      <tbody>${sd5.trunk.map((ph, i) => `
+        <tr>
+          <td class="stg"><b>${i + 1}. ${esc(ph.n)}</b><small>${esc(ph.time || '')}</small>
+            ${ph.ko ? `<small style="color:${ph.ko.lv === 1 ? '#ff9c6e' : '#c98a5e'}">${ph.ko.lv === 1 ? '⚔ 胜负手' : '▏关键'}</small>` : ''}</td>
+          <td class="dp"><b>${esc(ph.dp.q)}</b><i>${esc((ph.dp.crit || []).join(' ／ '))}</i></td>
+          <td>${ph.branches.length ? ph.branches.map(b => {
+            const bs = branchState(b, side);
+            return `<div class="brow"><span class="bdot ${DOT[bs.st]}"></span><span>${esc(b.n)}${bs.st === 'dim' ? '　<span style="color:#7b5a55">× 条件不满足</span>' : bs.st === 'open' ? '　<span style="color:#6f899b">? 待定</span>' : ''}</span></div>`;
+          }).join('') : '<span style="color:#6f899b">—（收束阶段）</span>'}</td>
+          <td class="to-c">${ph.branches.map(b => (b.to === '-' ? '终局' : (SIDES[side].trunk.find(x => x.id === b.to) || {}).n || b.to)).filter((v, i, a) => a.indexOf(v) === i).map(esc).join('<br>')}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </section>`;
+}
+
+
+function renderEval() {
+  const col = document.getElementById('mainCol');
+  const sc = scoreSide(side);
+  const w = DATA.weights[side];
+  const p = DATA.green_posture.find(x => x.id === posture);
+  const pres = DATA.presets[side] || [];
+  col.innerHTML = `<section class="panel-x ev-wrap">
+    <h3>组合评估 · ${esc(sd5.cn)}</h3>
+    <div class="tsub">COA 对比（MDMP 第 5 步）：五维评分 = 各变量 eff 加权累积（eff 为模型估算，用于方案间相对比较）；
+      每条联动冲突扣 8 分。权重随阵营特点设定：${Object.entries(w).map(([k, v]) => esc(CRIT_N[k]) + ' ' + Math.round(v * 100) + '%').join(' · ')}</div>
+    <div class="ev-score"><span class="big">${Math.round(sc.total)}</span><span class="lbl">综合评分 / 100</span>
+      <span class="lbl" style="color:${sc.cf.length ? '#f0a49a' : '#8fe0a2'}">${sc.cf.length ? '⚠ ' + sc.cf.length + ' 条联动冲突' : '✓ 无联动冲突'}</span></div>
+    <div class="ev-bars">${DATA.crits.map(c => `
+      <div class="ev-bar"><div class="bh"><span>${esc(c.n)}<small style="color:#6f899b">　权重 ${Math.round(w[c.id] * 100)}%</small></span><b>${sc.per[c.id]}</b></div>
+        <div class="tr"><i style="width:${sc.per[c.id]}%"></i></div></div>`).join('')}</div>
+    <div class="ev-env">环境修正 · ${esc(p.n)}（${esc(p.sub)}）：${esc(p.desc)}</div>
+    ${sc.cf.length ? `<div class="sg-conflict" style="margin-bottom:12px">⚠ ${sc.cf.map(c => esc(c)).join('；')}</div>` : ''}
+    ${pres.length ? `<table class="ev-tb"><thead><tr><th>多预案对比</th><th>构成</th><th style="width:80px">综合</th><th style="width:150px">五维</th></tr></thead>
+      <tbody>${pres.map(pr => {
+        
+        const saved = { ...selAll[side] };
+        Object.assign(selAll[side], p2null(sd5, pr.sel));
+        const s2 = scoreSide(side);
+        selAll[side] = saved;
+        const isCur = Object.entries(pr.sel).every(([k, v]) => selAll[side][k] === v);
+        return `<tr class="${isCur ? 'cur' : ''}"><td><b style="color:#dceaf5">${esc(pr.n)}</b><br><span style="font-size:10.5px;color:#7b93a6">${esc(pr.desc)}</span></td>
+          <td style="font-size:10.5px">${esc(Object.entries(pr.sel).map(([k, v]) => idName(v)).join(' · '))}</td>
+          <td class="sc">${Math.round(s2.total)}</td>
+          <td style="font-size:10px;font-family:Consolas,monospace">${DATA.crits.map(c => esc(CRIT_N[c.id][0]) + s2.per[c.id]).join(' ')}</td></tr>`;
+      }).join('')}</tbody></table>` : ''}
+  </section>`;
+}
+function p2null(sd5, sel) {
+  const out = {};
+  for (const c of sd5.vars) out[c.id] = sel[c.id] ?? null;
+  return out;
+}
+
+
+const V3 = DATA.v3 || { chains: {}, filters: [], contingencies: {} };
+
+
+function curVal(k) {
+  if (k === 'posture') return posture;
+  if (k === 'air') return calcAir();
+  if (k === 'sea') return calcSea();
+  const s = varSide(k);
+  return s ? (selAll[s][k] ?? null) : null;
+}
+
+function derivedOut(kind, pOverride) {
+  const D = V3[kind];
+  if (!D || !D.base) return null;
+  let i = D.base[pOverride || posture] ?? 1;
+  for (const m of (D.mods || [])) {
+    for (const k in m.when) {
+      const cur = (k === 'air' ? calcAir() : k === 'sea' ? calcSea() : curVal(k));
+      if (cur != null && m.when[k].includes(cur)) i += m.d;
+    }
+  }
+  return D.lv[Math.max(0, Math.min(D.lv.length - 1, i))].id;
+}
+function calcAir() { return derivedOut('air'); }
+function calcSea() { return derivedOut('sea'); }
+
+function fitScore(item, forSide) {
+  const notes = []; let s = 0;
+  for (const [k, tbl] of Object.entries(item.fit || {})) {
+    let cur;
+    if (k === 'posture') cur = posture;
+    else if (k === 'air') cur = calcAir();
+    else if (k === 'sea') cur = calcSea();
+    else { const vs = varSide(k); cur = vs ? (selAll[vs][k] ?? null) : null; }
+    if (cur == null) continue;
+    const d = tbl[cur];
+    if (d === undefined) continue;
+    s += d;
+    if (d) notes.push([k, cur, d]);
+  }
+  return { score: Math.max(5, Math.min(95, Math.round(50 + 13 * s))), notes };
+}
+function varSide(key) { for (const s in SIDES) if (SIDES[s].vars.some(c => c.id === key)) return s; return null; }
+
+function bestVal(varId, forSide) {
+  const cat = SIDES[forSide].vars.find(c => c.id === varId);
+  if (!cat) return null;
+  const flt = filterFor(varId, forSide);
+  let best = null, bs = -1e9;
+  for (const it of cat.items) {
+    if (flt.excluded.has(it.id)) continue;             
+    if (reqFail(it, forSide)) continue;                
+    const sc = fitScore(it, forSide).score;
+    if (sc > bs) { bs = sc; best = it.id; }
+  }
+  if (!best) {                                          
+    const fb = cat.items.find(it => !flt.excluded.has(it.id) && !reqFail(it, forSide)) || cat.items[0];
+    best = fb.id;
+  }
+  return best || cat.items[0].id;
+}
+function autoFill(forSide) {
+  
+  const seq = (V3.autoseq && V3.autoseq[forSide]) || (V3.chains[forSide] || []).map(c => c.var).filter(Boolean);
+  const seen = new Set();
+  for (const v of seq) {
+    if (seen.has(v) || ['posture', 'air', 'sea', 'airsea'].includes(v)) continue;
+    seen.add(v);
+    if (manAll[forSide][v]) continue;                  
+    const b = bestVal(v, forSide);
+    if (b) { selAll[forSide][v] = b; autoAll[forSide][v] = 1; }
+  }
+}
+function filterFor(varId, forSide) {       
+  const fs = forSide || side;
+  const out = { excluded: new Set(), whys: {} };
+  const curAir = calcAir(), curSea = calcSea();
+  for (const f of V3.filters) {
+    if (f.var !== varId || !f.when) continue;
+    let hit = true;
+    for (const k in f.when) {
+      let cur;
+      if (k === 'posture') cur = posture;
+      else if (k === 'air') cur = curAir;
+      else if (k === 'sea') cur = curSea;
+      else cur = selAll[varSide(k) || fs][k] ?? null;
+      if (cur == null || !f.when[k].includes(cur)) { hit = false; break; }
+    }
+    if (!hit) continue;
+    const apply = (id) => { out.excluded.add(id); out.whys[id] = f.why; };
+    const cat = SIDES[fs].vars.find(c => c.id === varId);
+    if (f.only && cat) { for (const it of cat.items) if (!f.only.includes(it.id)) apply(it.id); }
+    if (f.exclude) f.exclude.forEach(apply);
+  }
+  return out;
+}
+function allowVia(fromVar, fromVal, toVar, toVal) {   
+  for (const f of V3.filters) {
+    if (f.var !== toVar || !f.when || !f.when[fromVar]) continue;
+    if (!f.when[fromVar].includes(fromVal)) continue;
+    if (f.only && !f.only.includes(toVal)) return false;
+    if (f.exclude && f.exclude.includes(toVal)) return false;
+  }
+  return true;
+}
+function trigState(c0) {           
+  const w = (c0.trigger || {}).when || {};
+  let decided = false;
+  for (const k in w) {
+    const cur = curVal(k);
+    if (cur == null) continue;
+    decided = true;
+    if (!w[k].includes(cur)) return 'far';
+  }
+  return decided ? 'armed' : 'open';
+}
+function layoutLines() {           
+  const L = []; const nm = idName; const v = selAll[side];
+  if (side === 'red') {
+    L.push(['终局目标', v.endst ? nm(v.endst) : '未定']);
+    L.push(['制空评估', V3.air ? (V3.air.lv.find(x => x.id === calcAir()) || {}).n : '—']);
+    L.push(['制海评估', V3.sea ? (V3.sea.lv.find(x => x.id === calcSea()) || {}).n : '—']);
+    L.push(['登陆方向', v.axis ? nm(v.axis) : '未定（受推进样式筛选）']);
+    L.push(['推进样式', v.tempo ? nm(v.tempo) : '未定（受空海双评估约束）']);
+    L.push(['火力重心', v.opening ? nm(v.opening) : '未定']);
+    L.push(['拒止方式', v.deny ? nm(v.deny) : '未定']);
+    L.push(['编成', '主登陆群 + 佯动群 + 机动预备群（明细见舰队编成页）']);
+    L.push(['航线', v.axis === 'lp_taoyuan' || v.axis === 'lp_taipei' ? '北航道：中线以东 60~80km，佯动群牵制三芝雄三'
+      : v.axis === 'lp_taichung' ? '中航道：宽正面多波次，规避大安/虎尾鱼叉阵地'
+      : v.axis === 'lp_kaohsiung' ? '南航道：澎湖以南迂回，防左营与屏东东岸阵地'
+      : v.axis === 'lp_chiayi' ? '中南航道：多点抢滩风险分散，临时码头卸载' : '按方向待定']);
+  } else if (side === 'blue') {
+    L.push(['绿方介入', (DATA.green_posture.find(p => p.id === posture) || {}).n]);
+    L.push(['防卫构想', v.def ? nm(v.def) : '未定']);
+    L.push(['防御重心', v.focus ? nm(v.focus) : '未定']);
+    L.push(['阵地', '滨海 4 打击群：6 座鱼叉 + 9 座雄风固定阵地 + 机动大队']);
+    L.push(['疏散', '海锋中队/爱国者开战前 2h 疏散至预备阵地，固定阵地作诱饵']);
+    L.push(['后备', '后备旅按 D+7 到位 50% 规划（数据置信 C）']);
+  } else {
+    L.push(['介入深度', (DATA.green_posture.find(p => p.id === posture) || {}).n]);
+    L.push(['介入方式', v.gmode ? nm(v.gmode) : '未定']);
+    L.push(['部署姿态', v.gposture ? nm(v.gposture) : '未定']);
+    L.push(['预置', '关岛/澳北弹药预置 + 琉球一线疏散位（ACE）']);
+    L.push(['约束', '基地使用权依赖东道国政治许可（堤丰 100% 依赖吕宋）']);
+  }
+  return L;
+}
+
+
+const TV = { sel: null };
+const cut = (s, m) => (!s || s.length <= m) ? (s || '') : s.slice(0, m) + '…';
+
+function wrapText(s, maxW, fs) {
+  const out = []; let line = '', w = 0;
+  for (const ch of (s || '')) {
+    const cw = /[\x00-\xff]/.test(ch) ? fs * 0.56 : fs;
+    if (w + cw > maxW && line) { out.push(line); line = ''; w = 0; }
+    line += ch; w += cw;
+  }
+  if (line) out.push(line);
+  return out;
+}
+
+function splitTag(t, maxW) {
+  if (!t) return [];
+  const i = t.indexOf('（');
+  if (i > 0) return [t.slice(0, i), t.slice(i)];
+  return wrapText(t, maxW || 158, 9.2).slice(0, 2);
+}
+
+function renderTree() {
+  const col = document.getElementById('mainCol');
+  const chain = (V3.chains[side] || []).filter(c => c.kind !== 'stages');
+  if (!chain.length) { col.innerHTML = '<section class="panel-x tk-wrap"><h3>交互决策树</h3><div class="tsub">本方暂无因果链数据</div></section>'; return; }
+  const stages = sd5.trunk;
+  const conts = V3.contingencies[side] || [];
+  const curAir = calcAir(), curSea = calcSea();
+  const own = selAll[side];
+
+  
+  const PAD = 16;
+  const CW = 168, LGAP = 34, PAR_GAP = 64, VH = 42, VG = 10, NY0 = 84;
+  const BX = 7, BT = 24, BB = 8;          
+  const ASH = 228;                       
+
+  
+  const cols = []; const NDMAP = {};
+  for (const c of chain) {
+    let nodes = [], varId = c.var || '', label = '';
+    if (c.var === 'posture') {
+      label = '全局 · 绿方介入深度';
+      nodes = DATA.green_posture.map(p => ({ id: 'p:' + p.id, kind: 'val', varId: 'posture', val: p.id, n: p.n, sub: p.sub, it: p }));
+    } else if (c.var === 'airsea') {
+      
+      label = '空海态势（派生）';
+      nodes = [{ id: 'as', kind: 'asn', varId: 'airsea', n: '空海态势', sub: '制空 / 制海', h: ASH }];
+    } else if (c.var === 'air' || c.var === 'sea') {
+      const D = V3[c.var], isAir = c.var === 'air';
+      label = isAir ? '制空评估（派生）' : '制海评估（派生）';
+      nodes = D.lv.map(v => ({ id: (isAir ? 'a:' : 'e:') + v.id, kind: isAir ? 'airv' : 'seav',
+        varId: c.var, val: v.id, n: v.n, sub: v.tl, it: v })).reverse();   
+    } else if (c.kind === 'layout') {
+      label = '战役布局（收敛）';
+      nodes = [{ id: 'ly', kind: 'ly', n: '布局要点', sub: '点击查看当前收敛结果' }];
+    } else {
+      const cat = sd5.vars.find(v => v.id === c.var);
+      label = cat.n; varId = c.var;
+      const flt = filterFor(c.var);
+      nodes = cat.items.map(it => ({ id: 'v:' + c.var + ':' + it.id, kind: 'val', varId: c.var, val: it.id, n: it.n, sub: cut(it.tl, 17), it, dim: flt.excluded.has(it.id), why: flt.whys[it.id] }));
+    }
+    cols.push({ c, varId, label, nodes });
+  }
+
+  
+  const groups = [];
+  for (const c0 of cols) {
+    const lv = c0.c.lvl ?? 0;
+    let g = groups[groups.length - 1];
+    if (!g || g.lvl !== lv) { g = { lvl: lv, n: c0.c.lvlN || '', tag: c0.c.lvlTag || '', cols: [] }; groups.push(g); }
+    g.cols.push(c0);
+  }
+  const chainW = groups.length * CW + (groups.length - 1) * LGAP;
+  const W = chainW + PAD * 2;                          
+  const chainX0 = Math.round((W - chainW) / 2);
+  let gx = chainX0;
+  groups.forEach((g, gi) => {
+    g.x = gx; g.w = CW;
+    let y = NY0;
+    g.cols.forEach((c0, j) => {
+      c0.x = gx; c0.gi = gi; c0.y0 = y; c0.hdY = y - 8;
+      c0.nodes.forEach((n, i) => { n.x = gx; n.y = y + i * (VH + VG); n.w = CW; n.h = n.h || VH; NDMAP[n.id] = n; });
+      c0.h = Math.max(...c0.nodes.map(n => n.y + n.h)) - y;
+      c0.boxY = y - BT; c0.boxH = c0.h + BT + BB;       
+      y += c0.h + (j < g.cols.length - 1 ? PAR_GAP : 0);   
+    });
+    g.h = y - NY0;
+    gx += CW + LGAP;
+  });
+
+  
+  const HA = NY0 + Math.max(...groups.map(g => g.h)) + 34;                    
+
+  
+  const edgesA = [];
+  const curve = (a, b, cls) => {
+    const x1 = a.x + a.w, y1 = a.y + a.h / 2, x2 = b.x, y2 = b.y + b.h / 2;
+    const mx = (x1 + x2) / 2;
+    edgesA.push(`<path class="edge e-${cls}" d="M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`);
+  };
+  
+  const curOf = (v) => v === 'posture' ? posture : v === 'air' ? curAir : v === 'sea' ? curSea : (own[v] ?? null);
+  
+  for (let gi = 0; gi < groups.length - 1; gi++) {
+    for (const A of groups[gi].cols) for (const B of groups[gi + 1].cols) {
+    const aCur = curOf(A.varId), bCur = curOf(B.varId);
+    const Bderived = (B.varId === 'air' || B.varId === 'sea' || B.varId === 'airsea');
+    for (const an of A.nodes) for (const bn of B.nodes) {
+      if (B.c.kind === 'layout') { curve(an, bn, aCur === an.val ? 'main' : 'sub'); continue; }
+      if (Bderived) {
+        
+        if (bn.kind !== 'asn' && bCur !== bn.val) continue;
+        curve(an, bn, aCur === an.val ? 'main' : 'sub');
+        continue;
+      }
+      let ok = true;
+      if (A.varId && A.varId !== 'airsea') ok = allowVia(A.varId, an.val, B.varId, bn.val);
+      if (!ok) continue;
+      const isMain = A.varId === 'airsea' ? (bCur === bn.val) : (aCur === an.val && bCur === bn.val);
+      curve(an, bn, isMain ? 'main' : 'sub');
+    }
+    }
+  }
+  
+  const lastCol = cols[cols.length - 1];
+  {
+    const ly = lastCol.nodes[0], lx = ly.x + ly.w / 2, lT = ly.y + ly.h;
+    edgesA.push(`<path class="edge e-main" d="M${lx},${lT + 2} L${lx},${lT + 24}" marker-end="url(#arwA)"/>`);
+  }
+
+  
+  function nodeSvg(n) {
+    const cx = n.x + 12, stCls = [];
+    let head = '', body = '', badge = '';
+    if (n.kind === 'val' || n.kind === 'airv' || n.kind === 'seav') {
+      
+      const isSel = n.kind === 'val'
+        ? (n.varId === 'posture' ? posture === n.val : own[n.varId] === n.val)
+        : (n.kind === 'airv' ? curAir === n.val : curSea === n.val);
+      if (isSel) stCls.push('sel');
+      if (n.dim) stCls.push('dim');
+      if (n.kind === 'airv' && curAir === n.val) stCls.push('air-cur');
+      if (n.kind === 'seav' && curSea === n.val) stCls.push('sea-cur');
+      const isAuto = n.kind === 'val' && autoAll[side][n.varId] && isSel;
+      if (isAuto) stCls.push('auto');
+      head = `<text class="n-t" x="${cx}" y="${n.y + 19}">${isAuto ? '⟳ ' : ''}${esc(cut(n.n, isAuto ? 9 : 10))}</text>`;
+      body = `<text class="n-s" x="${cx}" y="${n.y + 35}">${esc(cut(n.sub, 16))}</text>`;
+      if (n.it && n.it.fit) {                     
+        const f = fitScore(n.it, side);
+        const cl = f.score >= 68 ? 'hi' : f.score <= 34 ? 'lo' : '';
+        badge = `<text class="n-fit ${cl}" x="${n.x + n.w - 9}" y="${n.y + 15}" text-anchor="end">${f.score}</text>`;
+      }
+    } else if (n.kind === 'ly') {
+      stCls.push('ly-n');
+      head = `<text class="n-t" x="${cx}" y="${n.y + 19}">◈ 布局要点</text>`;
+      body = `<text class="n-s" x="${cx}" y="${n.y + 35}">随上方选择收敛 · 点击查看</text>`;
+    } else if (n.kind === 'asn') {
+      
+      const A = V3.air, E = V3.sea;
+      const asRow = (lv, cur, y0, col) => lv.slice().reverse().map((v, i) => {
+        const y = y0 + i * 22, on = v.id === cur;
+        return `<circle cx="${n.x + 16}" cy="${y - 3.2}" r="${on ? 3.6 : 2.2}" fill="${on ? col : 'none'}" stroke="${col}" stroke-opacity="${on ? 1 : .4}"/>` +
+          `<text x="${n.x + 27}" y="${y}" font-size="9.8" fill="${on ? col : '#7b93a6'}"${on ? ' font-weight="700"' : ''}>${esc(v.n)}</text>` +
+          (on ? `<text x="${n.x + n.w - 10}" y="${y}" text-anchor="end" font-size="8.5" fill="${col}" opacity=".75">当前</text>` : '');
+      }).join('');
+      head = `<text x="${n.x + 12}" y="${n.y + 17}" font-size="10" font-weight="700" fill="#ffc861">制空</text>` +
+        `<text x="${n.x + 44}" y="${n.y + 17}" font-size="9" fill="#7b93a6">介入深度定基准档</text>` +
+        asRow(A.lv, curAir, n.y + 36, '#ffc861') +
+        `<line class="dv" x1="${n.x + 11}" y1="${n.y + 98}" x2="${n.x + n.w - 11}" y2="${n.y + 98}"/>` +
+        `<text x="${n.x + 12}" y="${n.y + 114}" font-size="10" font-weight="700" fill="#5ec8c0">制海</text>` +
+        `<text x="${n.x + 44}" y="${n.y + 114}" font-size="9" fill="#7b93a6">对等派生（JP 3-30）</text>` +
+        asRow(E.lv, curSea, n.y + 133, '#5ec8c0') +
+        `<line class="dv" x1="${n.x + 11}" y1="${n.y + 195}" x2="${n.x + n.w - 11}" y2="${n.y + 195}"/>` +
+        `<text x="${n.x + 12}" y="${n.y + 209}" font-size="8.6" fill="#7b93a6">修正：${esc(cut(idName(own.opening) || '首战未定', 6))} · ${esc(cut(idName(own.deny) || '拒止未定', 7))}</text>`;
+    } else if (n.kind === 'stg' && n.slim) {
+      
+      stCls.push('stg-slim');
+      const ph = stageView(n.ph);
+      head = `<text class="n-t" x="${n.x + 11}" y="${n.y + 19}">${n.no} · ${esc(cut(ph.n, 14))}</text>` +
+        `<text class="n-s" x="${n.x + 11}" y="${n.y + 35}">${esc(ph.time || '')}</text>`;
+      badge = `<text x="${n.x + n.w - 10}" y="${n.y + 19}" text-anchor="end" font-size="9" fill="#5f8ea6">∥ 并行 / 收束</text>`;
+    } else if (n.kind === 'stg') {
+      
+      const ph = stageView(n.ph), ko = ph.ko;
+      if (ko && ko.lv === 1) stCls.push('ko1'); else if (ko) stCls.push('ko2');
+      if (ph.__alt) stCls.push('alt');
+      const px = n.x + 11, tw = n.w - 22;
+      const goalL = wrapText(ph.goal || '', tw, 9.4).slice(0, 2);
+      const qL = ph.dp && ph.dp.q ? (() => {   
+        const q = ph.dp.q, k = q.indexOf('（');
+        if (k > 4 && q.length > 16) return [q.slice(0, k), q.slice(k)];
+        return wrapText(q, tw - 15, 9.2).slice(0, 2);
+      })() : [];
+      head = `<circle cx="${n.x + 20}" cy="${n.y + 19}" r="9.5" fill="var(--ac)" fill-opacity=".16"/>` +
+        `<text x="${n.x + 20}" y="${n.y + 23}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ac)">${n.no}</text>` +
+        `<text class="n-t" x="${n.x + 35}" y="${n.y + 24}">${esc(cut(ph.n, n.w > 300 ? 20 : 9))}</text>` +
+        `<text class="n-s" x="${px}" y="${n.y + 42}" style="font-family:Consolas,monospace">${esc(ph.time || '')}</text>` +
+        goalL.map((l, i) => `<text class="n-route" x="${px}" y="${n.y + 59 + i * 12.5}">${esc(l)}</text>`).join('') +
+        (qL.length ? `<line class="dv" x1="${px}" y1="${n.y + 84}" x2="${n.x + n.w - 11}" y2="${n.y + 84}"/>` +
+          `<text x="${px}" y="${n.y + 100}" font-size="9.6" font-weight="700" fill="#ffc861">◆</text>` +
+          qL.map((l, i) => `<text class="n-s" x="${px + 14}" y="${n.y + 100 + i * 12}">${esc(l)}</text>`).join('') : '');
+      if (ko && ko.lv === 1) badge = `<g><rect x="${n.x + n.w - 68}" y="${n.y - 10}" width="68" height="19" rx="9.5" fill="#ff9c6e"/>` +
+        `<text x="${n.x + n.w - 34}" y="${n.y + 3}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2a1408">⚔ 胜负手</text></g>`;
+      else if (ko) badge = `<text x="${n.x + n.w - 8}" y="${n.y - 4}" text-anchor="end" font-size="9" fill="#c98a5e">▏关键</text>`;
+    } else if (n.kind === 'ch') {
+      stCls.push('ch-' + n.stt);
+      head = `<text class="n-t" x="${cx}" y="${n.y + 21}">⚡ ${esc(cut(n.c0.n, 9))}</text>`;
+      body = `<text class="n-s" x="${cx}" y="${n.y + 39}">概率${esc(n.c0.mag)} · ${n.stt === 'armed' ? '条件具备' : n.stt === 'far' ? '条件不符' : '无条件'}</text>`;
+    } else if (n.kind === 'br') {
+      stCls.push(n.hit ? 'br-hit' : 'br-far');
+      head = `<text class="n-t" x="${n.x + 9}" y="${n.y + 21}">${esc(cut(n.t.n, 10))}</text>`;
+      const toN = n.t.to === '-' ? '终局' : ((stages.find(s => s.id === n.t.to) || {}).n || n.t.to);
+      body = `<text class="n-s" x="${n.x + 9}" y="${n.y + 38}">→ ${esc(cut(toN, 10))}</text>`;
+    }
+    return `<g class="nd ${stCls.join(' ')}" data-n="${n.id}">
+      <rect class="n-rect" x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="8"/>${head}${body}${badge}</g>`;
+  }
+
+  const defs = `<defs><marker id="arw" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#57c46a"/></marker>
+      <marker id="arwA" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="var(--ac)"/></marker></defs>`;
+
+  
+  const svgA = `<svg class="tv-svg tv-svg-a" width="${W}" height="${HA}" viewBox="0 0 ${W} ${HA}">
+    ${defs}
+    ${groups.map(g => {
+      
+      const par = g.cols.length > 1;
+      const tagL = splitTag(g.tag);
+      const gapY = par ? (g.cols[0].y0 + g.cols[0].h + PAR_GAP / 2) : 0;
+      return `<g class="lgrp${par ? ' par' : ''}">
+      <rect class="lband" x="${g.x - 9}" y="4" width="${g.w + 18}" height="${NY0 + g.h - 6}" rx="10"/>
+      <text class="lname" x="${g.x - 1}" y="19">${esc(g.n)}</text>
+      ${tagL.map((l, i) => `<text class="ltag" x="${g.x + 46}" y="${19 + i * 11}">${esc(l)}</text>`).join('')}
+      ${par ? `<line class="pdiv" x1="${g.x - 5}" y1="${gapY}" x2="${g.x + CW - 46}" y2="${gapY}"/>
+        <text class="lpar" x="${g.x + CW + 2}" y="${gapY + 3.5}" text-anchor="end">∥ 并行</text>` : ''}
+      ${g.cols.map(c0 => `<rect class="vbox" x="${c0.x - BX}" y="${c0.boxY}" width="${CW + BX * 2}" height="${c0.boxH}" rx="8"/>`).join('')}
+    </g>`;
+    }).join('')}
+    ${cols.map(c0 => {
+      
+      const typ = c0.varId === 'posture' ? { s: '○', c: '#ff9c6e', t: '外部不确定（○）：不由我方决定，点击研判当前档' }
+        : (c0.c.kind === 'layout' || c0.varId === 'airsea') ? { s: '◇', c: '#ffd76a', t: '派生/收敛（◇）：由上游选择决定，不可直接选' }
+        : { s: '□', c: '#57c46a', t: '我方决策（□）：点击候选值选定；敲定后下游「可行」数实时收窄' };
+      
+      let cnt = '';
+      if (c0.varId && c0.varId !== 'posture' && c0.varId !== 'airsea' && c0.c.kind !== 'layout') {
+        const cat = sd5.vars.find(v => v.id === c0.varId);
+        if (cat) {
+          const flt = filterFor(c0.varId), ok = cat.items.length - flt.excluded.size;
+          cnt = `<text x="${c0.x + CW + BX}" y="${c0.boxY + 13}" text-anchor="end" font-size="8.8" font-weight="700" fill="${ok < cat.items.length ? '#ffb08c' : '#7fd68f'}">可行 ${ok}/${cat.items.length}</text>`;
+        }
+      }
+      return `<g><title>${esc(typ.t)}</title><text class="hd-l" x="${c0.x}" y="${c0.hdY}"><tspan fill="${typ.c}" font-weight="700">${typ.s} </tspan>${esc(c0.label)}</text>${cnt}</g>
+      <line x1="${c0.x}" y1="${c0.hdY + 4}" x2="${c0.x + CW}" y2="${c0.hdY + 4}" stroke="var(--ac)" stroke-width="1" opacity=".35"/></g>`;
+    }).join('')}
+    ${edgesA.join('')}
+    ${cols.flatMap(c0 => c0.nodes).map(nodeSvg).join('')}
+  </svg>`;
+
+  
+
+
+
+
+  const RT = (V3.routeTree || {})[side];
+  let svgM = '', RTSUM = '', koTxt = '—';
+  if (RT) {
+    const LRW = 92, LGW = 196, LGG = 14, LM = 44;
+    const NL = stages.length;                          
+    const laneW = LRW + NL * (LGW + LGG) - LGG;
+    const RTW = LM + laneW + 18;
+    const rx0 = LM;
+    const cellX = (i) => rx0 + LRW + i * (LGW + LGG);
+    const activeLanes = RT.lanes.filter(l => !l.when || Object.entries(l.when).every(([k, v]) => (k === 'posture' ? v.includes(posture) : v.includes(own[k]))));
+    const actBr = RT.branches.filter(b => activeLanes.some(l => l.id === b.lane));
+    const cellsOf = (l) => (l.axisCells ? (l.axisCells[own.axis] || Object.values(l.axisCells)[0] || []) : (l.cells || []));
+    const legLive = (i) => { const ls = activeLanes.filter(l => cellsOf(l)[i]); return ls.length && ls.every(l => !(l.suppress || []).includes(i)); };
+    const riskHot = (r) => r === 'air' ? curAir !== 'ok' : r === 'sea' ? curSea !== 'ok'
+      : r === 'posture' ? posture === 'none' : r === 'tempo' ? own.tempo !== 'tp_lightning' : false;
+
+    
+    const legsOf = stages.map(ph => RT.legs.map((lg, i) => ({ lg, i })).filter(o => o.lg.stg === ph.id));
+    const stgOfLeg = (li) => { const lg = RT.legs[li] || {}; return stages.findIndex(ph => ph.id === lg.stg); };
+    const brOf = stages.map(() => []);
+    actBr.forEach(b => { const ci = stgOfLeg(b.at); if (ci >= 0) brOf[ci].push(b); });
+    const ctOf = stages.map(ph => conts.filter(c0 => c0.stage === ph.id));
+    const laneTexts = (l, ci) => legsOf[ci].map(o => cellsOf(l)[o.i]).filter(Boolean);
+    const mainLane = activeLanes.find(l => !l.dash) || activeLanes[0] || null;
+    const brLanes = activeLanes.filter(l => l !== mainLane);
+
+    
+    {
+      const koL = [], kL = [], hL = [];
+      RT.legs.forEach((lg, i) => {
+        const on = legLive(i);
+        if (lg.ko && on) koL.push(lg.n);
+        if (activeLanes.some(l => (l.key || {})[i])) kL.push(lg.n);
+        if (on && (lg.hard || activeLanes.some(l => (l.hard || {})[i]))) hL.push(lg.n);
+      });
+      RTSUM = [
+        koL.length ? `<b style="color:#ff9c6e">⚔ 胜负环节</b> ${esc(koL.join(' · '))}` : '',
+        kL.length ? `<b style="color:#ffd76a">★ 重点</b> ${esc(kL.join(' · '))}` : '',
+        hL.length ? `<b style="color:#ff7a7a">⛰ 难点</b> ${esc(hL.join(' · '))}` : ''
+      ].filter(Boolean).join('　｜　');
+    }
+
+    
+    const rowsOf = (l) => stages.map((ph, ci) => ({ t: laneTexts(l, ci) }));
+    const laneH = (l) => {
+      const rows = rowsOf(l), main = l === mainLane;
+      const nT = Math.max(1, ...rows.map(r => r.t.length));
+      return Math.max(main ? 48 : 42, (main ? 18 : 14) + nT * (main ? 15 : 13) + (main ? 8 : 6));
+    };
+    const SP_H = mainLane ? laneH(mainLane) : 48;
+
+    
+    const stageY = 26, SBH = 52;
+    const GATE_W = 84;                                  
+    const spineY = stageY + SBH + 24;
+    const edgesM = [], gM = [];
+    const cellBadge = (bxc, cy, col, sym, tip) => `<g><title>${esc(tip)}</title>
+      <circle cx="${bxc}" cy="${cy}" r="7.5" fill="#0a1520" stroke="${col}" stroke-width="1.1"/>
+      <text x="${bxc}" y="${cy + 3.5}" text-anchor="middle" font-size="9" font-weight="700" fill="${col}">${sym}</text></g>`;
+
+    
+    const koNos = [];
+    stages.forEach((ph, pi) => {
+      const sv = stageView(ph), ko = sv.ko, x = cellX(pi), w = LGW;
+      const lgAll = legsOf[pi];
+      const koOn = lgAll.some(o => o.lg.ko && legLive(o.i));
+      if (ko && ko.lv === 1) koNos.push((pi + 1) + '·' + cut(sv.n, 6));
+      NDMAP['s:' + ph.id] = { id: 's:' + ph.id, kind: 'stg', ph, no: pi + 1, x, y: stageY, w, h: SBH };
+      const cls = 'nd stg-bar' + (ko && ko.lv === 1 ? ' ko1' : ko ? ' ko2' : '') + (sv.__alt ? ' alt' : '');
+      gM.push(`<g class="${cls}" data-n="s:${ph.id}"><title>${esc(sv.n)}（${esc(sv.time || '')}）
+目标：${esc(sv.goal || '')}　◆ ${esc((sv.dp && sv.dp.q) || '')}——点击看完整阶段卡</title>
+        <rect class="n-rect" x="${x}" y="${stageY}" width="${w}" height="${SBH}" rx="9"/>
+        <circle cx="${x + 18}" cy="${stageY + 17}" r="9" fill="var(--ac)" fill-opacity=".18"/>
+        <text x="${x + 18}" y="${stageY + 20.5}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ac)">${pi + 1}</text>
+        <text x="${x + 32}" y="${stageY + 21}" font-size="10.5" font-weight="700" fill="#dceaf5">${esc(cut(sv.n, 9))}</text>
+        ${koOn ? `<text x="${x + w - 8}" y="${stageY + 21}" text-anchor="end" font-size="10.5" font-weight="700" fill="#ff9c6e">⚔</text>` : ''}
+        <text x="${x + 10}" y="${stageY + 38}" font-size="8.4" style="fill:#8fa8ba;font-family:Consolas,monospace">${esc(sv.time || '')}</text>
+        <text x="${x + 10}" y="${stageY + 48}" font-size="7.8" style="fill:#5f7789">环节 ${esc(lgAll.length ? lgAll.map(o => o.lg.n.split(' ')[0]).join('·') : '—')}</text></g>`);
+    });
+    koTxt = koNos.join(' · ') || '—';
+    for (let i = 0; i < NL - 1; i++) {                  
+      const a = { x: cellX(i), y: stageY, w: LGW, h: SBH }, b = { x: cellX(i + 1), y: stageY, h: SBH };
+      edgesM.push(`<path class="edge e-main" d="M${a.x + a.w + 1},${a.y + a.h / 2} C${a.x + a.w + 12},${a.y + a.h / 2} ${b.x - 12},${b.y + b.h / 2} ${b.x - 2},${b.y + b.h / 2}" marker-end="url(#arwA)"/>`);
+      
+
+      const sv = stageView(stages[i]);
+      if (sv.dp && sv.dp.q) {
+        const mx = (a.x + a.w + b.x) / 2 + 14, my = stageY + SBH + 10;
+        const q = cut(sv.dp.q.replace(/？$/, ''), 7);
+        gM.push(`<g class="nd" data-n="s:${stages[i].id}"><title>◆ 阶段判断门（DST）：${esc(sv.dp.q)}
+判据：${esc((sv.dp.crit || []).join(' ／ '))}——不通过 → 意外条内 ⚠受阻改走 / ⚡突变应对（点击看完整阶段卡）</title>
+          <rect x="${mx - 40}" y="${my - 7.5}" width="80" height="15" rx="7.5" fill="#141009" stroke="#ffc861" stroke-opacity=".6"/>
+          <text x="${mx}" y="${my + 3}" text-anchor="middle" font-size="8" font-weight="700" fill="#ffc861">◆ ${esc(q)}？</text></g>`);
+      }
+    }
+
+    
+    const airN = (V3.air.lv.find(x => x.id === curAir) || {}).n || '—';
+    const seaN = (V3.sea.lv.find(x => x.id === curSea) || {}).n || '—';
+    const airOk = curAir === 'ok', seaOk = curSea === 'ok';
+    const gateLine = (dy, label, val, ok, col) => `
+      <circle cx="${rx0 + 13}" cy="${stageY + dy}" r="3" fill="${ok ? '#57c46a' : '#ff9c6e'}"/>
+      <text x="${rx0 + 21}" y="${stageY + dy + 3.2}" font-size="8.6" font-weight="700" fill="${col}">${label}</text>
+      <text x="${rx0 + GATE_W - 6}" y="${stageY + dy + 3.2}" text-anchor="end" font-size="8.6" fill="${ok ? '#9fd6a8' : '#ffb08c'}">${esc(cut(val, 5))}</text>`;
+    gM.push(`<g class="nd rt-gate" data-n="rt:gate"><title>出击前置：${esc(RT.gate.sub)}——任一未达「稳固」（变橙）→ 下方「⚡ 意外」条内的 ⚠ 受阻分支生效（点击看依据）</title>
+      <rect class="n-rect" x="${rx0}" y="${stageY}" width="${GATE_W}" height="${SBH}" rx="9" style="stroke:#8fd3e6;stroke-opacity:.55;stroke-dasharray:5 4;fill:rgba(143,211,230,.05)"/>
+      <text x="${rx0 + 8}" y="${stageY + 15}" font-size="9.2" font-weight="700" fill="#8fd3e6">▲ 出击前置</text>
+      ${(!airOk || !seaOk) ? `<text x="${rx0 + GATE_W - 7}" y="${stageY + 15}" text-anchor="end" font-size="9" font-weight="700" fill="#ffb08c">⚠</text>` : ''}
+      ${gateLine(31, '制空', airN, airOk, '#ffc861')}
+      ${gateLine(46, '制海', seaN, seaOk, '#5ec8c0')}</g>`);
+    edgesM.push(`<path d="M${rx0 + GATE_W + 3},${stageY + SBH / 2} C${rx0 + GATE_W + 13},${stageY + SBH / 2} ${cellX(0) - 13},${stageY + SBH / 2} ${cellX(0) - 2},${stageY + SBH / 2}" fill="none" stroke="#8fd3e6" stroke-opacity=".55" marker-end="url(#arwD)"/>`);
+
+    
+    if (mainLane) {
+      const rows = rowsOf(mainLane), col = mainLane.col;
+      gM.push(`<g class="nd rt-lane" data-n="rt:lane:${mainLane.id}">
+        <text x="${rx0 + 2}" y="${spineY + 21}" font-size="11" font-weight="700" fill="${col}">★ ${esc(mainLane.n)}</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${spineY + 35}">${esc(cut(mainLane.note || '', 10))}</text></g>`);
+      stages.forEach((ph, ci) => {
+        const r = rows[ci];
+        if (!r.t.length) return;
+        const x = cellX(ci), nid = 'rt:cell:' + mainLane.id + ':' + ci;
+        const legI0 = (legsOf[ci].find(o => cellsOf(mainLane)[o.i]) || { i: 0 }).i;
+        NDMAP[nid] = { id: nid, kind: 'rtcell', lane: mainLane, legI: legI0, stgI: ci, txt: r.t.join('；'), txts: r.t, x, y: spineY, w: LGW, h: SP_H };
+        const kb = legsOf[ci].some(o => (mainLane.key || {})[o.i]), hb = legsOf[ci].some(o => (mainLane.hard || {})[o.i]);
+        gM.push(`<g class="nd rt-cell spine" data-n="${nid}">
+          <rect class="n-rect" x="${x}" y="${spineY}" width="${LGW}" height="${SP_H}" rx="9" style="stroke:${col};stroke-width:2.4;fill:${col};fill-opacity:.1"/>
+          ${kb ? cellBadge(x + LGW - (hb ? 36 : 16), spineY, '#ffd76a', '★', '★ 重点环节') : ''}${hb ? cellBadge(x + LGW - 16, spineY, '#ff7a7a', '⛰', '⛰ 难点环节') : ''}
+          ${r.t.map((t, k) => `<text class="rt-t" x="${x + 10}" y="${spineY + 24 + k * 15}" style="font-size:10px;font-weight:600">${esc(cut(t, 17))}</text>`).join('')}</g>`);
+      });
+    }
+
+    
+
+    const forkY = spineY + SP_H + 24;
+    const forkItems = stages.map((ph, ci) => ({ brs: brOf[ci], cts: ctOf[ci] }));
+    const hasFork = forkItems.some(o => o.brs.length || o.cts.length);
+    let stripH = 0;
+    if (hasFork) {
+      gM.push(`<g><text x="${rx0 + 2}" y="${forkY + 15}" font-size="11" font-weight="700" fill="#ffb08c">⚡ 意外</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 30}">按阶段列对齐</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 44}" style="fill:#c8a288">⚠ 受阻＝branch</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 56}" style="fill:#c8a288">　自身执行改走</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 70}" style="fill:#c8a288">⚡ 突变＝介入/政治</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 82}" style="fill:#8fa8ba">▸ 应对 → sequel</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${forkY + 94}" style="fill:#8fa8ba">　转段（⇢ 目标）</text></g>`);
+      forkItems.forEach((o, ci) => {
+        if (!o.brs.length && !o.cts.length) return;
+        const x = cellX(ci);
+        let yy = forkY;
+        o.brs.forEach(b => {
+          const k = actBr.indexOf(b), hot = riskHot(b.risk), bid = 'rt:br:' + side + ':' + k;
+          const toPh = b.to >= 0 ? stages.find(s => s.id === (RT.legs[b.to] || {}).stg) : null;
+          const lane = activeLanes.find(l => l.id === b.lane);
+          NDMAP[bid] = { id: bid, kind: 'rtbr', br: b, lane: lane || mainLane, hot, x, y: yy, w: LGW, h: 13 };
+          gM.push(`<g class="nd rt-acc" data-n="${bid}"><title>${esc(b.n)} · ${esc(b.t || '')}：${esc(b.p)}（点击看详情）</title>
+            <text x="${x + 8}" y="${yy + 10}" font-size="8.8" style="fill:${hot ? '#ffb08c' : '#8d7a6d'}">${hot ? '●' : '⚠'} ${esc(cut(b.n, 12))}</text>
+            <text x="${x + LGW - 7}" y="${yy + 10}" text-anchor="end" font-size="8.4" style="fill:${hot ? '#7fd68f' : '#5f7789'}">⇢ ${esc(cut(toPh ? toPh.n : '长期', 8))}</text></g>`);
+          yy += 13;
+        });
+        o.cts.forEach(c0 => {
+          const stt = trigState(c0), armed = stt === 'armed';
+          const h = 17 + c0.then.length * 12.5 + 5;
+          NDMAP['c:' + c0.id] = { id: 'c:' + c0.id, kind: 'ch', c0, x, y: yy, w: LGW, h, stt };
+          gM.push(`<g class="nd rt-acc" data-n="c:${c0.id}"><title>${esc(c0.n)} · 触发：${esc(c0.trigger.txt)}——点击看完整意外卡</title>
+            <rect x="${x}" y="${yy}" width="${LGW}" height="${h}" rx="7" style="fill:rgba(24,18,14,.5);stroke:${armed ? 'rgba(255,156,110,.6)' : 'rgba(255,156,110,.22)'};stroke-dasharray:4 3"/>
+            <text x="${x + 8}" y="${yy + 12}" font-size="9" font-weight="700" style="fill:${armed ? '#ffb08c' : '#c8a288'}">⚡ ${esc(cut(c0.n, 11))}</text>
+            <text x="${x + LGW - 7}" y="${yy + 12}" text-anchor="end" font-size="8" style="fill:#8d7a6d">${esc(c0.mag || '')}${armed ? ' · 具备' : ''}</text></g>`);
+          c0.then.forEach((t, j) => {
+            const toS = t.to === '-' ? '终局' : ((stages.find(s => s.id === t.to) || {}).n || '—');
+            const toN = t.to !== '-' ? NDMAP['s:' + t.to] : null;
+            gM.push(`<g class="nd rt-acc"${toN ? ` data-to="${toN.id}"` : ''} data-n="c:${c0.id}"><title>${esc(t.n)}：${esc(t.act || '')}——${t.to === '-' ? '战役终局' : '转 ' + esc(toS)}（点击看完整意外卡）</title>
+              <text x="${x + 12}" y="${yy + 26 + j * 12.5}" font-size="8.4" style="fill:#a9c2d6">▸ ${esc(cut(t.n, 9))}</text>
+              <text x="${x + LGW - 7}" y="${yy + 26 + j * 12.5}" text-anchor="end" font-size="8.2" style="fill:#7fd68f">⇢ ${esc(cut(toS, 7))}</text></g>`);
+          });
+          yy += h + 5;
+        });
+        stripH = Math.max(stripH, yy - forkY);
+      });
+      stripH += 4;
+    } else if (RT.branches.length) {
+      gM.push(`<text x="${rx0}" y="${forkY + 10}" font-size="9" style="fill:#ffb066">封锁态：登陆路径不适用；风险转为封锁线被破与外军护航冲突</text>`);
+      stripH = 16;
+    }
+
+    
+    let brBot = forkY + stripH;
+    brLanes.forEach(l => {
+      const BH = laneH(l), by = brBot + 26, rows = rowsOf(l), col = l.col;
+      const occCi = stages.map((ph, ci) => ({ ci, on: rows[ci].t.length })).filter(o => o.on);
+      if (occCi.length) {
+        const dx = cellX(occCi[0].ci) + LGW / 2;
+        edgesM.push(`<path d="M${dx},${forkY + stripH + 3} V${by - 3}" fill="none" stroke="${col}" stroke-opacity="${l.dash ? .5 : .75}" stroke-width="1.2" ${l.dash ? 'stroke-dasharray="4 4"' : ''} marker-end="url(#arwD)"/>
+          <circle cx="${dx}" cy="${forkY + stripH + 3}" r="2.4" fill="${col}"/>`);
+      }
+      gM.push(`<g class="nd rt-lane" data-n="rt:lane:${l.id}">
+        <text x="${rx0 + 2}" y="${by + 19}" font-size="10.5" font-weight="700" fill="${col}">∥ ${esc(l.n)}</text>
+        <text class="rt-tick" x="${rx0 + 2}" y="${by + 33}">${esc(cut(l.note || '', 10))}</text></g>`);
+      stages.forEach((ph, ci) => {
+        const r = rows[ci];
+        if (!r.t.length) return;
+        const x = cellX(ci), nid = 'rt:cell:' + l.id + ':' + ci;
+        const legI0 = (legsOf[ci].find(o => cellsOf(l)[o.i]) || { i: 0 }).i;
+        NDMAP[nid] = { id: nid, kind: 'rtcell', lane: l, legI: legI0, stgI: ci, txt: r.t.join('；'), txts: r.t, x, y: by, w: LGW, h: BH };
+        const kb = legsOf[ci].some(o => (l.key || {})[o.i]), hb = legsOf[ci].some(o => (l.hard || {})[o.i]);
+        gM.push(`<g class="nd rt-cell${l.dash ? ' dash' : ''}" data-n="${nid}">
+          <rect class="n-rect" x="${x}" y="${by}" width="${LGW}" height="${BH}" rx="7" style="stroke:${col};stroke-opacity:${l.dash ? .5 : .7};stroke-width:1.2;${l.dash ? 'stroke-dasharray:5 4;' : ''}fill:${col};fill-opacity:.05"/>
+          ${kb ? cellBadge(x + LGW - (hb ? 36 : 16), by, '#ffd76a', '★', '★ 重点环节') : ''}${hb ? cellBadge(x + LGW - 16, by, '#ff7a7a', '⛰', '⛰ 难点环节') : ''}
+          ${r.t.map((t, k) => `<text class="rt-t" x="${x + 9}" y="${by + 18 + k * 13}">${esc(cut(t, 19))}</text>`).join('')}</g>`);
+      });
+      if (l.end && occCi.length) {
+        const ci = occCi[occCi.length - 1].ci, ex = cellX(ci) + LGW - 4, ey = by + BH;
+        gM.push(`<g><title>${esc(l.end)}</title>
+          <rect x="${ex - 90}" y="${ey - 9}" width="94" height="17" rx="8.5" fill="#170d1d" stroke="#c99ae0" stroke-opacity=".75"/>
+          <text x="${ex - 43}" y="${ey + 3.2}" text-anchor="middle" font-size="8.8" font-weight="700" fill="#d9b8ef">⏹ 达成即止 · 速战速决</text></g>`);
+      }
+      NDMAP['rt:lane:' + l.id] = { id: 'rt:lane:' + l.id, kind: 'rtlane', lane: l };
+      brBot = by + BH;
+    });
+    NDMAP['rt:gate'] = { id: 'rt:gate', kind: 'rtgate', gate: RT.gate, st: { air: curAir, sea: curSea }, x: rx0, y: stageY, w: GATE_W, h: SBH };
+    if (mainLane) NDMAP['rt:lane:' + mainLane.id] = { id: 'rt:lane:' + mainLane.id, kind: 'rtlane', lane: mainLane };
+
+    const HM = brBot + (brLanes.length ? 16 : 14);
+    svgM = `<svg class="tv-svg tv-svg-m" width="${RTW}" height="${HM}" viewBox="0 0 ${RTW} ${HM}">
+      <defs>
+        <marker id="arwA" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--ac)"/></marker>
+        <marker id="arwD" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7b93a6"/></marker>
+      </defs>
+      ${edgesM.join('')}${gM.join('')}
+    </svg>`;
+  }
+
+  
+  const chipOf = (c0) => {
+    let v = '';
+    if (c0.c.kind === 'layout') return '';
+    if (c0.varId === 'posture') v = (DATA.green_posture.find(p => p.id === posture) || {}).n || '未定';
+    else if (c0.varId === 'airsea') v = (V3.air.lv.find(x => x.id === curAir) || {}).n + ' / ' + (V3.sea.lv.find(x => x.id === curSea) || {}).n;
+    else v = idName(own[c0.varId]) || '未定';
+    return `<span class="lk-chip">${esc(c0.c.tag || c0.label)} <b>${esc(v)}</b></span>`;
+  };
+  const chips = cols.map(chipOf).filter(Boolean).join('<span class="lk-sep">›</span>');
+
+  const chosen = sd5.vars.map(c0 => { const it = c0.items.find(v => v.id === own[c0.id]); return it ? it.n : null; }).filter(Boolean);
+  const pres = DATA.presets[side] || [];
+  const cfN = scoreSide(side).cf.length;
+  col.innerHTML = `<section class="panel-x tv-wrap">
+    <div class="tv-top">
+      <h3>交互决策树 · ${esc(sd5.cn)}</h3>
+      <div class="tv-tools">
+        <span class="tv-tl">多预案</span>
+        ${pres.map((p, i) => `<button class="tv-pre" data-p="${i}" title="${esc(p.desc)}">${esc(p.n)}</button>`).join('')}
+        <button class="tv-optbtn" id="tvOptBtn" title="变量卡、对手设定、联动规则（可在此直接改选）">☰ 变量卡</button>
+      </div>
+    </div>
+    <div class="tsub">${chosen.length ? '当前路径：<b style="color:#d5e7f5">' + esc(chosen.join(' ＋ ')) + '</b>（亮色 = 主链）'
+      : '点击树上任意值节点选宏观变量（或上方预案一键载入），整棵树随之联动'}　｜　选定后下游自动取<b>匹配度最高</b>的候选（节点右上角数字），可手选覆盖${cfN ? `　｜　<span style="color:#e8a49a">⚠ 联动冲突 ${cfN} 条</span>` : ''}</div>
+    ${(V3.assess || {})[side] ? `<div class="tsub" style="color:#6f899b;margin:-4px 0 10px">${esc(V3.assess[side])}</div>` : ''}
+    <div class="tv-blk">
+      <div class="tv-blk-hd"><b>① 战前 · 决策收敛</b><i>影响图 · 淘汰树</i><u>节点语法：<b style="color:#57c46a">□ 我方决策</b>（点击选值）∥ <b style="color:#ff9c6e">○ 外部不确定</b>（只能研判）→ <b style="color:#ffd76a">◇ 派生/收敛</b>（上游决定）。同层并行项<b style="color:#7fd68f">上下堆叠</b>、跨层才联动；列头右上「可行 N/M」＝上游敲定后本列剩余候选（灰化＝被联动淘汰，悬停看原因）</u></div>
+      <div class="tv-box">${svgA}</div>
+    </div>
+    <div class="tv-link">
+      <span class="lk-cap">① 评估结论</span>
+      ${chips}
+      <span class="lk-go">↓ 收敛结论驱动 ② 战役计划（阶段路线 · 意外分支 · 匹配筛选）</span>
+    </div>
+    <div class="tv-blk">
+      <div class="tv-blk-hd"><b>② 战时 · 执行应变</b><i>同步矩阵 · branches &amp; sequels</i><u>第一行＝<b>▲ 出击前置格 ＋ 阶段条</b>，箭头下的 <b style="color:#ffc861">◆＝阶段判断门</b>（DST，悬停看判据，不通过→走意外）；第二行＝<b>★ 主攻主干</b>（绿粗框格：动作）；正下方＝<b>⚡ 意外条</b>（⚠受阻＝branch 自身改走；⚡突变＝介入/政治，卡内 ▸ 全部应对 → sequel 转段）；再下＝∥ 佯攻/斩首支线</u>
+        <span class="ko-sum">⚔ 胜负手：${esc(koTxt)}${RTSUM ? `<span style="color:#8fa8ba">　｜　${RTSUM}</span>` : ''}</span></div>
+      <div class="tv-box">${svgM}</div>
+    </div>
+    <div class="tv-legend">
+      <i>━━ 当前路径（选中链路）</i><i style="color:#3a556d">── 候选连线</i><i style="opacity:.4">╌╌ 被筛选排除</i>
+      <i style="color:#ff9c6e">⚔ 胜负手（决定性阶段，重点标识）</i><i style="color:#c98a5e">▏关键（影响胜负）</i>
+      <i style="color:#ffc861">制空评估</i><i style="color:#5ec8c0">制海评估</i><i style="color:#ff9c6e">⚡ 意外事件</i><i style="color:#57c46a">应对分支 → 转段</i>
+      <i>右上角数字 = 与当前上游的匹配度（50 中性，越高越契合）</i><i>⟳ = 级联自动推荐（可手选覆盖）</i>
+      <i style="color:#8fa8ba">战前评估＝分层 DAG：① 判断（介入深度 ∥ 终局目标）→ ② 战法（首战 ∥ 拒止）→ ③ 评估（空海态势）→ ④ 形态 → ⑤ 方向 → ⑥ 收敛</i>
+      <i style="color:#7fd68f">∥ 并行＝同一层内<b>上下堆叠</b>，各自独立大框、留间隔；互不筛选、互不决定，只有跨层的横向箭头才是因果驱动</i>
+      <i style="color:#8fd3e6">② 一棵树：第一行＝<b>▲ 出击前置格 ＋ 阶段条</b>（单行不折行）→ ★绿粗框＝主攻主干、视觉最重，∥细虚框＝佯攻/斩首支线；每列格＝该阶段的作战线动作</i>
+      <i style="color:#6f899b">⚡ 意外条（主攻正下方，按阶段列对齐）：⚠＝路径受阻改走；⚡卡＝阶段意外＋<b>全部应对分支</b>（▸ 一行一条，⇢ 后是转段目标，悬停点亮目标阶段条，点击看完整意外卡）</i>
+      <i style="color:#8fd3e6">▲ 出击前置＝第一行最左格：制空/制海状态（未达「稳固」变橙＋⚠）→ 意外条内 ⚠ 受阻分支生效</i>
+      <i style="color:#ff9c6e">⚔ 胜负手环节</i><i style="color:#ffd76a">★ 重点（决定性动作）</i><i style="color:#ff7a7a">⛰ 难点（最可能受阻处）</i>
+      <i style="color:#8fa8ba">⚠＝路径受阻分支（当前条件已触发的 ● 亮橙）、⚡＝阶段意外（⇢ 首要应对/转段；全部应对在详情面板）；斩首＝独立时间轴的空中投放，⏹ 达成即止</i>
+      <i style="color:#d9b8ef">⏹ 达成即止＝斩首速战速决：H+8 前政权瘫痪，后续阶段整体跳过</i>
+      <i style="color:#ffb066">围而不打＝封锁态：主干整条切换（橙虚线卡），不出现登陆地点，路线改为封锁线与打击目标</i>
+    </div>
+  </section>`;
+  window.__TVND = NDMAP;
+  col.querySelectorAll('.tv-svg').forEach(sv => sv.addEventListener('click', e => {
+    const g = e.target.closest('.nd[data-n]');
+    if (g) openDetail(g.dataset.n);
+  }));
+  
+  col.querySelectorAll('.tv-svg').forEach(sv => {
+    const hi = el => { sv.querySelectorAll('.nd.hi-to').forEach(x => x.classList.remove('hi-to')); if (el) el.classList.add('hi-to'); };
+    sv.addEventListener('mouseover', e => {
+      const g = e.target.closest('.nd[data-to]');
+      hi(g ? sv.querySelector(`.nd[data-n="${g.dataset.to}"]`) : null);
+    });
+    sv.addEventListener('mouseleave', () => hi(null));
+  });
+  
+  col.querySelectorAll('.tv-pre').forEach(el => {
+    el.onclick = () => {
+      const p = pres[+el.dataset.p], keys = Object.keys(p.sel);
+      for (const c of sd5.vars) {
+        selAll[side][c.id] = keys.includes(c.id) ? p.sel[c.id] : null;
+        manAll[side][c.id] = keys.includes(c.id) ? 1 : 0;
+        delete autoAll[side][c.id];
+      }
+      autoFill(side); saveState(); renderAll();
+    };
+  });
+  col.querySelector('#tvOptBtn').onclick = () => document.getElementById('sgLayout').classList.toggle('tv-opt');
+  if (qs.get('tvs')) col.querySelector('.tv-box').scrollLeft = +qs.get('tvs');   
+  if (qs.get('tvn')) setTimeout(() => openDetail(qs.get('tvn')), 60);            
+  if (TV.sel) openDetail(TV.sel);
+}
+
+
+function openDetail(nid) {
+  TV.sel = nid;
+  const stages = (DATA.sides[side] || {}).trunk || [];   
+  const el = document.getElementById('tvDetail');
+  const n = window.__TVND && window.__TVND[nid];
+  let html = '';
+  const K = { val: ['变量选项', 'var(--ac)'], asn: ['空海态势（派生）', '#8fb7d0'], airv: ['制空评估档', '#ffc861'], seav: ['制海评估档', '#5ec8c0'], ly: ['战役布局', '#b98ce0'], stg: ['阶段', 'var(--ac)'], ch: ['意外事件', '#ff9c6e'], br: ['应对分支', '#57c46a'],
+    rtcell: ['路径环节', '#8fd3e6'], rtbr: ['受阻分支', '#ff9c6e'], rtgate: ['出击前置', '#8fd3e6'], rtlane: ['作战线', '#57c46a'] };
+  if (!n) { html = '<div class="dh"><b>节点不存在</b></div>'; }
+  else {
+    const kd = K[n.kind] || ['', '#8fa8ba'];
+    const _RT = (V3.routeTree || {})[side] || { legs: [] };
+    const nTitle = n.kind === 'ch' ? n.c0.n : n.kind === 'br' ? n.t.n : n.kind === 'stg' ? stageView(n.ph).n
+      : n.kind === 'rtcell' ? (n.lane.n + ' · ' + ((stages[n.stgI] || {}).n || ''))
+      : n.kind === 'rtbr' ? n.br.n : n.kind === 'rtlane' ? ('∥ ' + n.lane.n)
+      : n.kind === 'rtgate' ? n.gate.n : n.n;
+    html += `<div class="dh"><span class="knd" style="border:1px solid ${kd[1]};color:${kd[1]}">${kd[0]}</span>
+      <b>${esc(nTitle)}</b>
+      <span class="x" title="关闭">✕</span></div>`;
+    if (n.kind === 'val') {
+      const it = n.it || {};
+      const f = it.fit ? fitScore(it, side) : null;
+      const isAuto = !!autoAll[side][n.varId] && (n.varId === 'posture' ? posture === n.val : selAll[side][n.varId] === n.val);
+      
+      html += `<div class="sec">${esc(it.sub || it.tl || '')}</div>` + effHtml(n.varId === 'posture' ? (it.eff || {})[side] : it.eff)
+        + (f ? `<div class="sec">匹配度 <b style="color:${f.score >= 68 ? '#7fd68f' : f.score <= 34 ? '#e8a49a' : '#d5e7f5'};font-size:15px">${f.score}</b><span style="color:#6f899b"> / 100</span>
+            ${isAuto ? '<span style="color:#8fa8ba">· 级联自动推荐（可手选覆盖）</span>' : ''}
+            ${f.notes.length ? `<br><span style="font-size:10.5px;color:#7b93a6">依据：${f.notes.map(([k, v, d]) => esc(CRIT_VAR_N(k)) + '=' + esc(idName(v)) + (d > 0 ? '+' : '') + d).join('；')}</span>` : ''}</div>` : '')
+        + (n.dim ? `<div class="sec" style="color:#e8a49a">⚠ 被<b>级联筛选</b>灰化：${esc(n.why || '')}（仍可强制选定，但逻辑上不成立）</div>` : '')
+        + (Object.keys(it.req || {}).length ? `<div class="sec" style="color:#ffc861">前置：${Object.entries(it.req).map(([k, v]) => esc(CRIT_VAR_N(k)) + ' ∈ {' + v.map(x => esc(idName(x))).join('/') + '}').join('，')}</div>` : '')
+        + (it.pros || []).map(p => `<div class="sec" style="color:#9fd6a8">＋ ${esc(p)}</div>`).join('')
+        + (it.cons || []).map(p => `<div class="sec" style="color:#f0a49a">－ ${esc(p)}</div>`).join('')
+        + (it.conf ? `<div class="sec" style="color:#6f899b">置信 ${esc(it.conf)}</div>` : '')
+        + (it.src || []).map(s => `<div class="sec" style="font-size:10.5px;color:#6f899b">来源：<a style="color:#6fa8c8" target="_blank" rel="noopener" href="${esc(s.url)}">${esc(s.ref || s.url)}</a></div>`).join('')
+        + (() => { const picked = n.varId === 'posture' ? posture === n.val : selAll[side][n.varId] === n.val;   
+            return `<button class="pick ${picked ? 'off' : ''}" data-pick="${n.varId}" data-val="${n.val}">
+             ${picked ? (isAuto ? '⟳ 自动推荐（点击取消）' : '✓ 已选定（点击取消）') : '选定此选项'}</button>`; })();
+    } else if (n.kind === 'rtcell') {
+      const RTc = (V3.routeTree || {})[side] || { legs: [] };
+      const ph = stages[n.stgI] || {};
+      const lgAll = RTc.legs.map((lg, i) => ({ lg, i })).filter(o => o.lg.stg === ph.id);
+      const kb = lgAll.some(o => (n.lane.key || {})[o.i]), hb = lgAll.some(o => (n.lane.hard || {})[o.i]);
+      html += `<div class="sec" style="font-family:Consolas,monospace;color:#6f899b">${esc(ph.time || '')}</div>
+        <div class="sec" style="color:${n.lane.col};font-weight:600">${n.lane === ((RTc.lanes || []).find(l => !l.dash)) ? '★ ' : '∥ '}${esc(n.lane.n)}　·　${esc(ph.n || '')}</div>
+        <div class="sec" style="font-size:13px;color:#dceaf5">${(n.txts || [n.txt]).map(t => esc(t)).join('<br>')}</div>
+        ${n.lane.note ? `<div class="sec" style="color:#7b93a6">编成：${esc(n.lane.note)}</div>` : ''}
+        ${ph.goal ? `<div class="sec" style="color:#9db8ca"><b>阶段目标：</b>${esc(ph.goal)}</div>` : ''}
+        ${lgAll.map(o => `${o.lg.ko ? `<div class="sec" style="border-left:3px solid #ff9c6e;padding-left:8px;color:#ffe2cf"><b>⚔ ${esc(o.lg.n)}：</b>${esc(o.lg.ko)}</div>` : ''}
+          ${o.lg.hard ? `<div class="sec" style="border-left:3px solid #ff7a7a;padding-left:8px;color:#f0cfcb"><b>⛰ ${esc(o.lg.n)}：</b>${esc(o.lg.hard)}</div>` : ''}`).join('')}
+        ${kb ? `<div class="sec" style="color:#ffd76a"><b>★ 本线重点环节</b></div>` : ''}
+        ${hb ? `<div class="sec" style="color:#ff9a9a"><b>⛰ 本线难点环节</b></div>` : ''}`;
+    } else if (n.kind === 'rtbr') {
+      const b = n.br, RTc = (V3.routeTree || {})[side] || { legs: [] };
+      const cA = calcAir(), cS = calcSea();
+      html += `<div class="sec" style="color:${n.hot ? '#ff9c6e' : '#8fa8ba'}">${n.hot ? '● 当前状态已触发此风险' : '○ 条件未触发（这是预案性分支）'}</div>
+        <div class="sec"><b>触发条件：</b>${esc(b.risk === 'air' ? '制空评估未达「稳固」（当前 ' + ((V3.air.lv.find(x => x.id === cA) || {}).n || '—') + '）'
+          : b.risk === 'sea' ? '制海评估未达「稳固」（当前 ' + ((V3.sea.lv.find(x => x.id === cS) || {}).n || '—') + '）'
+          : b.risk === 'posture' ? '外军介入深度不支持（当前 ' + ((DATA.green_posture.find(p => p.id === posture) || {}).n || '—') + '）'
+          : b.risk === 'tempo' ? '推进样式不是闪电推进（当前 ' + (idName(own.tempo) || '—') + '）'
+          : '战术层面受阻（不依赖宏观选择，属战场实际）')}</div>
+        <div class="sec" style="border-left:2px solid #ff9c6e;padding-left:8px;color:#e8d5c8"><b>改走：</b>${esc(b.p)}</div>
+        <div class="sec" style="color:#7fd68f">↩ 回到：${esc(b.to >= 0 ? (RTc.legs[b.to] || {}).n : '长期消耗（不回到原链路）')}${b.t ? '　· 时间代价 ' + esc(b.t) : ''}</div>
+        ${n.lane ? `<div class="sec" style="color:#7b93a6">受影响作战线：∥ ${esc(n.lane.n)}</div>` : ''}`;
+    } else if (n.kind === 'rtgate') {
+      html += `<div class="sec">${esc(n.gate.note || '')}</div>
+        <div class="sec">当前：制空 <b style="color:#ffc861">${esc((V3.air.lv.find(x => x.id === n.st.air) || {}).n || '—')}</b>　制海 <b style="color:#5ec8c0">${esc((V3.sea.lv.find(x => x.id === n.st.sea) || {}).n || '—')}</b></div>
+        <div class="sec" style="color:#7b93a6">这道闸门决定下方所有作战线能不能按计划走：任一未达「稳固」，主攻路径就转看「⚡ 意外」条内的 ⚠ 受阻分支。</div>`;
+    } else if (n.kind === 'rtlane') {
+      html += `<div class="sec" style="color:${n.lane.col};font-weight:600">∥ ${esc(n.lane.n)}</div>
+        <div class="sec">${esc(n.lane.note || '')}</div>
+        <div class="sec" style="color:#7b93a6">与它同时进行：${((V3.routeTree || {})[side].lanes || []).filter(l => l.id !== n.lane.id).map(l => esc(l.n)).join(' ∥ ')}</div>`;
+    } else if (n.kind === 'airv' || n.kind === 'seav') {
+      const kind = n.kind === 'airv' ? 'air' : 'sea';
+      const D = V3[kind], p = DATA.green_posture.find(p0 => p0.id === posture) || {};
+      const baseI = D.base[posture] ?? 1;
+      const hits = [];
+      for (const m of (D.mods || [])) {
+        for (const k in m.when) {
+          const cur = (k === 'air' ? calcAir() : k === 'sea' ? calcSea() : curVal(k));
+          if (cur != null && m.when[k].includes(cur)) hits.push(m.why);
+        }
+      }
+      html += `<div class="sec">${esc(n.it.tl)}</div>
+        <div class="sec" style="color:${kind === 'air' ? '#ffc861' : '#5ec8c0'}">当前判定：<b>${esc(n.it.n)}</b>　｜　基准档：${esc(p.n || '')} → 「${esc(D.lv[baseI].n)}」${hits.length ? `＋ ${hits.length} 项修正` : '（无修正）'}</div>
+        ${hits.map(w => `<div class="sec" style="color:#9fd6a8">＋ ${esc(w)}</div>`).join('')}
+        <div class="sec" style="color:#7b93a6">${esc(D.note)}</div>`;
+    } else if (n.kind === 'asn') {
+      const p = DATA.green_posture.find(x => x.id === posture) || {};
+      const one = (kind, col, label) => {
+        const D = V3[kind], baseI = D.base[posture] ?? 1, cur = kind === 'air' ? calcAir() : calcSea();
+        const hits = [];
+        for (const m of (D.mods || [])) for (const k in m.when) {
+          const c0 = (k === 'air' ? calcAir() : k === 'sea' ? calcSea() : curVal(k));
+          if (c0 != null && m.when[k].includes(c0)) hits.push(m.why);
+        }
+        return `<div class="sec" style="margin-top:8px;padding:8px 10px;border:1px solid ${col};border-radius:8px;background:rgba(255,255,255,.02)">
+          <b style="color:${col}">${label}：${esc((D.lv.find(x => x.id === cur) || {}).n || '')}</b>
+          <br><span style="color:#7b93a6">基准档：${esc(p.n || '')} → ${esc(D.lv[baseI].n)}${hits.length ? '，另 ' + hits.length + ' 项修正' : '（无修正）'}</span>
+          ${hits.map(w => `<br><span style="color:#9fd6a8">＋ ${esc(w)}</span>`).join('')}
+          <br><span style="font-size:10.5px;color:#6f899b">${esc(D.note)}</span></div>`;
+      };
+      html += `<div class="sec">不是手选值，而是两个<b>派生评估</b>：由「介入深度」定基准档，再由「首战重心 / 拒止方式」修正（JP 3-30 分档模型，随空间与时间变化）。</div>`
+        + one('air', '#ffc861', '制空') + one('sea', '#5ec8c0', '制海')
+        + `<div class="sec" style="color:#7b93a6">当前修正项：首战重心＝${esc(idName(selAll[side].opening) || '未定')}；拒止方式＝${esc(idName(selAll[side].deny) || '未定')}（② 战法层两列并行，可在此改）</div>`;
+    } else if (n.kind === 'ly') {
+      html += `<div class="sec">宏观变量确定后，布局（编成 / 火力 / 航线）随之收敛：</div>`
+        + layoutLines().map(([k, v]) => `<div class="sec"><b>${esc(k)}：</b>${esc(v)}</div>`).join('');
+    } else if (n.kind === 'stg') {
+      const ph = stageView(n.ph), ko = ph.ko, ax = selAll[side].axis;
+      html += `<div class="sec" style="font-family:Consolas,monospace;color:#6f899b">${esc(ph.time || '')}</div>`;
+      if (ph.__alt) html += `<div class="sec" style="color:#ffb066;border-left:3px solid #ffb066;padding-left:8px">
+        <b>⚠ 封锁态（围而不打）：</b>本阶段不设登陆点，路线改为封锁线 / 打击目标清单——这是「推进样式＝围而不打」的另一种主干，不是同一条路线的分支。</div>`;
+      if (ko) html += `<div class="sec" style="border-left:3px solid ${ko.lv === 1 ? '#ff9c6e' : '#c98a5e'};padding-left:8px;color:${ko.lv === 1 ? '#ffe2cf' : '#e0c0a8'}">
+        <b>${ko.lv === 1 ? '⚔ 胜负手' : '▏关键阶段'}：</b>${esc(ko.why)}</div>`;
+      html += `<div class="sec"><b>目标：</b>${esc(ph.goal || '')}</div>`;
+      if (ph.routes) {
+        html += `<div class="sec" style="color:#7b93a6">作战路径（当前主攻方向高亮）：</div>` +
+          Object.entries(ph.routes).map(([k, v]) => {
+            const on = k === ax;
+            return `<div class="sec" style="margin:4px 0;padding:5px 8px;border-radius:6px;${on
+              ? 'background:rgba(87,196,106,.12);border-left:2px solid #57c46a;color:#bfe9c7'
+              : 'color:#8fa8ba;border-left:2px solid rgba(120,180,220,.16)'}">
+              <b>${on ? '▸ ' : ''}${esc(idName(k))}</b><br>${esc(v)}</div>`;
+          }).join('');
+      } else if (ph.route) {
+        html += `<div class="sec" style="color:#bfe9c7;border-left:2px solid #57c46a;padding-left:8px"><b>作战路径：</b>${esc(ph.route)}</div>`;
+      }
+      html += (ph.acts || []).map(a => `<div class="sec">· ${esc(a)}</div>`).join('') +
+        `<div class="sec" style="color:#ffc861">◆ 决策点：${esc(ph.dp.q)}<br><span style="color:#a08a5a">判据：${esc((ph.dp.crit || []).join(' ／ '))}</span></div>` +
+        `<div class="sec" style="color:#6f899b">分支 ${ph.branches.length} 条 · 详见「决策支持矩阵」视图</div>`;
+    } else if (n.kind === 'ch') {
+      const c0 = n.c0;
+      html += `<div class="sec" style="color:#ff9c6e">发生概率量级：<b>${esc(c0.mag)}</b>　｜　状态：${c0.stt === undefined ? '' : ''}${n.stt === 'armed' ? '触发条件已具备' : n.stt === 'far' ? '当前变量下条件不符' : '无前置条件（随时可能）'}</div>
+        <div class="sec"><b>触发：</b>${esc(c0.trigger.txt)}</div>
+        ${(c0.trigger.when && Object.keys(c0.trigger.when).length) ? `<div class="sec" style="font-size:10.5px;color:#8fa8ba">条件：${Object.entries(c0.trigger.when).map(([k, v]) => esc(CRIT_VAR_N(k)) + '=' + v.map(idName).map(esc).join('/')).join('，')}</div>` : ''}
+        <div class="sec" style="color:#57c46a"><b>应对分支：</b></div>`
+        + c0.then.map((t, i) => `<div class="sec" style="padding-left:10px;border-left:2px solid #57c46a;margin:6px 0 6px 2px">
+            <b>${esc(t.n)}</b> → ${t.to === '-' ? '终局' : esc((stages0().find(s => s.id === t.to) || {}).n || t.to)}<br>${esc(t.act)}</div>`).join('')
+        + `<div class="sec" style="color:#7b93a6">${esc(c0.why)}</div>`;
+    } else if (n.kind === 'br') {
+      html += `<div class="sec">${esc(n.t.act)}</div>
+        <div class="sec">转向：<b style="color:#7fd68f">${n.t.to === '-' ? '终局' : esc((stages0().find(s => s.id === n.t.to) || {}).n || n.t.to)}</b></div>
+        <div class="sec" style="color:#7b93a6">所属意外：⚡ ${esc(n.c0.n)}</div>`;
+    }
+  }
+  el.innerHTML = html;
+  el.classList.add('on');
+  el.querySelector('.x').onclick = () => { TV.sel = null; el.classList.remove('on'); };
+}
+function stages0() { return sd5.trunk; }
+
+
+document.getElementById('tvDetail').addEventListener('click', e => {
+  const b = e.target.closest('[data-pick]');
+  if (!b) return;
+  const v = b.dataset.pick, val = b.dataset.val;
+  if (v === 'posture') { posture = val; localStorage.setItem(LS_P, posture); for (const s of ['red', 'blue', 'green']) autoFill(s); }
+  else {
+    if (selAll[side][v] === val) { selAll[side][v] = null; delete manAll[side][v]; }
+    else { selAll[side][v] = val; manAll[side][v] = 1; }
+    delete autoAll[side][v];
+    autoFill(side);
+  }
+  saveState(); renderAll();
+});
+
+
+if (qs.has('diag')) {
+  window.__diag = () => {
+    const sc = scoreSide(side);
+    const hit = sd5.trunk.reduce((a, p) => a + p.branches.filter(b => branchState(b, side).st === 'hit').length, 0);
+    const tot = sd5.trunk.reduce((a, p) => a + p.branches.length, 0);
+    const tvn = window.__TVND ? Object.keys(window.__TVND).length : 0;
+    const tvk = {}; if (window.__TVND) for (const [k, v] of Object.entries(window.__TVND)) { const kk = k.split(':').slice(0, 2).join(':'); tvk[kk] = (tvk[kk] || 0) + 1; }
+    document.title = 'SG|' + side + '|score=' + Math.round(sc.total) + '|cf=' + sc.cf.length +
+      '|hit=' + hit + '/' + tot + '|air=' + (calcAir() || '-') + '|sea=' + (calcSea() || '-') + '|tv=' + tvn +
+      '|tk=' + JSON.stringify(tvk) + '|armed=' + (V3.contingencies[side] || []).filter(c0 => trigState(c0) === 'armed').length +
+      '|auto=' + Object.keys(autoAll[side]).filter(k => autoAll[side][k]).length +
+      '|sel=' + sd5.vars.map(c => (selAll[side][c.id] || '无')).join(',');
+  };
+}
+
+
+
+
+
+
+const MS_ORDER = {};
+for (const s of ['red', 'blue', 'green']) MS_ORDER[s] = SIDES[s].vars.map(c => c.id);
+const msLoaded = { red: null, blue: null, green: null };
+{ const _sel = MS.selected(side); if (_sel) msLoaded[side] = _sel.id; }
+
+function msCurSel() {
+  const o = {};
+  for (const c of sd5.vars) { const v = selAll[side][c.id]; if (v) o[c.id] = v; }
+  return o;
+}
+function msSame(a, b) {
+  const ka = Object.keys(a).filter(k => a[k]).sort();
+  const kb = Object.keys(b || {}).filter(k => b[k]).sort();
+  if (ka.length !== kb.length) return false;
+  return ka.every((k, i) => k === kb[i] && a[k] === b[k]);
+}
+function msSay(t) { const el = document.getElementById('msHintLine'); if (el) el.innerHTML = t; }
+
+
+function msApply(rec) {
+  if (!rec) return;
+  for (const c of sd5.vars) {
+    const v = rec.sel ? rec.sel[c.id] : null;
+    if (v) { selAll[side][c.id] = v; manAll[side][c.id] = 1; }
+    else { selAll[side][c.id] = null; delete manAll[side][c.id]; }
+    delete autoAll[side][c.id];
+  }
+  let pmsg = '';
+  if (rec.posture && DATA.green_posture.some(p => p.id === rec.posture) && rec.posture !== posture) {
+    posture = rec.posture; localStorage.setItem(LS_P, posture);
+    pmsg = ' · 介入姿态同步为 ' + ((DATA.green_posture.find(p => p.id === posture) || {}).n || posture);
+    for (const s of ['red', 'blue', 'green']) autoFill(s);
+  }
+  msLoaded[side] = rec.id;
+  MS.setSelSide(side, rec.id);          
+  saveState(); renderAll();
+  const d = MS.deriveExec(side, rec);
+  msSay('已载入 <b>' + esc(rec.name) + '</b>' + pmsg + ' · 执行案 <b>' + esc(MS.SCHEME_N[d.schemeId] || d.schemeId || '按预案')
+    + '</b> · 战场顶栏下拉已选中它');
+}
+
+function msDoSave(asNew) {
+  const sel = msCurSel();
+  if (!Object.keys(sel).length) { msSay('<b style="color:#ffc861">决策树还没选任何选项：先在下方变量卡 / 树里选值，再存为战略</b>'); return; }
+  const target = asNew ? null : (msLoaded[side] ? MS.get(side, msLoaded[side]) : null);
+  const nameEl = document.getElementById('msName');
+  const name = asNew
+    ? ((nameEl && nameEl.value.trim()) || MS.suggestName(side))
+    : ((target && target.name) || MS.suggestName(side));
+  if (asNew && !target) {
+    
+  }
+  const rec = MS.save(side, { id: target ? target.id : null, name, sel, posture });
+  msLoaded[side] = rec.id;
+  MS.setSelSide(side, rec.id);
+  const ed = document.getElementById('msEdit'); if (ed) ed.classList.remove('on');
+  renderMyStrat();
+  const d = MS.deriveExec(side, rec);
+  msSay('已保存 <b>' + esc(rec.name) + '</b>（' + Object.keys(sel).length + ' 项）· 执行案 <b>'
+    + esc(MS.SCHEME_N[d.schemeId] || d.schemeId || '按预案') + '</b> → 到作战页顶栏中间的下拉里选它即可开打');
+  try { __hbOff('beacon?stage=' + encodeURIComponent('MYSTRAT save ' + side + ' ' + rec.name + ' sel=' + Object.keys(sel).join(',') + ' →' + (d.schemeId || '-'))).catch(() => {}); } catch (e) {}
+}
+
+function renderMyStrat() {
+  const bar = document.getElementById('myStratBar'); if (!bar) return;
+  const arr = MS.list(side);
+  const cur = msCurSel();
+  const curN = Object.keys(cur).length;
+  const loadedId = msLoaded[side];
+  const chips = arr.map(r => {
+    const on = loadedId === r.id;
+    const dirty = on && !msSame(cur, r.sel);
+    const d = MS.deriveExec(side, r);
+    const tag = d.schemeId ? (MS.SCHEME_N[d.schemeId] || d.schemeId) : '按预案';
+    return '<span class="ms-chip' + (on ? ' on' : '') + '" data-id="' + r.id + '" title="'
+      + esc(MS.summary(r, MS_ORDER[side]) + (d.notes.length ? '\n' + d.notes.join('\n') : ''))
+      + '\n点一下＝把这套战略载入决策树（可再改）"><b>' + esc(r.name) + '</b><span class="tag">' + esc(tag)
+      + (dirty ? ' · 已改' : '') + '</span><u class="del" data-del="' + r.id + '" title="删除这套战略">✕</u></span>';
+  }).join('');
+
+  bar.innerHTML =
+    '<span class="ttl">我的战略<em>' + esc(S(side).cn) + ' · 已存 ' + arr.length + ' 套</em></span>'
+    + (chips || '<span style="font-size:11.5px;color:#7b93a6">还没有自定义战略 —— 在下方决策树把各项选好，点右边「＋ 存为我的战略」</span>')
+    + '<button class="ms-add" id="msAddBtn" title="把当前决策树的逐变量选值存成一套命名战略（战略1 / 战略2 … 可自己起名）">＋ 存为我的战略</button>'
+    + '<span class="ms-edit" id="msEdit"><input id="msName" maxlength="24" placeholder="战略名，默认 战略' + (arr.length + 1)
+    + '"><button class="ms-btn" id="msOk">保存</button><button class="ms-btn" id="msCancel">取消</button></span>'
+    + '<button class="ms-btn" id="msOver"' + (loadedId ? '' : ' disabled') + ' title="用当前决策树的选择覆盖已载入的那套战略（名称不变）">⟳ 覆盖</button>'
+    + '<button class="ms-btn warn" id="msDel"' + (loadedId ? '' : ' disabled') + ' title="删除当前载入的那套战略">✕ 删除</button>'
+    + '<div class="cur" id="msHintLine">当前决策树：<b>' + (curN ? esc(MS.summary({ sel: cur }, MS_ORDER[side])) : '未选')
+    + '</b> <u>（共 ' + curN + '/' + sd5.vars.length + ' 项已定）</u></div>';
+
+  bar.querySelectorAll('.ms-chip').forEach(el => {
+    el.onclick = ev => {
+      const delId = ev.target && ev.target.dataset && ev.target.dataset.del;
+      if (delId) {
+        ev.stopPropagation();
+        const rec = MS.get(side, delId); if (!rec) return;
+        if (!confirm('删除战略「' + rec.name + '」？删除后战场页顶栏不再显示它。')) return;
+        MS.remove(side, delId);
+        if (msLoaded[side] === delId) msLoaded[side] = null;
+        renderMyStrat();
+        msSay('已删除 <b>' + esc(rec.name) + '</b>');
+        return;
+      }
+      const rec = MS.get(side, el.dataset.id);
+      if (rec) msApply(rec);
+    };
+  });
+  const addBtn = bar.querySelector('#msAddBtn');
+  if (addBtn) addBtn.onclick = () => {
+    const ed = bar.querySelector('#msEdit'); ed.classList.add('on');
+    const inp = bar.querySelector('#msName'); inp.value = MS.suggestName(side);
+    inp.focus(); inp.select();
+  };
+  const ok = bar.querySelector('#msOk'); if (ok) ok.onclick = () => msDoSave(true);
+  const cancel = bar.querySelector('#msCancel');
+  if (cancel) cancel.onclick = () => bar.querySelector('#msEdit').classList.remove('on');
+  const inp = bar.querySelector('#msName');
+  if (inp) inp.onkeydown = ev => { if (ev.key === 'Enter') msDoSave(true); if (ev.key === 'Escape') bar.querySelector('#msEdit').classList.remove('on'); };
+  const over = bar.querySelector('#msOver'); if (over) over.onclick = () => msDoSave(false);
+  const del = bar.querySelector('#msDel');
+  if (del) del.onclick = () => {
+    const rec = msLoaded[side] ? MS.get(side, msLoaded[side]) : null;
+    if (!rec) { msSay('先点一套战略（chip）载入，再删除'); return; }
+    if (!confirm('删除战略「' + rec.name + '」？')) return;
+    MS.remove(side, rec.id); msLoaded[side] = null;
+    renderMyStrat(); msSay('已删除 <b>' + esc(rec.name) + '</b>');
+  };
+}
+
+
+function syncLayout() {
+  const el = document.getElementById('sgLayout');
+  el.classList.toggle('tvfull', view === 'tree');
+  el.classList.toggle('tv-opt', view === 'tree' && qs.has('tvopt'));   
+}
+function renderMain() {
+  syncLayout();
+  if (view === 'matrix') renderMatrix();
+  else if (view === 'eval') renderEval();
+  else if (view === 'trunk') renderTrunk();
+  else renderTree();
+}
+function renderAll() { autoFill(side); renderPosture(); renderViews(); renderOpts(); renderMain(); renderMyStrat(); if (window.__diag) window.__diag(); }   
+renderAll();
+</script>
+</body>
+</html>

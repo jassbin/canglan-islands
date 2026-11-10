@@ -1,0 +1,573 @@
+{
+ "$layer": "L2 参数层（绿方 · 美军）",
+ "$policy": "美军西太前沿装备。字段口径与 L2_params/L2_blue_params 一致；舰船条目带 ship:[shipgen 型号, 展示长度(世界单位,1单位=10m)] 供程序化建模。每条带 conf/updated/src。",
+ "version": "1.0.2",
+ "updated": "2026-11-04",
+ "units": {
+  "cvn73": {
+   "n": "华盛顿号核动力航母 CVN-73",
+   "cls": "CVN",
+   "maxs": 31,
+   "cruise": 20,
+   "range": 100000,
+   "displacement_t": 104200,
+   "len_m": 332.8,
+   "spec": "332.8m / 满载104,200t / 30+节 / 约90架舰载机（CVW-5：F-35C+F/A-18E/F+E-2D+MH-60）",
+   "ship": [
+    "cv",
+    33.3
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "2024-11 返回横须贺接替里根号，成为第7舰队前沿部署航母（CSG-5 旗舰）。",
+   "src": [
+    {
+     "ref": "美海军第7舰队：华盛顿号 CSG-5 2025-12-11 返回横须贺，编成为 CVN-73 + CVW-5 + CG-62 + DDG-86 + DDG-85",
+     "url": "https://www.globalsecurity.org/military///library/news/2025/12/mil-251211-seventhfleet02.htm",
+     "date": "2025-12-11",
+     "conf": "A"
+    },
+    {
+     "ref": "美国海军_fact file：尼米兹级 全长332.8m / 满载约104,000t / 30+节",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2165266/aircraft-carriers-cvn/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "cg47": {
+   "n": "提康德罗加级导弹巡洋舰（CG-62）",
+   "cls": "CG",
+   "maxs": 32,
+   "cruise": 20,
+   "range": 6000,
+   "displacement_t": 9800,
+   "len_m": 172.8,
+   "spec": "172.8m / 满载9,800t / 32.5节 / 128垂发（SM-2/SM-6/VLA） / 2×61'Mk45舰炮",
+   "ship": [
+    "cg",
+    17.3
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "CG-62 罗伯特·斯莫尔斯号：CSG-5 属舰，横须贺常驻；提康级正陆续退役，斯莫尔斯为最后批次之一。",
+   "src": [
+    {
+     "ref": "DVIDS：CSG-5 编成含提康德罗加级 CG-62 Robert Smalls",
+     "url": "https://www.dvidshub.net/news/500277",
+     "date": "2025-06-10",
+     "conf": "A"
+    },
+    {
+     "ref": "美国海军 fact file：提康德罗加级 172.8m / 9,800t / 128 VLS",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167312/cruisers-cg/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "ddg51": {
+   "n": "阿利·伯克级驱逐舰 Flight IIA",
+   "cls": "DDG",
+   "maxs": 31,
+   "cruise": 20,
+   "range": 4400,
+   "displacement_t": 9700,
+   "len_m": 155.3,
+   "spec": "155.3m / 满载9,700t / 30+节 / 96垂发（SM-2/SM-6/战斧/ESSM） / SPY-1D相控阵",
+   "ship": [
+    "ddg055",
+    15.5
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "DDG-85 麦克坎贝尔 / DDG-86 肖普为 CSG-5 属舰；第15驱逐舰中队（横须贺）另辖多艘（DDG-69 米利厄斯等）。",
+   "src": [
+    {
+     "ref": "美海军第7舰队：CSG-5 编成含 DDG-86 Shoup 与 DDG-85 McCampbell；CSGEX 2025 另有 DDG-69 Milius 参加",
+     "url": "https://www.globalsecurity.org/military//library/news/2025/11/mil-251115-seventhfleet01.htm",
+     "date": "2025-11-14",
+     "conf": "A"
+    },
+    {
+     "ref": "美国海军 fact file：阿利·伯克级 Flight IIA 全长509ft(155.3m) / 96 VLS",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167309/destroyers-ddg/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "lha6": {
+   "n": "的黎波里号两栖攻击舰 LHA-7",
+   "cls": "LHA",
+   "maxs": 22,
+   "cruise": 20,
+   "range": 9500,
+   "displacement_t": 44971,
+   "len_m": 257,
+   "spec": "45,700t / 257m / 20+ 架 F-35B 作战常驻 / 2025-09 接替美国号成为佐世保前沿部署大甲板两栖舰",
+   "ship": [
+    "lha",
+    25.7
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "佐世保常驻，两栖戒备群（ARG）旗舰；31st MEU 航空战斗分队含 F-35B（VMFA-242）与 MV-22B（VMM-262）。",
+   "src": [
+    {
+     "ref": "USNI Fleet Tracker 2025-09-08：Tripoli 将接替 America 成为前沿部署大甲板两栖舰",
+     "url": "https://news.usni.org/2025/09/08/usni-news-fleet-and-marine-tracker-sept-8-2025",
+     "date": "2025-09-08",
+     "conf": "A"
+    }
+   ]
+  },
+  "lpd22": {
+   "n": "圣安东尼奥级船坞运输舰 LPD-18/22",
+   "cls": "LPD",
+   "maxs": 22,
+   "cruise": 18,
+   "range": 8000,
+   "displacement_t": 25300,
+   "len_m": 208,
+   "spec": "208m / 满载25,300t / 22节 / 坞舱含LCAC气垫艇 / 700名陆战队员",
+   "ship": [
+    "lpd",
+    20.8
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "DVIDS：America ARG 编成含 LPD-22 San Diego",
+     "url": "https://www.dvidshub.net/news/492452",
+     "date": "2025-03-06",
+     "conf": "A"
+    },
+    {
+     "ref": "美国海军 fact file：圣安东尼奥级 208m / 25,300t / 22节",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167297/amphibious-transport-dock-lpd/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "lsd47": {
+   "n": "惠德贝岛级船坞登陆舰 LSD-47",
+   "cls": "LSD",
+   "maxs": 20,
+   "cruise": 18,
+   "range": 8000,
+   "displacement_t": 16108,
+   "len_m": 186,
+   "spec": "186m / 满载16,108t / 20+节 / 海军最大坞舱（4×LCAC）",
+   "ship": [
+    "lpd",
+    18.6
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "DVIDS：America ARG 编成含 LSD-47 Rushmore（Whidbey Island 级坞舱最大）",
+     "url": "https://www.dvidshub.net/news/492452",
+     "date": "2025-03-06",
+     "conf": "A"
+    },
+    {
+     "ref": "美国海军 fact file：惠德贝岛级 185.6m / 16,108t",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167294/dock-landing-ships-lsd/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "ssnla": {
+   "n": "洛杉矶级攻击核潜艇",
+   "cls": "SSN",
+   "maxs": 32,
+   "cruise": 15,
+   "range": 100000,
+   "displacement_t": 6927,
+   "len_m": 110,
+   "spec": "110.3m / 水下6,927t / 水下32节 / 4×533mm鱼雷 + 12垂发战斧 / 无限续航（核动力）",
+   "ship": [
+    "sub",
+    11.0
+   ],
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "关岛阿普拉港波拉里斯角为前沿攻击潜艇母港，第15潜艇中队常态 5 艘洛杉矶级（如 SSN-760 安纳波利斯号）。",
+   "src": [
+    {
+     "ref": "美海军新闻（2025-12-19）：安纳波利斯号返回关岛母港，隶属第15潜艇中队，为太平洋前沿 5 艘快速攻击核潜艇之一",
+     "url": "https://ludesocial.ludepress.com/2025/12/30/",
+     "date": "2025-12-19",
+     "conf": "A"
+    },
+    {
+     "ref": "美国会研究处 CRS R47643：关岛波拉里斯角潜艇基地母港化（5艘洛杉矶级）",
+     "url": "https://sgp.fas.org/sgp/crs/natsec/R47643.pdf",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "f35c": {
+   "n": "F-35C 闪电II 舰载战斗机",
+   "cls": "FGTR",
+   "speed_kmh": 1900,
+   "range_km": 1100,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 90,
+   "spec": "15.7m / 1.6马赫 / 作战半径~1,100km / 内置弹舱 AIM-120+JDAM",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "洛克希德·马丁 F-35C 官方页：翼展13.1m / 作战半径>1,000nm 级（含副油箱）",
+     "url": "https://www.lockheedmartin.com/en-us/products/f-35/f-35-variants.html",
+     "date": "2024",
+     "conf": "B"
+    },
+    {
+     "ref": "美国海军 fact file：F-35C 为航母舰载型（CVW-5 已编 F-35C 中队）",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167281/f-35-lightning-ii/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "fa18ef": {
+   "n": "F/A-18E/F 超级大黄蜂",
+   "cls": "FGTR",
+   "speed_kmh": 1900,
+   "range_km": 720,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 80,
+   "spec": "18.3m / 1.8马赫 / 作战半径~720km / AGM-158C LRASM 反舰（~560km）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "CVW-5 舰载机联队主力打击机型，对海挂载 AGM-84/LRASM。",
+   "src": [
+    {
+     "ref": "波音 F/A-18E/F 技术页：全长18.31m / 作战半径720km（典型挂载）",
+     "url": "https://www.boeing.com/defense/f-a-18-super-hornet",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "f35b": {
+   "n": "F-35B 短距起飞垂直降落战斗机",
+   "cls": "FGTR",
+   "speed_kmh": 1900,
+   "range_km": 833,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 90,
+   "spec": "15.6m / 1.6马赫 / 作战半径~833km / STOVL 垂直降落（两栖攻击舰搭载）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "31st MEU 航空战斗元素（VMFA-242）随美国号部署。",
+   "src": [
+    {
+     "ref": "DVIDS：31st MEU 航空战斗元素含 F-35B 中队（VMFA-242 分遣队）",
+     "url": "https://www.dvidshub.net/news/492452",
+     "date": "2025-03-06",
+     "conf": "A"
+    },
+    {
+     "ref": "洛马官方：F-35B 作战半径 833km（内置武器）",
+     "url": "https://www.lockheedmartin.com/en-us/products/f-35/f-35-variants.html",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "f22": {
+   "n": "F-22A 猛禽战斗机",
+   "cls": "FGTR",
+   "speed_kmh": 2410,
+   "range_km": 850,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 70,
+   "spec": "18.9m / 2.25马赫(超巡1.8) / 作战半径~850km / AIM-120+AIM-9X 内置",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "嘉手纳自 2022 年底起以轮换中队维持战斗机存在：2026-05 起为 27th/90th EFS 双 F-22 中队（约12+架，阿拉斯加/兰利轮换）。",
+   "src": [
+    {
+     "ref": "Stars and Stripes：两支 F-22 中队（90th EFS/27th EFS）2026-05 抵嘉手纳轮换，12 架自阿拉斯加上周降落",
+     "url": "https://www.stripes.com/branches/air_force/2026-05-06/kadena-okinawa-raptors-alaska-elmendorf-21589967.html",
+     "date": "2026-05-06",
+     "conf": "A"
+    },
+    {
+     "ref": "美国空军 fact file：F-22 全长18.92m / 最大速度2.25马赫?（标称 M2.0+）",
+     "url": "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104505/f-22-raptor/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "f15cm": {
+   "n": "F-15C/D 鹰式战斗机",
+   "cls": "FGTR",
+   "speed_kmh": 2650,
+   "range_km": 1000,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 70,
+   "spec": "19.4m / 2.5马赫 / 作战半径~1,000km / AIM-120D+AIM-9X",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "嘉手纳常驻 48 架 F-15C/D 已于 2025 年初全部退役，现由后备役轮换中队（如 122nd EFS，路易斯安那州）顶替；2027 年起换装 36 架 F-15EX。",
+   "src": [
+    {
+     "ref": "Stars and Stripes：嘉手纳最后一批常驻 F-15C 于 2025-01/03 退役，2026-10 路易斯安那 122nd EFS 的 F-15C 抵嘉手纳轮换；F-15EX 计划 36 架 2027 年到位",
+     "url": "https://www.stripes.com/branches/air_force/2026-10-27/fighter-squadron-rotations-kadena-okinawa-23274756.html",
+     "date": "2026-10-27",
+     "conf": "A"
+    }
+   ]
+  },
+  "e2d": {
+   "n": "E-2D 先进鹰眼预警机",
+   "cls": "AEW",
+   "speed_kmh": 650,
+   "range_km": 550,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "spec": "17.6m / 648km/h / APY-9 探测~550km / 兼容海军综合火控-防空（NIFC-CA）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "美国海军 fact file：E-2D 先进鹰眼，APY-9 雷达，为航母编队空中预警指挥中枢",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167284/e-2d-advanced-hawkeye/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "p8a": {
+   "n": "P-8A 海神海上巡逻机",
+   "cls": "MPA",
+   "speed_kmh": 815,
+   "range_km": 4500,
+   "salvo": 2,
+   "ammo": 6,
+   "reload_s": 300,
+   "spec": "39.5m / 815km/h / 巡航半径~2,250km / MK54鱼雷+AGM-84 鱼叉 / 广域海上监视",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "美国海军 fact file：P-8A 基于737机身，39.47m / 任务系统含磁异探杆与126声呐浮标",
+     "url": "https://www.navy.mil/Resources/Fact-Files/Display-FactFiles/Article/2167316/p-8a-poseidon/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "mv22": {
+   "n": "MV-22B 鱼鹰倾转旋翼机",
+   "cls": "TILT",
+   "speed_kmh": 446,
+   "range_km": 720,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "spec": "17.5m(旋翼折叠) / 446km/h / 战斗半径~720km / 载24名陆战队员或4.5t",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "美国海军陆战队 fact file：MV-22B 446km/h，VMM-262 随 31st MEU 部署",
+     "url": "https://www.marines.mil/Units/Aviation/MV-22B-Osprey/",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "kc135": {
+   "n": "KC-135R 同温层空中加油机",
+   "cls": "TKR",
+   "speed_kmh": 830,
+   "range_km": 2400,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "spec": "41.5m / 可输送燃油83t / 嘉手纳+横田常驻，为西太空域加油 backbone",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "美国空军 fact file：KC-135R 输油能力83,000lb(37.6t)/任务燃料转移，嘉手纳为西太主要加油节点",
+     "url": "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104518/kc-135-stratotanker/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "b52h": {
+   "n": "B-52H 同温层堡垒战略轰炸机",
+   "cls": "BMB",
+   "speed_kmh": 950,
+   "range_km": 14000,
+   "salvo": 4,
+   "ammo": 12,
+   "reload_s": 600,
+   "spec": "49.0m / 不加油航程14,000km+ / 20×AGM-158 JASSM/LRASM / 关岛轰炸机特遣队（BTF）轮换 6~12 架",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "安德森空军基地常态 6~12 架 B-52H 或 B-1B 轮换部署。",
+   "src": [
+    {
+     "ref": "澎湃新闻（引卫星图与美媒）：关岛常态部署 6~12 架 B-52H/B-1B，另有 F-22/F-35A 中队与 KC-135、MQ-4C",
+     "url": "https://www.thepaper.cn/newsDetail_forward_30579071",
+     "date": "2025",
+     "conf": "B"
+    },
+    {
+     "ref": "美国空军 fact file：B-52H 全长48.5m / 不加油航程8,800nm（约16,300km）",
+     "url": "https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104470/b-52-stratofortress/",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "typhon": {
+   "n": "堤丰中程导弹系统连（MRC）",
+   "cls": "ASM-TEL",
+   "speed_kmh": 88,
+   "range_km": 370,
+   "range_max_km": 1600,
+   "warhead_kg": 64,
+   "speed_mach": 3.5,
+   "warhead_alt_kg": 340,
+   "speed_alt_mach": 0.72,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 240,
+   "spec": "Mk41 陆基垂发（拖车式，发射车 M983A4 HEMTT）／两种弹共用一套发射装置：SM-6（RIM-174 ERAM，对海模式）64kg Mk125 破片战斗部·Mach 3.5·公开口径上限 370km ＋ 战斧 Block V（MST 反舰型带末端导引头，可打海上运动目标）340kg WDU-36/B·M0.72 亚音速掠海巡航·约 1,600km ／ 1连4发射装置16单元",
+   "conf": "A",
+   "updated": "2026-11-09",
+   "note": "2024-04 首次部署吕宋北部（1st MDTF，C/5-3野战炮兵团），后无限期保留；2026-02 美菲宣布增派。吕宋发射位可覆盖巴士海峡与东南沿海。堤丰是**发射车/编制名**，不是弹名——射程 370km 那发是 SM-6，能跨图打到东南沿海的那发是战斧（MST）。战斧战斗部另有 450kg WDU-25/B 一档，本表取保守的 340kg。SM-6 战斗部公开值 64kg（designation-systems/MDA），中文媒体有 68kg 一说，差 6%，不影响档位。",
+   "src": [
+    {
+     "ref": "Army Recognition：MRC/Typhon 吕宋部署与 2026 增派计划；SM-6 370km / 战斧 1,600km；发射车 M983A4 HEMTT 8x8",
+     "url": "https://www.armyrecognition.com/news/army-news/2026/u-s-to-deploy-additional-typhon-missile-systems-to-philippines-in-2026",
+     "date": "2026-02-17",
+     "conf": "A"
+    },
+    {
+     "ref": "US Missile Designations（designation-systems）RIM-174 SM-6：战斗部 64kg（140lb）Mk 125 破片、Mach 3.5",
+     "url": "https://www.designation-systems.net/dusrm/m-174.html",
+     "date": "2025-01-27",
+     "conf": "A"
+    },
+    {
+     "ref": "US Missile Designations（designation-systems）BGM/RGM/UGM/TGM-109 战斧：WDU-36/B 340kg（750lb）／WDU-25/B 450kg，巡航速度 880km/h；MST（海上打击型）带末端导引头，可攻击海上运动目标",
+     "url": "https://www.designation-systems.net/dusrm/m-109.html",
+     "date": "2025",
+     "conf": "A"
+    },
+    {
+     "ref": "HiWars：美陆军菲律宾轮换部队（ARF-P）成立以维持 Typhon 持续部署，1st MDTF 编 2 连 8 套发射装置",
+     "url": "https://hiwars.com/fa/intel/the-us-military-establishes-army-rotational-forces",
+     "date": "2026-01-29",
+     "conf": "B"
+    }
+   ]
+  },
+  "nmesis": {
+   "n": "NMESIS 远征舰艇拦截系统连",
+   "cls": "ASM-TEL",
+   "thumb": "nmesis",
+   "speed_kmh": 100,
+   "range_km": 185,
+   "warhead_kg": 125,
+   "speed_mach": 0.9,
+   "salvo": 2,
+   "ammo": 4,
+   "reload_s": 120,
+   "spec": "JLTV 无人发射车（ROGUE Fires） / NSM 海军打击导弹 185km 掠海隐身 / 1连=2排×3组分发",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "2025-03 列装冲绳汉森营（12th MLR/12th LCT）；2025-04 巴丹群岛巴斯科、2025-09 石垣岛前出演训。",
+   "src": [
+    {
+     "ref": "Army Recognition：12th MLR 于 2025-03-03 在冲绳汉森营编入 NMESIS 连；NSM 185km / 0.9马赫 / JLTV 底盘",
+     "url": "https://www.armyrecognition.com/archives/archives-land-defense/defense-news-army-2025/flash-news-us-marines-deploy-nmesis-anti-ship-missile-systems-in-japan-to-counter-indo-pacific-maritime-threats",
+     "date": "2025-03-03",
+     "conf": "A"
+    },
+    {
+     "ref": "Stars and Stripes：NMESIS 2025-09 首次上石垣岛参加 Resolute Dragon 岛屿防卫演习，最大射程 115 英里",
+     "url": "https://www.stripes.com/branches/marine_corps/2025-09-17/nmesis-madis-missiles-ishigaki-okinawa-19122648.html",
+     "date": "2025-09-17",
+     "conf": "A"
+    }
+   ]
+  },
+  "thaad": {
+   "n": "萨德 THAAD 末段高空防御连",
+   "cls": "SAM",
+   "speed_kmh": 0,
+   "range_km": 200,
+   "warhead_kg": 0,
+   "speed_mach": 8.2,
+   "salvo": 6,
+   "ammo": 48,
+   "reload_s": 180,
+   "pk": 0.8,
+   "spec": "拦截高度40~150km / AN/TPY-2 X波段雷达 / 关岛 6 发射架 48 拦截弹（Task Force Talon）",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "关岛现有 THAAD + PAC-3 + 铁穹三层反导，2025 年起增配陆基宙斯盾（SM-3 Block IIA）构成 EIAMD 体系。",
+   "src": [
+    {
+     "ref": "HiWars/CSIS SALUTE：截至2025-05 关岛 6 具 THAAD 发射架、48 枚拦截弹，正构建增强型综合防空反导（EIAMD）",
+     "url": "https://hiwars.com/zh/intel/is-the-us-militarys-most-important-island-in-the-p",
+     "date": "2025-05",
+     "conf": "B"
+    },
+    {
+     "ref": "澎湃新闻：关岛部署 THAAD、爱国者-3 与铁穹，2025 年增配 SM-3 IIA 陆基宙斯盾",
+     "url": "https://www.thepaper.cn/newsDetail_forward_30579071",
+     "date": "2025",
+     "conf": "B"
+    }
+   ]
+  },
+  "pac3mse": {
+   "n": "爱国者 PAC-3 MSE 防空连",
+   "cls": "SAM",
+   "speed_kmh": 0,
+   "range_km": 100,
+   "warhead_kg": 0,
+   "speed_mach": 5.0,
+   "salvo": 4,
+   "ammo": 32,
+   "reload_s": 150,
+   "pk": 0.72,
+   "spec": "PAC-3 MSE 拦截~100km(反TBM)/主动雷达导引命中杀伤 / 每连6~8发射架",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "美国陆军 fact file：PAC-3 MSE 拦截距离约100km级（反战术弹道导弹），关岛/冲绳均有部署",
+     "url": "https://www.army.mil/equipment/air-and-missile-defense/patriot/",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  }
+ }
+}

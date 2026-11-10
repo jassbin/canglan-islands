@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 交战规则（攻防与毁伤模型）</title>
+<link rel="stylesheet" href="js/page.css">
+<style>
+  .cb-sec { margin: 26px 0 0; }
+  .cb-t { display:flex; align-items:baseline; gap:10px; margin:0 0 10px; font-size:15px; font-weight:650; letter-spacing:.03em; color:#dff0fb; }
+  .cb-t i { font-style:normal; font:700 10.5px/1 "Microsoft YaHei"; color:#04202c; background:var(--ac);
+    width:19px; height:19px; display:grid; place-items:center; border-radius:4px; flex:none; }
+  .cb-t small { font-weight:400; font-size:11px; color:var(--tx3); letter-spacing:0; }
+  .cb-p { color:#a9bfd0; font-size:12.5px; line-height:1.75; margin:0 0 10px; }
+  .cb-p b { color:#dff0fb; }
+  .cb-p code, .cb-i code { font-family:"Cascadia Mono",Consolas,monospace; font-size:11.5px;
+    background:rgba(120,180,220,.10); border:1px solid var(--line); border-radius:4px; padding:0 4px; color:#9fe3f2; }
+
+  
+  .map4 { display:grid; gap:8px; }
+  .map4-row { display:grid; grid-template-columns:112px 1fr 1.25fr; gap:12px; align-items:center;
+    background:var(--pnl); border:1px solid var(--line); border-left:3px solid var(--ac);
+    border-radius:8px; padding:9px 12px; }
+  .map4-row .k { font-size:12.5px; color:#ffc469; }
+  .map4-row .m { font-size:12.5px; color:#dff0fb; }
+  .map4-row .m b { color:var(--ac); font-weight:600; }
+  .map4-row .f { font-family:"Cascadia Mono",Consolas,monospace; font-size:11px; color:#9fe3f2; line-height:1.6; }
+
+  
+  .chain { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .chain .step { position:relative; background:linear-gradient(180deg,rgba(20,45,64,.95),rgba(12,28,42,.95));
+    border:1px solid var(--line); border-radius:9px; padding:10px 11px; }
+  .chain .step::after { content:"›"; position:absolute; right:-8px; top:50%; transform:translateY(-50%);
+    color:var(--ac); font-size:15px; opacity:.65; z-index:2; }
+  .chain .step:last-child::after { display:none; }
+  .chain .sn { font:700 9.5px/1 "Microsoft YaHei"; color:#7fa6bd; letter-spacing:.08em; }
+  .chain .st { font-size:12.5px; color:#dff0fb; margin:5px 0 4px; font-weight:600; }
+  .chain .sd { font-size:10.5px; color:#8fa8bc; line-height:1.55; }
+  .chain .sx { margin-top:6px; font-family:"Cascadia Mono",Consolas,monospace; font-size:10.5px; color:#7fd6ff; }
+
+  
+  .calc { display:grid; grid-template-columns:300px 1fr; gap:14px; align-items:start; }
+  .calc-in { background:var(--pnl); border:1px solid var(--line); border-radius:10px; padding:13px 14px; }
+  .fl { display:block; margin-bottom:11px; }
+  .fl span { display:block; font-size:11px; color:var(--tx3); margin-bottom:5px; letter-spacing:.04em; }
+  .fl select { width:100%; background:#0a1a26; color:var(--tx); border:1px solid var(--line2);
+    border-radius:7px; padding:7px 9px; font-size:12.5px; font-family:inherit; }
+  .fl input[type=range] { width:100%; accent-color:var(--ac); }
+  .fl .rv { display:flex; justify-content:space-between; font-size:11.5px; color:var(--tx2); margin-top:3px; }
+  .fl .rv b { color:var(--ac); font-size:14px; font-family:"Cascadia Mono",Consolas,monospace; }
+
+  .calc-out { background:var(--pnl); border:1px solid var(--line); border-radius:10px; padding:13px 15px; }
+  .co-h { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:11px; }
+  .co-h b { font-size:14px; color:#dff0fb; }
+  .co-h .tag { font-size:10.5px; padding:2px 7px; border-radius:5px;
+    color:#9fe3f2; background:rgba(79,195,217,.12); border:1px solid rgba(79,195,217,.35); }
+  .co-h .tag.bad { color:#ffc3a8; background:rgba(255,122,77,.12); border-color:rgba(255,122,77,.4); }
+
+  .bars { display:grid; gap:7px; margin-bottom:12px; }
+  .bar-row { display:grid; grid-template-columns:74px 1fr 92px; gap:10px; align-items:center; }
+  .bar-row .bl { font-size:11.5px; color:var(--tx2); }
+  .bar-row .bt { height:16px; background:rgba(120,180,220,.10); border-radius:4px; overflow:hidden; position:relative; }
+  .bar-row .bf { height:100%; border-radius:4px; transition:width .22s ease; }
+  .bar-row .bv { font-family:"Cascadia Mono",Consolas,monospace; font-size:11.5px; color:#dff0fb; text-align:right; }
+  .bf.ok { background:linear-gradient(90deg,#2f8fa8,#4fc3d9); }
+  .bf.mid { background:linear-gradient(90deg,#a8883a,#ffc469); }
+  .bf.bad { background:linear-gradient(90deg,#a8442a,#ff7a4d); }
+
+  .kv4 { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-bottom:12px; }
+  .kv { background:rgba(120,180,220,.06); border:1px solid var(--line); border-radius:8px; padding:8px 10px; }
+  .kv .kk { font-size:10.5px; color:var(--tx3); margin-bottom:3px; }
+  .kv .vv { font-family:"Cascadia Mono",Consolas,monospace; font-size:17px; color:#dff0fb; line-height:1.2; }
+  .kv .vv small { font-size:10.5px; color:var(--tx3); font-family:inherit; }
+  .kv.hot .vv { color:#ff9a7a; }
+  .kv.cool .vv { color:#7fd6a0; }
+
+  .verdict { font-size:12.5px; line-height:1.7; padding:9px 11px; border-radius:7px;
+    background:rgba(79,195,217,.08); border-left:2px solid rgba(79,195,217,.6); color:#bfd8e8; }
+  .verdict b { color:#fff; }
+  .verdict .em { color:#ffc469; }
+
+  
+  table.cbt { width:100%; border-collapse:collapse; font-size:11.5px; }
+  table.cbt th { text-align:left; font-weight:600; color:var(--tx3); font-size:10.5px; letter-spacing:.06em;
+    padding:6px 8px; border-bottom:1px solid var(--line2); white-space:nowrap; }
+  table.cbt td { padding:6px 8px; border-bottom:1px solid rgba(120,180,220,.07); color:#b7cddd; }
+  table.cbt tr:hover td { background:rgba(120,180,220,.05); }
+  table.cbt td.n, table.cbt th.n { text-align:right; font-family:"Cascadia Mono",Consolas,monospace; }
+  table.cbt td b { color:#dff0fb; }
+  table.cbt .cf { font-size:10px; padding:1px 5px; border-radius:4px; }
+  .cf.A { color:#7fd6a0; background:rgba(127,214,160,.12); }
+  .cf.B { color:#ffc469; background:rgba(255,196,105,.12); }
+  .cf.C { color:#8fa8bc; background:rgba(143,168,188,.12); }
+  .side-h { font-size:11px; color:var(--ac); letter-spacing:.08em; margin:12px 0 4px; }
+
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; }
+  .lim { counter-reset:l; display:grid; gap:7px; }
+  .lim div { position:relative; padding-left:26px; font-size:12px; line-height:1.65; color:#a9bfd0;
+    background:rgba(255,122,77,.05); border:1px solid rgba(255,122,77,.16); border-radius:7px; padding:8px 10px 8px 30px; }
+  .lim div::before { counter-increment:l; content:counter(l); position:absolute; left:9px; top:8px;
+    font:700 10px/1.4 "Microsoft YaHei"; color:#ff9a7a; }
+  .lim div b { color:#ffd2c0; }
+
+  .srcs { display:grid; gap:6px; }
+  .srcs a { display:grid; grid-template-columns:1fr auto; gap:10px; text-decoration:none;
+    background:var(--pnl); border:1px solid var(--line); border-radius:7px; padding:8px 11px; transition:.15s; }
+  .srcs a:hover { border-color:var(--line2); background:var(--pnl2); }
+  .srcs .sr { font-size:12px; color:#b7cddd; }
+  .srcs .sr b { color:#9fe3f2; font-weight:500; }
+  .srcs .su { font-size:10px; color:var(--tx3); font-family:"Cascadia Mono",Consolas,monospace;
+    max-width:420px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .srcs .sc { font-size:10px; padding:1px 5px; border-radius:4px; }
+
+  @media (max-width: 1180px) {
+    .calc { grid-template-columns:1fr; }
+    .chain { grid-template-columns:1fr 1fr; }
+    .chain .step::after { display:none; }
+    .two { grid-template-columns:1fr; }
+    .kv4 { grid-template-columns:1fr 1fr; }
+    .map4-row { grid-template-columns:1fr; gap:5px; }
+  }
+</style>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+
+<div class="page-wrap">
+
+  <div class="page-head">
+    <h1>交战规则 · 攻防与毁伤是怎么算的</h1>
+    <span class="ph-sub">同一套模型，红方战场页 / 蓝方战场页 / 本页共用 <code style="font-size:11px">js/combat.js</code></span>
+    <span class="ph-sp"></span>
+    <div class="ph-tabs">
+      <button class="on" data-jump="sec-algo">模型</button>
+      <button data-jump="sec-calc">算例</button>
+      <button data-jump="sec-param">参数</button>
+      <button data-jump="sec-pick">选型</button>
+    </div>
+  </div>
+
+  <p class="cb-p" style="font-size:13px;color:#cfe2ef">
+    你问的「攻击力强度、效果、防御力、报废程度」——这四项在本作里对应四个有名字、有公式、有出处的量。
+    不是拍脑袋的血条相减，而是 <b>Hughes 齐射方程</b>（美海军研究生院教材口径）+ <b>Armstrong 2005 随机化</b>（逐发伯努利）
+    + <b>双阈值毁伤</b>（打完瘫 ≠ 打沉）。下面每一段都能对着数字验算。
+  </p>
+
+  
+  <section class="cb-sec" id="sec-map">
+    <h2 class="cb-t"><i>1</i>四个词，四个量<small>你的说法 → 模型里的量 → 怎么算</small></h2>
+    <div class="map4">
+      <div class="map4-row">
+        <div class="k">攻击力强度</div>
+        <div class="m">打击力 <b>α</b>（Salvo striking power）</div>
+        <div class="f">α = 齐射弹数 × 发射可靠率 0.9 × 末制导命中率 pk<br>
+          <span style="color:#8fa8bc">例：12 发齐射 × 0.9 × 0.62 ≈ 6.7 发"有效弹"</span></div>
+      </div>
+      <div class="map4-row">
+        <div class="k">防御力</div>
+        <div class="m">火控通道 <b>dp</b> + 单通道拦截率 <b>psam</b></div>
+        <div class="f">30 s 波次内最多接战 dp 发，每发按 psam 掷骰击落<br>
+          <span style="color:#8fa8bc">通道用满 → 后续全漏（这就是"饱和攻击"能奏效的数学原因）</span></div>
+      </div>
+      <div class="map4-row">
+        <div class="k">效果</div>
+        <div class="m">突防数 → 命中数 → 结构损失</div>
+        <div class="f">突防 = 来袭 − 拦截；命中 = 突防 × pk<br>
+          每发命中扣 <b>100 / sp × 战斗部系数</b> 点结构</div>
+      </div>
+      <div class="map4-row">
+        <div class="k">报废程度</div>
+        <div class="m">结构值四档（不是"血条归零就沉"）</div>
+        <div class="f">≥70% 完好 · 50~70% 轻损 · 35~50% 重伤 · <b>≤35% 失能 OOA</b> · ≤0 沉没<br>
+          <span style="color:#8fa8bc">失能 = 停火、脱离编队、慢速漂流，但船还浮着</span></div>
+      </div>
+    </div>
+    <p class="cb-p" style="margin-top:10px">
+      <b>抗沉力 sp</b> 是这四个之外的第 5 个量，但它是"报废程度"的分母：
+      sp = 6（航母）意味着要 <b>6 发名义命中</b>才彻底失能，sp = 1（气垫艇）意味着 1 发就完。
+    </p>
+  </section>
+
+  
+  <section class="cb-sec" id="sec-algo">
+    <h2 class="cb-t"><i>2</i>一发反舰弹的完整链路<small>五步，每步都有独立概率，缺一不可</small></h2>
+    <div class="chain">
+      <div class="step">
+        <div class="sn">STEP 1</div>
+        <div class="st">发射</div>
+        <div class="sd">齐射不是"扣扳机就全出膛"：发射装置故障、装填失误都会吃掉一部分</div>
+        <div class="sx">P = 0.90</div>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 2</div>
+        <div class="st">通道拦截</div>
+        <div class="sd">目标按火控通道数接战，一个通道一次只打一发；通道用完就不再接战</div>
+        <div class="sx">≤ dp 次 × psam</div>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 3</div>
+        <div class="st">突防</div>
+        <div class="sd">漏过拦截的弹继续飞。这一步没有概率——拦不掉就是拦不掉</div>
+        <div class="sx">= 来袭 − 拦掉</div>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 4</div>
+        <div class="st">末制导命中</div>
+        <div class="sd">雷达导引头开机、掠海飞行、末端机动；干扰弹与海杂波在这里起作用</div>
+        <div class="sx">P = pk ≈ 0.62</div>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 5</div>
+        <div class="st">毁伤判定</div>
+        <div class="sd">扣 100/sp×战斗部系数 点结构，再按 35% / 0% 两个阈值判失能与沉没</div>
+        <div class="sx">−100/sp × wf</div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:12px">
+      <div class="panel-x" style="padding:12px 14px">
+        <div style="font-size:12px;color:var(--ac);letter-spacing:.06em;margin-bottom:7px">确定性期望（Hughes 原式）</div>
+        <div class="cb-i" style="font-family:'Cascadia Mono',Consolas,monospace;font-size:11.5px;line-height:1.9;color:#bfd8e8">
+          ΔA = (β·B − y·A) / a₁<br>
+          <span style="color:#8fa8bc">β·B = 打击力（弹数×可靠率×命中率）</span><br>
+          <span style="color:#8fa8bc">y   = 防御力（本作取 dp×psam）</span><br>
+          <span style="color:#8fa8bc">a₁ = 抗沉力 sp</span>
+        </div>
+        <p class="cb-p" style="margin:8px 0 0;font-size:11.5px">
+          本作 UI 上显示的"预计命中 / 预计失能"就是这个式子的结果。对局实时结算走的是下面的随机版。
+        </p>
+      </div>
+      <div class="panel-x" style="padding:12px 14px">
+        <div style="font-size:12px;color:var(--ac);letter-spacing:.06em;margin-bottom:7px">随机化（Armstrong 2005，对局实际用）</div>
+        <div class="cb-i" style="font-family:'Cascadia Mono',Consolas,monospace;font-size:11.5px;line-height:1.9;color:#bfd8e8">
+          发射：Binomial(n, 0.90)<br>
+          拦截：min(弹数, dp) 次伯努利(psam)<br>
+          命中：Binomial(突防, pk)<br>
+          结构：100 − Σ(100/sp × wf)
+        </div>
+        <p class="cb-p" style="margin:8px 0 0;font-size:11.5px">
+          为什么要随机：同样是 8 发齐射，可能瘫也可能毫发无损。<b>概率分布才是真实，平均值只是简报。</b>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="cb-sec" id="sec-calc">
+    <h2 class="cb-t"><i>3</i>自己算一遍<small>改任一项，右边立刻重算（每次 12000 次蒙特卡洛）</small></h2>
+    <div class="calc">
+      <div class="calc-in">
+        <label class="fl"><span>目标</span>
+          <select id="tgt"></select>
+        </label>
+        <label class="fl"><span>来袭弹种</span>
+          <select id="wpn"></select>
+        </label>
+        <label class="fl"><span>齐射弹数</span>
+          <input type="range" id="n" min="1" max="32" value="8">
+          <div class="rv"><span>1</span><b id="nv">8 发</b><span>32</span></div>
+        </label>
+        <div style="border-top:1px dashed var(--line);padding-top:10px;margin-top:4px">
+          <div style="font-size:11px;color:var(--tx3);margin-bottom:6px">目标参数（取 L3 真源，不可手改）</div>
+          <div id="tinfo" style="font-size:11.5px;line-height:1.85;color:#b7cddd"></div>
+        </div>
+      </div>
+
+      <div class="calc-out">
+        <div class="co-h">
+          <b id="oTitle">—</b>
+          <span class="tag" id="oSat">—</span>
+          <span class="tag" id="oThreat">—</span>
+        </div>
+
+        <div class="bars" id="bars"></div>
+
+        <div class="kv4">
+          <div class="kv"><div class="kk">期望拦掉</div><div class="vv" id="kInt">—</div></div>
+          <div class="kv"><div class="kk">期望突防</div><div class="vv" id="kLeak">—</div></div>
+          <div class="kv"><div class="kk">期望命中</div><div class="vv" id="kHit">—</div></div>
+          <div class="kv"><div class="kk">剩余结构（均值）</div><div class="vv" id="kHull">—</div></div>
+        </div>
+
+        <div class="kv4" style="grid-template-columns:1fr 1fr">
+          <div class="kv hot"><div class="kk">打瘫概率（结构 ≤35%）</div><div class="vv" id="kOOA">—</div></div>
+          <div class="kv hot"><div class="kk">击沉概率（结构 ≤0）</div><div class="vv" id="kSink">—</div></div>
+        </div>
+
+        <div class="verdict" id="verdict">—</div>
+
+        <div style="margin-top:11px">
+          <div style="font-size:11px;color:var(--tx3);margin-bottom:5px">同一目标，不同弹数的失能概率曲线</div>
+          <div id="curve" style="display:flex;align-items:flex-end;gap:3px;height:64px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="cb-sec" id="sec-param">
+    <h2 class="cb-t"><i>4</i>参数从哪来<small>抗沉力 sp / 火控通道 dp / 单通道拦截率 psam</small></h2>
+    <p class="cb-p">
+      <b>sp 的依据</b>一共两条：吨位 + 实弹打靶（SINKEX）。最硬的记录是 RIMPAC 2000 的 USS Buchanan（驱逐舰）——
+      挨了 3 发地狱火 + 3 发鱼叉 + 1 枚 2400 磅激光制导炸弹，<b>还浮着</b>，最后靠 200 磅 C4 自沉。
+      同批 Hughes 统计：124 枚导弹命中 → 沉 14 艘、失能 17 艘。<b>命中后只有约四成会沉</b>，这是"打瘫 ≠ 打沉"的由来。
+    </p>
+    <div class="two">
+      <div class="panel-x" style="padding:12px 14px">
+        <div class="side-h">◆ 红方（苍澜联合特混舰队）</div>
+        <table class="cbt">
+          <thead><tr><th>舰艇</th><th class="n">吨位</th><th class="n">sp</th><th class="n">dp</th><th class="n">psam</th><th>依据</th></tr></thead>
+          <tbody id="tbBlue"></tbody>
+        </table>
+      </div>
+      <div class="panel-x" style="padding:12px 14px">
+        <div class="side-h" style="color:#ff9a7a">▲ 蓝方（岛内防卫力量）</div>
+        <table class="cbt">
+          <thead><tr><th>装备</th><th class="n">类别</th><th class="n">sp</th><th class="n">dp</th><th class="n">psam</th><th>依据</th></tr></thead>
+          <tbody id="tbRed"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="cb-p" style="margin-top:10px;font-size:12px">
+      <b>注意 dp = 0 的型号</b>：022 快艇、气垫艇、潜艇、地面发射车、坦克——它们<b>不是"防御差"，是没有对空火控通道</b>。
+      反舰弹飞过来时，它们除了干扰弹和机动没有任何手段，所以 1 发就可能完。这不是游戏性削弱，是物理事实。
+    </p>
+
+    
+    <h3 class="cb-t" style="font-size:13.5px;margin-top:20px"><i style="background:#ffc469">5</i>战斗部系数<small>相对"名义反舰弹"（鹰击-62 的 210 kg 半穿甲高爆）</small></h3>
+    <div class="panel-x" style="padding:12px 14px">
+      <table class="cbt">
+        <thead><tr><th>弹种</th><th class="n">系数 wf</th><th class="n">战斗部</th><th>说明</th></tr></thead>
+        <tbody id="tbWf"></tbody>
+      </table>
+    </div>
+    <p class="cb-p" style="margin-top:8px;font-size:11.5px">
+      鱼雷系数 <b>2.5</b> 不是拍脑袋：鱼-6 战斗部约 205 kg，与鹰击-62 的 210 kg 相当，
+      但水下爆破有<b>自由面效应</b>和<b>全船纵向弯矩</b>——同样质量在水下能把驱逐舰的龙骨顶断，在空气中只能炸开一个舱段。
+      所以一枚重型鱼雷 ≈ 2.5 发反舰弹的毁伤，这是各国海军的共识。
+    </p>
+  </section>
+
+  
+  <section class="cb-sec">
+    <h2 class="cb-t"><i>6</i>被打伤之后，战力会掉<small>结构值不只是"还剩多少血"，它真的影响输出和防御</small></h2>
+    <div class="panel-x" style="padding:12px 14px">
+      <table class="cbt">
+        <thead><tr><th>结构</th><th>状态</th><th class="n">射击间隔</th><th class="n">拦截率</th><th>战场表现</th></tr></thead>
+        <tbody>
+          <tr><td class="n">≥ 70%</td><td><b>完好</b></td><td class="n">×1.00</td><td class="n">×1.00</td><td>正常开火、跟队、正常拦截</td></tr>
+          <tr><td class="n">50 ~ 70%</td><td style="color:#ffc469"><b>轻损</b></td><td class="n">×1.35</td><td class="n">×0.90</td><td>射速下降，日志提示"轻损"</td></tr>
+          <tr><td class="n">35 ~ 50%</td><td style="color:#ff9a7a"><b>重伤</b></td><td class="n">×1.80</td><td class="n">×0.78</td><td>射速明显下降，拦截更容易被饱和</td></tr>
+          <tr><td class="n">≤ 35%</td><td style="color:#ff6b6b"><b>失能 OOA</b></td><td class="n">—</td><td class="n">—</td><td><b>停火、脱离编队、约 1/3 航速漂流；船还浮着</b></td></tr>
+          <tr><td class="n">≤ 0%</td><td style="color:#ff6b6b"><b>沉没</b></td><td class="n">—</td><td class="n">—</td><td>沉没动画，从编队移除</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cb-p" style="margin-top:8px">
+      这一档数据是 <span class="cf C">C 级</span>——Hughes 原文只算"整舰失能"，不管中间过程。
+      我们把"轻损/重伤拉长射速、削弱拦截"作为工程近似补上，方向可辩（真实战损确实会让射控变慢），但<b>具体倍数没有公开数据支撑</b>，属于可调假设。
+    </p>
+  </section>
+
+  
+  <section class="cb-sec" id="sec-pick">
+    <h2 class="cb-t"><i>7</i>为什么是这套，不是别的<small>四个候选模型，按五个维度打分</small></h2>
+    <p class="cb-p">
+      这一层（L3）的定位是<b>客观拟合</b>：攻防规律是客观存在的，我们只是选一个逼近它的"拟合器"。
+      换模型的理由必须是<b>拟合质量更高</b>，不能是"我喜欢这个"。所以下面每个模型都打了分，落选的写了理由。
+    </p>
+    <div class="panel-x" style="padding:12px 14px">
+      <table class="cbt">
+        <thead><tr><th>模型</th><th class="n">依据强度</th><th class="n">实时可算</th><th class="n">可解释</th><th class="n">可调参</th><th class="n">保真度</th><th class="n">加权</th><th>结论</th></tr></thead>
+        <tbody id="tbModel"></tbody>
+      </table>
+    </div>
+    <p class="cb-p" style="margin-top:9px;font-size:11.5px">
+      <b>Lanchester 平方律被否</b>：它假设连续瞄准射击，损耗是连续函数；反舰导弹是离散"脉冲齐射"，
+      Hughes 在《Fleet Tactics》第 5 章明确指出该场景下必须用齐射方程。<br>
+      <b>MANA 类智能体 + 蒙特卡洛被否</b>：保真度最高，但要上千次复盘，浏览器实时对局跑不动，且结果难以向玩家解释。
+    </p>
+  </section>
+
+  
+  <section class="cb-sec">
+    <h2 class="cb-t"><i>8</i>这套模型的局限<small>说清楚，不装</small></h2>
+    <div class="lim">
+      <div><b>不是兵棋级仿真。</b>没有航路规划、诱饵弹时序、编队协同拦截。真实编队能把多舰通道叠加，本作只在单舰层面算。</div>
+      <div><b>dp 是静态值。</b>真实防御力随告警状态、操作员训练、电磁环境大幅波动；Hughes 用 σ 侦察效率、τ 警戒度折算，本作简化为常数。</div>
+      <div><b>pk 用固定值。</b>真实命中率取决于掠海高度、末端机动、海况、干扰强度，本作按弹种给单一系数。</div>
+      <div><b>没有部位判定。</b>真实战损要看命中部位——一发打中弹药库可能直接殉爆，打中舰桥可能瞬间失能。本作是抽象结构值。</div>
+      <div><b>一个波次按 30 s 算。</b>真实饱和攻击的窗口通常是十几秒到一分钟，本作取 30 s 作为通道复位周期。</div>
+      <div><b>三档损伤倍数是 C 级近似。</b>方向可辩，数值可调，没有公开试验数据。</div>
+    </div>
+    <p class="cb-p" style="margin-top:10px;font-size:12px">
+      但<b>结论方向不受影响</b>：单发对现代编队几乎无效、饱和攻击才有效、大舰难沉但极易瘫——这三条和公开实战统计一致。
+      模型精度影响的是"要几发"，不是"该不该饱和"。
+    </p>
+  </section>
+
+  
+  <section class="cb-sec">
+    <h2 class="cb-t"><i>9</i>来源<small>A = 同行评议 / 官方教材；B = 权威媒体；C = 本作工程假设</small></h2>
+    <div class="srcs" id="srcs"></div>
+  </section>
+
+  <p class="cb-p" style="margin-top:24px;font-size:11px;color:#4d6a80;line-height:1.9">
+    模型真源：<code>data/L3_combat.json</code>（机器可读，含 scoring 与 src）· 计算内核：<code>js/combat.js</code>（三页共用）·
+    人读推导：<code>战损模型说明.md</code><br>
+    本页所有数字都由 <code>js/combat.js</code> 现算，不写死。
+  </p>
+</div>
+
+<script type="module">
+import { nav, initTips } from './js/theme.js';
+import {
+  LAUNCH_REL, OOA, WAVE_SEC, WARHEAD, SP, DEF, DMG_STATES,
+  dmgState, hullPerHit, hitsToOOA, hitsToSink, profileOf,
+  expected, monteCarlo, roundsFor, pct
+} from './js/combat.js';
+
+const QS = new URLSearchParams(location.search);
+const side = QS.get('side') === 'red' ? 'red' : 'blue';
+document.getElementById('navSlot').innerHTML = nav('combat', side);
+initTips();
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+
+const TGT = [
+  
+  { k: 'cv',     n: '航母（山东舰级）', side: 'blue', ton: '6 万 t' },
+  { k: 'ddg055', n: '055 型驱逐舰',   side: 'blue', ton: '1.25 万 t' },
+  { k: 'ddg',    n: '052D 型驱逐舰',  side: 'blue', ton: '7,200 t' },
+  { k: 'ffg',    n: '054A 型护卫舰',  side: 'blue', ton: '4,053 t' },
+  { k: 'lha',    n: '075 型两栖攻击舰', side: 'blue', ton: '4 万 t' },
+  { k: 'lpd',    n: '071 型船坞登陆舰', side: 'blue', ton: '2 万 t' },
+  { k: 'aoe',    n: '901 型补给舰',   side: 'blue', ton: '4.8 万 t' },
+  { k: 'sub',    n: '039B 型潜艇',    side: 'blue', ton: '水下 3,600 t' },
+  { k: 'fpb',    n: '022 型导弹快艇', side: 'blue', ton: '220 t' },
+  { k: 'lcac',   n: '726 型气垫登陆艇', side: 'blue', ton: '160 t' },
+  
+  { k: 'tajiang', n: '塔江级巡逻舰',  side: 'red', ton: '约 700 t' },
+  { k: 'gh6',    n: '光华六号快艇',   side: 'red', ton: '约 190 t' },
+  { k: 'm1a2t',  n: 'M1A2T 主战坦克', side: 'red', ton: '66 t' },
+  { k: 'm60a3',  n: 'M60A3 主战坦克', side: 'red', ton: '52 t' },
+  { k: 'cm34',   n: 'CM-34 云豹装甲车', side: 'red', ton: '24 t' },
+  { k: 'tk3',    n: '天弓三型防空连', side: 'red', ton: '阵地' },
+  { k: 'lt2000', n: '雷霆 2000 火箭车', side: 'red', ton: '45 t' },
+  { k: 'hf2',    n: '雄风二型发射车', side: 'red', ton: '卡车底盘' },
+  { k: 'radar',  n: '机动雷达车',     side: 'red', ton: '卡车底盘' },
+  { k: 'gun',    n: '岸防炮阵地',     side: 'red', ton: '固定' }
+];
+
+
+
+
+const WPN = [
+  { k: 'yj62', n: '鹰击-62 岸舰弹',   pk: 0.62, w: 1.00, note: '210 kg 半穿甲，基准弹' },
+  { k: 'yj83', n: '鹰击-83 反舰弹',   pk: 0.58, w: 0.85, note: '165~190 kg，掠海突防' },
+  { k: 'asm',  n: '雄风二/三型',      pk: 0.56, w: 1.00, note: '蓝方主力反舰弹' },
+  { k: 'torp', n: '鱼-6 重型鱼雷',    pk: 0.60, w: 2.50, note: '水下爆破，毁伤远超同质量' },
+  { k: 'mlrs', n: '雷霆 2000 火箭弹', pk: 0.35, w: 0.75, note: '面压制，单发战斗部小' },
+  { k: 'arty', n: '岸炮',             pk: 0.30, w: 0.50, note: '滩头拦阻' },
+  { k: 'bomb', n: '航空制导炸弹',     pk: 0.72, w: 1.20, note: '红方航空兵对地' }
+];
+
+
+const BLUE_ROWS = [
+  ['cv', '航母（山东舰级）', '6 万 t', 'sp6：吨位大 + 损管强；dp4/psam.72：HQ-10 24 联装 + 1130 近防 + 护航舰协同'],
+  ['ddg055', '055 型驱逐舰', '1.25 万 t', 'sp4：参照 Adams 级 SINKEX（3 鱼叉 + 3 地狱火 + 2400 磅炸弹仍浮）；dp5 = 远程/中程/近弹/近炮/电子五层取整'],
+  ['ddg', '052D 型驱逐舰', '7,200 t', 'sp3：Perry 级 SINKEX 3 鱼叉 + 1 制导炸弹才沉，取 3；dp4：比 055 少中段照射通道'],
+  ['ffg', '054A 型护卫舰', '4,053 t', 'sp2：4,100 t 级实弹打靶 2~3 发鱼叉失能；dp3：HHQ-16 半主动需照射通道，同时接战受限'],
+  ['lha', '075 型两栖攻击舰', '4 万 t', 'sp5：4 万吨级；dp2/psam.45：自卫仅 HQ-10 + 近防炮，区域防空靠护航舰'],
+  ['lpd', '071 型船坞登陆舰', '2 万 t', 'sp4；dp1/psam.35：仅近防'],
+  ['aoe', '901 型补给舰', '4.8 万 t', 'sp5：Hughes 统计 3 万吨级油轮命中沉没率 0%；dp1：近防'],
+  ['sub', '039B 型潜艇', '水下 3,600 t', 'sp1：一发重型鱼雷即瘫痪；<b>反舰导弹不入水，对它天然免疫</b>'],
+  ['fpb', '022 型导弹快艇', '220 t', 'sp1：实战一发即失能；<b>dp0：无对空火控</b>'],
+  ['lcac', '726 型气垫登陆艇', '160 t', 'sp1；dp0：只有干扰弹和机动']
+];
+const RED_ROWS = [
+  ['tk3', '天弓三型防空连', 'SAM 阵地', 'sp1：阵地单元；dp3/psam.70：四联装 + 相控阵照射，同时接战 3 批'],
+  ['tajiang', '塔江级巡逻舰', 'PGG', 'sp2：约 700 t 但带防空；dp2/psam.50：海剑二 + 方阵'],
+  ['gh6', '光华六号快艇', 'FAC', 'sp1：约 190 t；dp0'],
+  ['m1a2t', 'M1A2T 主战坦克', 'MBT 66 t', 'sp3：复合装甲 + 66 t 车体，需 3 发名义命中；dp0'],
+  ['m60a3', 'M60A3 主战坦克', 'MBT 52 t', 'sp2；dp0'],
+  ['cm34', 'CM-34 云豹装甲车', 'IFV 24 t', 'sp2：比主战坦克薄一半；dp0'],
+  ['lt2000', '雷霆 2000 火箭车', 'MLRS', 'sp1.4：卡车底盘，比坦克脆；dp0'],
+  ['hf2', '雄风二型发射车', 'ASM', 'sp1：卡车底盘，一发即毁；dp0'],
+  ['radar', '机动雷达车', 'RDR', 'sp3：方舱 + 天线，价值高但无防护；dp0'],
+  ['gun', '岸防炮阵地', 'ART', 'sp3：土木工事 + 炮位；dp0'],
+  ['sub_', '', '', ''],
+  ['', '', '', '']
+];
+
+function spCell(k) { return SP[k] != null ? SP[k] : '—'; }
+function defCell(k) {
+  const d = DEF[k];
+  return d ? [d.dp, (d.psam * 100).toFixed(0) + '%'] : ['0', '—'];
+}
+
+$('tbBlue').innerHTML = BLUE_ROWS.map(([k, n, ton, note]) => {
+  const d = defCell(k);
+  return `<tr><td><b>${esc(n)}</b></td><td class="n">${esc(ton)}</td>
+    <td class="n">${spCell(k)}</td><td class="n">${d[0]}</td><td class="n">${d[1]}</td>
+    <td style="font-size:10.5px;color:#8fa8bc">${note}</td></tr>`;
+}).join('');
+
+$('tbRed').innerHTML = RED_ROWS.filter(r => r[0]).map(([k, n, ton, note]) => {
+  const d = defCell(k);
+  return `<tr><td><b>${esc(n)}</b></td><td class="n">${esc(ton)}</td>
+    <td class="n">${spCell(k)}</td><td class="n">${d[0]}</td><td class="n">${d[1]}</td>
+    <td style="font-size:10.5px;color:#8fa8bc">${note}</td></tr>`;
+}).join('');
+
+
+const WF_ROWS = [
+  ['yj62', '鹰击-62 岸舰弹', 1.00, '210 kg', '基准弹，半穿甲 + 高爆'],
+  ['yj83', '鹰击-83 反舰弹', 0.85, '165~190 kg', 'NDU 记 165 kg、人民网记 190 kg，取中值比 0.79~0.90'],
+  ['asm',  '雄风二/三型', 1.00, '约 200 kg', '与基准弹同级'],
+  ['torp', '鱼-6 重型鱼雷', 2.50, '205 kg', '<b>水下爆破：自由面效应 + 全船纵向弯矩，常一发断轴/瘫痪驱逐舰</b>'],
+  ['bomb', '航空制导炸弹', 1.20, '约 250 kg', '对地/对海通用'],
+  ['mlrs', '雷霆 2000 火箭弹', 0.75, '子母/高爆', '面压制武器，单发小'],
+  ['arty', '岸炮', 0.50, '—', '滩头拦阻']
+];
+$('tbWf').innerHTML = WF_ROWS.map(([k, n, wf, kg, note]) =>
+  `<tr><td><b>${esc(n)}</b></td><td class="n" style="color:#ffc469">${wf.toFixed(2)}</td>
+   <td class="n">${esc(kg)}</td><td style="font-size:11px;color:#9fb8cc">${note}</td></tr>`).join('');
+
+
+const MODELS = [
+  { n: 'Hughes 齐射 v3（双阈值版）', s: [5, 5, 5, 4, 4], w: 4.55, st: 'adopted', note: '<b style="color:#7fd6a0">采用</b>：唯一有 222 枚实战统计支撑；区分打瘫与击沉' },
+  { n: 'Hughes 分层防御 v4', s: [5, 4, 3, 3, 5], w: 4.30, st: 'backup', note: '<b style="color:#ffc469">备份</b>：保真度更高，但分层参数靠保密数据，易变成拍脑袋' },
+  { n: 'Lanchester 平方律', s: [4, 5, 4, 3, 2], w: 3.55, st: 'rejected', note: '<b style="color:#ff9a7a">否决</b>：假设连续射击，与离散齐射不符' },
+  { n: 'MANA 智能体 + 蒙特卡洛', s: [4, 1, 2, 2, 5], w: 3.10, st: 'rejected', note: '<b style="color:#ff9a7a">否决</b>：浏览器跑不动上千次复盘' }
+];
+$('tbModel').innerHTML = MODELS.map(m => {
+  const cells = m.s.map(v => `<td class="n" style="color:${v >= 4 ? '#7fd6a0' : v >= 3 ? '#ffc469' : '#ff9a7a'}">${v}</td>`).join('');
+  return `<tr><td><b>${esc(m.n)}</b></td>${cells}
+    <td class="n" style="color:#dff0fb">${m.w.toFixed(2)}</td>
+    <td style="font-size:10.5px">${m.note}</td></tr>`;
+}).join('');
+
+
+const SRCS = [
+  ['A', 'Hughes《Fleet Tactics and Coastal Combat》—— 齐射方程原始出处；1967–1992 年 222 枚反舰弹统计', 'https://www.usni.org/press/books/fleet-tactics-and-coastal-combat'],
+  ['A', 'Armstrong, A Stochastic Salvo Model for Naval Surface Combat, Operations Research 53(5), 2005', 'https://doi.org/10.1287/opre.1040.0195'],
+  ['A', 'NPS 教材 ch6 Salvo Equations —— 齐射模型参数与算例', 'https://nps.edu/documents/105988579/106076845/ch6.pdf'],
+  ['A', 'WSC 2019：随机齐射模型的仿真分析（命中 = max(N_o − N_d, 0)）', 'https://www.informs-sim.org/wsc19papers/238.pdf'],
+  ['A', 'NPS 硕士论文 Modified Hughes Salvo Model（打击力/防御力/抗沉力口径）', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/An_analysis_of_small_navy_tactics_using_a_modified_Hughes%27_Salvo_Model_%28IA_annalysisofsmall109453615%29.pdf'],
+  ['A', 'NDU INSS Table 2.1：YJ-62 战斗部 210 kg、YJ-83 165 kg', 'https://www.govinfo.gov/content/pkg/GOVPUB-D5-PURL-gpo76796/pdf/GOVPUB-D5-PURL-gpo76796.pdf'],
+  ['B', '人民网：鹰击-8 族 165 kg、鹰击-83/83K 190 kg 高爆破片', 'https://military.people.com.cn/n/2014/1020/c1011-25868449-2.html'],
+  ['B', 'USNI Proceedings「Island Forts」2019-02，引 Hughes 数据表', 'https://www.usni.org/magazines/proceedings/2019-02/island-forts-land-forces-have-value-in-air-sea-battle'],
+  ['B', 'Navy Matters「How Many Shots?」2023-04 —— 引 Hughes/Schulte 222 枚统计', 'https://navy-matters.blogspot.com/2023/04/how-many-shots.html'],
+  ['B', 'CIMSEC：Distributed Maritime Operations – A Salvo Equation Analysis', 'https://cimsec.org'],
+  ['B', 'RIMPAC 2000 / 2022 SINKEX 记录（USS Buchanan、ex-Rodney M. Davis、ex-Boone）', ''],
+  ['C', '三档损伤对射速/拦截率的影响 —— 本作工程近似，无公开试验数据', 'data/L3_combat.json']
+];
+$('srcs').innerHTML = SRCS.map(([c, t, u]) =>
+  `<a href="${u || '#'}" ${u ? 'target="_blank" rel="noopener"' : 'onclick="return false"'} style="${u ? '' : 'cursor:default'}">
+    <div><div class="sr">${t}</div>${u ? `<div class="su">${esc(u)}</div>` : ''}</div>
+    <div class="cf ${c} sc">${c}</div>
+  </a>`).join('');
+
+
+$('tgt').innerHTML = TGT.map(t => `<option value="${t.k}">${t.side === 'blue' ? '◆' : '▲'} ${esc(t.n)}</option>`).join('');
+$('wpn').innerHTML = WPN.map(w => `<option value="${w.k}">${esc(w.n)}</option>`).join('');
+
+function curTgt() { return TGT.find(t => t.k === $('tgt').value) || TGT[2]; }
+function curWpn() { return WPN.find(w => w.k === $('wpn').value) || WPN[0]; }
+
+function render() {
+  const t = curTgt(), w = curWpn();
+  const n = Number($('n').value);
+  $('nv').textContent = n + ' 发';
+
+  const p = profileOf(t.k, {});
+  const prof = { dp: p.dp, psam: p.psam, pk: w.pk, sp: p.sp, wf: w.w };
+
+  
+  const hOOA = hitsToOOA(p.sp, w.w);
+  const hSink = hitsToSink(p.sp, w.w);
+  $('tinfo').innerHTML =
+    `抗沉力 <b style="color:#9fe3f2">sp ${p.sp}</b>　·　火控通道 <b style="color:#9fe3f2">dp ${p.dp}</b><br>` +
+    `单通道拦截 <b style="color:#9fe3f2">${p.psam ? (p.psam * 100).toFixed(0) + '%' : '无（dp=0）'}</b>　·　每发扣 <b style="color:#9fe3f2">${hullPerHit(p.sp, w.w).toFixed(1)}</b> 点<br>` +
+    `用<b>${esc(w.n)}</b>：<b style="color:#ffc469">${hOOA} 发命中</b>失能 / <b style="color:#ff9a7a">${hSink} 发命中</b>沉没`;
+
+  
+  const e = expected(n, prof);
+  $('oTitle').textContent = `${n} 发 ${w.n} → ${t.n}`;
+  $('oSat').textContent = e.saturated ? '⚠ 通道饱和（超出部分全漏）' : '通道未饱和';
+  $('oSat').className = 'tag' + (e.saturated ? ' bad' : '');
+  const threat = e.hits >= hSink ? '单波次足以击沉' : e.hits >= hOOA ? '单波次足以打瘫' : '单波次打不瘫';
+  $('oThreat').textContent = threat;
+  $('oThreat').className = 'tag' + (e.hits >= hOOA ? ' bad' : '');
+
+  
+  const rows = [
+    ['来袭弹数', n, n, 'ok'],
+    ['拦掉', e.intercepted, n, 'ok'],
+    ['突防', e.leakers, n, 'mid'],
+    ['命中', e.hits, n, 'bad'],
+    ['打成失能所需', hOOA, Math.max(n, hOOA), e.hits >= hOOA ? 'bad' : 'mid']
+  ];
+  $('bars').innerHTML = rows.map(([l, v, max, cls]) =>
+    `<div class="bar-row"><div class="bl">${l}</div>
+      <div class="bt"><div class="bf ${cls}" style="width:${Math.min(100, v / Math.max(1, max) * 100)}%"></div></div>
+      <div class="bv">${v.toFixed(1)} / ${max}</div></div>`).join('');
+
+  $('kInt').textContent = e.intercepted.toFixed(1);
+  $('kLeak').textContent = e.leakers.toFixed(1);
+  $('kHit').textContent = e.hits.toFixed(2);
+  $('kHull').textContent = Math.max(0, 100 - e.hits * hullPerHit(p.sp, w.w)).toFixed(0) + '%';
+
+  
+  const mc = monteCarlo(n, prof, 12000);
+  $('kOOA').textContent = pct(mc.pOOA);
+  $('kSink').textContent = pct(mc.pSink);
+  $('kHull').textContent = mc.meanHull.toFixed(0) + '%';
+
+  
+  let v = '';
+  if (p.dp === 0) {
+    v = `<b>${esc(t.n)} 没有对空火控通道（dp = 0）</b>，${esc(w.n)} 一枚都拦不住，全部进入末制导。
+         每发命中扣 ${hullPerHit(p.sp, w.w).toFixed(0)} 点，<b>${hOOA} 发就能打瘫</b>。`;
+  } else if (!e.saturated) {
+    v = `来袭 <b>${n} 发</b> 未超过 <b>${p.dp} 个通道</b>，理论上每发都有一次拦截机会。
+         按 ${(p.psam * 100).toFixed(0)}% 单通道成功率，期望拦掉 <b>${e.intercepted.toFixed(1)} 发</b>，突防 ${e.leakers.toFixed(1)} 发，
+         命中 ${e.hits.toFixed(2)} 发 —— <b>${threat}</b>。`;
+  } else {
+    v = `来袭 <b>${n} 发</b> 已超出 <b>${p.dp} 个通道</b>的上限，<span class="em">超出的 ${n - p.dp} 发完全没人拦</span>。
+         期望突防 <b>${e.leakers.toFixed(1)} 发</b>，命中 ${e.hits.toFixed(2)} 发，打瘫概率 <b>${pct(mc.pOOA)}</b>。
+         这就是饱和攻击：<b>不需要更高的命中率，只需要超过对方的通道数。</b>`;
+  }
+  $('verdict').innerHTML = v;
+
+  
+  const pts = [];
+  for (let i = 1; i <= 24; i++) pts.push({ i, p: monteCarlo(i, prof, 2500).pOOA });
+  $('curve').innerHTML = pts.map(({ i, p: pr }) => {
+    const h = Math.max(2, pr * 100);
+    const on = i === n;
+    return `<div title="${i} 发 → 打瘫 ${(pr * 100).toFixed(0)}%"
+      style="flex:1;height:${h}%;background:${on ? '#ff7a4d' : pr > .5 ? 'rgba(255,122,77,.55)' : 'rgba(79,195,217,.45)'};
+      border-radius:2px 2px 0 0;${on ? 'outline:1px solid #ffb08a' : ''}"></div>`;
+  }).join('');
+}
+
+['tgt', 'wpn', 'n'].forEach(id => {
+  $(id).addEventListener('input', render);
+  $(id).addEventListener('change', render);
+});
+render();
+
+
+document.querySelectorAll('[data-jump]').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.ph-tabs button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    const el = document.getElementById(b.dataset.jump);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+});
+
+
+if (QS.get('diag') === '3') {
+  const bad = [];
+  document.querySelectorAll('body *').forEach(el => {
+    const w = el.getBoundingClientRect().width, h = el.getBoundingClientRect().height;
+    if (w > innerWidth + 2 || h > 3000) {
+      bad.push((el.id ? '#' + el.id : el.tagName.toLowerCase() + '.' + (el.className || '').toString().split(' ')[0]) +
+        `:${Math.round(w)}x${Math.round(h)}`);
+    }
+  });
+  document.title = 'WIDE|vw=' + innerWidth + '|' + (bad.slice(0, 12).join('|') || 'none');
+}
+if (QS.get('diag') === '2') {
+  const navEl = document.querySelector('.site-nav');
+  const head = document.querySelector('.page-head');
+  const nb = navEl ? navEl.getBoundingClientRect() : { height: 0, bottom: 0 };
+  const hb = head ? head.getBoundingClientRect() : { top: 0 };
+  const se = document.scrollingElement;
+  const secs = [...document.querySelectorAll('.cb-sec')].map(s => s.id || s.querySelector('.cb-t i').textContent);
+  const empt = [...document.querySelectorAll('[id^=tb],[id=srcs],[id=bars],[id=curve]')]
+    .filter(el => !el.children.length).map(el => el.id);
+  document.title = [
+    'LAY',
+    'navH=' + Math.round(nb.height),
+    'headTop=' + Math.round(hb.top),
+    'overlap=' + (hb.top < nb.bottom - 1),
+    'hOverflow=' + (se.scrollWidth > innerWidth + 1),
+    'secs=' + secs.length,
+    'empty=' + (empt.join(',') || '-'),
+    'docH=' + se.scrollHeight,
+    'blue=' + document.querySelectorAll('#tbBlue tr').length,
+    'red=' + document.querySelectorAll('#tbRed tr').length,
+    'wf=' + document.querySelectorAll('#tbWf tr').length,
+    'model=' + document.querySelectorAll('#tbModel tr').length,
+    'src=' + document.querySelectorAll('#srcs a').length,
+    'bars=' + document.querySelectorAll('#bars .bar-row').length
+  ].join('|');
+}
+if (QS.get('diag') === '1') {
+  
+
+  const cases = [
+    { k: 'ddg', label: '8发雄三打052D', n: 8, w: 'asm' },
+    { k: 'ddg055', label: '8发雄三打055', n: 8, w: 'asm' },
+    { k: 'fpb', label: '1发雄二打022', n: 1, w: 'asm' },
+    { k: 'cv', label: '16发雄三打航母', n: 16, w: 'asm' },
+    { k: 'lcac', label: '1发雄二打气垫艇', n: 1, w: 'asm' },
+    { k: 'm1a2t', label: '4发火箭打M1A2T', n: 4, w: 'mlrs' },
+    { k: 'tk3', label: '8发炸弹打天弓三', n: 8, w: 'bomb' }
+  ];
+  const out = cases.map(c => {
+    const p = profileOf(c.k, {}), w = WPN.find(x => x.k === c.w);
+    const mc = monteCarlo(c.n, { dp: p.dp, psam: p.psam, pk: w.pk, sp: p.sp, wf: w.w }, 8000);
+    return `${c.label}=${Math.round(mc.pOOA * 100)}%瘫/${Math.round(mc.pSink * 100)}%沉`;
+  });
+  document.title = 'CB|' + out.join('|');
+}
+</script>
+</body>
+</html>

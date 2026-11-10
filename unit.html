@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 装备性能</title>
+<link rel="stylesheet" href="js/page.css">
+<script type="importmap">{"imports":{"three":"./lib/three.module.js","three/addons/":"./lib/jsm/"}}</script>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<div class="page-wrap">
+  <div class="page-head">
+    <h1>装备性能卡</h1>
+    <span class="ph-sub" id="phSub">逐型列出稳定参数、来源与编成归属；3D 模型与游戏战场同源（程序化生成 · 按需渲染 · 拖动旋转 / 滚轮缩放）</span>
+    <span class="ph-sp"></span>
+    <div class="ph-tabs" id="sideTabs"></div>
+  </div>
+  <div class="ut-layout">
+    <aside class="panel-x ut-list" id="unitList" style="padding:8px"></aside>
+    <main>
+      <section class="ut-hero" id="hero">
+        <div class="uh-label" id="heroLabel">3D 模型</div>
+      </section>
+      <section class="panel-x" style="margin-top:12px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <b id="uName" style="font-size:18px">—</b>
+          <span class="tagc" id="uCls">—</span>
+          <span class="conf" id="uConf">—</span>
+          <span style="color:var(--tx2);font-size:11.5px" id="uSide"></span>
+        </div>
+        <p id="uSpec" style="margin:8px 0 0;color:#a9c1d2;font-size:12.5px"></p>
+        <div class="ut-spec" id="uStats"></div>
+        <div class="ut-combat" id="uCombat"></div>
+      </section>
+      <section class="panel-x ut-sec" style="margin-top:12px">
+        <h3>参数明细</h3>
+        <table class="tbl" id="uTable"></table>
+      </section>
+    </main>
+    <aside>
+      <section class="panel-x">
+        <h3 class="ut-sec" style="margin:0 0 8px">编成归属</h3>
+        <div id="uIn" style="font-size:12px;color:#a9c1d2"></div>
+      </section>
+      <section class="panel-x" style="margin-top:12px">
+        <h3 class="ut-sec" style="margin:0 0 8px">数据来源</h3>
+        <div class="src-list" id="uSrc"></div>
+      </section>
+      <section class="panel-x" style="margin-top:12px">
+        <h3 class="ut-sec" style="margin:0 0 8px">口径说明</h3>
+        <p style="margin:0;font-size:11.5px;color:#93aec2;line-height:1.7">
+          参数来自 L1 稳定层（型号事实）与 L2 参数层（性能数值），每条带来源与置信度：
+          <span class="conf A">A</span> 官方 / 权威媒体一致　
+          <span class="conf B">B</span> 多源一致但非官方　
+          <span class="conf C">C</span> 单源或估算。
+          标 <span class="tagc">推演值</span> 的为交战模型内部量，不对应公开指标。
+        </p>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script type="module">
+window.__uerr='';
+addEventListener('error',e=>{window.__uerr=(e.message||'err').slice(0,40);});
+import * as THREE from 'three';
+import { GLTFLoader } from './lib/jsm/loaders/GLTFLoader.js';
+import { nav, S, esc, initTips } from './js/theme.js';
+import { SP, DEF, WARHEAD, profileOf, hitsToOOA, hitsToSink, hullPerHit } from './js/combat.js';
+import { makeShip, fitLen } from './js/shipgen.js';   
+import { makeGround, GROUND_KINDS, AIR_KINDS, lenNote } from './js/groundgen.js';   
+
+const qs = new URLSearchParams(location.search);
+const _sv = qs.get('side');
+const side = _sv === 'blue' ? 'blue' : _sv === 'green' ? 'green' : 'red';
+const sd = S(side);
+document.getElementById('navSlot').outerHTML = nav('unit', side);
+document.body.style.setProperty('--ac', sd.color);
+document.title = '苍澜群岛 · 装备图鉴 · ' + sd.cn + ' [v0.4]';
+initTips();
+
+document.getElementById('sideTabs').innerHTML =
+  `<button data-s="red" class="${side === 'red' ? 'on' : ''}">◆ 红方装备</button>` +
+  `<button data-s="blue" class="${side === 'blue' ? 'on' : ''}">▲ 蓝方装备</button>` +
+  `<button data-s="green" class="${side === 'green' ? 'on' : ''}">● 绿方装备</button>`;
+document.querySelectorAll('#sideTabs button').forEach(b => {
+  b.onclick = () => { location.href = 'unit.html?side=' + b.dataset.s + (qs.get('id') ? '&id=' + qs.get('id') : ''); };
+});
+
+const CLS = {
+  CV: '航母', CVN: '核动力航母', CG: '导弹巡洋舰', DDG: '驱逐舰', FFG: '护卫舰', FFL: '轻型护卫舰',
+  LHA: '两栖攻击舰', LPD: '船坞登陆舰', LSD: '船坞登陆舰',
+  AOE: '综合补给舰', AOR: '油船', SS: '潜艇', SSK: '常规潜艇', SSN: '攻击核潜艇', FPB: '导弹艇',
+  LCAC: '气垫登陆艇', LC: '登陆艇', LCM: '气垫登陆船',
+  'ASM-TEL': '反舰发射车', SAM: '防空导弹', MLRS: '火箭炮', MBT: '主战坦克',
+  IFV: '步兵战车', ATK: '攻击直升机', HELI: '直升机', FGTR: '战斗机', AEW: '预警机',
+  MPA: '海上巡逻机', TKR: '加油机', BMB: '战略轰炸机', TILT: '倾转旋翼机',
+  PGG: '导弹巡逻舰', FAC: '导弹快艇', ARTY: '岸防火炮', RADAR: '雷达', ATGM: '反坦克导弹',
+  AFV: '两栖战车', ART: '岸炮阵地', RDR: '雷达站', SSM: '岸舰导弹', SRBM: '弹道导弹', CM: '巡航导弹',
+  'CM-TEL': '巡航导弹发射连', 'SAM-F': '固定防空阵地', UGB: '地下洞库基地', CHQ: '地下指挥所',
+  FUEL: '油料储存区', AFB: '空军基地'
+};
+const CONF_CN = { A: 'A 级·官方/权威', B: 'B 级·多源一致', C: 'C 级·单源估算' };
+
+const KV = {
+  maxs: ['最高航速', '节'], cruise: ['经济航速', '节'], range: ['续航力', 'nm'],
+  aaw: ['防空半径', 'km'], displacement_t: ['满载排水量', 't'], len_m: ['全长', 'm'],
+  speed_kmh: ['机动速度', 'km/h'], range_km: ['有效射程', 'km'], range_max_km: ['最大射程', 'km'],
+  warhead_kg: ['战斗部', 'kg'], speed_mach: ['末端速度', '马赫'], salvo: ['齐射弹数', '发/轮'],
+  
+  warhead_alt_kg: ['战斗部（战斧 MST）', 'kg'], speed_alt_mach: ['巡航速度（战斧 MST）', '马赫'],
+  ammo: ['发射箱内弹量', '发'], reload_s: ['再装填', 's'], psam: ['点防御拦截率', ''],
+  ev: ['机动/干扰规避', ''], hp: ['耐久（推演值）', ''], pk: ['单发命中率（推演值）', ''],
+  dmg: ['单发毁伤（推演值）', ''], spd: ['航速（推演值）', '节']
+};
+const HIDE = new Set(['conf', 'updated', 'history', 'src', 'spec', 'n', 't', 'glb', 'first', 'builder', 'cls', 'ammo_note', 'name', 'c', 's', 'w', 'm', 'rl', 'rng', 'air', 'sea', 'dp', 'psam']);
+
+const j = async f => (await fetch('data/' + f + '?v=' + Date.now())).json();
+const [L1, L2R, L2B, L4R, L4B, L2G, L4G] = await Promise.all([
+  j('L1_static.json'), j('L2_params.json'), j('L2_blue_params.json'),
+  j('L4_strategy.json'), j('L4_blue_denial.json'),
+  j('L2_green_params.json'), j('L4_green_ops.json')
+]);
+
+
+
+
+
+
+function thumbFor(l, p) {
+  const src = l || {};
+  const id = src.thumb || src.glb || (p && p.thumb) || '';
+  return id ? 'assets/thumbs/' + id + '.png' : '';
+}
+
+
+
+
+const units = {};
+if (side === 'red') {
+  for (const [k, p] of Object.entries(L2R.units)) {
+    const l = L1.units[k] || {};
+    units[k] = { k, name: l.n || p.n || k, cls: CLS[l.t || p.t] || l.t || '—', conf: p.conf || '—',
+      spec: p.spec || '', stats: p, src: (p.src || []).concat(l.src || []), glbId: l.glb || '',
+      ship: l.ship || '', thumb: thumbFor(l),
+      first: l.first || '', builder: l.builder || '', len: l.len_m || 0 };
+  }
+} else if (side === 'green') {
+  for (const [k, p] of Object.entries(L2G.units)) {
+    units[k] = { k, name: p.n || k, cls: CLS[p.cls] || p.cls || '—', conf: p.conf || '—',
+      spec: p.spec || '', stats: p, src: p.src || [], glbId: '', ship: p.ship || '',
+      thumb: thumbFor(L1.units[k], p), first: '', builder: '', len: p.len_m || 0 };
+  }
+} else {
+  for (const [k, p] of Object.entries(L2B.units)) {
+    units[k] = { k, name: p.n || k, cls: CLS[p.cls] || p.cls || '—', conf: p.conf || '—',
+      spec: p.spec || '', stats: p, src: p.src || [], glbId: '', ship: '',
+      
+
+
+      thumb: thumbFor(L1.units[k], p), first: '', builder: '', len: 0 };
+  }
+}
+const keys = Object.keys(units);
+const byCls = {};
+keys.forEach(k => { (byCls[units[k].cls] = byCls[units[k].cls] || []).push(k); });
+
+
+const listEl = document.getElementById('unitList');
+listEl.innerHTML = Object.entries(byCls).map(([cls, ks]) =>
+  `<div class="ut-g">${esc(cls)}</div>` +
+  ks.map(k => {
+    const u = units[k];
+    const th = u.thumb
+      ? `<img class="ut-th" src="${esc(u.thumb)}" alt="" loading="lazy" onerror="this.remove()">`
+      : `<span class="ut-th ut-thn">${esc((u.cls || '?').slice(0, 1))}</span>`;
+    return `<button class="ut-item" data-k="${esc(k)}">${th}<i>${esc(u.conf)}</i><span>${esc(u.name)}</span></button>`;
+  }).join('')
+).join('');
+
+
+function procModel(cls, key = '') {
+  const M = c => new THREE.MeshStandardMaterial({ color: c, roughness: .82, metalness: .22 });
+  const box = (w, h, d, x, y, z, c) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), M(c)); m.position.set(x, y, z); return m; };
+  const cyl = (r, h, x, y, z, c, rot) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, 14), M(c)); m.position.set(x, y, z); if (rot === 'x') m.rotation.z = Math.PI / 2; if (rot === 'z') m.rotation.x = Math.PI / 2; return m; };
+  const wheels = (g, xs, y, z, r) => { for (const x of xs) for (const s of [-1, 1]) { const w = cyl(r, r * 2.2, 0, 0, 0, 0x24271f); w.rotation.x = Math.PI / 2; w.position.set(x, y, z * s); g.add(w); } };
+  
+
+  const wingGeo = (root, tip, span, sweep, thick = .07) => {
+    const sh = new THREE.Shape();
+    sh.moveTo(0, 0); sh.lineTo(-sweep, span); sh.lineTo(-sweep - tip, span); sh.lineTo(-root, 0); sh.closePath();
+    const g2 = new THREE.ExtrudeGeometry(sh, { depth: thick, bevelEnabled: true, bevelThickness: thick * .5, bevelSize: thick * .7, bevelSegments: 1 });
+    g2.rotateX(-Math.PI / 2); g2.translate(0, thick * .5, 0);
+    return g2;
+  };
+  const g = new THREE.Group();
+  const hull = 0x46503c, hull2 = 0x525d46, steel = 0x6d7885, dark = 0x33392e;
+  if (cls === '反舰发射车' || cls === '防空导弹' || cls === '火箭炮') {
+    
+    g.add(box(4.6, .55, 1.7, 0, .85, 0, hull));
+    g.add(box(1.1, .95, 1.55, 1.55, 1.55, 0, hull2));              
+    g.add(box(1.05, .5, 1.55, 1.55, 2.15, 0, 0x2c3128));
+    wheels(g, [1.55, .25, -1.05], .45, .88, .45);
+    if (cls === '反舰发射车') {
+      for (let i = 0; i < 3; i++) {                                 
+        const t = box(2.9, .62, .56, -.7, 1.65 + i * .7, 0, steel);
+        t.rotation.z = .42; g.add(t);
+      }
+      g.add(box(1.6, .18, 1.5, -.9, 1.25, 0, dark));
+    } else if (cls === '防空导弹') {
+      g.add(box(2.4, 2.1, .3, -.8, 2.1, 0, 0x59657a));              
+      for (const [x, z] of [[-.35, -.5], [-.35, .5], [-1.35, -.5], [-1.35, .5]]) {
+        const t = box(1.5, .42, .42, x + .9, 2.0, z, steel); t.rotation.z = 1.35; g.add(t);
+      }
+    } else {
+      g.add(box(2.2, 1.5, 1.6, -.9, 1.8, 0, 0x4f4a3c));             
+      for (const s of [-.45, .45]) cyl(.3, 2.2, -1.9, 2.3, s, dark, 'x');
+    }
+  } else if (cls === '主战坦克') {
+    g.add(box(3.9, .75, 1.9, 0, .62, 0, dark));
+    wheels(g, [-1.4, -.7, 0, .7, 1.4], .4, .95, .4);
+    g.add(box(3.6, .55, 1.72, 0, 1.2, 0, hull));
+    g.add(box(1.5, .55, 1.7, -.25, 1.72, 0, hull2));                
+    g.add(cyl(.09, 3.0, 1.6, 1.75, 0, dark, 'x'));                  
+    g.add(cyl(.04, .9, .35, 2.15, -.45, dark));                     
+  } else if (cls === '步兵战车') {
+    g.add(box(4.0, .8, 1.8, 0, .78, 0, hull));
+    wheels(g, [1.35, .45, -.45, -1.35], .42, .92, .42);
+    g.add(box(3.4, .6, 1.7, -.1, 1.45, 0, hull2));
+    g.add(box(.9, .4, 1.2, .55, 1.85, 0, dark));                    
+    g.add(cyl(.06, 1.3, 1.6, 1.9, 0, dark, 'x'));
+  } else if (cls === '攻击直升机') {
+    g.add(box(3.2, 1.05, 1.1, 0, 1.2, 0, hull2));
+    g.add(box(1.1, .8, .9, 1.9, 1.3, 0, 0x1d2430));                 
+    const boom = box(3.2, .35, .35, -3.2, 1.5, 0, hull2); g.add(boom);
+    g.add(box(.4, 1.25, .12, -4.7, 2.1, 0, hull2));                 
+    const rotor = cyl(.02, 5.6, 0, 2.6, 0, dark); rotor.rotation.z = Math.PI / 2;
+    rotor.scale.set(1, 1, .06); g.add(rotor);                       
+    for (const s of [-1, 1]) { g.add(box(1.5, .12, .5, .2, 1.75, s * .95, hull)); g.add(box(.12, .5, .14, .35, 1.85, s * 1.5, dark)); }
+    const tr = cyl(.015, 1.5, -4.7, 1.5, .35, dark); tr.rotation.x = Math.PI / 2; tr.scale.set(1, 1, .1); g.add(tr);
+    g.add(cyl(.32, .5, 0, .45, 0, dark));
+    g.add(cyl(.14, 1.9, -.5, .45, 0, dark)); g.add(cyl(.14, 1.9, .5, .45, 0, dark));
+  } else if (cls === '战斗机') {
+    if (key === 'j35') {                                         
+    const body = cyl(.48, 4.4, 0, .92, 0, 0x5d6772); body.rotation.z = Math.PI / 2; g.add(body);
+    const nose = new THREE.Mesh(new THREE.ConeGeometry(.48, 1.7, 14), M(0x56606a));
+    nose.rotation.z = -Math.PI / 2; nose.position.set(3.0, .92, 0); g.add(nose);
+    const cp = new THREE.Mesh(new THREE.SphereGeometry(.42, 12, 8), M(0x1b232c)); cp.scale.set(1.7, .5, .66); cp.position.set(1.75, 1.22, 0); g.add(cp);
+    for (const s of [-1, 1]) {                                   
+      const w = new THREE.Mesh(wingGeo(2.7, .85, 2.55 * s, 2.0), M(0x616b75)); w.position.set(1.15, .80, 0); g.add(w);
+    }
+    for (const s of [-1, 1]) {                                   
+      const t = new THREE.Mesh(wingGeo(1.5, .55, .95 * s, .8, .05), M(0x57616b));
+      t.position.set(-1.3, 1.02, .32 * s); t.rotation.x = -.55 * s; g.add(t);
+    }
+    for (const s of [-1, 1]) {                                   
+      const h = new THREE.Mesh(wingGeo(1.35, .5, 1.15 * s, 1.0), M(0x39434c)); h.position.set(-1.55, .84, 0); g.add(h);
+    }
+    for (const s of [-1, 1]) g.add(cyl(.17, .55, -2.1, .86, s * .26, 0x2c343c, 'x'));   
+  } else if (key === 'j16') {                                   
+    const body = cyl(.55, 5.6, 0, 1.0, 0, 0x5c6a77); body.rotation.z = Math.PI / 2; g.add(body);
+    const nose = new THREE.Mesh(new THREE.ConeGeometry(.5, 1.5, 14), M(0x33424e));
+    nose.rotation.z = -Math.PI / 2; nose.position.set(3.5, 1.02, 0); g.add(nose);
+    const cp = new THREE.Mesh(new THREE.SphereGeometry(.46, 12, 8), M(0x27313c)); cp.scale.set(2.3, .5, .72); cp.position.set(1.9, 1.32, 0); g.add(cp);  
+    for (const s of [-1, 1]) g.add(box(2.4, .1, .55, 1.3, .88, s * .6, 0x4c5a66));       
+    for (const s of [-1, 1]) {                                   
+      const w = new THREE.Mesh(wingGeo(3.0, 1.0, 2.9 * s, 1.6), M(0x55636f)); w.position.set(.9, .86, 0); g.add(w);
+    }
+    for (const s of [-1, 1]) {                                   
+      const t = new THREE.Mesh(wingGeo(1.7, .6, 1.15 * s, .55, .06), M(0x4c5a66));
+      t.position.set(-2.1, 1.35, .72 * s); t.rotation.x = -.16 * s; g.add(t);
+    }
+    for (const s of [-1, 1]) { const e = cyl(.26, 1.1, -.6, .88, s * .32, 0x2f3841); e.rotation.z = Math.PI / 2; g.add(e); }  
+    for (const s of [-1, 1]) for (const p of [1.5, 2.3, 3.1]) g.add(box(.06, .06, 1.5, -.3, .74, s * p, 0x2c343c));  
+  } else if (/^f35/.test(key)) {                                         
+      const body = cyl(.62, 4.6, 0, .95, 0, 0x66707a); body.rotation.z = Math.PI / 2; g.add(body);
+      g.add(box(1.3, .6, .95, 2.6, .95, 0, 0x5b656f));              
+      g.add(box(1.0, .30, .78, .7, 1.22, 0, 0x1b232c));             
+      for (const s of [-1, 1]) {                                     
+        const w = box(1.9, .10, 2.4, -.5, .78, s * 1.5, 0x616b75);
+        w.rotation.y = s * .30; g.add(w);
+      }
+      for (const s of [-1, 1]) {                                     
+        const t = box(1.2, .07, .8, -1.5, 1.05, s * .55, 0x57616b);
+        t.rotation.z = s * .55; g.add(t);
+      }
+      if (/b$/.test(key)) { g.add(box(1.0, .12, .8, .1, 1.30, 0, 0x3c464f)); }  
+      g.add(box(1.4, .18, 1.1, -1.9, .85, 0, 0x39434c));             
+    } else if (key === 'f22') {                                      
+      const body = cyl(.72, 5.4, 0, .98, 0, 0x626c77); body.rotation.z = Math.PI / 2; g.add(body);
+      g.add(box(1.4, .55, 1.0, 3.0, 1.0, 0, 0x56606b));
+      g.add(box(1.1, .28, .8, 1.4, 1.3, 0, 0x1b232c));
+      for (const s of [-1, 1]) {
+        const w = box(2.4, .10, 2.9, -.7, .80, s * 1.7, 0x5d6771);
+        w.rotation.y = s * .34; g.add(w);
+      }
+      for (const s of [-1, 1]) {                                     
+        const t = box(1.5, .09, .95, -2.0, 1.35, s * .85, 0x545e68);
+        t.rotation.z = s * .42; g.add(t);
+      }
+      for (const s of [-1, 1]) g.add(box(.7, .34, .34, -2.5, .92, s * .42, 0x2f3841));  
+    } else if (key === 'j20') {                                      
+      const body = cyl(.58, 5.8, 0, .95, 0, 0x5f6a74); body.rotation.z = Math.PI / 2; g.add(body);
+      const nose = new THREE.Mesh(new THREE.ConeGeometry(.44, 2.0, 12), M(0x555f68)); nose.rotation.z = -Math.PI / 2; nose.position.set(3.9, .95, 0); g.add(nose);
+      const cp = new THREE.Mesh(new THREE.SphereGeometry(.4, 12, 8), M(0x1b232c)); cp.scale.set(2.0, .45, .6); cp.position.set(1.7, 1.22, 0); g.add(cp);
+      g.add(box(3.4, .09, .5, 1.2, .8, 0, 0x535d66));                 
+      for (const s of [-1, 1]) {                                      
+        const w = new THREE.Mesh(wingGeo(2.9, .7, 2.75 * s, 2.55), M(0x5b6570)); w.position.set(1.0, .78, 0); g.add(w);
+      }
+      for (const s of [-1, 1]) {                                      
+        const t = new THREE.Mesh(wingGeo(1.35, .5, 1.05 * s, .7, .05), M(0x4e5862));
+        t.position.set(-1.7, 1.05, .55 * s); t.rotation.x = -.62 * s; g.add(t);
+      }
+      for (const s of [-1, 1]) {                                      
+        const h = new THREE.Mesh(wingGeo(1.3, .45, 1.05 * s, .95), M(0x39434c)); h.position.set(-1.9, .82, 0); g.add(h);
+      }
+      for (const s of [-1, 1]) g.add(cyl(.16, .5, -2.35, .9, s * .3, 0x2c343c, 'x'));   
+    } else {                                                         
+      const body = cyl(.5, 5.6, 0, 1.0, 0, 0x5c6a77); body.rotation.z = Math.PI / 2; g.add(body);
+      g.add(box(1.2, .5, .8, 3.3, 1.05, 0, 0x33424e));                
+      g.add(box(1.15, .28, .7, .5, 1.5, 0, 0x27313c));                
+      const wing = box(2.2, .12, 5.2, -.4, .85, 0, 0x55636f);
+      wing.rotation.z = -.12; wing.scale.set(1, 1, 1); g.add(wing);   
+      for (const s of [-1, 1]) { g.add(box(1.6, 1.0, .12, -2.3, 1.55, s * .75, 0x4c5a66)); } 
+      g.add(box(1.0, .16, 1.6, .9, .9, 0, 0x45525e));
+    }
+  } else if (cls === '战略轰炸机') {
+    if (key === 'h6k') {                                          
+      const gr = 0x4d5863, gr2 = 0x434e59, dk = 0x2c343c;
+      const body = cyl(.60, 6.6, 0, 1.15, 0, gr); body.rotation.z = Math.PI / 2; g.add(body);
+      const tailCone = new THREE.Mesh(new THREE.ConeGeometry(.60, 2.2, 14), M(gr)); tailCone.rotation.z = Math.PI / 2; tailCone.position.set(-4.4, 1.15, 0); g.add(tailCone);
+      const nose = new THREE.Mesh(new THREE.CylinderGeometry(.34, .60, 1.1, 14), M(gr)); nose.rotation.z = Math.PI / 2; nose.position.set(3.85, 1.15, 0); g.add(nose);
+      const glass = new THREE.Mesh(new THREE.SphereGeometry(.36, 12, 8), M(0x1c2836)); glass.scale.set(1.25, .8, .95); glass.position.set(4.3, 1.15, 0); g.add(glass);   
+      g.add(box(.66, .26, .5, 2.0, 1.62, 0, 0x1c2836));             
+      for (const s of [-1, 1]) {                                     
+        const w = new THREE.Mesh(wingGeo(5.0, 1.6, 5.5 * s, 3.5, .12), M(gr)); w.position.set(1.1, 1.05, 0); g.add(w);
+      }
+      for (const s of [-1, 1]) {                                     
+        const e = cyl(.34, 1.7, .9, .78, s * 1.15, 0x38424c); e.rotation.z = Math.PI / 2; g.add(e);
+        const ring = cyl(.37, .16, 1.78, .78, s * 1.15, dk); ring.rotation.z = Math.PI / 2; g.add(ring);
+        const noz = new THREE.Mesh(new THREE.ConeGeometry(.30, .5, 12), M(dk)); noz.rotation.z = -Math.PI / 2; noz.position.set(-.1, .78, s * 1.15); g.add(noz);
+        g.add(box(.1, .3, .22, .9, .95, s * 1.15, gr2));             
+      }
+      for (const s of [-1, 1]) for (const p of [.85, 1.65, 2.45]) {  
+        g.add(box(.08, .26, .18, .4, .95, s * p, gr2));
+        const ms = cyl(.085, 1.5, -.35, .82, s * p, 0x515c67); ms.rotation.z = Math.PI / 2; g.add(ms);
+        const mn = new THREE.Mesh(new THREE.ConeGeometry(.085, .34, 10), M(0x454f59)); mn.rotation.z = -Math.PI / 2; mn.position.set(.59, .82, s * p); g.add(mn);
+        for (const f of [-1, 1]) g.add(box(.02, .16, .3, -1.02, .82, s * p + f * .09, dk));   
+      }
+      const fin = new THREE.Mesh(wingGeo(2.3, .8, 2.0, 1.15, .09), M(gr));   
+      fin.rotation.x = Math.PI / 2; fin.position.set(-3.6, 1.15, 0); g.add(fin);
+      for (const s of [-1, 1]) {                                     
+        const h = new THREE.Mesh(wingGeo(1.7, .6, 1.5 * s, 1.0, .08), M(gr2)); h.position.set(-3.5, 1.1, 0); g.add(h);
+      }
+      const tur = new THREE.Mesh(new THREE.SphereGeometry(.3, 10, 8), M(gr2)); tur.position.set(-4.35, 1.15, 0); g.add(tur);   
+      for (const s of [-1, 1]) { const b = cyl(.035, .5, -4.55, 1.12, s * .12, dk); b.rotation.z = Math.PI / 2 + .35; g.add(b); }
+      g.add(cyl(.02, 1.0, .6, 1.78, 0, dk));                        
+    } else {
+      const body = cyl(.62, 7.4, 0, 1.2, 0, 0x4a5560); body.rotation.z = Math.PI / 2; g.add(body);
+      g.add(box(1.3, .45, .9, 4.2, 1.25, 0, 0x39434e));               
+      g.add(box(.9, .35, .7, .8, 1.85, 0, 0x232c36));                 
+      for (const s of [-1, 1]) {                                       
+        const w = box(5.2, .14, 1.5, -.7, 1.15, s * 2.1, 0x505b66); w.rotation.y = s * .42; g.add(w);
+        for (const p of [-1.6, -.55, .55, 1.6]) {                       
+          const e = cyl(.22, .9, -.7 + p * .8, .95, s * (3.6 - Math.abs(p) * .45), 0x3c4650);
+          e.rotation.z = Math.PI / 2; g.add(e);
+        }
+      }
+      g.add(box(.5, 1.4, 2.6, -3.6, 1.9, 0, 0x4a5560));                
+    }
+  } else if (cls === '预警机') {
+    const body = cyl(.55, 5.0, 0, 1.1, 0, 0x59636e); body.rotation.z = Math.PI / 2; g.add(body);
+    const wing = box(4.8, .12, 1.4, .2, 1.0, 0, 0x505b66); g.add(wing);
+    for (const s of [-1, 1]) g.add(box(.8, 1.1, .1, -2.3, 1.7, s * .5, 0x46525c));
+    const dome = cyl(1.35, .22, 0, 2.15, 0, 0x88929c); g.add(dome);  
+    g.add(box(.2, .8, .2, 0, 1.65, 0, 0x39434e));
+  } else if (cls === '海上巡逻机') {
+    if (key === 'y8q') {                                              
+      const gr = 0x6b7570;
+      const body = cyl(.62, 6.0, 0, 1.2, 0, gr); body.rotation.z = Math.PI / 2; g.add(body);
+      g.add(box(1.0, .7, .9, 2.9, 1.5, 0, gr));                       
+      g.add(box(.7, .28, .55, 2.9, 1.9, 0, 0x1f2a33));
+      const wing = box(1.9, .14, 9.2, .5, 1.75, 0, 0x5d6762); g.add(wing);   
+      for (const s of [-1, 1]) for (const p of [.62, 1.85]) {         
+        g.add(box(.6, .5, .5, .5, 1.7, s * p, 0x4a534e));
+        const pr = cyl(.03, 2.6, 1.0, 1.68, s * p, 0x2c343c); pr.rotation.x = Math.PI / 2; pr.scale.set(1, 1, .07); g.add(pr);
+      }
+      for (const s of [-1, 1]) g.add(box(.7, 1.15, .1, -2.6, 1.9, s * .55, 0x5d6762));
+      const fin = box(.55, 1.6, .1, -2.9, 2.1, 0, gr); g.add(fin);
+      g.add(cyl(.05, 3.2, -1.1, .55, 0, 0x4a534e));                   
+      g.add(box(.9, .5, .9, 0, .85, 0, 0x39434c));                    
+    } else {
+      const body = cyl(.7, 6.2, 0, 1.3, 0, 0xd8dde2); body.rotation.z = Math.PI / 2; g.add(body);
+    g.add(box(1.2, .8, 1.0, 2.9, 1.55, 0, 0xd8dde2));                
+    const wing = box(5.6, .13, 1.3, .4, 1.05, 0, 0xc9cfd6); g.add(wing); 
+    for (const s of [-1, 1]) { const e = cyl(.3, 1.1, .4, .75, s * 1.6, 0x8f99a2); e.rotation.z = Math.PI / 2; g.add(e); }
+    for (const s of [-1, 1]) g.add(box(.8, 1.2, .1, -2.7, 1.9, s * .55, 0xc9cfd6));
+    g.add(cyl(.06, 1.6, -1.0, .55, 0, 0x8f99a2));                    
+    }
+  } else if (cls === '加油机') {
+    const body = cyl(.7, 6.0, 0, 1.2, 0, 0xb9c0c7); body.rotation.z = Math.PI / 2; g.add(body);
+    g.add(box(1.1, .7, .9, 2.8, 1.5, 0, 0xb9c0c7));
+    const wing = box(5.4, .13, 1.3, .3, 1.35, 0, 0xaeb6bd); g.add(wing);
+    for (const s of [-1, 1]) { const e = cyl(.28, 1.0, .3, .8, s * 1.5, 0x8f99a2); e.rotation.z = Math.PI / 2; g.add(e); }
+    g.add(box(.6, 1.6, 2.4, -2.7, 2.0, 0, 0xb9c0c7));                
+    const boom = cyl(.05, 2.2, -1.6, .6, 0, 0x6d7885); boom.rotation.z = Math.PI / 2 - .18; g.add(boom); 
+  } else if (cls === '倾转旋翼机') {
+    g.add(box(4.4, 1.0, 1.0, 0, 1.3, 0, 0x59636e));                  
+    g.add(box(1.0, .7, .9, 2.4, 1.5, 0, 0x25303a));                  
+    const wing = box(1.0, .14, 5.6, .3, 1.75, 0, 0x505b66); g.add(wing);
+    for (const s of [-1, 1]) {                                       
+      g.add(box(.7, .6, .7, .3, 1.85, s * 2.8, 0x46525c));
+      const rr = cyl(.03, 4.4, .3, 2.35, s * 2.8, 0x2c343c); rr.rotation.x = Math.PI / 2; rr.scale.set(1, 1, .05); g.add(rr);
+    }
+    g.add(box(.35, 1.1, .5, -2.4, 1.9, 0, 0x505b66));                
+    g.add(box(.9, .1, 2.2, -2.3, 1.35, 0, 0x46525c));
+  } else if (cls === '导弹巡逻舰' || cls === '导弹快艇') {
+    const L = cls === '导弹巡逻舰' ? 8.5 : 5.5, Wd = cls === '导弹巡逻舰' ? 1.7 : 1.3;
+    g.add(box(L, .8, Wd, 0, .55, 0, 0x54606c));                     
+    const bow = box(1.6, .8, Wd * .8, L / 2 + .7, .55, 0, 0x54606c); bow.rotation.y = 0; g.add(bow);
+    g.add(box(L * .45, .9, Wd * .8, -.3, 1.35, 0, 0x66727e));       
+    g.add(box(.5, 1.1, .5, -.4, 2.3, 0, 0x79848f));                 
+    g.add(box(1.3, .35, 1.0, -.4, 2.9, 0, 0x8893a0));
+    for (const s of [-1, 1]) {                                      
+      const t = box(2.2, .5, .5, -L * .18, 1.5, s * (Wd * .55)); t.rotation.z = .35; t.material.color.setHex(0x5d6874); g.add(t);
+    }
+    g.add(box(L * .5, .25, Wd * .9, .2, 1.0, 0, 0x4a545e));
+  } else if (cls === '岸炮阵地' || cls === '岸防火炮') {
+    
+
+    const cc = 0x8a8474, cc2 = 0x736e5f;
+    g.add(cyl(2.7, .3, 0, .15, 0, cc));                                
+    for (let i = 0; i < 9; i++) {                                      
+      const a = -1.9 + i * .48;
+      const seg = box(.85, .62, .5, Math.cos(a) * 2.4, .6, Math.sin(a) * 2.4, cc2); seg.rotation.y = -a; g.add(seg);
+    }
+    g.add(cyl(.85, .35, 0, .5, 0, cc));                                
+    g.add(box(1.1, .62, 1.1, 0, .95, 0, 0x4c543f));                    
+    const recoil = cyl(.13, 1.3, .55, 1.25, 0, 0x3a4149); recoil.rotation.z = 1.35; g.add(recoil);   
+    const barrel = cyl(.11, 4.2, 1.9, 1.9, 0, 0x3a4149); barrel.rotation.z = 1.35; g.add(barrel);    
+    const brake = cyl(.16, .5, 4.0, 2.9, 0, 0x33392e); brake.rotation.z = 1.35; g.add(brake);        
+    const shield = box(.14, 1.05, 2.0, .95, 1.5, 0, 0x454f3a); shield.rotation.z = .28; g.add(shield);   
+    const bun = cyl(1.25, 1.6, -3.1, .55, 1.6, cc2); bun.rotation.x = Math.PI / 2; g.add(bun);      
+    g.add(box(1.4, .9, .5, -3.1, .5, .75, 0x39413a));                 
+    g.add(box(.5, .42, .34, -2.2, .42, 1.05, 0x5a5344));              
+    g.add(box(.5, .42, .34, -2.45, .42, 1.4, 0x5a5344));
+    g.add(box(.46, .38, .3, -2.32, .84, 1.2, 0x534c3e));
+    g.add(cyl(.16, 1.5, 2.15, .75, 1.45, cc));                        
+    g.add(box(.55, .42, .55, 2.15, 1.55, 1.45, 0x4c543f));
+  } else if (cls === '雷达站' || cls === '雷达') {
+    
+    if (key === 'pavepaws') {                                          
+      g.add(box(5.2, 1.5, 3.6, 0, .75, 0, 0x8d8878));                  
+      const pyr = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 2.45, 2.6, 4, 1), M(0x9a9482)); pyr.rotation.y = Math.PI / 4; pyr.position.set(0, 2.8, 0); g.add(pyr);
+      for (const s of [-1, 1]) {                                       
+        const pg = new THREE.Group(); pg.position.set(s * 1.05, 3.1, 0); pg.rotation.z = s * .55;
+        pg.add(box(.2, 2.3, 3.0, 0, 0, 0, 0x2b3a46));
+        for (let i = 0; i < 8; i++) pg.add(box(.05, .06, 2.7, .12, -1.0 + i * .29, 0, 0x46606f));
+        g.add(pg);
+      }
+      g.add(box(1.0, .8, 1.2, 3.2, .4, 1.2, 0x7d786a));                
+      g.add(cyl(.1, 3.2, -2.6, 1.6, -1.2, 0x6d7885));                  
+    } else if (side === 'blue' && key === 'radar') {                    
+      g.add(box(6.2, .6, 2.0, 0, .95, 0, 0x4c564a));
+      wheels(g, [2.2, 1.3, -1.0, -2.1], .48, 1.05, .55);
+      g.add(box(1.2, 1.0, 1.9, 2.55, 1.75, 0, 0x57624e));             
+      g.add(cyl(.5, .4, -.8, 1.35, 0, dark));                          
+      const pg = new THREE.Group(); pg.position.set(-.8, 1.95, 0); pg.rotation.y = .5;   
+      pg.add(box(2.6, 2.8, .22, 0, 0, 0, 0x5f7386));
+      for (let i = 0; i < 6; i++) pg.add(box(2.3, .06, .05, 0, -1.05 + i * .42, .13, 0x8fa4b8));
+      g.add(pg);
+      for (const s of [-1, 1]) g.add(box(.3, .95, .3, -2.5, .5, s * 1.15, dark));   
+    } else {                                                           
+      const steel2 = 0x6d7885;
+      g.add(cyl(5.4, .12, 0, .06, 0, 0x565e48));                       
+      for (const [lx, lz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {  
+        const l = cyl(.07, 4.4, lx * 1.05, 2.2, lz * 1.05, steel2); l.rotation.z = lx * -.11; l.rotation.x = lz * -.11; g.add(l);
+      }
+      const frame = (yy, w) => {                                       
+        g.add(box(w, .06, .06, 0, yy, w / 2, steel2)); g.add(box(w, .06, .06, 0, yy, -w / 2, steel2));
+        g.add(box(.06, .06, w, w / 2, yy, 0, steel2)); g.add(box(.06, .06, w, -w / 2, yy, 0, steel2));
+      };
+      frame(1.4, 2.1); frame(2.7, 1.85); frame(3.95, 1.6);
+      g.add(box(1.65, .12, 1.65, 0, 4.4, 0, steel2));                  
+      const pg = new THREE.Group(); pg.position.set(0, 5.0, 0); pg.rotation.y = .4;   
+      pg.add(box(2.4, 1.15, .12, 0, 0, 0, 0x5f7386));
+      for (let i = 0; i < 6; i++) pg.add(box(2.15, .06, .04, 0, -.42 + i * .17, .08, 0x8fa4b8));
+      pg.add(box(.06, .06, .5, 0, 0, .28, steel2));
+      g.add(pg);
+      g.add(box(2.6, 1.1, 1.7, 3.5, .55, 1.0, 0x57624e));             
+      g.add(box(.8, .5, .9, 3.5, 1.35, 1.0, dark));                   
+      for (let i = 0; i < 14; i++) {                                   
+        const a = i / 14 * Math.PI * 2;
+        g.add(box(.1, .95, .1, Math.cos(a) * 5.0, .5, Math.sin(a) * 5.0, 0x4a5344));
+      }
+    }
+  } else if (cls === '弹道导弹' || cls === '巡航导弹') {
+    
+    g.add(box(6.0, .6, 2.0, 0, .9, 0, 0x3d4a3f));
+    wheels(g, [2.0, 1.1, -.2, -1.3, -2.2], .5, 1.0, .55);
+    g.add(box(1.3, 1.0, 1.9, 2.45, 1.7, 0, 0x57624e));                
+    if (cls === '弹道导弹') {
+      g.add(box(1.6, .3, 1.0, -.4, 1.35, 0, dark));                    
+      const mg = new THREE.Group();                                    
+      const ms = new THREE.Mesh(new THREE.CylinderGeometry(.22, .22, 5.4, 12), M(0x7a836e)); ms.rotation.z = Math.PI / 2; mg.add(ms);
+      const tipc = new THREE.Mesh(new THREE.ConeGeometry(.22, .9, 12), M(0x5a6355)); tipc.rotation.z = -Math.PI / 2; tipc.position.set(3.15, 0, 0); mg.add(tipc);
+      for (const s of [-1, 1]) { const f = box(.02, .5, .16, -1.3, s * .18, 0, dark); mg.add(f); }   
+      mg.position.set(-.5, 1.8, 0); mg.rotation.z = .62; g.add(mg);
+    } else {
+      for (const yy of [0, 1]) {                                       
+        const t = box(3.4, .62, .62, -.7, 1.65 + yy * .68, 0, steel); t.rotation.z = .35; g.add(t);
+      }
+    }
+  } else if (cls === '岸舰导弹') {
+    
+    g.add(box(6.2, .6, 2.1, 0, .95, 0, 0x3d4a3f));
+    wheels(g, [2.1, 1.2, -.2, -1.4, -2.3], .52, 1.05, .58);
+    g.add(box(1.3, 1.0, 2.0, 2.55, 1.75, 0, 0x57624e));
+    for (let i = 0; i < 3; i++) {
+      const t = box(3.6, .72, .66, -.9, 1.75 + i * .78, 0, steel); t.rotation.z = .4; g.add(t);
+    }
+    if (key === 'yj12b') {
+      const t2 = box(3.4, .68, .62, -.7, 4.1, 0, steel); t2.rotation.z = .4; g.add(t2);   
+      const sc = box(2.4, .9, 1.8, -3.6, 1.4, 0, hull2); g.add(sc);                        
+      wheels(g, [-3.1, -4.2], .45, 1.0, .6);
+    }
+  } else if (cls === '巡航导弹发射连') {
+    
+    g.add(box(5.8, .6, 2.0, 0, .9, 0, 0x3f4a44));
+    wheels(g, [1.9, 1.0, -.3, -1.5, -2.3], .5, 1.0, .55);
+    g.add(box(1.2, .95, 1.9, 2.4, 1.65, 0, 0x52604f));
+    const lk = new THREE.Group(); lk.position.set(-.7, 1.9, 0); lk.rotation.z = .5;
+    for (const [dx, dz] of [[0, -.42], [0, .42], [-.75, -.42], [-.75, .42]]) lk.add(box(1.55, .5, .5, dx, 0, dz, steel));
+    g.add(lk);
+    const fc = box(1.9, 1.15, 1.7, -4.4, 1.5, 0, 0x4a5a52); g.add(fc);                    
+    g.add(box(.9, .28, .9, -4.4, 2.15, 0, dark));
+    wheels(g, [-3.9, -4.9], .45, .95, .55);
+  } else if (cls === '固定防空阵地') {
+    
+    g.add(box(5.2, .5, 4.2, 0, .25, 0, 0x8a8a80));                                        
+    g.add(box(2.2, 1.1, 2.4, 1.6, .8, 0, 0x9a9a8e));                                      
+    for (const [dx, dz] of [[-.9, -1.2], [-.9, 1.2], [-2.0, -1.2], [-2.0, 1.2]]) {        
+      const t = box(2.0, .5, .5, dx, 1.55, dz, steel); t.rotation.z = 1.0; g.add(t);
+    }
+    const ph = box(2.6, 2.3, .3, 2.2, 2.2, -1.3, 0x5f7386); ph.rotation.x = -.18; g.add(ph);  
+    for (let i = 0; i < 8; i++) g.add(box(.05, 2.1, .05, 2.2, 2.2, -1.13 - i * .0 + 0, 0x8fa4b8));
+    g.add(box(1.6, .8, 1.4, 2.4, .65, 1.4, 0x6a6a5e));                                    
+    for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2; g.add(box(.1, .8, .1, Math.cos(a) * 3.9, .4, Math.sin(a) * 3.2, 0x4a5344)); }
+  } else if (cls === '空军基地') {
+    
+    g.add(box(12.0, .18, 2.3, 0, 0, 0, 0x565c5e));                                        
+    for (let i = 0; i < 9; i++) g.add(box(.45, .04, .1, -4.8 + i * 1.2, .12, 0, 0xd8dde2));  
+    for (let i = 0; i < 8; i++) { g.add(box(.12, .04, .12, -5.2 + i * 1.5, .12, 1.0, 0xe8c060)); g.add(box(.12, .04, .12, -5.2 + i * 1.5, .12, -1.0, 0xe8c060)); }  
+    for (const [dx, dz] of [[-3.0, -2.2], [0, -2.2], [3.0, -2.2]]) {                      
+      const has = new THREE.Mesh(new THREE.CylinderGeometry(.85, .85, 1.9, 12, 1, false, 0, Math.PI), M(0x7d8478));
+      has.rotation.z = Math.PI / 2; has.position.set(dx, .1, dz); g.add(has);
+      g.add(box(.5, .5, 1.9, dx + 1.15, .25, dz, 0x6a7166));                              
+    }
+    const tw = cyl(.28, .35, 4.2, 2.6, 1.8, 0x8f958a); g.add(tw);                          
+    g.add(box(1.1, .55, 1.1, 4.2, 3.0, 1.8, 0x6f8aa0));                                    
+    const am = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.3, .8, 10), M(0x6d7a5f));  
+    am.position.set(-4.6, .4, 2.2); g.add(am);
+    g.add(box(2.4, .3, 1.1, -1.5, .15, 2.6, 0x5e6660));                                    
+  } else if (cls === '地下洞库基地') {
+    
+    const mt = new THREE.Mesh(new THREE.ConeGeometry(4.2, 3.6, 7), M(0x5f6d5c)); mt.position.set(-1.5, 1.8, -1.6); g.add(mt);
+    const mt2 = new THREE.Mesh(new THREE.ConeGeometry(2.9, 2.5, 6), M(0x556350)); mt2.position.set(-3.3, 1.25, .4); g.add(mt2);
+    const mt3 = new THREE.Mesh(new THREE.ConeGeometry(2.2, 1.9, 6), M(0x586655)); mt3.position.set(.6, .95, -2.8); g.add(mt3);
+    g.add(box(1.9, 1.5, .5, -.6, .75, .9, 0x3a3f3a));                                      
+    const door = box(1.75, 1.35, .18, -.6, .68, 1.12, 0x707a72); door.rotation.x = .1; g.add(door);  
+    g.add(box(.24, 1.2, .24, -1.7, .6, 1.16, 0x4a5248)); g.add(box(.24, 1.2, .24, .5, .6, 1.16, 0x4a5248));  
+    g.add(box(7.5, .18, 2.0, 2.6, 0, 1.9, 0x565c5e));                                       
+    for (let i = 0; i < 6; i++) g.add(box(.4, .04, .1, 0 + i * 1.15, .12, 1.9, 0xd8dde2));
+    const jet = cyl(.3, 1.8, 2.2, .55, 1.0, 0x7a836e); jet.rotation.z = Math.PI / 2; g.add(jet);  
+    const w = wingGeo(1.1, .35, -1.3, .8, .06); const wm = new THREE.Mesh(w, M(0x6d7864)); wm.position.set(2.2, .6, 0); g.add(wm);
+  } else if (cls === '地下指挥所') {
+    
+    const mt = new THREE.Mesh(new THREE.ConeGeometry(3.8, 3.2, 7), M(0x5f6d5c)); mt.position.set(0, 1.6, -1.2); g.add(mt);
+    const mt2 = new THREE.Mesh(new THREE.ConeGeometry(2.6, 2.1, 6), M(0x556350)); mt2.position.set(-2.4, 1.05, .5); g.add(mt2);
+    g.add(box(1.7, 1.3, .5, .9, .65, 1.15, 0x3a3f3a));                                     
+    g.add(box(1.55, 1.15, .18, .9, .58, 1.38, 0x606a62)); g.add(box(1.5, .12, .4, .9, 1.28, 1.3, 0x4a5248));  
+    const an1 = cyl(.05, 3.4, 2.8, 1.7, -2.2, 0x8f99a2); g.add(an1);                       
+    for (const yy of [1.2, 2.0, 2.8]) g.add(box(.5, .04, .04, 2.8, yy, -2.2, 0x8f99a2));
+    const dish = new THREE.Mesh(new THREE.SphereGeometry(.55, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2.6), M(0x9fb2c0));
+    dish.rotation.x = -.9; dish.position.set(-2.0, 2.2, 1.8); g.add(dish);                  
+    g.add(cyl(.06, 1.4, -2.0, .7, 1.8, 0x6d7885));
+    g.add(box(2.0, .9, 1.5, 3.6, .45, .6, 0x57624e));                                      
+    g.add(box(1.1, .75, 1.1, -4.3, .38, -.6, 0x4a5344));                                   
+  } else if (cls === '油料储存区') {
+    
+    for (const [dx, dz, r] of [[-2.2, -1.3, .85], [.2, -1.3, .85], [2.4, -1.3, .85], [-2.2, 1.4, .6], [.2, 1.4, .6]]) {
+      const tk = cyl(r, r * 1.5, dx, r * .75, dz, 0x9aa5ad); g.add(tk);
+      g.add(cyl(r * 1.02, .06, dx, r * 1.5, dz, 0x77828a));                                
+      g.add(cyl(.05, r * 1.5, dx + r * .7, r * .75, dz, 0x6d7885));                        
+    }
+    g.add(box(7.4, .3, .15, 0, .15, 0, 0x8a8a80)); g.add(box(7.4, .3, .15, 0, .15, -2.6, 0x8a8a80));  
+    g.add(box(.15, .3, 2.75, -3.7, .15, -1.3, 0x8a8a80)); g.add(box(.15, .3, 2.75, 3.7, .15, -1.3, 0x8a8a80));
+    for (let i = 0; i < 3; i++) g.add(cyl(.07, 4.6, .2, .22 + i * .16, -1.3 + .0, 0x6d7885, 'x'));  
+    g.add(box(1.5, .95, 1.2, 4.2, .48, 1.6, 0x57624e));                                    
+    g.add(box(.9, .55, .9, -4.4, .28, 2.0, 0x4a5344));                                     
+  } else if (cls === '反坦克导弹') {
+    g.add(box(3.8, .6, 1.6, 0, .8, 0, 0x4c564a));
+    g.add(box(.95, .8, 1.45, 1.4, 1.5, 0, 0x57624e));
+    wheels(g, [1.35, -.35, -1.35], .42, .85, .42);
+    const launcher = box(1.7, .45, .45, -.5, 1.9, 0, 0x66707a); launcher.rotation.z = .5; g.add(launcher);
+    g.add(box(.3, .9, .3, -.1, 1.4, 0, dark));
+  } else {
+    g.add(box(2.6, .9, 1.5, 0, .9, 0, hull));                        
+    g.add(box(1.0, .8, 1.4, 1.6, 1.2, 0, hull2));
+    wheels(g, [1.4, -.9], .4, .8, .4);
+  }
+  return g;
+}
+
+
+const hero = document.getElementById('hero');
+const heroLabel = document.getElementById('heroLabel');
+
+
+const SHIP_MAP = {
+  cv: 'cv', fujian: 'fujian', ddg055: 'ddg055', ddg: 'ddg', ffg: 'ffg', f056a: 'ffg',
+  lha: 'lha', lpd: 'lpd', aoe: 'aoe', aor: 'aor', sub: 'sub', fpb: 'fpb', zubr: 'zubr', lcac: 'lcac'
+};
+
+
+const PROC_ALT = { ztd05: 'ztd', zbd05: 'zbd' };
+function procKey(glb, key) {
+  for (const c of [key, glb]) {
+    if (!c) continue;
+    const k = PROC_ALT[c] || c;
+    if (GROUND_KINDS.has(k) || AIR_KINDS.has(k)) return k;
+  }
+  return '';
+}
+
+
+function modelSrc(u) {
+  if (side === 'red' && SHIP_MAP[u.k]) return '程序化舰船（shipgen）';
+  const pk = procKey(u.glbId, u.k);
+  if (pk) return '程序化兵器（' + pk + '）';
+  return u.cls ? '类别拼装示意' : '—';
+}
+
+let renderer = null, scene = null, cam = null, holder = null;
+let rotY = .78, rotP = .55, dist = 10.5;
+
+function render() { if (renderer && scene && cam) renderer.render(scene, cam); }
+function updateCam() {
+  cam.position.set(dist * Math.cos(rotP) * Math.sin(rotY), dist * Math.sin(rotP) + .4, dist * Math.cos(rotP) * Math.cos(rotY));
+  cam.lookAt(0, .35, 0);
+  render();
+}
+function fitHero() {
+  if (!renderer) return;
+  const w = hero.clientWidth || 800, h = hero.clientHeight || 300;
+  renderer.setSize(w, h, false);
+  cam.aspect = w / h; cam.updateProjectionMatrix();
+  render();
+}
+
+
+(function bindOrbit() {
+  let drag = false, lx = 0, ly = 0;
+  hero.style.cursor = 'grab';
+  hero.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; ly = e.clientY; hero.style.cursor = 'grabbing'; hero.setPointerCapture(e.pointerId); });
+  hero.addEventListener('pointermove', e => {
+    if (!drag) return;
+    rotY -= (e.clientX - lx) * .008;
+    rotP = Math.max(.12, Math.min(1.25, rotP + (e.clientY - ly) * .006));
+    lx = e.clientX; ly = e.clientY;
+    updateCam();
+  });
+  const up = () => { drag = false; hero.style.cursor = 'grab'; };
+  hero.addEventListener('pointerup', up); hero.addEventListener('pointercancel', up);
+  hero.addEventListener('wheel', e => { e.preventDefault(); dist = Math.max(6, Math.min(30, dist + e.deltaY * .012)); updateCam(); }, { passive: false });
+  addEventListener('resize', fitHero);
+})();
+
+async function showModel(key, cls, glb) {
+  const sk = side === 'red' ? SHIP_MAP[key] : '';
+  const pk = procKey(glb, key);
+  if (!sk && !glb && !cls && !pk) {
+    if (renderer) { render(); }
+    hero.querySelectorAll('canvas').forEach(c => c.remove());
+    let box = hero.querySelector('.uh-none');
+    if (!box) { box = document.createElement('div'); box.className = 'uh-none'; hero.appendChild(box); }
+    box.innerHTML = '该型号暂无独立模型文件';
+    heroLabel.textContent = '模型';
+    return;
+  }
+  hero.querySelectorAll('.uh-none').forEach(n => n.remove());
+
+  if (!renderer) {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
+    renderer.setPixelRatio(Math.min(1.5, devicePixelRatio || 1));   
+    hero.appendChild(renderer.domElement);
+    scene = new THREE.Scene();
+    cam = new THREE.PerspectiveCamera(38, 1, 0.1, 500);
+    scene.add(new THREE.HemisphereLight(0xbfe4ff, 0x0a1420, 1.25));
+    const d = new THREE.DirectionalLight(0xffffff, 1.5); d.position.set(6, 9, 5); scene.add(d);
+    const d2 = new THREE.DirectionalLight(0x6fb6d8, .6); d2.position.set(-7, 4, -6); scene.add(d2);
+    const grid = new THREE.GridHelper(24, 24, 0x2b5f78, 0x16323f);
+    grid.position.y = -1.2; scene.add(grid);
+    fitHero();
+  }
+
+  if (holder) { scene.remove(holder); holder.traverse(o => { if (o.geometry) o.geometry.dispose(); }); }
+  holder = new THREE.Group(); scene.add(holder);
+
+  try {
+    window.__gl = 'loading';
+    let m;
+    if (sk) {                                                     
+      
+
+
+
+      const lenWu = (units[key] && units[key].len) ? units[key].len / 10 : (key === 'f056a' ? 8.95 : 0);
+      m = makeShip(sk, key === 'f056a' ? 8.95 : undefined);
+      if (lenWu > 0) m = fitLen(m, lenWu);
+      heroLabel.textContent = '3D 模型 · 与游戏战场同源（程序化生成 · 拖动旋转 / 滚轮缩放）';
+      window.__gl = 'ship';
+    } else if (pk && !qs.has('glb')) {                            
+      m = makeGround(pk);
+      heroLabel.textContent = '3D 模型 · 与游戏战场同源（程序化生成 · 拖动旋转 / 滚轮缩放）';
+      window.__gl = 'gen:' + pk;
+    } else if (glb) {                                             
+      const g = await new GLTFLoader().loadAsync('models/_archive_opt/' + glb + '.glb');
+      m = g.scene;
+      heroLabel.textContent = '3D 模型 · 归档 GLB 对照（?glb=1，战场已改用程序化）';
+      window.__gl = 'glb';
+    } else {                                                      
+      m = procModel(cls || '', key || '');
+      heroLabel.textContent = '程序化示意模型 · 拖动旋转（按类别拼装，非实物外形）';
+      window.__gl = 'proc';
+    }
+    const box = new THREE.Box3().setFromObject(m);
+    const size = box.getSize(new THREE.Vector3()), ctr = box.getCenter(new THREE.Vector3());
+    const span = Math.max(size.x, size.y, size.z) || 1;
+    m.position.sub(ctr);
+    holder.scale.setScalar(9 / span);
+    holder.add(m);
+    updateCam();
+  } catch (e) { window.__gl = 'ERR ' + e.message.slice(0, 30);
+    heroLabel.textContent = '模型加载失败：' + e.message;
+  }
+}
+
+
+function fmt(v) {
+  if (typeof v === 'number') return Number.isInteger(v) ? v : +v.toFixed(2);
+  return v;
+}
+function renderDetail(k) {
+  const u = units[k];
+  if (!u) return;
+  document.getElementById('uName').textContent = u.name;
+  document.getElementById('uCls').textContent = u.cls;
+  const cf = document.getElementById('uConf');
+  cf.className = 'conf ' + u.conf; cf.textContent = CONF_CN[u.conf] || ('置信度 ' + u.conf);
+  document.getElementById('uSide').textContent = sd.glyph + ' ' + sd.cn + ' · ' + sd.full;
+  document.getElementById('uSpec').textContent = u.spec || '';
+
+  
+  const PRI = (side === 'red' || (side === 'green' && typeof u.stats.maxs === 'number'))
+    ? ['maxs', 'range', 'aaw', 'displacement_t'] : ['range_km', 'speed_mach', 'warhead_kg', 'ammo'];
+  const kvs = PRI.filter(f => typeof u.stats[f] === 'number').slice(0, 4).map(f => {
+    const [cn, unit] = KV[f] || [f, ''];
+    return `<div class="ut-kv"><span>${esc(cn)}</span><b>${fmt(u.stats[f])}<small>${esc(unit)}</small></b></div>`;
+  }).join('');
+  document.getElementById('uStats').innerHTML = kvs || '<div class="ut-kv"><span>数值参数</span><b>见明细</b></div>';
+
+  
+  const pf = profileOf(k, {});
+  const hOOA = hitsToOOA(pf.sp, 1), hSink = hitsToSink(pf.sp, 1);
+  const perHit = hullPerHit(pf.sp, 1);
+  const defTxt = pf.dp > 0
+    ? `<b style="color:#9fe3f2">${pf.dp}</b> 个通道 · 单通道 <b style="color:#9fe3f2">${Math.round(pf.psam * 100)}%</b>`
+    : `<b style="color:#ff9a7a">0</b> <span style="color:var(--tx3)">（无对空火控，拦不住反舰弹）</span>`;
+  document.getElementById('uCombat').innerHTML = `
+    <div class="uc-h">交战参数 <small>Hughes 齐射模型 · 反舰弹口径（战斗部系数 1.0）</small></div>
+    <div class="uc-grid">
+      <div class="uc-cell"><span>抗沉力 sp</span><b>${pf.sp}</b><i>几发名义命中失能</i></div>
+      <div class="uc-cell"><span>火控通道 dp</span><b>${pf.dp}</b><i>30 s 波次内可接战数</i></div>
+      <div class="uc-cell"><span>单通道拦截 psam</span><b>${pf.dp ? Math.round(pf.psam * 100) + '%' : '—'}</b><i>SAM+近防+ECW 合成</i></div>
+      <div class="uc-cell"><span>每发扣结构</span><b>${perHit.toFixed(1)}</b><i>点（满 100）</i></div>
+    </div>
+    <div class="uc-verdict">
+      拦截能力：${defTxt}<br>
+      挨打能力：反舰弹 <b>${hOOA} 发</b>失能（≤35%）/ <b>${hSink} 发</b>沉没；
+      鱼雷按系数 2.5 折算 → <b>${hitsToOOA(pf.sp, WARHEAD.torp)} 发</b>失能
+    </div>`;
+
+  
+  const rows = Object.entries(u.stats)
+    .filter(([f, v]) => typeof v === 'number' && !HIDE.has(f))
+    .map(([f, v]) => {
+      const [cn, unit] = KV[f] || [f, ''];
+      const guess = /^(hp|pk|dmg|psam|ev|dp)$/.test(f) ? ' <span class="tagc">推演值</span>' : '';
+      return `<tr><td style="width:150px;color:var(--tx2)">${esc(cn)}${guess}</td><td><b>${fmt(v)}</b> <span class="tsub">${esc(unit)}</span></td></tr>`;
+    }).join('');
+  const meta = [];
+  
+
+
+  const ln = lenNote(u.k) || (u.len ? { m: u.len, label: '全长' } : null);
+  if (ln) meta.push(`<tr><td style="color:var(--tx2)">${ln.label}</td><td><b>${ln.m}</b> <span class="tsub">m（游戏内 ${(ln.m / 10).toFixed(1)} 单位）</span></td></tr>`);
+  if (u.first) meta.push(`<tr><td style="color:var(--tx2)">首舰服役</td><td>${esc(u.first)}</td></tr>`);
+  if (u.builder) meta.push(`<tr><td style="color:var(--tx2)">建造厂</td><td>${esc(u.builder)}</td></tr>`);
+  if (u.stats.ammo_note) meta.push(`<tr><td style="color:var(--tx2)">弹量口径</td><td class="tsub">${esc(u.stats.ammo_note)}</td></tr>`);
+  if (u.stats.updated) meta.push(`<tr><td style="color:var(--tx2)">参数更新</td><td class="tsub">${esc(u.stats.updated)}</td></tr>`);
+  document.getElementById('uTable').innerHTML =
+    `<tbody>${rows}${meta.join('')}</tbody>`;
+
+  
+  const inG = [];
+  if (side === 'red') {
+    
+
+
+    const _sch = (L4R.schemes || []).find(s => s.status === 'adopted' && s.composition)
+              || (L4R.schemes || []).find(s => s.composition) || {};
+    const C = L4R.composition || _sch.composition || {};
+    (C.red_groups || []).forEach(g => {
+      const hit = (g.units || []).filter(x => x.kind === k);
+      if (hit.length) inG.push('第' + (g.gi + 1) + '打击群 · ' + hit.map(x => x.name).join('/') + (hit.length > 1 ? `（${hit.length} 艘）` : ''));
+    });
+    (C.red_extra || []).forEach(e => { if (e.kind === k) inG.push('第' + ((e.gi ?? 0) + 1) + '打击群 · 伴随'); });
+  } else if (side === 'green') {
+    (L4G.groups || []).forEach(g => {
+      const c = (g.composition || []).find(x => x.k === k);
+      if (c) inG.push(`${g.n} · ${(c.name ? c.name + ' · ' : '')}${c.n} 个单位`);
+    });
+  } else {
+    (L4B.groups || []).forEach(g => {
+      const c = (g.composition || []).find(x => x.k === k);
+      if (c) inG.push(`${g.n} · ${c.n} 个`);
+    });
+  }
+  document.getElementById('uIn').innerHTML = inG.length
+    ? inG.map(x => `<div style="padding:4px 0;border-bottom:1px solid rgba(120,180,220,.08)">${esc(x)}</div>`).join('')
+    : '<span style="color:var(--tx2)">未列入当前编成（备用/未部署）</span>';
+
+  
+  const src = (u.src || []).map(s => s.url
+    ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.ref)}<span class="sl-meta"> · ${esc(s.date || '')} · ${esc(s.conf || '')}</span></a>`
+    : `<div>${esc(s.ref)}<span class="sl-meta"> · ${esc(s.date || '')} · ${esc(s.conf || '')}</span></div>`).join('');
+  document.getElementById('uSrc').innerHTML = src || '<span style="color:var(--tx2)">无来源记录</span>';
+
+  document.querySelectorAll('.ut-item').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  showModel(u.k, u.cls, u.glbId);
+  if (qs.get('id') !== k) history.replaceState(null, '', 'unit.html?side=' + side + '&id=' + encodeURIComponent(k));
+}
+
+document.querySelectorAll('.ut-item').forEach(b => { b.onclick = () => renderDetail(b.dataset.k); });
+
+const first = (qs.get('id') && units[qs.get('id')]) ? qs.get('id') : keys[0];
+renderDetail(first);
+initTips();
+if (qs.has('diag')) {
+  document.title = 'UT|' + side + '|k=' + keys.length + '|id=' + first + '|cls=' + Object.keys(byCls).length +
+    '|src=' + (units[first].src || []).length + '|model=' + modelSrc(units[first]) + '|glb=' + (units[first].glbId || '-') + '|thumb=' + (units[first].thumb ? 'y' : 'n') + '|gl=' + (window.__gl || '-') + '|err=' + (window.__uerr || '');
+}
+</script>
+</body>
+</html>

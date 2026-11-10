@@ -1,0 +1,846 @@
+{
+ "$layer": "L2 参数层",
+ "$policy": "物理性能参数：会随新公开资料修订。每条记录带 conf/updated/src；修订时在 history 里留旧值。字段含义：maxs=最大航速(节,海上单位) · cruise=巡航速(节/飞机km/h) · range=续航(海里/飞机km) · aaw=防空包线(km,游戏值) · spec=参数面板显示串。",
+ "version": "1.3.0",
+ "updated": "2026-11-04",
+ "units": {
+  "cv": {
+   "maxs": 31,
+   "cruise": 18,
+   "range": 7000,
+   "aaw": 200,
+   "spec": "306m / 满载6万余t / 31节 / 载26×歼-15+预警+直升机",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "displacement_t": 65000,
+   "history": [
+    {
+     "updated": "2026-10-30",
+     "note": "初版"
+    }
+   ],
+   "src": [
+    {
+     "ref": "国防部山东舰报道（排水量6万余吨）+ 维基百科 Type 002 carrier 航速条目",
+     "url": "http://www.mod.gov.cn/big5/topnews/2019-12/17/content_4864874.htm",
+     "date": "2019-12-17",
+     "conf": "A"
+    }
+   ]
+  },
+  "ddg055": {
+   "maxs": 34,
+   "cruise": 20,
+   "range": 7000,
+   "aaw": 200,
+   "spec": "180m / 12,500t / 34节 / 112垂发 / 续航7000海里",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 12500,
+   "vls": 112,
+   "src": [
+    {
+     "ref": "维基百科 Type 055（满载12,000-13,000t，112 VLS）；Naval News 分析",
+     "url": "https://en.wikipedia.org/wiki/Type_055_destroyer",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "ddg": {
+   "maxs": 30,
+   "cruise": 18,
+   "range": 4500,
+   "aaw": 200,
+   "spec": "156m / 7,200t / 30节 / 64垂发(HHQ-9B+YJ-18) / HQ-10×24+1130近防 / 4500海里@15节",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 7500,
+   "vls": 64,
+   "note": "满载7,500t(后期批次)；aaw=HHQ-9B 射程公开估算200km（与055同级弹）；近防 730(早期)/1130(后期)+HQ-10 24联装",
+   "history": [
+    {
+     "updated": "2026-10-30",
+     "note": "初版 aaw=125"
+    },
+    {
+     "updated": "2026-10-31",
+     "note": "052D 武备核实（seaforces/wikiwand）：HHQ-9B 上舰，aaw 125→200 与 ddg055 对齐"
+    }
+   ],
+   "src": [
+    {
+     "ref": "SeaForces Type 052D：64 VLS(HHQ-9B/YJ-18/CY-5) + HQ-10 24联装 + 730/1130 CIWS + 346A AESA",
+     "url": "https://www.seaforces.org/marint/China-Navy-PLAN/Destroyers/Type-052D-Luyang-III-class-DDG.htm",
+     "date": "2024",
+     "conf": "B"
+    },
+    {
+     "ref": "Wikiwand Type 052D（满载7,500t/30节/4500海里@15节）",
+     "url": "https://wikiwand.com/en/articles/Type_052D_destroyer",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "ffg": {
+   "maxs": 27,
+   "cruise": 18,
+   "range": 3800,
+   "aaw": 40,
+   "spec": "134m / 4,053t / 27节 / 32垂发(HHQ-16) / 730近防 / HHQ-16射程40~70km",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 4053,
+   "vls": 32,
+   "note": "aaw=40km 取 HHQ-16 基本型；HQ-16B/C 估算70km；HHQ-16 半主动制导需照射通道，火控通道数受限（L3 dp=3 依据）",
+   "history": [
+    {
+     "updated": "2026-10-31",
+     "note": "HHQ-16 40/70km 核实（维基/defenseandtech）"
+    }
+   ],
+   "src": [
+    {
+     "ref": "维基百科 HQ-16：基本型40km / B型70km / FE型160km，半主动雷达制导",
+     "url": "https://es.wiikipedia.org/wiki/LY-80",
+     "date": "2024",
+     "conf": "B"
+    },
+    {
+     "ref": "维基百科 Type 054A frigate",
+     "url": "https://en.wikipedia.org/wiki/Type_054A_frigate",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "lha": {
+   "maxs": 25,
+   "cruise": 18,
+   "range": 8000,
+   "aaw": 40,
+   "spec": "250m / 40,000t / 25节 / 8000海里 / 30+直升机 / 1200登陆兵",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 40000,
+   "src": [
+    {
+     "ref": "维基百科 Type 075 LHA",
+     "url": "https://en.wikipedia.org/wiki/Type_075_amphibious_assault_ship",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "lpd": {
+   "maxs": 20,
+   "cruise": 16,
+   "range": 6000,
+   "aaw": 0,
+   "spec": "210m / 20,000t / 20节 / 6000海里@18节 / 坞舱4艘气垫艇",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 20000,
+   "src": [
+    {
+     "ref": "维基百科 Type 071 LPD",
+     "url": "https://en.wikipedia.org/wiki/Type_071_amphibious_transport_dock",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "aoe": {
+   "maxs": 25,
+   "cruise": 20,
+   "range": 10000,
+   "aaw": 0,
+   "spec": "241m / 48,000t / 25节",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 48000,
+   "src": [
+    {
+     "ref": "维基百科 Type 901（约45,000-48,000t，25节）",
+     "url": "https://en.wikipedia.org/wiki/Type_901_replenishment_ship",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "aor": {
+   "maxs": 20,
+   "cruise": 16,
+   "range": 8000,
+   "aaw": 0,
+   "spec": "178m / 23,000t / 20节",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 23000,
+   "src": [
+    {
+     "ref": "维基百科 Type 903",
+     "url": "https://en.wikipedia.org/wiki/Type_903_replenishment_ship",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "sub": {
+   "maxs": 18,
+   "cruise": 8,
+   "range": 8000,
+   "aaw": 0,
+   "spec": "77m / 水下3,600t / 水下18节 / 8000海里@16节 / 6×533mm(鱼-6+鹰击-18) / AIP",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 3600,
+   "note": "水下排水量3000t+(039B)，鱼-6线导鱼雷战斗部约200kg、50节/高速25km(线导可达60km)",
+   "history": [
+    {
+     "updated": "2026-10-31",
+     "note": "武备核实：6×533mm，鱼-6 200kg战斗部"
+    }
+   ],
+   "src": [
+    {
+     "ref": "新浪军事：039B 六具533mm发射管、鱼-6 50节/30km/205kg战斗部 + 鹰击-83",
+     "url": "https://mil.sina.cn/sd/2018-06-25/detail-iheirxyf4506139.d.html",
+     "date": "2018-06-25",
+     "conf": "B"
+    },
+    {
+     "ref": "简氏战舰年鉴 Type 039A/B 条目",
+     "url": "https://www.janes.com",
+     "date": "2023",
+     "conf": "B"
+    }
+   ]
+  },
+  "fpb": {
+   "maxs": 50,
+   "cruise": 35,
+   "range": 210,
+   "aaw": 0,
+   "spec": "42.6m / 220t / 50节 / 续航210海里 / 8×鹰击-83",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 220,
+   "src": [
+    {
+     "ref": "维基百科 Type 022 missile boat",
+     "url": "https://en.wikipedia.org/wiki/Type_022_missile_boat",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "zubr": {
+   "maxs": 60,
+   "cruise": 45,
+   "range": 270,
+   "aaw": 0,
+   "spec": "57.3m / 满载550t / 63节 / 续航500km / 载3坦克或360兵",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "displacement_t": 550,
+   "note": "最大63节按公开数据取整60节",
+   "src": [
+    {
+     "ref": "维基百科 Zubr-class LCAC（63节/500海里/550t）",
+     "url": "https://en.wikipedia.org/wiki/Zubr-class_LCAC",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  "lcac": {
+   "maxs": 60,
+   "cruise": 45,
+   "range": 173,
+   "aaw": 0,
+   "spec": "30m / 满载160t / 60~80节 / 续航320km / 载50t或1×96坦克+2步战",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "displacement_t": 160,
+   "note": "726A 换装 QC-70 燃气轮机后恢复批量生产；最高航速公开口径 60~80 节，取保守下限 60；320km≈173海里",
+   "history": [
+    {
+     "updated": "2026-10-30",
+     "note": "初版 C 级估算"
+    },
+    {
+     "updated": "2026-10-31",
+     "note": "科普中国+台湾国防部报告交叉核实，升 B 级：满载160t/60-80节/续航320km"
+    }
+   ],
+   "src": [
+    {
+     "ref": "科普中国（中国科协官方平台）：726型排水量约150-160吨、最大载重约50吨、最高时速60-80节",
+     "url": "https://www.kepuchina.cn/kpcs/qyz/xsxl/201708/t20170831_221955.shtml",
+     "date": "2017-08-31",
+     "conf": "A"
+    },
+    {
+     "ref": "台湾国防部《共军三栖登陆犯台作战能力发展与运用之研析》气垫船诸元表：726型 160吨/60~80节/320km/载1×96式坦克或80兵",
+     "url": "https://www.mnd.gov.tw/NewUpload/202212/04%E5%85%B1%E8%BB%8D%E4%B8%89%E6%A3%B2%E7%99%BB%E9%99%B8%E7%8A%AF%E8%87%BA%E4%BD%9C%E6%88%B0%E8%83%BD%E5%8A%9B%E7%99%BC%E5%B1%95%E8%88%87%E9%81%8B%E7%94%A8%E4%B9%8B%E7%A0%94%E6%9E%90-%E7%94%B0%E9%8C%A6%E8%B3%A2%E4%B8%AD%E6%A0%A1_474040.pdf",
+     "date": "2022-12",
+     "conf": "B"
+    }
+   ]
+  },
+  "j15": {
+   "maxs": 0,
+   "cruise": 800,
+   "range": 1900,
+   "aaw": 0,
+   "spec": "21.2m（不含空速管；含空速管 22.28）/ 32.5t / 2.4马赫 / 作战半径~800km",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "维基百科 Shenyang J-15（作战半径按公开分析~800km，转油量不同差异大）",
+     "url": "https://en.wikipedia.org/wiki/Shenyang_J-15",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "j10c": {
+   "maxs": 0,
+   "cruise": 800,
+   "range": 1200,
+   "aaw": 0,
+   "spec": "16.4m（不含空速管）/ 1.8马赫 / 作战半径~1,200km",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "维基百科 Chengdu J-10",
+     "url": "https://en.wikipedia.org/wiki/Chengdu_J-10",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "aew": {
+   "maxs": 0,
+   "cruise": 550,
+   "range": 2500,
+   "aaw": 0,
+   "spec": "18.1m / 693km/h / 雷达探测600km+",
+   "conf": "C",
+   "updated": "2026-10-31",
+   "note": "KJ-600 未官方公开，全部为影像推算",
+   "src": [
+    {
+     "ref": "Naval News: KJ-600 analysis（推算）",
+     "url": "https://www.navalnews.com",
+     "date": "2023",
+     "conf": "C"
+    }
+   ]
+  },
+  "heli": {
+   "maxs": 0,
+   "cruise": 290,
+   "range": 560,
+   "aaw": 0,
+   "spec": "机身 15.2m / 主旋翼 Ø16.0m / 最大 10t / 320km/h / 航程 560km / 载 12-15 人",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "note": "GlobalSecurity 与多源一致：全长19.5m、MTOW 10t、巡航290km/h、航程560-600km",
+   "history": [
+    {
+     "updated": "2026-10-30",
+     "note": "初版 C 级"
+    },
+    {
+     "updated": "2026-10-31",
+     "note": "GlobalSecurity 专页核实，升 B 级"
+    }
+   ],
+   "src": [
+    {
+     "ref": "GlobalSecurity.org Z-20 specifications（19.5m/10t/320km/h/560-600km）",
+     "url": "https://www.globalsecurity.org/military/world/china/z-20-specs.htm",
+     "date": "2024",
+     "conf": "B"
+    },
+    {
+     "ref": "MilitaryDex Z-20（cruise 290km/h, combat range 560km）",
+     "url": "https://www.militarydex.com/equipment/aircraft/z-20",
+     "date": "2026",
+     "conf": "B"
+    }
+   ]
+  },
+  "z8": {
+   "maxs": 0,
+   "cruise": 230,
+   "range": 700,
+   "aaw": 0,
+   "spec": "机身 20.3m / 旋翼 Ø18.9m / 13t / 机降登陆",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "维基百科 Changhe Z-8",
+     "url": "https://en.wikipedia.org/wiki/Changhe_Z-8",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "ztd": {
+   "maxs": 0,
+   "cruise": 25,
+   "range": 0,
+   "aaw": 0,
+   "spec": "炮向前全长 10.0m（车体 9.5）/ 28.5t / 水上 25~30km/h / 105mm",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "维基百科 Type 05 amphibious armored vehicle",
+     "url": "https://en.wikipedia.org/wiki/Type_05_amphibious_armored_vehicle",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "zbd": {
+   "maxs": 0,
+   "cruise": 25,
+   "range": 0,
+   "aaw": 0,
+   "spec": "9.5m / 26t / 水上25~30km/h / 30mm",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "同 ZTD-05 车族",
+     "url": "https://en.wikipedia.org/wiki/Type_05_amphibious_armored_vehicle",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "hq9": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 0,
+   "aaw": 150,
+   "spec": "射程125~200km / 要地防空",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "维基百科 HQ-9（HQ-9B 射程~200km）",
+     "url": "https://en.wikipedia.org/wiki/HQ-9",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "yj62": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 0,
+   "aaw": 0,
+   "spec": "射程400km（YJ-62B）/ 战斗部~400kg / 0.9马赫 / 雷达+红外复合导引头（2026升级）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "自用型 400km（NDU 报告）；2026-08 央视披露完成雷达+红外成像复合导引头换装，抗干扰大幅提升。",
+   "history": [
+    {
+     "updated": "2026-10-30",
+     "note": "初版：射程~280km"
+    },
+    {
+     "updated": "2026-10-31",
+     "note": "NDU 报告核实：区分出口280/自用400km，战斗部210kg"
+    },
+    {
+     "updated": "2026-11-04",
+     "note": "升级为 YJ-62B 口径（400km/复合导引头）"
+    }
+   ],
+   "src": [
+    {
+     "ref": "美国国防大学 INSS《A Low-Visibility Force Multiplier》Table 2.1：YJ-62 射程280km(62A:400km)、战斗部210kg、0.6-0.8马赫",
+     "url": "https://www.govinfo.gov/content/pkg/GOVPUB-D5-PURL-gpo76796/pdf/GOVPUB-D5-PURL-gpo76796.pdf",
+     "date": "2014",
+     "conf": "A"
+    },
+    {
+     "ref": "人民网（转载美方分析）：C602射程280km/300kg半穿甲，鹰击-62真实射程400km",
+     "url": "https://military.people.com.cn/n/2014/1020/c1011-25868449-2.html",
+     "date": "2014-10-20",
+     "conf": "B"
+    },
+    {
+     "ref": "今日头条（引央视 2026-08-26 画面）：鹰击-62 完成复合导引头换装，雷达+红外双模，抗干扰；战斗部约400kg、0.9马赫",
+     "url": "https://www.toutiao.com/article/7678342344625619497/",
+     "date": "2026-08-26",
+     "conf": "B"
+    }
+   ]
+  },
+  "radar": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 0,
+   "aaw": 0,
+   "spec": "探测~400km / 全军目标指示",
+   "conf": "C",
+   "updated": "2026-10-31",
+   "note": "虚构阵地，探测距离按对空警戒雷达通用值估算",
+   "src": [
+    {
+     "ref": "游戏抽象（虚构）",
+     "url": "",
+     "date": "2026-10-30",
+     "conf": "C"
+    }
+   ]
+  },
+  "gun": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 0,
+   "aaw": 0,
+   "spec": "滩头拦阻",
+   "conf": "C",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "游戏抽象（虚构）",
+     "url": "",
+     "date": "2026-10-30",
+     "conf": "C"
+    }
+   ]
+  },
+  "fujian": {
+   "maxs": 31,
+   "cruise": 18,
+   "range": 10000,
+   "aaw": 200,
+   "spec": "316m / 80,000t级 / 31节 / 3条电磁弹射 / 载歼-35+歼-15T+空警-600（~60架）",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "displacement_t": 80000,
+   "note": "2025-11-05 三亚入列；舰载机满编尚在推进，编队含延安舰（055）、通辽舰等。",
+   "history": [
+    {
+     "updated": "2026-11-04",
+     "note": ""
+    }
+   ],
+   "src": [
+    {
+     "ref": "新华社（福建省政府转载）：福建舰入列与舰载机联队构成",
+     "url": "https://www.fujian.gov.cn/jdhy/hygq/202511/t20251109_7031692.htm",
+     "date": "2025-11-08",
+     "conf": "A"
+    }
+   ]
+  },
+  "j35": {
+   "maxs": 0,
+   "cruise": 900,
+   "range": 1350,
+   "aaw": 0,
+   "spec": "17.4m / 1.8马赫级 / 作战半径~1,350km☆ / 内置霹雳-15",
+   "conf": "C",
+   "updated": "2026-11-04",
+   "note": "参数为公开分析估算（无官方数据）。",
+   "src": [
+    {
+     "ref": "Naval News 等公开分析：歼-35 弹射型舰载机，性能参数未官宣",
+     "url": "https://www.navalnews.com",
+     "date": "2025",
+     "conf": "C"
+    }
+   ]
+  },
+  "j16": {
+   "maxs": 0,
+   "cruise": 900,
+   "range": 1850,
+   "aaw": 0,
+   "spec": "21.9m / 2.0马赫 / 作战半径~1,850km / 鹰击-83K+鹰击-91反辐射",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 Shenyang J-16",
+     "url": "https://en.wikipedia.org/wiki/Shenyang_J-16",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "h6k": {
+   "maxs": 0,
+   "cruise": 800,
+   "range": 3500,
+   "aaw": 0,
+   "spec": "34.6m / 防区外打击 / 6×鹰击-12（400km,3马赫）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 Xi'an H-6（H-6K）",
+     "url": "https://en.wikipedia.org/wiki/Xi%27an_H-6",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "f056a": {
+   "maxs": 28,
+   "cruise": 18,
+   "range": 3500,
+   "aaw": 15,
+   "spec": "89.5m / 1,500t / 28节 / 反潜型：拖曳阵声呐+鱼-8 / 海峡与近海巡逻",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "displacement_t": 1500,
+   "src": [
+    {
+     "ref": "维基百科 Type 056A corvette",
+     "url": "https://en.wikipedia.org/wiki/Type_056_corvette",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "j20": {
+   "maxs": 0,
+   "cruise": 1000,
+   "range": 1100,
+   "aaw": 0,
+   "spec": "20.3m / 2.0马赫 / 作战半径~1,100km / 隐身制空+精确对地",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 Chengdu J-20",
+     "url": "https://en.wikipedia.org/wiki/Chengdu_J-20",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "kj500": {
+   "maxs": 0,
+   "cruise": 550,
+   "range": 2500,
+   "aaw": 0,
+   "spec": "34m 运-9 平台 / 碟形有源阵 / 预警指挥半径~500km",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 Shaanxi KJ-500",
+     "url": "https://en.wikipedia.org/wiki/Shaanxi_KJ-500",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "y8q": {
+   "maxs": 0,
+   "cruise": 480,
+   "range": 4000,
+   "aaw": 0,
+   "spec": "34m 4发涡桨 / 磁探+声呐浮标 / 反潜巡逻~8h",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 Shaanxi Y-8 变型",
+     "url": "https://en.wikipedia.org/wiki/Shaanxi_Y-8",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "df16": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 1000,
+   "aaw": 0,
+   "spec": "射程~1,000km / 常规弹头 / 打机场与指挥节点",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 DF-16",
+     "url": "https://en.wikipedia.org/wiki/DF-16",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "df17": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 2000,
+   "aaw": 0,
+   "spec": "乘波体高超弹头 / 射程 1,800~2,500km / 反萨德/爱国者",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 DF-17",
+     "url": "https://en.wikipedia.org/wiki/DF-17",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "df26": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 4000,
+   "aaw": 0,
+   "spec": "射程~4,000km / 核常兼备 / 反航母（关岛快反）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 DF-26",
+     "url": "https://en.wikipedia.org/wiki/DF-26",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "cj10a": {
+   "maxs": 0,
+   "cruise": 880,
+   "range": 1500,
+   "aaw": 0,
+   "spec": "射程~1,500km / 亚音速贴地 / 打固定高价值目标",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 CJ-10 巡航导弹家族",
+     "url": "https://en.wikipedia.org/wiki/CJ-10",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "phl191": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 350,
+   "aaw": 0,
+   "spec": "370mm 箱式 12 联 / 射程 350km 级 / 滩头与纵深面压制",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基百科 PHL-16/PHL-191",
+     "url": "https://en.wikipedia.org/wiki/PHL-16",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "yj12b": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 400,
+   "aaw": 0,
+   "spec": "射程400km+ / 全程4马赫超音速 / 大型水面舰一发致瘫 / 岸导团机动预设阵地",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "海峡雷霆-2025A 官方画面：东海舰队岸舰导弹第3团鹰击-12 前出浙东海岛预设阵地（射程400km+、4马赫）",
+     "url": "http://mp.weixin.qq.com/s?__biz=MzU4MTkyNTE5Mg==&mid=2247484318&idx=1&sn=67bd02699bc6bed452dce335903afb86",
+     "date": "2025-04",
+     "conf": "A"
+    }
+   ]
+  },
+  "airbase": {
+   "maxs": 0,
+   "cruise": 0,
+   "range": 0,
+   "aaw": 0,
+   "spec": "龙田距新竹170km（战机7分钟凌空台北）/ 惠安190km / 漳州直升机基地 / 汕头外砂+兴宁二线 / 惠州军民合用；配弹药掩体+加固机堡",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "联合早报：福建龙田（170km）、惠安（190km）、漳州直升机基地扩建跑道/弹药掩体/机堡；汕头外砂部署运-8Q/空警-500，兴宁部署轰-6K",
+     "url": "https://www.zaobao.com/news/china/story20221024-1325786",
+     "date": "2022-10-24",
+     "conf": "B"
+    }
+   ]
+  }
+ },
+ "loadouts": {
+  "$note": "弹药基数＝物理装载（垂发单元分配/鱼雷发射管/挂架）。打光即失效，不是装饰值。asm 反舰弹 · sam 防空弹 · torp 鱼雷 · aam 空空弹 · bomb 对地弹药。依据同各舰条目的武备配置（VLS 单元数按典型任务分配，非官方公开配比，故整体 B 级）。",
+  "cv": {
+   "sam": 24
+  },
+  "ddg055": {
+   "asm": 16,
+   "sam": 64
+  },
+  "ddg": {
+   "asm": 8,
+   "sam": 48
+  },
+  "ffg": {
+   "asm": 8,
+   "sam": 24
+  },
+  "lha": {
+   "sam": 24
+  },
+  "sub": {
+   "torp": 6
+  },
+  "fpb": {
+   "asm": 8
+  },
+  "j15": {
+   "aam": 4,
+   "bomb": 4
+  },
+  "j10c": {
+   "aam": 4
+  },
+  "hq9": {
+   "sam": 32
+  },
+  "yj62": {
+   "asm": 18
+  },
+  "_src": [
+   {
+    "ref": "seaforces/wikwand：052D 64 单元（HHQ-9B+YJ-18+CY-5 混装）、HQ-10 24 联装",
+    "url": "https://www.seaforces.org/marint/China-Navy-PLAN/Destroyers/Type-052D-Luyang-III-class-DDG.htm",
+    "date": "2024",
+    "conf": "B"
+   },
+   {
+    "ref": "维基百科 Type 055（112 单元）、Type 022（8×YJ-83）、Type 039B（6×533mm）",
+    "url": "https://en.wikipedia.org/wiki/Type_055_destroyer",
+    "date": "2024",
+    "conf": "B"
+   }
+  ]
+ }
+}

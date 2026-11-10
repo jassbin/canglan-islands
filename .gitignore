@@ -1,0 +1,27 @@
+# This repository is a static site: what you see in the tree is what the browser loads.
+# Everything below is either operating-system noise or something a local run produced.
+
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+node_modules/
+package/
+*.tgz
+npm-debug.log*
+
+# editor / terminal scratch
+*.local
+*.tmp
+*.bak
+*.log
+.cache/
+
+# files a visitor's browser may drop into the folder when exporting a view
+*.download

@@ -1,0 +1,8407 @@
+{
+ "title": "L4 部署与编成地理注册表",
+ "generated": "offline data pipeline (see DATA_SOURCES.md)",
+ "grab_date": "2026-11-10",
+ "version": "",
+ "anchors": {
+  "LON0": 121.15686,
+  "LAT0": 23.9996,
+  "km_per_deg": [
+   96.82,
+   110.56
+  ],
+  "block_km": [
+   640.0,
+   552.6
+  ],
+  "block_geo": [
+   117.8568,
+   124.462,
+   21.4996,
+   26.4996
+  ],
+  "region_geo": {
+   "w": 96,
+   "e": 150,
+   "n": 46,
+   "s": 4
+  },
+  "world_unit": "km×10（js/env.js W2；KM=10）",
+  "must_sync": [
+   "index.html P_GEO",
+   "js/env.js W2/LON0/LAT0"
+  ]
+ },
+ "conf_scale": {
+  "A": "官方或多方一致",
+  "B": "单一权威来源",
+  "C": "估算/待验证"
+ },
+ "discipline": "无源不写；conf C 只允许『点位精度待验证』，不允许『存在性无据』——引擎实体化（BLUE_SHORE 带 bid）要求该兵力出现在该地至少有一条可溯源公开实证（演训报道／地理定位链）；纯无源的造点必须删除或降级为本群相对机动位；out_of_block 条目只进外图/小地图/资料层，不实体化布势",
+ "stats": {
+  "places_total": 171,
+  "in_block": 81,
+  "out_of_block": 90,
+  "out_of_region": [
+   "us_diego"
+  ],
+  "by_side": {
+   "red": 57,
+   "blue": 61,
+   "green": 53
+  },
+  "by_conf": {
+   "A": 6,
+   "B": 93,
+   "C": 72
+  },
+  "exercises": 14,
+  "exercise_boxes": 7,
+  "boxes_clipped": 3,
+  "conflicts": 22,
+  "src_count": 82,
+  "label_max_len": 30,
+  "label_worst": [
+   "Keen Edge / Keen Sword 27 联合演训",
+   "Makin Island 两栖戒备群 + 13th MEU",
+   "LHA-6 America + 31st MEU",
+   "Boxer 两栖戒备群 + 11th MEU",
+   "EDCA·Elmoro–Andyfield"
+  ],
+  "blue_shore_land": {
+   "checked": 21,
+   "known_sea": [
+    "blue_hf_dongyin",
+    "blue_hf_heping",
+    "blue_hf_xiyu"
+   ],
+   "lowest": [
+    "blue_hf_dongyin -55.12m",
+    "blue_hf_heping -27.08m",
+    "blue_hf_xiyu -2.74m",
+    "blue_hf_mob_yilan 3.48m"
+   ]
+  }
+ },
+ "places": [
+  {
+   "id": "red_n_hq",
+   "side": "red",
+   "name": "北部战区海军机关（青岛）",
+   "nm": "北部战区海军机关",
+   "type": "base_navy",
+   "geo": [
+    120.38,
+    36.07
+   ],
+   "km": [
+    244.8,
+    -1058.2
+   ],
+   "world": [
+    -752.2,
+    -13345.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "北海方向战役指挥部；战时增援台海在本方块外",
+   "units": [
+    "机关"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_n_ddg1",
+   "side": "red",
+   "name": "驱逐舰第1支队（青岛黄岛古镇口）",
+   "nm": "驱逐舰第1支队",
+   "type": "sqdn",
+   "geo": [
+    120.05,
+    35.86
+   ],
+   "km": [
+    212.8,
+    -1035.0
+   ],
+   "world": [
+    -1071.7,
+    -13112.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "辽宁舰编队护航主力，首批 055 所在",
+   "units": [
+    "055 101-104",
+    "052D 117/118",
+    "051C 115/116",
+    "052 112/113",
+    "054A 538/546/547/550"
+   ],
+   "conf": "B",
+   "note": "辽宁舰(16) 母港同址",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_n_ddg10",
+   "side": "red",
+   "name": "驱逐舰第10支队（大连旅顺口）",
+   "nm": "驱逐舰第10支队",
+   "type": "sqdn",
+   "geo": [
+    121.26,
+    38.81
+   ],
+   "km": [
+    330.0,
+    -1361.1
+   ],
+   "world": [
+    99.9,
+    -16374.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "黄海/渤海方向；台海增援属图外机动",
+   "units": [
+    "052D 119-124",
+    "054A 539/542/576/579/598"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_n_ffg1112",
+   "side": "red",
+   "name": "护卫舰第11/12支队（旅顺·威海）",
+   "nm": "护卫舰第11/12支队",
+   "type": "sqdn",
+   "geo": [
+    122.12,
+    37.51
+   ],
+   "km": [
+    413.3,
+    -1217.4
+   ],
+   "world": [
+    932.5,
+    -14937.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "近海巡逻，台海方向使用概率低",
+   "units": [
+    "056A",
+    "054"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_n_sub",
+   "side": "red",
+   "name": "潜艇第2/12支队 + 核潜艇支队（青岛·旅顺·小平岛）",
+   "nm": "潜艇第2/12支队 + 核潜艇支队",
+   "type": "base_navy",
+   "geo": [
+    120.38,
+    36.07
+   ],
+   "km": [
+    244.8,
+    -1058.2
+   ],
+   "world": [
+    -752.2,
+    -13345.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "093/094 出海走第一岛链水道",
+   "units": [
+    "093",
+    "094",
+    "039/039A"
+   ],
+   "conf": "B",
+   "note": "洞库与栈桥 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_hq",
+   "side": "red",
+   "name": "东部战区海军机关（东海舰队）",
+   "nm": "东部战区海军机关",
+   "type": "base_navy",
+   "geo": [
+    121.62,
+    29.78
+   ],
+   "km": [
+    364.8,
+    -362.8
+   ],
+   "world": [
+    448.4,
+    -6390.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "本战役方向主机关，围台演训通报出口",
+   "units": [
+    "机关"
+   ],
+   "conf": "C",
+   "note": "官方口径宁波 29.87/121.54，2023-25 媒体报道舟山，冲突见 conflicts",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_ddg3",
+   "side": "red",
+   "name": "驱逐舰第3支队（舟山定海·沈家门）",
+   "nm": "驱逐舰第3支队",
+   "type": "sqdn",
+   "geo": [
+    122.3,
+    29.95
+   ],
+   "km": [
+    430.7,
+    -381.6
+   ],
+   "world": [
+    1106.8,
+    -6578.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "台海方向主用驱支：太原舰 131 为正义使命-2025 台岛以东实弹编队",
+   "units": [
+    "052DL 132/133/134",
+    "052D 131太原",
+    "956型 136-139",
+    "054A 529-533/601"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_e_ddg6",
+   "side": "red",
+   "name": "驱逐舰第6支队（舟山）",
+   "nm": "驱逐舰第6支队",
+   "type": "sqdn",
+   "geo": [
+    122.11,
+    30.02
+   ],
+   "km": [
+    412.3,
+    -389.3
+   ],
+   "world": [
+    922.8,
+    -6656.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "052C/052D 区域防空与对海；西安舰 153 台岛以东副炮实弹",
+   "units": [
+    "052C 150-153",
+    "052D 154-158",
+    "054A 515/548/549/577/578/599",
+    "055 109东莞/110安庆（首批入东战）"
+   ],
+   "conf": "C",
+   "note": "158 宿州 2025 入列",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "解放军报转载：055 109东莞/110安庆 入列东部战区海军，宫古海峡首训",
+     "url": "https://cj.sina.cn/articles/view/1617264814/v606580ae02002jobw",
+     "date": "2026-03-14",
+     "conf": "B"
+    },
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_e_fpb16",
+   "side": "red",
+   "name": "快艇第16支队（舟山定海）",
+   "nm": "快艇第16支队",
+   "type": "sqdn",
+   "geo": [
+    122.11,
+    30.02
+   ],
+   "km": [
+    412.3,
+    -389.3
+   ],
+   "world": [
+    922.8,
+    -6656.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "近岸突击；本引擎 red_extra 的 022 导弹艇群来源",
+   "units": [
+    "022型"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_e_sub22",
+   "side": "red",
+   "name": "潜艇第22支队（宁波大榭岛）",
+   "nm": "潜艇第22支队",
+   "type": "base_navy",
+   "geo": [
+    121.97,
+    29.87
+   ],
+   "km": [
+    398.7,
+    -372.7
+   ],
+   "world": [
+    787.3,
+    -6490.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "外线设伏；本引擎 gi2 的 039B 长征34/35 号来源",
+   "units": [
+    "039/039A/041",
+    "093A"
+   ],
+   "conf": "C",
+   "note": "约 10 艇",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_sub42",
+   "side": "red",
+   "name": "潜艇第42支队（宁波象山）",
+   "nm": "潜艇第42支队",
+   "type": "base_navy",
+   "geo": [
+    121.87,
+    29.48
+   ],
+   "km": [
+    389.0,
+    -329.6
+   ],
+   "world": [
+    690.5,
+    -6059.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "巴士海峡方向设伏；本引擎 基洛 636M 366 艇来源",
+   "units": [
+    "基洛 636 366/367",
+    "636M 368-371"
+   ],
+   "conf": "C",
+   "note": "约 6 艇",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_lsd5",
+   "side": "red",
+   "name": "登陆舰第5支队（上海虬江·吴淞）",
+   "nm": "登陆舰第5支队",
+   "type": "base_navy",
+   "geo": [
+    121.52,
+    31.36
+   ],
+   "km": [
+    355.2,
+    -537.5
+   ],
+   "world": [
+    351.6,
+    -8137.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "战役输送主力；本引擎 gi1/gi2 的 071/072/野牛 来源",
+   "units": [
+    "071 980龙虎山/986四明山/988沂蒙山",
+    "072A/B 973-977/981/982",
+    "072III 939/940/970-972",
+    "野牛 3325/3326",
+    "075 32广西/33安徽"
+   ],
+   "conf": "B",
+   "note": "075 母港口径=31 海南→三亚（新华社 A）、32 广西→东部战区海军、33 安徽→上海虬江（日统合幕僚监部经 ICCS 转述 B）；官方从未自曝母港，故只到支队级",
+   "src": [
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "ICCS 引日本统合幕僚监部：075 安徽舰（33）隶东部战区海军第5登陆舰支队（驻上海虬江码头）；2025-12-11 续列广西舰 32/安徽舰 33 同支队",
+     "url": "https://iccs.org.tw/NewsContent/358",
+     "date": "2025-06-16",
+     "conf": "B"
+    },
+    {
+     "ref": "新华社：海南舰（31）2021-04-23 在三亚某军港交接入列（075 首舰母港=三亚）",
+     "url": "https://www.news.cn/mil/2022-11/11/c_1211699762.htm",
+     "date": "2022-11-11",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_e_ffg1416",
+   "side": "red",
+   "name": "东部战区海军护卫舰支队（14/15/16支）",
+   "nm": "东部战区海军护卫舰支队",
+   "type": "sqdn",
+   "geo": [
+    119.65,
+    26.65
+   ],
+   "km": [
+    174.1,
+    -16.7
+   ],
+   "world": [
+    -1458.9,
+    -2930.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "战备警巡与护航：宝鸡舰 534 台岛西南实弹、衢州舰 517 北部",
+   "units": [
+    "054AG 516淮北/517衢州（14支）",
+    "534宝鸡（15支）",
+    "522资阳/523红河（16支）",
+    "温州/德阳"
+   ],
+   "conf": "C",
+   "note": "支队—驻地映射未公开，驻地取宁德三都澳（福建基地）",
+   "src": [
+    {
+     "ref": "护卫舰支队编号汇编（14支 516淮北/517衢州；15支 534宝鸡；16支 522资阳/523红河）",
+     "url": "https://baijiahao.baidu.com/s?id=1775098113906092140",
+     "date": "2023-08-24",
+     "conf": "C"
+    },
+    {
+     "ref": "新华社：东部战区海军某护卫舰支队（衢州/温州/德阳）",
+     "url": "http://www.xinhuanet.com.cn/politics/20260114/b9c36d1c55b14237a756410ea59d9ec0/c.html",
+     "date": "2026-01-14",
+     "conf": "A"
+    },
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_e_fujian_base",
+   "side": "red",
+   "name": "福建基地（副军级）辖宁德、厦门水警区",
+   "nm": "福建基地",
+   "type": "base_navy",
+   "geo": [
+    119.65,
+    26.65
+   ],
+   "km": [
+    174.1,
+    -16.7
+   ],
+   "world": [
+    -1458.9,
+    -2930.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "三都澳 1952 年进驻，东冲口以内军事禁区；辖护卫舰第15支队、快艇第21支队、猎潜艇78大队（常规兵力）",
+   "units": [
+    "水警区",
+    "护卫舰第15支队",
+    "快艇第21支队",
+    "猎潜艇78大队"
+   ],
+   "conf": "B",
+   "note": "媒体/博客所称「三都澳核潜艇基地」无任何权威源，INDSR 表6-2 核潜艇基地仅青岛沙子口（第1基地）与三亚亚龙湾（第2基地）",
+   "src": [
+    {
+     "ref": "INDSR《解放军海军的编成与部署》2022-05（引竹田纯一 Naval Review 2020）表6-2：核潜艇基地仅第1基地青岛沙子口、第2基地三亚亚龙湾；表列第15护卫舰支队驻宁德三都澳、快艇21支队驻三都澳",
+     "url": "https://indsr.org.tw/uploads/indsr/files/202205/4691ce06-55f9-491f-86a8-e54bcd0c767a.pdf",
+     "date": "2022-05",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_xiamen",
+   "side": "red",
+   "name": "厦门水警区 / 海防第13旅",
+   "nm": "厦门水警区 / 海防第13旅",
+   "type": "base_navy",
+   "geo": [
+    118.09,
+    24.48
+   ],
+   "km": [
+    23.1,
+    223.2
+   ],
+   "world": [
+    -2969.3,
+    -531.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "金门当面岸舰与防空；方块内最近的红色岸上力量",
+   "units": [
+    "岸舰导弹",
+    "防空",
+    "HJ-12"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_e_jinjiang",
+   "side": "red",
+   "name": "晋江（海防部队 + 空军前沿机场）",
+   "nm": "晋江",
+   "type": "base_air",
+   "geo": [
+    118.55,
+    24.78
+   ],
+   "km": [
+    67.6,
+    190.0
+   ],
+   "world": [
+    -2524.0,
+    -862.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "对台前沿机场群南段",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_s_hq",
+   "side": "red",
+   "name": "南部战区海军机关（湛江）",
+   "nm": "南部战区海军机关",
+   "type": "base_navy",
+   "geo": [
+    110.36,
+    21.27
+   ],
+   "km": [
+    -725.4,
+    578.1
+   ],
+   "world": [
+    -10453.5,
+    3017.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海方向；台海增援走巴士海峡，在本方块外",
+   "units": [
+    "机关"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_s_ddg2",
+   "side": "red",
+   "name": "驱逐舰第2支队（湛江）",
+   "nm": "驱逐舰第2支队",
+   "type": "sqdn",
+   "geo": [
+    110.4,
+    21.19
+   ],
+   "km": [
+    -721.5,
+    586.9
+   ],
+   "world": [
+    -10414.8,
+    3106.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海防空/反舰主力",
+   "units": [
+    "052D 161-169（含166渭南/167深圳）",
+    "054A"
+   ],
+   "conf": "B",
+   "note": "161呼和浩特 参加正义使命-2025（南海方向北上）",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_s_ddg9",
+   "side": "red",
+   "name": "驱逐舰第9支队（三亚）",
+   "nm": "驱逐舰第9支队",
+   "type": "sqdn",
+   "geo": [
+    109.5,
+    18.25
+   ],
+   "km": [
+    -808.6,
+    912.0
+   ],
+   "world": [
+    -11286.2,
+    6356.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海前沿 + 航母母港护航",
+   "units": [
+    "055 105-108",
+    "052C 170/171",
+    "052D 172-175",
+    "054A 572-575"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_s_sub_yulin",
+   "side": "red",
+   "name": "潜艇第32/52支队 + 榆林保障基地（三亚）",
+   "nm": "潜艇第32/52支队 + 榆林保障基地",
+   "type": "base_navy",
+   "geo": [
+    109.64,
+    18.2
+   ],
+   "km": [
+    -795.1,
+    917.5
+   ],
+   "world": [
+    -11150.6,
+    6412.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "山东舰(17) 与福建舰(18，2025-11-05 入列) 母港三亚",
+   "units": [
+    "093B",
+    "039"
+   ],
+   "conf": "B",
+   "note": "洞库 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_41",
+   "side": "red",
+   "name": "空41旅（武夷山）",
+   "nm": "空41旅",
+   "type": "base_air",
+   "geo": [
+    118.0,
+    27.75
+   ],
+   "km": [
+    14.4,
+    -138.3
+   ],
+   "world": [
+    -3056.5,
+    -4146.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-20A，对台方向隐蔽进场",
+   "units": [
+    "歼-20A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_85",
+   "side": "red",
+   "name": "空85旅（衢州）",
+   "nm": "空85旅",
+   "type": "base_air",
+   "geo": [
+    118.87,
+    28.94
+   ],
+   "km": [
+    98.6,
+    -269.9
+   ],
+   "world": [
+    -2214.1,
+    -5462.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-20A",
+   "units": [
+    "歼-20A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_94",
+   "side": "red",
+   "name": "空94旅（台州路桥）",
+   "nm": "空94旅",
+   "type": "base_air",
+   "geo": [
+    121.4,
+    28.58
+   ],
+   "km": [
+    343.5,
+    -230.1
+   ],
+   "world": [
+    235.4,
+    -5064.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "苏-30MK2 + 歼-10A",
+   "units": [
+    "苏-30MK2",
+    "歼-10A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_25",
+   "side": "red",
+   "name": "空25旅（汕头外砂）",
+   "nm": "空25旅",
+   "type": "base_air",
+   "geo": [
+    116.73,
+    23.5
+   ],
+   "km": [
+    -108.6,
+    331.5
+   ],
+   "world": [
+    -4286.1,
+    552.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-10C（南部战区方向）",
+   "units": [
+    "歼-10C"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_40",
+   "side": "red",
+   "name": "空40旅（南昌向塘）",
+   "nm": "空40旅",
+   "type": "base_air",
+   "geo": [
+    115.85,
+    28.43
+   ],
+   "km": [
+    -193.8,
+    -213.5
+   ],
+   "world": [
+    -5138.1,
+    -4898.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-16",
+   "units": [
+    "歼-16"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_96",
+   "side": "red",
+   "name": "空96旅（义乌）",
+   "nm": "空96旅",
+   "type": "base_air",
+   "geo": [
+    120.07,
+    29.31
+   ],
+   "km": [
+    214.8,
+    -310.8
+   ],
+   "world": [
+    -1052.3,
+    -5871.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼轰-7A 反舰/对陆",
+   "units": [
+    "歼轰-7A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_9",
+   "side": "red",
+   "name": "空9旅（芜湖）",
+   "nm": "空9旅",
+   "type": "base_air",
+   "geo": [
+    118.36,
+    31.35
+   ],
+   "km": [
+    49.2,
+    -536.4
+   ],
+   "world": [
+    -2707.9,
+    -8126.6
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-20",
+   "units": [
+    "歼-20"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_8",
+   "side": "red",
+   "name": "空8旅（长兴）",
+   "nm": "空8旅",
+   "type": "base_air",
+   "geo": [
+    119.91,
+    31.02
+   ],
+   "km": [
+    199.3,
+    -499.9
+   ],
+   "world": [
+    -1207.2,
+    -7761.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-20 / 歼-16",
+   "units": [
+    "歼-20",
+    "歼-16"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_42",
+   "side": "red",
+   "name": "空42旅（宜春樟树）",
+   "nm": "空42旅",
+   "type": "base_air",
+   "geo": [
+    115.54,
+    28.05
+   ],
+   "km": [
+    -223.8,
+    -171.5
+   ],
+   "world": [
+    -5438.2,
+    -4478.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "歼-11B",
+   "units": [
+    "歼-11B"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_af_28",
+   "side": "red",
+   "name": "空28团（安庆）",
+   "nm": "空28团",
+   "type": "base_air",
+   "geo": [
+    117.05,
+    30.53
+   ],
+   "km": [
+    -77.6,
+    -445.7
+   ],
+   "world": [
+    -3976.3,
+    -7220.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "轰-6K（正义使命-2025 与 075 编队协同科目）",
+   "units": [
+    "轰-6K"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "解放军海军/东部战区空军编制表（zh.wikipedia，舷号→支队归属）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "正义使命-2025 条目（编队/海警/演训区汇编，引东部战区与中国军号）",
+     "url": "https://baike.baidu.com/item/%E6%AD%A3%E4%B9%89%E4%BD%BF%E5%91%BD-2025/67141606",
+     "date": "2025-12-31",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_yixu",
+   "side": "red",
+   "name": "福州义序机场（前沿）",
+   "nm": "福州义序机场",
+   "type": "base_air",
+   "geo": [
+    119.32,
+    26.0
+   ],
+   "km": [
+    142.2,
+    55.1
+   ],
+   "world": [
+    -1778.4,
+    -2211.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "对台前沿进场/分散演练",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "跑道精确坐标 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_longtian",
+   "side": "red",
+   "name": "福清龙田机场（前沿，距台北约217km）",
+   "nm": "福清龙田机场",
+   "type": "base_air",
+   "geo": [
+    119.5,
+    25.93
+   ],
+   "km": [
+    159.6,
+    62.9
+   ],
+   "world": [
+    -1604.2,
+    -2134.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "2020 年后扩建；报道值距台约170km",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "跑道精确坐标 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_pingtan",
+   "side": "red",
+   "name": "平潭（前沿场站 + 岸导，海峡最窄侧）",
+   "nm": "平潭",
+   "type": "base_air",
+   "geo": [
+    119.79,
+    25.5
+   ],
+   "km": [
+    187.7,
+    110.4
+   ],
+   "world": [
+    -1323.4,
+    -1658.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "平潭—白沙岬 130km 为海峡最窄处，岸导/远箱火覆盖窗口",
+   "units": [
+    "一线场站",
+    "岸导"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_huian",
+   "side": "red",
+   "name": "惠安（大型相控阵雷达 + 前沿场站）",
+   "nm": "惠安",
+   "type": "site_radar",
+   "geo": [
+    118.79,
+    24.98
+   ],
+   "km": [
+    90.8,
+    167.9
+   ],
+   "world": [
+    -2291.6,
+    -1083.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "对空监视与弹道预警前端",
+   "units": [
+    "大型相控阵雷达"
+   ],
+   "conf": "C",
+   "note": "HQ-9 阵地清单未查到权威源",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_longxi",
+   "side": "red",
+   "name": "漳州龙溪机场（前沿）",
+   "nm": "漳州龙溪机场",
+   "type": "base_air",
+   "geo": [
+    117.57,
+    24.5
+   ],
+   "km": [
+    -27.3,
+    221.0
+   ],
+   "world": [
+    -3472.8,
+    -553.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对台南段进场",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_changle",
+   "side": "red",
+   "name": "长乐机场（前沿备用）",
+   "nm": "长乐机场",
+   "type": "base_air",
+   "geo": [
+    119.48,
+    25.93
+   ],
+   "km": [
+    157.6,
+    62.9
+   ],
+   "world": [
+    -1623.5,
+    -2134.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "分散/进驻演练",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_fwd_putian",
+   "side": "red",
+   "name": "莆田机场（前沿备用）",
+   "nm": "莆田机场",
+   "type": "base_air",
+   "geo": [
+    119.05,
+    25.43
+   ],
+   "km": [
+    116.0,
+    118.2
+   ],
+   "world": [
+    -2039.9,
+    -1581.5
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "分散/进驻演练",
+   "units": [
+    "一线场站"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_611",
+   "side": "red",
+   "name": "611营/旅（池州）DF-21A",
+   "nm": "611营/旅",
+   "type": "site_sam",
+   "geo": [
+    117.49,
+    30.66
+   ],
+   "km": [
+    -35.0,
+    -460.1
+   ],
+   "world": [
+    -3550.3,
+    -7363.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "中程地对地，西太增援方向",
+   "units": [
+    "DF-21A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_612",
+   "side": "red",
+   "name": "612营（景德镇）DF-21",
+   "nm": "612营",
+   "type": "site_sam",
+   "geo": [
+    117.2,
+    29.29
+   ],
+   "km": [
+    -63.1,
+    -308.6
+   ],
+   "world": [
+    -3831.0,
+    -5849.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "Bulletin 2023：612 营 DF-21 于东南方向",
+   "units": [
+    "DF-21"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_613",
+   "side": "red",
+   "name": "613旅（上饶）DF-15B",
+   "nm": "613旅",
+   "type": "site_sam",
+   "geo": [
+    117.94,
+    28.45
+   ],
+   "km": [
+    8.5,
+    -215.7
+   ],
+   "world": [
+    -3114.6,
+    -4920.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "短程弹道，覆盖台北/台中",
+   "units": [
+    "DF-15B"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    },
+    {
+     "ref": "CSIS GTI 常规导弹地图（DF-11/15/16/21 旅级点位）",
+     "url": "https://chinapower.csis.org/conventional-missiles/",
+     "date": "2020-09-21",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_614",
+   "side": "red",
+   "name": "614旅（永安）DF-17",
+   "nm": "614旅",
+   "type": "site_sam",
+   "geo": [
+    117.3151,
+    26.0596
+   ],
+   "km": [
+    -52.0,
+    48.5
+   ],
+   "world": [
+    -3719.6,
+    -2277.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "福建境内距台最近的一线旅；高超音速滑翔",
+   "units": [
+    "DF-17"
+   ],
+   "conf": "B",
+   "note": "智库现行值而非官方确认，维持 B（见 conflicts）",
+   "src": [
+    {
+     "ref": "BAS Kristensen《Chinese nuclear weapons, 2026》Table 2：614 Brigade / Yongan 26.0596N 117.3151E / DF-17 / 「First DF-17 brigade」",
+     "url": "https://thebulletin.org/wp-content/uploads/2026/07/rbul_a_2691662_t0002.pdf",
+     "date": "2026-07",
+     "conf": "B"
+    },
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    },
+    {
+     "ref": "BAS Kristensen-Korda 2020-12 Table 2（历史对照：614=DF-11A「First DF-11A brigade」，作者本人 2026 版已更新）",
+     "url": "https://thebulletin.org/wp-content/uploads/2020/12/Kristensen-Korda_Nov-Dec-China-Table2_final.pdf",
+     "date": "2020-12",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_615",
+   "side": "red",
+   "name": "615旅（梅州）DF-11A",
+   "nm": "615旅",
+   "type": "site_sam",
+   "geo": [
+    116.1,
+    24.27
+   ],
+   "km": [
+    -169.6,
+    246.4
+   ],
+   "world": [
+    -4896.1,
+    -299.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "广东方向",
+   "units": [
+    "DF-11A"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_616",
+   "side": "red",
+   "name": "616旅（赣州）DF-17",
+   "nm": "616旅",
+   "type": "site_sam",
+   "geo": [
+    114.94,
+    25.85
+   ],
+   "km": [
+    -281.9,
+    71.7
+   ],
+   "world": [
+    -6019.2,
+    -2045.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "高超音速滑翔；NYT 2025-09-29 指 DF-17 列装此旅",
+   "units": [
+    "DF-17"
+   ],
+   "conf": "B",
+   "note": "Kristensen 2026 Table2 同表列 DF-17 旅为 614（永安）/616（赣州）/627（普宁），635（宜春）标 DF-17?——福建另有 DF-17 旅的缺口已收敛为 614",
+   "src": [
+    {
+     "ref": "Focus Taiwan 引 NYT：DF-17 列装 616旅（赣州）",
+     "url": "https://focustaiwan.tw/cross-strait/202510030019",
+     "date": "2025-10-03",
+     "conf": "B"
+    },
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    },
+    {
+     "ref": "BAS Kristensen《Chinese nuclear weapons, 2026》Table 2：614 Brigade / Yongan 26.0596N 117.3151E / DF-17 / 「First DF-17 brigade」",
+     "url": "https://thebulletin.org/wp-content/uploads/2026/07/rbul_a_2691662_t0002.pdf",
+     "date": "2026-07",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_617",
+   "side": "red",
+   "name": "617旅（金华）DF-16/DF-21 系列",
+   "nm": "617旅",
+   "type": "site_sam",
+   "geo": [
+    119.65,
+    29.1
+   ],
+   "km": [
+    174.1,
+    -287.6
+   ],
+   "world": [
+    -1458.9,
+    -5639.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对第一岛链内目标的短程主力（本引擎 df16 弹型的现实对应）",
+   "units": [
+    "DF-16",
+    "DF-21"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_df26_625",
+   "side": "red",
+   "name": "DF-26 营（云南，开源坐标 23.735/102.871）",
+   "nm": "DF-26 营",
+   "type": "site_sam",
+   "geo": [
+    102.871,
+    23.735
+   ],
+   "km": [
+    -1450.4,
+    305.6
+   ],
+   "world": [
+    -17704.4,
+    292.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "关岛方向二次打击；反舰型未证实",
+   "units": [
+    "DF-26"
+   ],
+   "conf": "C",
+   "note": "zh-wiki PLARF 表，精度存疑",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_df26_626",
+   "side": "red",
+   "name": "DF-26 营（清远 23.684/113.177）",
+   "nm": "DF-26 营",
+   "type": "site_sam",
+   "geo": [
+    113.177,
+    23.684
+   ],
+   "km": [
+    -452.6,
+    311.2
+   ],
+   "world": [
+    -7726.1,
+    348.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海/菲律宾海方向",
+   "units": [
+    "DF-26"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_df26_627",
+   "side": "red",
+   "name": "DF-26 营（普宁 23.412/116.182）",
+   "nm": "DF-26 营",
+   "type": "site_sam",
+   "geo": [
+    116.182,
+    23.412
+   ],
+   "km": [
+    -161.7,
+    341.3
+   ],
+   "world": [
+    -4816.7,
+    649.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "东南沿海，本引擎 DF-26 射程门槛的现实依据",
+   "units": [
+    "DF-26"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_rf_df26_night",
+   "side": "red",
+   "name": "东南沿海某旅 DF-26（2026-10-11 夜间突击装载）",
+   "nm": "东南沿海某旅 DF-26",
+   "type": "site_sam",
+   "geo": [
+    118.1,
+    24.5
+   ],
+   "km": [
+    24.0,
+    221.0
+   ],
+   "world": [
+    -2959.7,
+    -553.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "最近一次公开战备拉动；地点未公开",
+   "units": [
+    "DF-26"
+   ],
+   "conf": "C",
+   "note": "地点未公开，坐标为福建中部占位，禁止当实测点使用",
+   "src": [
+    {
+     "ref": "CCTV 2026-10-11：东南沿海某旅 DF-26 夜间突击装载（地点未公开）",
+     "url": "https://m.toutiao.com/w/1878900630437897/",
+     "date": "2026-10-13",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_ccg_east",
+   "side": "red",
+   "name": "中国海警台岛以东巡查轮换舰群",
+   "nm": "中国海警台岛以东巡查轮换舰群",
+   "type": "unit_group",
+   "geo": [
+    122.0,
+    23.0
+   ],
+   "km": [
+    401.6,
+    386.8
+   ],
+   "world": [
+    816.3,
+    1105.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "查证识别/警告驱离/临检拿捕；每月约 2 艘在位，最远约 200 海里",
+   "units": [
+    "岱山（6-01）",
+    "秀山（7-04/7-31）",
+    "普陀山（9-03）",
+    "朱家尖（9-29）",
+    "虎狮1308 + 梅山2303（10-31）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "中国海警位台湾岛以东执法巡查（姜略通报，2026 逐月轮换）",
+     "url": "https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E6%B5%B7%E8%AD%A6%E4%BD%8D%E4%B8%AD%E5%9B%BD%E5%8F%B0%E6%B9%BE%E5%B2%9B%E4%BB%A5%E4%B8%9C%E6%B5%B7%E5%9F%9F%E5%BC%80%E5%B1%95%E6%89%A7%E6%B3%95%E5%B7%A1%E6%9F%A5/67882679",
+     "date": "2026-10-31",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_ccg_islands",
+   "side": "red",
+   "name": "海警周边岛执法编队（金·马·乌·东）",
+   "nm": "海警周边岛执法编队",
+   "type": "unit_group",
+   "geo": [
+    119.42,
+    24.93
+   ],
+   "km": [
+    151.8,
+    173.4
+   ],
+   "world": [
+    -1681.6,
+    -1028.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "东引/乌丘/金门/马祖邻近海域",
+   "units": [
+    "14606编队（乌丘屿）",
+    "14607编队（东引岛）",
+    "2304编队（台岛以东）",
+    "1302/1306/2203/2204（近岸）"
+   ],
+   "conf": "A",
+   "note": "乌丘 24°55′N/119°21′E 为流传值 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "东部战区「联合利剑-2024A」（解放军报/新华网）",
+     "url": "https://www.xinhuanet.com/politics/20240524/b6c31a24b7584c6386373becc7badb2b/c.html",
+     "date": "2024-05-24",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_etc_patrol26",
+   "side": "red",
+   "name": "2026 年绕台战备警巡常态线",
+   "nm": "2026 年绕台战备警巡常态线",
+   "type": "unit_group",
+   "geo": [
+    121.6,
+    24.1
+   ],
+   "km": [
+    362.9,
+    265.2
+   ],
+   "world": [
+    429.0,
+    -111.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "舰机多向抵近，台岛已成主轴线",
+   "units": [
+    "2026-04 单月 229 架次（169 入西南空域）",
+    "11-02/03 24h 49 架次（年度纪录）+ 6 舰 + 6 海警"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_baoji",
+   "side": "red",
+   "name": "宝鸡舰编队（054A 534）·台岛西南实弹位",
+   "nm": "宝鸡舰编队",
+   "type": "unit_group",
+   "geo": [
+    119.0,
+    22.8
+   ],
+   "km": [
+    111.2,
+    408.9
+   ],
+   "world": [
+    -2088.3,
+    1326.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "29日 09:30 序列主/副炮实弹 + 防空反导、联合反潜、联合海上突击",
+   "units": [
+    "534 宝鸡（054A，厦门）",
+    "同编队护航兵力未公布"
+   ],
+   "conf": "A",
+   "note": "澎湖七美屿以南警巡同舰（2026-01-30）",
+   "src": [
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "护卫舰支队编号汇编（14支 516淮北/517衢州；15支 534宝鸡；16支 522资阳/523红河）",
+     "url": "https://baijiahao.baidu.com/s?id=1775098113906092140",
+     "date": "2023-08-24",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_quzhou",
+   "side": "red",
+   "name": "衢州舰编队·台岛北实弹位",
+   "nm": "衢州舰编队·台岛北实弹位",
+   "type": "unit_group",
+   "geo": [
+    120.6,
+    25.4
+   ],
+   "km": [
+    266.1,
+    121.5
+   ],
+   "world": [
+    -539.2,
+    -1548.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "29日 09:30 北部海域序列实弹；东部战区海军某护卫舰支队",
+   "units": [
+    "517 衢州（054A）",
+    "温州舰、德阳舰同支队"
+   ],
+   "conf": "A",
+   "note": "支队舷号归属为 C 级汇编",
+   "src": [
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "新华社：东部战区海军某护卫舰支队（衢州/温州/德阳）",
+     "url": "http://www.xinhuanet.com.cn/politics/20260114/b9c36d1c55b14237a756410ea59d9ec0/c.html",
+     "date": "2026-01-14",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_taiyuan",
+   "side": "red",
+   "name": "太原舰编队（131）·台岛东实弹位",
+   "nm": "太原舰编队",
+   "type": "unit_group",
+   "geo": [
+    122.1,
+    22.6
+   ],
+   "km": [
+    411.3,
+    431.0
+   ],
+   "world": [
+    913.1,
+    1547.4
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "29日 09:30 以东海域序列实弹；104 无锡同期获 YJ-20 发射资质认证",
+   "units": [
+    "131 太原（052D）",
+    "104 无锡（055，报道）"
+   ],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_075grp",
+   "side": "red",
+   "name": "075 两栖攻击舰编队·台岛东南（首次入围台演训）",
+   "nm": "075 两栖攻击舰编队·台岛东南",
+   "type": "unit_group",
+   "geo": [
+    121.5,
+    22.3
+   ],
+   "km": [
+    353.2,
+    464.2
+   ],
+   "world": [
+    332.2,
+    1879.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "与轰炸机编队 + 反舰常导 同域，科目：舰机协同/对海打击/远程奔袭/综合保障",
+   "units": [
+    "31 海南舰（075）",
+    "106 延安舰（055）",
+    "554 通辽舰（054A）",
+    "907 骆马湖舰（903A）"
+   ],
+   "conf": "B",
+   "note": "编队舷号清单来自腾讯/中国军号汇编；",
+   "src": [
+    {
+     "ref": "正义使命-2025 条目（编队/海警/演训区汇编，引东部战区与中国军号）",
+     "url": "https://baike.baidu.com/item/%E6%AD%A3%E4%B9%89%E4%BD%BF%E5%91%BD-2025/67141606",
+     "date": "2025-12-31",
+     "conf": "B"
+    },
+    {
+     "ref": "075 编队舷号清单（31海南+106延安+554通辽+907骆马湖）",
+     "url": "https://cj.sina.cn/articles/view/5729800514/15585d142001022rjy",
+     "date": "2026-01-01",
+     "conf": "C"
+    },
+    {
+     "ref": "中央社（游凯翔）：截至 12-29 15:00 共机 89 架次、67 架次入应变区域；共舰 14 艘 + 海警 14 艘；两栖攻击舰编队 4 艘位于东太平洋",
+     "url": "https://www.cna.com.tw/news/aipl/202512290243.aspx",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "联合报同日报道补充：9 艘共舰入 24 浬线、5 艘越中线；海南舰 LHA-31 编队在台岛东南外海",
+     "url": "https://udn.com/news/story/10930/9232941",
+     "date": "2025-12-29",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_lz_strike",
+   "side": "red",
+   "name": "陆军远程火力 + 联合火力突击（台岛南海域）",
+   "nm": "陆军远程火力 + 联合火力突击",
+   "type": "unit_group",
+   "geo": [
+    120.5,
+    21.6
+   ],
+   "km": [
+    256.4,
+    541.6
+   ],
+   "world": [
+    -636.0,
+    2653.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "30日 09:00 陆军远程箱火实弹（北部海域）；13:00 陆协同海/空/火箭军远程联合火力突击（南部海域）",
+   "units": [
+    "PHL-191 远程箱式火箭炮",
+    "DF-15 系列",
+    "DF-17（画面）"
+   ],
+   "conf": "A",
+   "note": "李熹海军大校通报",
+   "src": [
+    {
+     "ref": "正义使命-2025 条目（编队/海警/演训区汇编，引东部战区与中国军号）",
+     "url": "https://baike.baidu.com/item/%E6%AD%A3%E4%B9%89%E4%BD%BF%E5%91%BD-2025/67141606",
+     "date": "2025-12-31",
+     "conf": "B"
+    },
+    {
+     "ref": "中国日报：J-20/J-16/H-6K 实弹与 PHL-191、DF-17 画面",
+     "url": "https://www.chinadaily.com.cn/a/202512/29/WS69520dc7a310d6866eb30f80.html",
+     "date": "2025-12-29",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "red_jm25_118",
+   "side": "red",
+   "name": "118 乌鲁木齐（052D）与台 1108 班超对峙·台岛东南海",
+   "nm": "118 乌鲁木齐",
+   "type": "unit_group",
+   "geo": [
+    121.6,
+    22.55
+   ],
+   "km": [
+    362.9,
+    436.6
+   ],
+   "world": [
+    429.0,
+    1602.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "演训期间唯一有公开的red—blue 舰舰接触事件",
+   "units": [
+    "118 乌鲁木齐（052D）",
+    "台 1108 班超（基隆级）"
+   ],
+   "conf": "C",
+   "note": "两源均为 C，仅登记为接触位置；首版误写 121.00/22.50（落在本岛内陆），已按「台岛东南」修正",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_navy_hq",
+   "side": "blue",
+   "name": "海军舰队指挥部（左营）",
+   "nm": "海军舰队指挥部",
+   "type": "base_navy",
+   "geo": [
+    120.29,
+    22.68
+   ],
+   "km": [
+    236.1,
+    422.2
+   ],
+   "world": [
+    -839.3,
+    1458.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台海军水面/潜艇/两栖兵力总指挥；战时反登陆调度核心",
+   "units": [
+    "168/124/131/146/151/192 舰队",
+    "256 战队",
+    "反潜飞行大队"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_f168",
+   "side": "blue",
+   "name": "168 舰队（苏澳，231/251 战队）",
+   "nm": "168 舰队",
+   "type": "sqdn",
+   "geo": [
+    121.85,
+    24.59
+   ],
+   "km": [
+    387.1,
+    211.0
+   ],
+   "world": [
+    671.1,
+    -652.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "北部海区制海／反登陆拦截；基隆级为唯一区域防空兵力",
+   "units": [
+    "基隆级 DDG-1801/1802/1803/1805（在役 4/4）",
+    "济阳级 FFG-933/934/937/938/939（兰阳 935 退役）"
+   ],
+   "conf": "B",
+   "note": "台海军官网 基隆级页（2024-04-12 更新）列 4 舰交舰 2005-06、驻苏澳、隶 168 舰队且无退役记载；2026-06-06 国防部汰除报告点名的是 5 艘济阳级 + 2 艘锦江级，不含基隆级 → 旧「基隆级全部 4 艘退废」为伪（唯一来源是 C 级 PRC 汇编）",
+   "src": [
+    {
+     "ref": "台海军官网 基隆级页（2024-04-12 更新）：2005-2006 交舰，基隆/苏澳/左营/马公，驻地苏澳港、隶属 168 舰队；无退役记载",
+     "url": "https://navy.mnd.gov.tw/AboutUs/Other_Info.aspx?AID=30035&ID=1",
+     "date": "2024-04-12",
+     "conf": "A"
+    },
+    {
+     "ref": "自由时报军武：2026-06-06 国防部汰除报告点名 5 艘济阳级 + 2 艘锦江级，不含基隆级（「基隆级全退废」证伪）",
+     "url": "https://def.ltn.com.tw/article/breakingnews/5462705",
+     "date": "2026-06-06",
+     "conf": "B"
+    },
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_f124",
+   "side": "blue",
+   "name": "124 舰队（左营，242/264 战队）",
+   "nm": "124 舰队",
+   "type": "sqdn",
+   "geo": [
+    120.26,
+    22.66
+   ],
+   "km": [
+    233.2,
+    424.4
+   ],
+   "world": [
+    -868.3,
+    1481.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "中部海区制海；康定级改装后担中程防空",
+   "units": [
+    "康定级 PFG-1202/1203/1205/1206/1207/1208",
+    "承德 1208 首改（Artisan + 华扬 VLS + 32×TC-2N）"
+   ],
+   "conf": "B",
+   "note": "124/146 归属与 wiki 版本冲突，见 conflicts",
+   "src": [
+    {
+     "ref": "Focus Taiwan：康定级承德 PFG-1208 改裝后海上测试（Artisan+华扬VLS+32×TC-2N）",
+     "url": "https://focustaiwan.tw/politics/202508030008",
+     "date": "2025-08-03",
+     "conf": "A"
+    },
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_f146",
+   "side": "blue",
+   "name": "146 舰队（马公，226/268 战队）",
+   "nm": "146 舰队",
+   "type": "sqdn",
+   "geo": [
+    119.58,
+    23.56
+   ],
+   "km": [
+    167.3,
+    324.9
+   ],
+   "world": [
+    -1526.7,
+    486.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "南部海区／台海与巴士海峡方向；覆盖澎湖",
+   "units": [
+    "成功级 PFG-1101~1112",
+    "派里级 FFH-911 铭传 / 912 逢甲"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_f131",
+   "side": "blue",
+   "name": "131 舰队（基隆，212/232/252 战队）",
+   "nm": "131 舰队",
+   "type": "sqdn",
+   "geo": [
+    121.73,
+    25.13
+   ],
+   "km": [
+    375.5,
+    151.3
+   ],
+   "world": [
+    554.9,
+    -1249.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "北部近岸巡逻／快艇突击（光六已 2026-07 划出）",
+   "units": [
+    "锦江级 PGK-16xx",
+    "沱江级 PGG-619~627",
+    "光六 31 艘 → 滨海指挥部"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "上报/自由时报：滨海作战指挥部 2026-07-01 虎尾成军，简士渊首任，并入海锋大队+光六31艘",
+     "url": "https://www.storm.mg/article/11041719",
+     "date": "2026-07-28",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_f151",
+   "side": "blue",
+   "name": "151 舰队（左营，两栖与勤务）",
+   "nm": "151 舰队",
+   "type": "sqdn",
+   "geo": [
+    120.25,
+    22.63
+   ],
+   "km": [
+    232.2,
+    427.7
+   ],
+   "world": [
+    -878.0,
+    1514.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "兵力和物资海上运输／外岛运补（汉光42 玉山舰花莲港卸载）",
+   "units": [
+    "玉山级 LPD-1401(+1402)",
+    "磐石 AOE-532",
+    "武夷 AO-1402"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "汉光42号：兵推 2026-04-11~24、实兵 08-05~14（滨海指挥部首次参演、金门实弹 08-08）",
+     "url": "https://baike.baidu.com/item/%E6%B1%89%E5%85%8942%E5%8F%B7%E6%BC%94%E4%B9%A0/68333378",
+     "date": "2026-08",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_f192",
+   "side": "blue",
+   "name": "192 舰队（左营，扫雷／登陆艇）",
+   "nm": "192 舰队",
+   "type": "sqdn",
+   "geo": [
+    120.24,
+    22.62
+   ],
+   "km": [
+    231.2,
+    428.8
+   ],
+   "world": [
+    -887.7,
+    1525.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "水雷战与近岸运输；部分兵力 2026-07 传划归滨海指挥部（未证实）",
+   "units": [
+    "扫雷舰／登陆艇若干"
+   ],
+   "conf": "C",
+   "note": "划归传闻未证实",
+   "src": [
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "上报/自由时报：滨海作战指挥部 2026-07-01 虎尾成军，简士渊首任，并入海锋大队+光六31艘",
+     "url": "https://www.storm.mg/article/11041719",
+     "date": "2026-07-28",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_s256",
+   "side": "blue",
+   "name": "256 战队（左营，潜艇）",
+   "nm": "256 战队",
+   "type": "sqdn",
+   "geo": [
+    120.25,
+    22.62
+   ],
+   "km": [
+    232.2,
+    428.8
+   ],
+   "world": [
+    -878.0,
+    1525.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "反潜／制海迟滞；海鲲号成军后首支自制潜兵力",
+   "units": [
+    "海龙 SS-793 / 海虎 SS-794（剑龙级）",
+    "海鲲 SS-711（2026-10-02 第23次海测/第17次下潜）"
+   ],
+   "conf": "B",
+   "note": "舷号 SS-711（非 SS-501）；基地苏澳说法为 C 级冲突",
+   "src": [
+    {
+     "ref": "联合报：海鲲号舷号 SS-711，第23次海上测放/第17次下潜（2026-10-02），成军目标 2026 底→256战队左营",
+     "url": "https://udn.com/news/story/10930/9678492",
+     "date": "2026-10-01",
+     "conf": "B"
+    },
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_nhel",
+   "side": "blue",
+   "name": "海军反潜飞行大队（左营）",
+   "nm": "海军反潜飞行大队",
+   "type": "base_air",
+   "geo": [
+    120.24,
+    22.61
+   ],
+   "km": [
+    231.2,
+    429.9
+   ],
+   "world": [
+    -887.7,
+    1536.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "舰载/岸基反潜，配合 P-3C 覆盖巴士海峡",
+   "units": [
+    "S-70C(M)-1/2 约 18 机（MH-60R 采购取消）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_coastal_cmd",
+   "side": "blue",
+   "name": "滨海作战指挥部（云林虎尾）",
+   "nm": "滨海作战指挥部",
+   "type": "base_navy",
+   "geo": [
+    120.43,
+    23.71
+   ],
+   "km": [
+    249.6,
+    308.3
+   ],
+   "world": [
+    -703.7,
+    320.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "军团级：统管岸置反舰导弹 + 海洋监侦雷达 + 导弹快艇，2026 汉光42 首演",
+   "units": [
+    "滨海第 1~3 大队（3 支海锋大队 2026-07-01 更衔）",
+    "海洋监侦指挥部雷达",
+    "光华六号 3 中队 31 艘",
+    "岸置雄二/三/三增程 + 鱼叉 约1400 枚"
+   ],
+   "conf": "B",
+   "note": "正式英文名 Littoral Combat Command（LCC）、2026-07-01 虎尾挂牌、首任指挥官 简士渊（GMU/中时/信传媒多源一致）；海锋大队更衔滨海大队（自由军武 07-28/08-08）",
+   "src": [
+    {
+     "ref": "上报/自由时报：滨海作战指挥部 2026-07-01 虎尾成军，简士渊首任，并入海锋大队+光六31艘",
+     "url": "https://www.storm.mg/article/11041719",
+     "date": "2026-07-28",
+     "conf": "B"
+    },
+    {
+     "ref": "汉光42号：兵推 2026-04-11~24、实兵 08-05~14（滨海指挥部首次参演、金门实弹 08-08）",
+     "url": "https://baike.baidu.com/item/%E6%B1%89%E5%85%8942%E5%8F%B7%E6%BC%94%E4%B9%A0/68333378",
+     "date": "2026-08",
+     "conf": "B"
+    },
+    {
+     "ref": "GMU Taiwan Security Monitor：正式英文名 Littoral Combat Command（滨海作战指挥部，LCC），2026-07-01 成军，HQ 云林虎尾",
+     "url": "https://tsm.schar.gmu.edu/everything-to-know-about-taiwans-new-littoral-combat-command/",
+     "date": "2026-05-29",
+     "conf": "B"
+    },
+    {
+     "ref": "自由时报军武 2026-07-28：滨海作战指挥部 7-1 编成，3 支海锋大队更衔滨海大队；08-08 续报并入海洋监侦雷达部队",
+     "url": "https://def.ltn.com.tw/article/breakingnews/5520223",
+     "date": "2026-07-28",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_huwei",
+   "side": "blue",
+   "name": "岸置鱼叉·云林虎尾",
+   "nm": "岸置鱼叉·云林虎尾",
+   "type": "site_ssm",
+   "geo": [
+    120.43,
+    23.71
+   ],
+   "km": [
+    249.6,
+    308.3
+   ],
+   "world": [
+    -703.7,
+    320.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台海中部西侧对海打击；与滨海指挥部同址",
+   "units": [
+    "HCDS 营级",
+    "Mk141 发射车 ×若干",
+    "鱼叉 RGM-84L-2"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_xinzhong",
+   "side": "blue",
+   "name": "岸置鱼叉·台南新中（官田）",
+   "nm": "岸置鱼叉·台南新中",
+   "type": "site_ssm",
+   "geo": [
+    120.35,
+    23.2
+   ],
+   "km": [
+    241.9,
+    364.7
+   ],
+   "world": [
+    -781.2,
+    884.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台南以北、嘉南沿海对海打击",
+   "units": [
+    "HCDS 营级"
+   ],
+   "conf": "B",
+   "note": "引擎旧 BLUE_SHORE 缺此阵地",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_zuoying",
+   "side": "blue",
+   "name": "岸置鱼叉·左营军港",
+   "nm": "岸置鱼叉·左营军港",
+   "type": "site_ssm",
+   "geo": [
+    120.28,
+    22.68
+   ],
+   "km": [
+    235.1,
+    422.2
+   ],
+   "world": [
+    -849.0,
+    1458.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "军港自卫 + 南部海峡对海打击",
+   "units": [
+    "HCDS 营级"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_dongan",
+   "side": "blue",
+   "name": "岸置鱼叉·屏东东岸（潮州）",
+   "nm": "岸置鱼叉·屏东东岸",
+   "type": "site_ssm",
+   "geo": [
+    120.54,
+    22.55
+   ],
+   "km": [
+    260.3,
+    436.6
+   ],
+   "world": [
+    -597.2,
+    1602.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "巴士海峡北口封控",
+   "units": [
+    "HCDS 营级"
+   ],
+   "conf": "B",
+   "note": "引擎旧表把它写成 hf3（雄三）型名，实为鱼叉",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_puqian",
+   "side": "blue",
+   "name": "岸置鱼叉·屏东埔墘",
+   "nm": "岸置鱼叉·屏东埔墘",
+   "type": "site_ssm",
+   "geo": [
+    120.49,
+    22.67
+   ],
+   "km": [
+    255.4,
+    423.3
+   ],
+   "world": [
+    -645.7,
+    1470.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "屏东平原内侧第二处，掩护恒春",
+   "units": [
+    "HCDS 营级"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hcds_taiping",
+   "side": "blue",
+   "name": "岸置鱼叉·台东太平",
+   "nm": "岸置鱼叉·台东太平",
+   "type": "site_ssm",
+   "geo": [
+    121.15,
+    22.87
+   ],
+   "km": [
+    319.3,
+    401.2
+   ],
+   "world": [
+    -6.6,
+    1248.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台岛东侧唯一公开对海阵地（面向太平洋approach）",
+   "units": [
+    "HCDS 营级"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_heping",
+   "side": "blue",
+   "name": "海锋·和平岛固定阵地（基隆）",
+   "nm": "海锋·和平岛固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    121.74,
+    25.17
+   ],
+   "km": [
+    376.5,
+    146.9
+   ],
+   "world": [
+    564.6,
+    -1294.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "北部出入口封控（基隆港外）",
+   "units": [
+    "雄二/雄三发射位"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_siaoliu",
+   "side": "blue",
+   "name": "海锋·小琉球固定阵地",
+   "nm": "海锋·小琉球固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    120.37,
+    22.33
+   ],
+   "km": [
+    243.8,
+    460.9
+   ],
+   "world": [
+    -761.8,
+    1845.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台湾海峡南口、扼巴士海峡西侧",
+   "units": [
+    "雄二/雄三发射位"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_sanzhi",
+   "side": "blue",
+   "name": "海锋·三芝沙仑固定阵地（新北）",
+   "nm": "海锋·三芝沙仑固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    121.5,
+    25.25
+   ],
+   "km": [
+    353.2,
+    138.1
+   ],
+   "world": [
+    332.2,
+    -1382.4
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台北外海与淡水河口北翼",
+   "units": [
+    "雄三发射位"
+   ],
+   "conf": "C",
+   "note": "引擎已有 hf3 三芝阵地，坐标一致",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_dongyin",
+   "side": "blue",
+   "name": "海锋·东引固定阵地",
+   "nm": "海锋·东引固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    120.52,
+    25.93
+   ],
+   "km": [
+    258.3,
+    62.9
+   ],
+   "world": [
+    -616.6,
+    -2134.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "外岛前出，封控闽江口—台海峡北段",
+   "units": [
+    "雄二发射位"
+   ],
+   "conf": "C",
+   "note": "面积仅 3.7km²，阵地贴近陆地格网边缘",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_xiyu",
+   "side": "blue",
+   "name": "海锋·澎湖西屿外垵固定阵地",
+   "nm": "海锋·澎湖西屿外垵固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    119.55,
+    23.59
+   ],
+   "km": [
+    164.4,
+    321.6
+   ],
+   "world": [
+    -1555.8,
+    452.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台海中央枢纽、两侧对海",
+   "units": [
+    "雄二发射位"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_hetianshan",
+   "side": "blue",
+   "name": "海锋·花莲贺田山固定阵地（寿丰）",
+   "nm": "海锋·花莲贺田山固定阵地",
+   "type": "site_ssm",
+   "geo": [
+    121.56,
+    24.02
+   ],
+   "km": [
+    359.0,
+    274.0
+   ],
+   "world": [
+    390.3,
+    -22.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台岛东侧花莲外海",
+   "units": [
+    "雄二/雄三发射位"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_tamsui",
+   "side": "blue",
+   "name": "海锋机动·淡水河口",
+   "nm": "海锋机动·淡水河口",
+   "type": "site_ssm",
+   "geo": [
+    121.45,
+    25.13
+   ],
+   "km": [
+    348.4,
+    151.3
+   ],
+   "world": [
+    283.8,
+    -1249.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "机动发射（隐藏/转移），北部反击位",
+   "units": [
+    "雄三增程机动中队"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_bali",
+   "side": "blue",
+   "name": "海锋机动·台北八里",
+   "nm": "海锋机动·台北八里",
+   "type": "site_ssm",
+   "geo": [
+    121.43,
+    25.12
+   ],
+   "km": [
+    346.4,
+    152.4
+   ],
+   "world": [
+    264.5,
+    -1238.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "机动发射，观音山侧翼",
+   "units": [
+    "雄二机动中队"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_dapiantou",
+   "side": "blue",
+   "name": "海锋机动·高雄大片头",
+   "nm": "海锋机动·高雄大片头",
+   "type": "site_ssm",
+   "geo": [
+    120.33,
+    22.72
+   ],
+   "km": [
+    239.9,
+    417.8
+   ],
+   "world": [
+    -800.6,
+    1414.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "机动发射，高雄港北侧",
+   "units": [
+    "雄二机动中队"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_chaozhou",
+   "side": "blue",
+   "name": "海锋机动·屏东潮州",
+   "nm": "海锋机动·屏东潮州",
+   "type": "site_ssm",
+   "geo": [
+    120.54,
+    22.55
+   ],
+   "km": [
+    260.3,
+    436.6
+   ],
+   "world": [
+    -597.2,
+    1602.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "机动发射与鱼叉东岸阵地同域",
+   "units": [
+    "雄三机动中队"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "搜狐：台军 6 支反舰导弹机动中队与海锋固定阵地清单（和平岛/小琉球/三芝/东引/西屿/贺田山）",
+     "url": "https://m.sohu.com/a/909266791_121622910/",
+     "date": "2025-06-30",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_9sites",
+   "side": "blue",
+   "name": "岸置雄风拟建阵地（9 座，位置机密）",
+   "nm": "岸置雄风拟建阵地",
+   "type": "site_ssm",
+   "geo": [
+    120.95,
+    23.6
+   ],
+   "km": [
+    300.0,
+    320.5
+   ],
+   "world": [
+    -200.3,
+    441.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "中评社：15 座新建导弹阵地 = 6 岸置鱼叉 + 9 岸置雄风，位置列为机密",
+   "units": [
+    "9 座（未公布）"
+   ],
+   "conf": "C",
+   "note": "不布点：仅记为整体威胁，坐标取全岛几何中心",
+   "src": [
+    {
+     "ref": "中评社：台军拟建 15 座导弹阵地（6 座岸置鱼叉 + 9 座岸置雄风，位置列为机密）",
+     "url": "https://www.crntt.com/doc/153_0_106807025_1.html",
+     "date": "2023-11-08",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_yilan",
+   "side": "blue",
+   "name": "海锋机动·宜兰壮围过岭保安宫",
+   "nm": "海锋机动·宜兰壮围过岭保安宫",
+   "type": "site_ssm",
+   "geo": [
+    121.80962,
+    24.75663
+   ],
+   "km": [
+    383.2,
+    192.6
+   ],
+   "world": [
+    632.0,
+    -837.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "正义使命-2025 期间（12-29 午后）首次曝光的预设阵地：4 发射车 + 1 火控车，发射箱起竖、射向东北外海；距海岸约 300m",
+   "units": [
+    "雄二/雄三发射车 4 + 火控车 1"
+   ],
+   "conf": "B",
+   "note": "两稿互校：腾讯独家给到「壮围乡靠东海岸的保安宫前停车场」并研判车组自苏澳基地机动（约 35 分钟）；网易分析给出庙名（过岭保安宫中坛元帅宫庙）与逐字坐标 24.75663/121.81601。误差来源见 gaps「东岸 0.8km 海岸格网」",
+   "src": [
+    {
+     "ref": "腾讯新闻独家：台军应对正义使命-2025 多地出动陆基反舰导弹梳理（宜兰壮围乡保安宫前停车场 4 发射车+1 火控车；研判车组自苏澳基地机动；第6机动中队驻地桃园龟山大岗营区）",
+     "url": "https://view.inews.qq.com/wxn/20251230A05OMZ00",
+     "date": "2025-12-30",
+     "conf": "B"
+    },
+    {
+     "ref": "网易：「变与不变」雄风反舰导弹系统部署特点分析——过岭保安宫中坛元帅宫庙前停车场 24.75663N/121.81601E（首次曝光预设阵地）；台东市海滨公园停车场 22.75499N/121.16282E（往年训战常用预设阵地，距志航 6km）",
+     "url": "https://m.163.com/dy/article/KJ7OOP200552231F.html",
+     "date": "2026-01-14",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_taitung",
+   "side": "blue",
+   "name": "海锋机动·台东市海滨公园",
+   "nm": "海锋机动·台东市海滨公园",
+   "type": "site_ssm",
+   "geo": [
+    121.16282,
+    22.75499
+   ],
+   "km": [
+    320.6,
+    413.9
+   ],
+   "world": [
+    5.8,
+    1376.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "往年训战常用预设阵地（雄风 + 防空部队），直面绿岛与台岛东南向海域，距志航基地 6km；2025-12-29 花莲南下车队未第一时间进驻",
+   "units": [
+    "雄二/雄三预设战位"
+   ],
+   "conf": "C",
+   "note": "取代引擎旧表无源的『海锋东·雄三 知本阵地』点位名（旧点 317.4/417.8 与此 320.6/413.9 相差约 5km，实为同一带）",
+   "src": [
+    {
+     "ref": "网易：「变与不变」雄风反舰导弹系统部署特点分析——过岭保安宫中坛元帅宫庙前停车场 24.75663N/121.81601E（首次曝光预设阵地）；台东市海滨公园停车场 22.75499N/121.16282E（往年训战常用预设阵地，距志航 6km）",
+     "url": "https://m.163.com/dy/article/KJ7OOP200552231F.html",
+     "date": "2026-01-14",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_site_hualien",
+   "side": "blue",
+   "name": "海锋·花莲复兴南营区（驻地与阵地）",
+   "nm": "海锋·花莲复兴南营区",
+   "type": "site_ssm",
+   "geo": [
+    121.61338,
+    24.04008
+   ],
+   "km": [
+    364.2,
+    271.8
+   ],
+   "world": [
+    442.0,
+    -44.8
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "花莲新城乡：雄风发射车驻地即阵地（岛内民众画面 + 卫星影像比对，2024-10 联剑-2024B 期间被地理定位）",
+   "units": [
+    "雄风发射车组"
+   ],
+   "conf": "C",
+   "note": "同一链条多源同稿（微博 @热力机器人 定位），坐标逐字 24.04008/121.61974；属自媒体地理定位，非官方。",
+   "src": [
+    {
+     "ref": "腾讯新闻：同一批地理定位（微博 @热力机器人）——淡水区中正路一段 25.17582/121.42764；花莲新城乡复兴南营区 24.04008/121.61974",
+     "url": "https://new.qq.com/rain/a/20241017A04WCJ00",
+     "date": "2024-10-17",
+     "conf": "C"
+    },
+    {
+     "ref": "凤凰军事引台「青年日报」：联剑-2024B 台军暴露阵地——花莲渔港（海锋机动4中队）、淡水河口中正路一段苍穹雷达车 25.17582/121.42764、屏东猫鼻头公园停车场（左营忠义营区机动1中队，连续两年）",
+     "url": "https://mil.ifeng.com/c/8dhYzHruqTl",
+     "date": "2024-10-17",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_hualien_port",
+   "side": "blue",
+   "name": "海锋机动·花莲渔港",
+   "nm": "海锋机动·花莲渔港",
+   "type": "site_ssm",
+   "geo": [
+    121.624,
+    23.994
+   ],
+   "km": [
+    365.2,
+    276.9
+   ],
+   "world": [
+    452.3,
+    6.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "联剑-2024B（2024-10-14）海锋大队机动4中队实证出动位置，台东/花莲外海监视与威慑",
+   "units": [
+    "雄风发射车组（机动4中队）"
+   ],
+   "conf": "C",
+   "note": "源只给地名「花莲渔港」，坐标取地名词书值 ±1km",
+   "src": [
+    {
+     "ref": "凤凰军事引台「青年日报」：联剑-2024B 台军暴露阵地——花莲渔港（海锋机动4中队）、淡水河口中正路一段苍穹雷达车 25.17582/121.42764、屏东猫鼻头公园停车场（左营忠义营区机动1中队，连续两年）",
+     "url": "https://mil.ifeng.com/c/8dhYzHruqTl",
+     "date": "2024-10-17",
+     "conf": "C"
+    },
+    {
+     "ref": "腾讯新闻：同一批地理定位（微博 @热力机器人）——淡水区中正路一段 25.17582/121.42764；花莲新城乡复兴南营区 24.04008/121.61974",
+     "url": "https://new.qq.com/rain/a/20241017A04WCJ00",
+     "date": "2024-10-17",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_mob_maobitou",
+   "side": "blue",
+   "name": "海锋机动·屏东猫鼻头公园停车场",
+   "nm": "海锋机动·屏东猫鼻头公园停车场",
+   "type": "site_ssm",
+   "geo": [
+    120.8167,
+    21.9292
+   ],
+   "km": [
+    287.1,
+    505.2
+   ],
+   "world": [
+    -329.3,
+    2289.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "联合利剑-2024A/B 连续两年同一位置部署（左营忠义营区机动1中队沿屏鹅公路南下）；射界干净，得陆战99旅、鹅銮鼻对海雷达站、空军3联队与左营基地支援",
+   "units": [
+    "雄二发射车组（机动1中队）"
+   ],
+   "conf": "C",
+   "note": "巴士海峡北口封控位；源给地名未给经纬度，坐标取地名词书值 ±1km",
+   "src": [
+    {
+     "ref": "凤凰军事引台「青年日报」：联剑-2024B 台军暴露阵地——花莲渔港（海锋机动4中队）、淡水河口中正路一段苍穹雷达车 25.17582/121.42764、屏东猫鼻头公园停车场（左营忠义营区机动1中队，连续两年）",
+     "url": "https://mil.ifeng.com/c/8dhYzHruqTl",
+     "date": "2024-10-17",
+     "conf": "C"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_hf_dagang",
+   "side": "blue",
+   "name": "海锋第6机动中队驻地·桃园龟山大岗营区",
+   "nm": "海锋第6机动中队驻地·桃园龟山大岗营区",
+   "type": "site_ssm",
+   "geo": [
+    121.37,
+    24.9933
+   ],
+   "km": [
+    340.6,
+    166.4
+   ],
+   "world": [
+    206.4,
+    -1098.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "研判 2025-12-29 机动至宜兰壮围阵地的车组隶属此营区（源称「仍需更多消息佐证」）",
+   "units": [
+    "海锋大队第6机动中队"
+   ],
+   "conf": "C",
+   "note": "取代引擎旧表无源的『海锋北·雄二 桃园观音阵地』绝对点位，改为本群相对机动位",
+   "src": [
+    {
+     "ref": "腾讯新闻独家：台军应对正义使命-2025 多地出动陆基反舰导弹梳理（宜兰壮围乡保安宫前停车场 4 发射车+1 火控车；研判车组自苏澳基地机动；第6机动中队驻地桃园龟山大岗营区）",
+     "url": "https://view.inews.qq.com/wxn/20251230A05OMZ00",
+     "date": "2025-12-30",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_radar_cangqiong",
+   "side": "blue",
+   "name": "苍穹机动雷达·淡水河口中正路",
+   "nm": "苍穹机动雷达·淡水河口中正路",
+   "type": "site_radar",
+   "geo": [
+    121.42764,
+    25.17582
+   ],
+   "km": [
+    346.2,
+    146.3
+   ],
+   "world": [
+    262.2,
+    -1300.4
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "海军机动雷达侦搜中队远程雷达车，进驻北部海岸野战阵地监控北部外海舰艇；2020 年岛内「联合作战防空训练」影片首次出现",
+   "units": [
+    "苍穹远程雷达车（机动雷达侦搜中队）"
+   ],
+   "conf": "C",
+   "note": "坐标逐字 25.17582/121.42764（微博地理定位 + 街景比对）；与长白（AN/MPQ-78，天弓三配套）是两套系统，不可混用",
+   "src": [
+    {
+     "ref": "凤凰军事引台「青年日报」：联剑-2024B 台军暴露阵地——花莲渔港（海锋机动4中队）、淡水河口中正路一段苍穹雷达车 25.17582/121.42764、屏东猫鼻头公园停车场（左营忠义营区机动1中队，连续两年）",
+     "url": "https://mil.ifeng.com/c/8dhYzHruqTl",
+     "date": "2024-10-17",
+     "conf": "C"
+    },
+    {
+     "ref": "腾讯新闻：同一批地理定位（微博 @热力机器人）——淡水区中正路一段 25.17582/121.42764；花莲新城乡复兴南营区 24.04008/121.61974",
+     "url": "https://new.qq.com/rain/a/20241017A04WCJ00",
+     "date": "2024-10-17",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_pavepaws",
+   "side": "blue",
+   "name": "乐山铺路爪（FPS-115）预警雷达站",
+   "nm": "乐山铺路爪",
+   "type": "site_radar",
+   "geo": [
+    121.186,
+    24.583
+   ],
+   "km": [
+    322.8,
+    211.8
+   ],
+   "world": [
+    28.2,
+    -645.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "对大陆弹道导弹早期预警，与美军共享轨迹；新竹尖石—苗栗三义交界山脊",
+   "units": [
+    "AN/FPS-115 双面相控阵列（2 发 1 收）"
+   ],
+   "conf": "B",
+   "note": "与引擎 BLUE_SHORE 现点 (324,212) 吻合（差 1.4km）；本表以引擎既有值反推经纬度",
+   "src": [
+    {
+     "ref": "台湾防务部门 2026 报告摘要（海空军组织调整、滨海指挥部与 M1A2T/HIMARS 编组）",
+     "url": "https://view.inews.qq.com/k/20251022A05OIX00",
+     "date": "2025-10-22",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_ad_792",
+   "side": "blue",
+   "name": "防空炮兵第792旅（北部，天弓/爱国者/霍克）",
+   "nm": "防空炮兵第792旅",
+   "type": "base_navy",
+   "geo": [
+    121.53,
+    25.05
+   ],
+   "km": [
+    356.1,
+    160.2
+   ],
+   "world": [
+    361.3,
+    -1161.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台北中枢要地防空",
+   "units": [
+    "天弓二/三营",
+    "爱国者 PAC-2/3 营",
+    "霍克营"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_ad_793",
+   "side": "blue",
+   "name": "防空炮兵第793旅（中部）",
+   "nm": "防空炮兵第793旅",
+   "type": "base_navy",
+   "geo": [
+    120.68,
+    24.16
+   ],
+   "km": [
+    273.8,
+    258.6
+   ],
+   "world": [
+    -461.7,
+    -177.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台中—清泉岗要地防空",
+   "units": [
+    "天弓/爱国者/霍克营连"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_ad_794",
+   "side": "blue",
+   "name": "防空炮兵第794旅（南部）",
+   "nm": "防空炮兵第794旅",
+   "type": "base_navy",
+   "geo": [
+    120.32,
+    22.72
+   ],
+   "km": [
+    239.0,
+    417.8
+   ],
+   "world": [
+    -810.2,
+    1414.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "高雄—左营—屏东要地防空",
+   "units": [
+    "天弓二/三营",
+    "爱国者营"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_ad_795",
+   "side": "blue",
+   "name": "防空炮兵第795旅（东部）",
+   "nm": "防空炮兵第795旅",
+   "type": "base_navy",
+   "geo": [
+    121.58,
+    23.99
+   ],
+   "km": [
+    361.0,
+    277.4
+   ],
+   "world": [
+    409.7,
+    10.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "花莲—佳山基地防空",
+   "units": [
+    "天弓/爱国者营连"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_pac3_nangang",
+   "side": "blue",
+   "name": "爱国者·台北南港阵地",
+   "nm": "爱国者·台北南港阵地",
+   "type": "site_sam",
+   "geo": [
+    121.61,
+    25.03
+   ],
+   "km": [
+    363.9,
+    162.4
+   ],
+   "world": [
+    438.7,
+    -1139.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台北中枢要地防空（南港—内湖翼侧）",
+   "units": [
+    "PAC-2/3 营级发射位"
+   ],
+   "conf": "C",
+   "note": "地名口径来自公开防空部署梳理（C 级），坐标由引擎 BLUE_SHORE 现值 (363.9,162.4) 反推，非实测阵地点",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_pac3_wanli",
+   "side": "blue",
+   "name": "爱国者·新北万里阵地",
+   "nm": "爱国者·新北万里阵地",
+   "type": "site_sam",
+   "geo": [
+    121.66,
+    25.18
+   ],
+   "km": [
+    368.7,
+    145.8
+   ],
+   "world": [
+    487.1,
+    -1305.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "北部出入口与淡水河口北翼防空",
+   "units": [
+    "PAC-2/3 营级发射位"
+   ],
+   "conf": "C",
+   "note": "同上：坐标由引擎值 (368.7,145.8) 反推",
+   "src": [
+    {
+     "ref": "观察者网《台湾军力浅析·空军(7)》：天弓/爱国者/霍克营连与阵地方位",
+     "url": "https://user.guancha.cn/main/content?id=469670",
+     "date": "2021-02",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_pac3_pinglin",
+   "side": "blue",
+   "name": "爱国者·台中坪林阵地",
+   "nm": "爱国者·台中坪林阵地",
+   "type": "site_sam",
+   "geo": [
+    120.735,
+    24.15
+   ],
+   "km": [
+    279.2,
+    259.7
+   ],
+   "world": [
+    -408.4,
+    -166.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "清泉岗—台中要地防空",
+   "units": [
+    "PAC-2/3 营级发射位"
+   ],
+   "conf": "B",
+   "note": "专名有源、坐标改正）：「台中市太平区坪林」被台国防部记者会(2007)、中时(2016 动工)、自由(2020 部队进驻)、联合报(2018) 反复点名为 PAC-3 阵地；点位取 OSINT DMS 24°09′01″N/120°44′07″E＝120.735/24.150（与政府开放数据「坪林森林公园」120.730/24.148 同区、差 <1km）。旧引擎值 120.900/24.350（km 295.1/237.6）落在太平区以北约 27km 的山区、无任何公开点位支撑 ⇒ 判为错值，已平移；注意与新北市坪林区（121.711/24.937，茶山、与导弹无关）同名不同地。连级归属在不同 OSINT 稿件间不一致（1 连＝坪林 vs 清泉岗），故 conf 只给到 B。",
+   "src": [
+    {
+     "ref": "台「国防部」记者会（中新网/新浪军事转述）：中南部 6 处 PAC-3 阵地公布，含「台中县太平市坪林」；北部南港/新店/万里已部署",
+     "url": "http://jczs.news.sina.com.cn/2007-03-30/1700437629.html",
+     "date": "2007-03-30",
+     "conf": "A"
+    },
+    {
+     "ref": "中国时报〈爱国者飞弹坪林阵地 鬼月已动工〉：台中市太平区坪林废弃靶场建为爱国者三型阵地，也是台湾 5 个爱国者阵地最后一座；中部＝坪林、南部＝考潭；天弓三另算 12 阵地",
+     "url": "https://www.chinatimes.com/newspapers/20161009000344-260102",
+     "date": "2016-10-09",
+     "conf": "A"
+    },
+    {
+     "ref": "自由时报〈化解居民疑虑 台中飞弹基地 军方沟通奏效〉：台中太平坪林爱国者飞弹基地「部队已进驻」（成军事实），地名带出坪林里/大兴里/坪林路",
+     "url": "https://news.ltn.com.tw/news/politics/paper/1410002",
+     "date": "2020-11-01",
+     "conf": "A"
+    },
+    {
+     "ref": "联合报（洪哲政）〈扬弃都会防御 最强防空飞弹爱国者3型东部野战大部署〉：台中＝太平（坪林）＋清泉岗机场；北部＝安坑／南港；南部＝新化／拷潭／屏东机场",
+     "url": "https://news.housefun.com.tw/news/article/119306202127.html",
+     "date": "2018-07-22",
+     "conf": "A"
+    },
+    {
+     "ref": "OSINT《情报实战》/cn-sec 转载：防空炮兵 795 旅 633 营（中部 PAC-3）「1 连部署在台中市坪林区阵地（24°09′01″N，120°44′07″E）」→ 十进制 120.7353/24.1503；旁证：台中市观光局开放数据「坪林森林公园」120.72996/24.14812（同区、差 <1km）",
+     "url": "https://cn-sec.com/archives/569935.html",
+     "date": "2019-03-11",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_art58",
+   "side": "blue",
+   "name": "第十军团 58 炮兵指挥部（HIMARS）",
+   "nm": "第十军团 58 炮兵指挥部",
+   "type": "base_navy",
+   "geo": [
+    121.22,
+    24.93
+   ],
+   "km": [
+    326.1,
+    173.4
+   ],
+   "world": [
+    61.1,
+    -1028.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "远程精确火力；对海峡内舰船与登陆梯队打击",
+   "units": [
+    "HIMARS 29 套（首批 11 已到，18 提前至 2026 Q4）",
+    "M57 ATACMS 约300km（+82 套/420 枚获批）",
+    "2025-05-12 九鹏首实射，2025-07-04 成连"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    },
+    {
+     "ref": "台湾防务部门 2026 报告摘要（海空军组织调整、滨海指挥部与 M1A2T/HIMARS 编组）",
+     "url": "https://view.inews.qq.com/k/20251022A05OIX00",
+     "date": "2025-10-22",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_art58_penghu",
+   "side": "blue",
+   "name": "HIMARS 拟驻·澎湖马公",
+   "nm": "HIMARS 拟驻·澎湖马公",
+   "type": "site_ssm",
+   "geo": [
+    119.57,
+    23.57
+   ],
+   "km": [
+    166.4,
+    323.8
+   ],
+   "world": [
+    -1536.4,
+    475.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "2026-01 报道的东移/外岛布势计划（未证实已部署）",
+   "units": [
+    "HIMARS 排级（拟）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_art58_dongyin",
+   "side": "blue",
+   "name": "HIMARS 拟驻·东引",
+   "nm": "HIMARS 拟驻·东引",
+   "type": "site_ssm",
+   "geo": [
+    120.52,
+    25.93
+   ],
+   "km": [
+    258.3,
+    62.9
+   ],
+   "world": [
+    -616.6,
+    -2134.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "同上；前出可覆盖浙闽沿海集结地",
+   "units": [
+    "HIMARS 排级（拟）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_jiupeng",
+   "side": "blue",
+   "name": "屏东九鹏基地（导弹测试场）",
+   "nm": "屏东九鹏基地",
+   "type": "base_navy",
+   "geo": [
+    120.65,
+    22.18
+   ],
+   "km": [
+    270.9,
+    477.5
+   ],
+   "world": [
+    -490.7,
+    2011.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "雄风/天弓/HIMARS 实弹测试场",
+   "units": [
+    "测试阵地 + 落区（恒春东南海）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_3",
+   "side": "blue",
+   "name": "空军第3战斗机联队（清泉岗，IDF）",
+   "nm": "空军第3战斗机联队",
+   "type": "base_air",
+   "geo": [
+    120.63,
+    24.26
+   ],
+   "km": [
+    269.0,
+    247.5
+   ],
+   "world": [
+    -510.1,
+    -287.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "中部战区制空／经国号自卫",
+   "units": [
+    "IDF 战联队"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_4",
+   "side": "blue",
+   "name": "空军第4战斗机联队（嘉义，F-16V）",
+   "nm": "空军第4战斗机联队",
+   "type": "base_air",
+   "geo": [
+    120.43,
+    23.46
+   ],
+   "km": [
+    249.6,
+    336.0
+   ],
+   "world": [
+    -703.7,
+    596.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "南部战区制空，21/22/23 中队",
+   "units": [
+    "F-16A/B _blk20 → F-16V"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_2",
+   "side": "blue",
+   "name": "空军第2战斗机联队（新竹，幻影2000-5）",
+   "nm": "空军第2战斗机联队",
+   "type": "base_air",
+   "geo": [
+    120.95,
+    24.82
+   ],
+   "km": [
+    300.0,
+    185.6
+   ],
+   "world": [
+    -200.3,
+    -907.0
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "北部制空／台北要地（妥善率极低）",
+   "units": [
+    "幻影 2000-5 53 架（可飞 <10）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_5",
+   "side": "blue",
+   "name": "空军第5战斗机联队（花莲·佳山洞库）",
+   "nm": "空军第5战斗机联队",
+   "type": "base_air",
+   "geo": [
+    121.61,
+    24.02
+   ],
+   "km": [
+    363.9,
+    274.0
+   ],
+   "world": [
+    438.7,
+    -22.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "东侧机动与存活力中心，反登陆时出击",
+   "units": [
+    "F-16V 中队",
+    "佳山地下机库"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_7",
+   "side": "blue",
+   "name": "空军第7战斗机联队（台东志航，F-16V Block70）",
+   "nm": "空军第7战斗机联队",
+   "type": "base_air",
+   "geo": [
+    121.1,
+    22.75
+   ],
+   "km": [
+    314.5,
+    414.5
+   ],
+   "world": [
+    -55.1,
+    1381.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "新机接收起点（6727/6728 2026-10-02 到港，66 架全数于此换装）",
+   "units": [
+    "F-16V Block 70/20（66 架）"
+   ],
+   "conf": "B",
+   "note": "志航精确坐标 NOT VERIFIED（流传表此条与台中重复＝错值），此处取台东机场市南公共坐标 22.76N/121.10E",
+   "src": [
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_1",
+   "side": "blue",
+   "name": "空军第1战斗机联队（台南）",
+   "nm": "空军第1战斗机联队",
+   "type": "base_air",
+   "geo": [
+    120.2,
+    22.99
+   ],
+   "km": [
+    227.4,
+    387.9
+   ],
+   "world": [
+    -926.4,
+    1116.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "F-16V 训练／南部补强",
+   "units": [
+    "F-16V 中队 + 假想敌队"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "博客园 Google-Earth 坐标集 + 360doc 作战联队驻地表（台湾基地精确坐标）",
+     "url": "https://www.cnblogs.com/googlegis/archive/2011-11/18/2978768.html",
+     "date": "2011-11-18",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_af_6",
+   "side": "blue",
+   "name": "空军第6混合联队（屏东：E-2K/P-3C/C-130H）",
+   "nm": "空军第6混合联队",
+   "type": "base_air",
+   "geo": [
+    120.46,
+    22.64
+   ],
+   "km": [
+    252.5,
+    426.6
+   ],
+   "world": [
+    -674.7,
+    1503.2
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "预警（20电战大队 E-2K×6）+ 反潜（33/34 中队 P-3C×12）+ 运输",
+   "units": [
+    "E-2K ×6",
+    "P-3C ×12（P-8A 待交）",
+    "C-130H ×19"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_uav_mq9b",
+   "side": "blue",
+   "name": "MQ-9B Sea Guardian（花莲 + 嘉义地面站）",
+   "nm": "MQ-9B Sea Guardian",
+   "type": "base_air",
+   "geo": [
+    121.62,
+    24.03
+   ],
+   "km": [
+    364.8,
+    272.9
+   ],
+   "world": [
+    448.4,
+    -33.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "远海 ISR／延伸至巴士海峡，2026-09-14 花莲首飞",
+   "units": [
+    "MQ-9B ×4（2 架 2026-03 到港，2 架 2027）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Yahoo/SETN：MQ-9B Sea Guardian ×4（2026-09-14 花莲首飞，地面站花莲+嘉义）",
+     "url": "https://tw.news.yahoo.com/%E8%BB%8D%E5%82%B3%E5%AA%92-mq-9b%E8%8A%B1%E8%93%AE%E9%A6%96%E9%A3%9B%E4%B9%8B%E6%97%A5-%E5%AE%83%E7%9A%84%E6%8E%A5%E7%8F%AD%E4%BA%BA%E5%B7%B2%E5%9C%A8%E7%BE%8E%E5%9C%8B%E7%99%BB%E5%A0%B4-230000206.html",
+     "date": "2026-10-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_ah64",
+   "side": "blue",
+   "name": "陆航第601旅（AH-64E，桃园龙潭）",
+   "nm": "陆航第601旅",
+   "type": "base_air",
+   "geo": [
+    121.17,
+    24.87
+   ],
+   "km": [
+    321.3,
+    180.1
+   ],
+   "world": [
+    12.7,
+    -962.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "滩岸反击／反登陆装甲拦截（新竹有分遣队）",
+   "units": [
+    "AH-64E ×29",
+    "2020-02-18 起新竹分遣"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_isle_jinmen",
+   "side": "blue",
+   "name": "金门守备（外岛）",
+   "nm": "金门守备",
+   "type": "base_navy",
+   "geo": [
+    118.36,
+    24.43
+   ],
+   "km": [
+    49.2,
+    228.7
+   ],
+   "world": [
+    -2707.9,
+    -475.9
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "海峡北段前出警戒；汉光42 于 2026-08-08 金门实弹",
+   "units": [
+    "金门防卫指挥部",
+    "雄风/坦甲/炮兵"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "汉光42号：兵推 2026-04-11~24、实兵 08-05~14（滨海指挥部首次参演、金门实弹 08-08）",
+     "url": "https://baike.baidu.com/item/%E6%B1%89%E5%85%8942%E5%8F%B7%E6%BC%94%E4%B9%A0/68333378",
+     "date": "2026-08",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_isle_matsu",
+   "side": "blue",
+   "name": "马祖守备（南竿）",
+   "nm": "马祖守备",
+   "type": "base_navy",
+   "geo": [
+    119.95,
+    26.15
+   ],
+   "km": [
+    203.2,
+    38.6
+   ],
+   "world": [
+    -1168.5,
+    -2377.5
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "闽江口外警戒；海警编队常态对峙区",
+   "units": [
+    "马祖防卫指挥部"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "东部战区「联合利剑-2024A」（解放军报/新华网）",
+     "url": "https://www.xinhuanet.com/politics/20240524/b6c31a24b7584c6386373becc7badb2b/c.html",
+     "date": "2024-05-24",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "blue_isle_wuqiu",
+   "side": "blue",
+   "name": "乌丘屿守备（大小乌丘）",
+   "nm": "乌丘屿守备",
+   "type": "base_navy",
+   "geo": [
+    119.42,
+    24.92
+   ],
+   "km": [
+    151.8,
+    174.5
+   ],
+   "world": [
+    -1681.6,
+    -1017.6
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "厦门外海；2024 起海警编队持续执法巡查",
+   "units": [
+    "乌丘守备大队"
+   ],
+   "conf": "C",
+   "note": "坐标为流传值 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "「联合利剑-2024B」条目（辽宁舰编队首次围台 + 海警编队表）",
+     "url": "https://baike.baidu.com/item/%E8%81%94%E5%90%88%E5%88%A9%E5%89%91%EF%BC%8D2024B/64995627",
+     "date": "2024-10-14",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_dongsha",
+   "side": "blue",
+   "name": "东沙岛（环礁）",
+   "nm": "东沙岛",
+   "type": "base_navy",
+   "geo": [
+    116.75,
+    20.7
+   ],
+   "km": [
+    -106.7,
+    641.1
+   ],
+   "world": [
+    -4266.7,
+    3648.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海北端监视；台方 2026-04 整修码头并拟建岸置导弹（未证实）",
+   "units": [
+    "东沙警戒旅",
+    "巡逻船（拟增）"
+   ],
+   "conf": "C",
+   "note": "越出战役方块，只能进外图/小地图",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "blue_taiping",
+   "side": "blue",
+   "name": "太平岛（南沙）",
+   "nm": "太平岛",
+   "type": "base_navy",
+   "geo": [
+    114.92,
+    10.32
+   ],
+   "km": [
+    -283.9,
+    1788.7
+   ],
+   "world": [
+    -6038.5,
+    15124.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南沙北端存在（战役无关，登记为地理事实）",
+   "units": [
+    "太平岛守卫中队",
+    "机场 1,100m"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "blue_256_suwao",
+   "side": "blue",
+   "name": "256 战队／苏澳方向（冲突版本）",
+   "nm": "256 战队／苏澳方向",
+   "type": "sqdn",
+   "geo": [
+    121.85,
+    24.59
+   ],
+   "km": [
+    387.1,
+    211.0
+   ],
+   "world": [
+    671.1,
+    -652.7
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "部分来源记 256 战队基地为苏澳（与左营版本冲突）",
+   "units": [
+    "剑龙级／海鲲（驻地争议）"
+   ],
+   "conf": "C",
+   "note": "不作为独立点位，保留在 conflicts",
+   "src": [
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_yokosuka",
+   "side": "green",
+   "name": "横须贺（前沿部署海军基地 / Fleet Activities Yokosuka）",
+   "nm": "横须贺",
+   "type": "base_navy",
+   "geo": [
+    139.67,
+    35.29
+   ],
+   "km": [
+    2112.4,
+    -972.0
+   ],
+   "world": [
+    17924.4,
+    -12482.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西太唯一前沿部署航母母港；第7舰队司令部",
+   "units": [
+    "CVN-73 George Washington（FDNF）",
+    "DDG-65 Benfold / DDG-86 Shoup（GWCSG）",
+    "CG-62 Robert Smalls"
+   ],
+   "conf": "B",
+   "note": "非 CVN-76 Reagan（2024-05 已撤离进厂）",
+   "src": [
+    {
+     "ref": "USNI Fleet & Marine Tracker 2026-06-29：CVN-73 华盛顿号为唯一前沿部署航母（Reagan 2024-05 离岗进 Bremerton）",
+     "url": "https://news.usni.org/2026-06-29/usni-news-fleet-and-marine-tracker-june-29-2026",
+     "date": "2026-06-29",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_gwcsg",
+   "side": "green",
+   "name": "GWCSG 华盛顿号航母打击群",
+   "nm": "GWCSG 华盛顿号航母打击群",
+   "type": "task_group",
+   "geo": [
+    139.67,
+    35.29
+   ],
+   "km": [
+    2112.4,
+    -972.0
+   ],
+   "world": [
+    17924.4,
+    -12482.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "战役假定中的绿方主力海上打击/制空核心",
+   "units": [
+    "CVN-73",
+    "CVW-5（F/A-18E/F + F-35C + E-2D + EA-18G + MH-60）",
+    "CG-62 Robert Smalls",
+    "DDG-65 Benfold",
+    "DDG-86 Shoup",
+    "配属 SSN-783 Minnesota、VP-26 P-8A"
+   ],
+   "conf": "B",
+   "note": "引擎 csg5 群 hq 取母港，出海后按航线机动",
+   "src": [
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI Fleet & Marine Tracker 2026-06-29：CVN-73 华盛顿号为唯一前沿部署航母（Reagan 2024-05 离岗进 Bremerton）",
+     "url": "https://news.usni.org/2026-06-29/usni-news-fleet-and-marine-tracker-june-29-2026",
+     "date": "2026-06-29",
+     "conf": "B"
+    },
+    {
+     "ref": "CVW-5 中队表（VFA-27/102/195、VFA-147 或 115 F-35C、VAQ-141、VAW-125、VRM-30、HSC-12、HSM-77；岩国岸基/厚木旋翼）",
+     "url": "https://en.wikipedia.org/wiki/Carrier_Air_Wing_5",
+     "date": "2025-09-26",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_trcsg",
+   "side": "green",
+   "name": "TRCSG 罗斯福号航母打击群（Keen Sword 27）",
+   "nm": "TRCSG 罗斯福号航母打击群",
+   "type": "task_group",
+   "geo": [
+    132.0,
+    15.0
+   ],
+   "km": [
+    1369.8,
+    1271.3
+   ],
+   "world": [
+    10498.3,
+    9950.0
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "临时增援西太的第二个航母打击群，2026-10 起转 5th Fleet",
+   "units": [
+    "CVN-71 Theodore Roosevelt",
+    "CVW-11",
+    "CG-65 Chosin",
+    "DDG-73 Decatur",
+    "DDG-120 Carl M. Levin",
+    "DDG-60/67 Paul Hamilton（舷号两源冲突）"
+   ],
+   "conf": "B",
+   "note": "引擎 csg3 群取菲律宾海站位；Paul Hamilton 舷号 60/67 冲突见 conflicts",
+   "src": [
+    {
+     "ref": "USNI Tracker 2026-10-13：CVN-71 罗斯福号 CSG（CVW-11/CG-65/DDG-73/DDG-120/保罗·汉密尔顿）参加 Keen Sword 27",
+     "url": "https://news.usni.org/2026-10-13/usni-news-fleet-and-marine-tracker-oct-13-2026",
+     "date": "2026-10-13",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_cvw5",
+   "side": "green",
+   "name": "第5舰载机联队（岩国岸基 / 厚木旋翼）",
+   "nm": "第5舰载机联队",
+   "type": "base_air",
+   "geo": [
+    132.23,
+    34.33
+   ],
+   "km": [
+    1392.1,
+    -865.8
+   ],
+   "world": [
+    10721.0,
+    -11421.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "GWCSG 航空联队：西太唯一常驻舰载联队",
+   "units": [
+    "VFA-27/102/195 F/A-18E",
+    "VFA-147 或 115 F-35C",
+    "VAQ-141 EA-18G",
+    "VAW-125 E-2D",
+    "HSC-12 / HSM-77 MH-60",
+    "VRM-30 C-2"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "CVW-5 中队表（VFA-27/102/195、VFA-147 或 115 F-35C、VAQ-141、VAW-125、VRM-30、HSC-12、HSM-77；岩国岸基/厚木旋翼）",
+     "url": "https://en.wikipedia.org/wiki/Carrier_Air_Wing_5",
+     "date": "2025-09-26",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_iwakuni",
+   "side": "green",
+   "name": "岩国 MCAS / 陆战队轮驻（含 Typhon 2025 首入日）",
+   "nm": "岩国 MCAS / 陆战队轮驻",
+   "type": "base_navy",
+   "geo": [
+    132.23,
+    34.33
+   ],
+   "km": [
+    1392.1,
+    -865.8
+   ],
+   "world": [
+    10721.0,
+    -11421.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "陆战队远征部队（MLR/MEU）与航母舰载机岸基分遣；2025 Resolute Dragon 堤丰首赴日",
+   "units": [
+    "VMGR/MARFAT 轮驻",
+    "Typhon battery（2025 演练）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "The War Zone：Typhon 2025 首次入日（岩国/Resolute Dragon）→ 鹿屋（VS26/Orient Shield）→ 2026-10 冲绳存储",
+     "url": "https://www.twz.com/land/army-deploys-typhon-missile-system-to-japan-for-the-first-time",
+     "date": "2026-01",
+     "conf": "B"
+    },
+    {
+     "ref": "CVW-5 中队表（VFA-27/102/195、VFA-147 或 115 F-35C、VAQ-141、VAW-125、VRM-30、HSC-12、HSM-77；岩国岸基/厚木旋翼）",
+     "url": "https://en.wikipedia.org/wiki/Carrier_Air_Wing_5",
+     "date": "2025-09-26",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_atsugi",
+   "side": "green",
+   "name": "厚木舰队航空基地（舰载旋翼/运输）",
+   "nm": "厚木舰队航空基地",
+   "type": "base_air",
+   "geo": [
+    139.45,
+    35.45
+   ],
+   "km": [
+    2091.1,
+    -989.7
+   ],
+   "world": [
+    17711.4,
+    -12659.6
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西太舰载后勤与旋翼枢纽",
+   "units": [
+    "VRC-30 C-2/C-130",
+    "HSM 中队轮驻"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "CVW-5 中队表（VFA-27/102/195、VFA-147 或 115 F-35C、VAQ-141、VAW-125、VRM-30、HSC-12、HSM-77；岩国岸基/厚木旋翼）",
+     "url": "https://en.wikipedia.org/wiki/Carrier_Air_Wing_5",
+     "date": "2025-09-26",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_sasebo",
+   "side": "green",
+   "name": "佐世保（前沿部署陆战队 + 两栖母港）",
+   "nm": "佐世保",
+   "type": "base_navy",
+   "geo": [
+    129.72,
+    33.16
+   ],
+   "km": [
+    1149.1,
+    -736.5
+   ],
+   "world": [
+    8290.8,
+    -10127.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "日本以外唯一前沿部署海军基地；轮驻 MEU 与 MPS 群",
+   "units": [
+    "31st MEU 轮驻（LHA-6 America）",
+    "MPS 西南群预置船",
+    "USFC/SNAFU 后勤"
+   ],
+   "conf": "B",
+   "note": "引擎 arg31 群 hq 取此",
+   "src": [
+    {
+     "ref": "USNI/DVIDS：Boxer ARG+11th MEU、America+31st MEU、Makin Island ARG+13th MEU（2025-08~2026-10）",
+     "url": "https://news.usni.org/2026-06-22/usni-news-fleet-and-marine-tracker-june-22-2026",
+     "date": "2026-06-22",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_arg_boxer",
+   "side": "green",
+   "name": "Boxer 两栖戒备群 + 11th MEU",
+   "nm": "Boxer 两栖戒备群 + 11th MEU",
+   "type": "task_group",
+   "geo": [
+    129.72,
+    33.16
+   ],
+   "km": [
+    1149.1,
+    -736.5
+   ],
+   "world": [
+    8290.8,
+    -10127.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西太/关岛方向两栖存在（战役中为增援与撤僂池）",
+   "units": [
+    "LHD-4 Boxer",
+    "LSD-45 Comstock",
+    "LPD-27 Portland",
+    "11th MEU"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "USNI/DVIDS：Boxer ARG+11th MEU、America+31st MEU、Makin Island ARG+13th MEU（2025-08~2026-10）",
+     "url": "https://news.usni.org/2026-06-22/usni-news-fleet-and-marine-tracker-june-22-2026",
+     "date": "2026-06-22",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_arg_makin",
+   "side": "green",
+   "name": "Makin Island 两栖戒备群 + 13th MEU",
+   "nm": "Makin Island 两栖戒备群 + 13th MEU",
+   "type": "task_group",
+   "geo": [
+    132.0,
+    12.0
+   ],
+   "km": [
+    1369.8,
+    1603.0
+   ],
+   "world": [
+    10498.3,
+    13266.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "2026-10 起转 5th Fleet（台海方向抽空的变量）",
+   "units": [
+    "LHD-8 Makin Island",
+    "LPD-26 John P. Murtha",
+    "LPD-23 Anchorage",
+    "13th MEU"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "USNI/DVIDS：Boxer ARG+11th MEU、America+31st MEU、Makin Island ARG+13th MEU（2025-08~2026-10）",
+     "url": "https://news.usni.org/2026-06-22/usni-news-fleet-and-marine-tracker-june-22-2026",
+     "date": "2026-06-22",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI Tracker 2026-10-13：CVN-71 罗斯福号 CSG（CVW-11/CG-65/DDG-73/DDG-120/保罗·汉密尔顿）参加 Keen Sword 27",
+     "url": "https://news.usni.org/2026-10-13/usni-news-fleet-and-marine-tracker-oct-13-2026",
+     "date": "2026-10-13",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_lha6",
+   "side": "green",
+   "name": "LHA-6 America + 31st MEU（大阪靠港 / 日本周边）",
+   "nm": "LHA-6 America + 31st MEU",
+   "type": "task_group",
+   "geo": [
+    134.7,
+    34.65
+   ],
+   "km": [
+    1631.2,
+    -901.2
+   ],
+   "world": [
+    13112.5,
+    -11775.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "吕宋海峡—冲绳方向的陆战队远征与 NMESIS/HIMARS 搭载平台",
+   "units": [
+    "LHA-6",
+    "31st MEU",
+    "F-35B 中队"
+   ],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "USNI/DVIDS：Boxer ARG+11th MEU、America+31st MEU、Makin Island ARG+13th MEU（2025-08~2026-10）",
+     "url": "https://news.usni.org/2026-06-22/usni-news-fleet-and-marine-tracker-june-22-2026",
+     "date": "2026-06-22",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_kadena",
+   "side": "green",
+   "name": "冲绳·嘉手纳 AB（18th WG）",
+   "nm": "冲绳·嘉手纳 AB",
+   "type": "base_air",
+   "geo": [
+    127.768,
+    26.351
+   ],
+   "km": [
+    960.1,
+    16.3
+   ],
+   "world": [
+    6400.9,
+    -2599.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西太空中兵力核心：战斗机联队 + 无人机 + 空中加油/预警中转",
+   "units": [
+    "908th/188th FW F-16（轮驻）",
+    "KC-135/KC-46",
+    "MQ-4C Triton（2025-04 起常驻）",
+    "MQ-9：USMC VMU-3 ≤6 架（自 2024-08）+ USAF 8 架（自 2023-11）",
+    "E-3（轮换）"
+   ],
+   "conf": "B",
+   "note": "引擎 kadena18 群 hq 取此",
+   "src": [
+    {
+     "ref": "条目汇编：嘉手纳 18th WG、MQ-4C（2025-04 常驻）、MQ-9（USMC VMU-3 ≤6 自 2024-08、USAF 8 自 2023-11）",
+     "url": "https://baike.baidu.com/item/%E5%98%89%E6%89%8B%E7%BA%B3%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/8959361",
+     "date": "2026-09",
+     "conf": "C"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_whitebeach",
+   "side": "green",
+   "name": "冲绳·白滩港（两栖装卸/预置舰）",
+   "nm": "冲绳·白滩港",
+   "type": "base_navy",
+   "geo": [
+    127.898,
+    26.31
+   ],
+   "km": [
+    972.7,
+    20.9
+   ],
+   "world": [
+    6526.8,
+    -2554.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "预置船卸载与两栖训练岸滩（战役中为增援上岸口）",
+   "units": [
+    "AMP-3 白滩设施",
+    "RIMPAC/Keen Sword 岸滩"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_camp_hansen",
+   "side": "green",
+   "name": "汉森营（冲绳，12th MLR）",
+   "nm": "汉森营",
+   "type": "base_navy",
+   "geo": [
+    127.78,
+    26.47
+   ],
+   "km": [
+    961.3,
+    3.2
+   ],
+   "world": [
+    6412.5,
+    -2731.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "第12濒海团（2025-03-03 LCT 成军）+ NMESIS 反舰连常驻地",
+   "units": [
+    "12th Marine Littoral Regiment（LCE/LCT/HLSC）",
+    "NMESIS 反舰连",
+    "营 2026-08 移驻临高？未证实"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Stars and Stripes：12th MLR 最后一个营（LCT）2025-03-03 于冲绳成军",
+     "url": "https://www.stripes.com/theaters/asia_pacific/2025-03-04/littoral-marines-okinawa-17026104.html",
+     "date": "2025-03-04",
+     "conf": "B"
+    },
+    {
+     "ref": "Military Times 2026-10-05：NMESIS+MADIS 首次部署与那国（距台约110km，Keen Sword 27），日 88/25 式同址",
+     "url": "http://www.militarytimes.com/global/asia-pacific/2026-10-05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan/",
+     "date": "2026-10-05",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_futenma",
+   "side": "green",
+   "name": "冲绳·普天间（MV-22 / KC-130）",
+   "nm": "冲绳·普天间",
+   "type": "base_air",
+   "geo": [
+    127.752,
+    26.271
+   ],
+   "km": [
+    958.5,
+    25.2
+   ],
+   "world": [
+    6385.4,
+    -2511.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "垂直补给与陆战队空运；噪声/搬迁议题持续",
+   "units": [
+    "VMGR-152 KC-130J",
+    "HM-14/361 MV-22B"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_typhon_okinawa",
+   "side": "green",
+   "name": "堤丰中程导弹连·冲绳存储（2026-10）",
+   "nm": "堤丰中程导弹连·冲绳存储",
+   "type": "site_ssm",
+   "geo": [
+    127.75,
+    26.3
+   ],
+   "km": [
+    958.3,
+    22.0
+   ],
+   "world": [
+    6383.5,
+    -2543.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "由吕宋/鹿屋回抽后的存储与训练位置（Typhon 已三赴日）",
+   "units": [
+    "4 发射车 + 拖车指挥所（1 连制）",
+    "SM-6 陆射 + 战斧 Block IV/V"
+   ],
+   "conf": "B",
+   "note": "非永久驻地，可被战役脚本调用",
+   "src": [
+    {
+     "ref": "The War Zone：Typhon 2025 首次入日（岩国/Resolute Dragon）→ 鹿屋（VS26/Orient Shield）→ 2026-10 冲绳存储",
+     "url": "https://www.twz.com/land/army-deploys-typhon-missile-system-to-japan-for-the-first-time",
+     "date": "2026-01",
+     "conf": "B"
+    },
+    {
+     "ref": "CRS IF12135：Typhon 使用 SM-6 与战斧两种陆射改型；标准连制 4 发射车 + 拖车指挥所",
+     "url": "https://www.congress.gov/crs-product/IF12135",
+     "date": "2025-09-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_typhon_kanoya",
+   "side": "green",
+   "name": "堤丰连·鹿屋航空基地（VS26 / Orient Shield）",
+   "nm": "堤丰连·鹿屋航空基地",
+   "type": "site_ssm",
+   "geo": [
+    130.94,
+    31.37
+   ],
+   "km": [
+    1267.2,
+    -538.6
+   ],
+   "world": [
+    9472.0,
+    -8148.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "2026 VS26 期间在九州南端的中程火力阵位，射程覆盖东海与台海",
+   "units": [
+    "Typhon battery（鹿屋）",
+    "与 JMSDF 联合 fires"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "The War Zone：Typhon 2025 首次入日（岩国/Resolute Dragon）→ 鹿屋（VS26/Orient Shield）→ 2026-10 冲绳存储",
+     "url": "https://www.twz.com/land/army-deploys-typhon-missile-system-to-japan-for-the-first-time",
+     "date": "2026-01",
+     "conf": "B"
+    },
+    {
+     "ref": "DVIDS：Valiant Shield 2026 闭幕（22 Jun–1 Jul；ex-LPD-10 Juno SINKEX 6-27）",
+     "url": "https://www.dvidshub.net/news/569105/valiant-shield-2026-concludes-western-pacific",
+     "date": "2026-07-01",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "us_nmesis_yonaguni",
+   "side": "green",
+   "name": "NMESIS + MADIS·与那国（首次实战部署）",
+   "nm": "NMESIS + MADIS·与那国",
+   "type": "site_ssm",
+   "geo": [
+    122.99,
+    24.47
+   ],
+   "km": [
+    497.5,
+    224.3
+   ],
+   "world": [
+    1774.8,
+    -520.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "距台岛约 110 km 的最东端对海封锁位；2026-10 Keen Sword 27 首演",
+   "units": [
+    "NMESIS 发射车（RGM-184 NSM）",
+    "MADIS 雷达",
+    "与日本 88式/25式同址"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Military Times 2026-10-05：NMESIS+MADIS 首次部署与那国（距台约110km，Keen Sword 27），日 88/25 式同址",
+     "url": "http://www.militarytimes.com/global/asia-pacific/2026-10-05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan/",
+     "date": "2026-10-05",
+     "conf": "B"
+    },
+    {
+     "ref": "日 MoD 2026-10-06：Keen Edge/Keen Sword 27 与那国首次 NMESIS+MADIS、石垣 HIMARS，260 机/40 舰",
+     "url": "https://www.mod.go.jp/j/press/news/2026/10/06.html",
+     "date": "2026-10-06",
+     "conf": "B"
+    },
+    {
+     "ref": "Reuters/Daily Excelsior：Keen Sword 27（10-19~29，4.5万日+1.2万美，HIMARS 石垣、NMESIS 与那国、CVN-71）",
+     "url": "https://www.dailyexcelsior.com/japan-us-kick-off-joint-drills-around-islands-as-regional-tensions-rise/",
+     "date": "2026-10-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_batan_nmesis",
+   "side": "green",
+   "name": "巴丹群岛（Itbayat）NMESIS/HIMARS·Balikatan 2026",
+   "nm": "巴丹群岛",
+   "type": "site_ssm",
+   "geo": [
+    121.9,
+    20.51
+   ],
+   "km": [
+    392.0,
+    662.1
+   ],
+   "world": [
+    719.5,
+    3858.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "扼巴士海峡，封控台岛南口外海（引擎既有绿方岸基火力位）",
+   "units": [
+    "NMESIS（VMDT-1? 轮驻）",
+    "HIMARS 实弹射击"
+   ],
+   "conf": "C",
+   "note": "km(392,662) 与引擎 nmesis 位一致",
+   "src": [
+    {
+     "ref": " Balikatan 2026（4-20~5-08，约1.7万人，日 1400 人 + Ise + 88式；Itbayat NMESIS/HIMARS）",
+     "url": "https://m.baike.so.com/doc/30563722.html",
+     "date": "2026-05",
+     "conf": "C"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_batan_nmesis2",
+   "side": "green",
+   "name": "巴丹群岛南侧第二发射位",
+   "nm": "巴丹群岛南侧第二发射位",
+   "type": "site_ssm",
+   "geo": [
+    122.02,
+    20.42
+   ],
+   "km": [
+    403.6,
+    672.1
+   ],
+   "world": [
+    835.7,
+    3957.6
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "同群第二阵位（提高存续与射界）",
+   "units": [
+    "NMESIS 发射车"
+   ],
+   "conf": "C",
+   "note": "km(404,672) 与引擎第二 nmesis 位一致",
+   "src": [
+    {
+     "ref": " Balikatan 2026（4-20~5-08，约1.7万人，日 1400 人 + Ise + 88式；Itbayat NMESIS/HIMARS）",
+     "url": "https://m.baike.so.com/doc/30563722.html",
+     "date": "2026-05",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_typhon_luzon",
+   "side": "green",
+   "name": "堤丰连·吕宋（第1 MDTF 常驻）",
+   "nm": "堤丰连·吕宋",
+   "type": "site_ssm",
+   "geo": [
+    120.6,
+    18.5
+   ],
+   "km": [
+    266.1,
+    884.3
+   ],
+   "world": [
+    -539.2,
+    6080.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对海峡南口与红方登陆梯队的外区远程火力；2026-05-05 首次自菲发射战斧（约 630km）",
+   "units": [
+    "1st MDTF Typhon battery",
+    "SM-6 / 战斧（630km 落区报称）"
+   ],
+   "conf": "B",
+   "note": "引擎 TYPHON 常量 km(266,884) 即此点；gfix 标记用 18.19 略有偏差，见 conflicts",
+   "src": [
+    {
+     "ref": "Naval News：Typhon 连 2026-05-05 在菲律宾首次发射战斧（约 630km 落区）",
+     "url": "https://www.navalnews.com/naval-news/2026/05/us-fires-tomahawk-missile-from-typhon-launcher-in-philippines-for-the-first-time/",
+     "date": "2026-05-05",
+     "conf": "B"
+    },
+    {
+     "ref": "CRS IF12135：Typhon 使用 SM-6 与战斧两种陆射改型；标准连制 4 发射车 + 拖车指挥所",
+     "url": "https://www.congress.gov/crs-product/IF12135",
+     "date": "2025-09-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_andersen",
+   "side": "green",
+   "name": "安德森空军基地（关岛，13th AF）",
+   "nm": "安德森空军基地",
+   "type": "base_air",
+   "geo": [
+    144.925,
+    13.584
+   ],
+   "km": [
+    2621.2,
+    1427.8
+   ],
+   "world": [
+    23012.3,
+    11515.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "远程轰炸机与ISR 前沿出发场；战役中的第二岛链空中支点",
+   "units": [
+    "B-1B / B-52H / B-2 轮驻",
+    "MQ-4C 出发",
+    "KC-135 集群"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "条目汇编：安德森 13th AF / B-1B、B-52H、B-2 轮驻；阿普拉 SSN 轮驻 + 潜艇支援设施",
+     "url": "https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%A3%AE%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/466744",
+     "date": "2026-09",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_apra",
+   "side": "green",
+   "name": "阿普拉军港（关岛，SubRON-15 / SSN 轮驻）",
+   "nm": "阿普拉军港",
+   "type": "base_navy",
+   "geo": [
+    144.645,
+    13.439
+   ],
+   "km": [
+    2594.1,
+    1443.9
+   ],
+   "world": [
+    22741.2,
+    11675.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西太潜艇前进基地 + 表面舰轮换；战役中的增援出发港",
+   "units": [
+    "SubRON-15：SSN-758 Asheville / 760 Annapolis / 770 Tucson（洛杉矶级）",
+    "SSN-783 Minnesota（弗吉尼亚级，2024-11-26 抵关岛）",
+    "ARTEMIS/Dry Deck"
+   ],
+   "conf": "B",
+   "note": "官方 SubRON-15 潜艇页 = 3 艘洛杉矶级 + 1 艘弗吉尼亚级（四舰逐字）；DVIDS 证实 Tucson 2026-07-10 抵关岛接 Jefferson City（后者转驻珍珠港）→ 旧名单含 Jefferson City/Springfield 已过期",
+   "src": [
+    {
+     "ref": "美海军 SubRON-15 官网潜艇页：3 艘洛杉矶级 + 1 艘弗吉尼亚级 = Asheville 758 / Annapolis 760 / Tucson 770 / Minnesota 783",
+     "url": "https://www.csp.navy.mil/css15/submarines/",
+     "date": "2026-11-09",
+     "conf": "A"
+    },
+    {
+     "ref": "DVIDS：USS Tucson SSN-770 2026-07-10 抵达关岛新母港（Jefferson City SSN-759 同期转驻珍珠港）",
+     "url": "https://www.dvidshub.net/news/569753/uss-tucson-arrives-new-homeport-guam",
+     "date": "2026-07",
+     "conf": "A"
+    },
+    {
+     "ref": "条目汇编：安德森 13th AF / B-1B、B-52H、B-2 轮驻；阿普拉 SSN 轮驻 + 潜艇支援设施",
+     "url": "https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%A3%AE%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/466744",
+     "date": "2026-09",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_guam_thaad",
+   "side": "green",
+   "name": "THAAD 反导连·关岛（Task Force Talon）",
+   "nm": "THAAD 反导连·关岛",
+   "type": "site_sam",
+   "geo": [
+    144.83,
+    13.44
+   ],
+   "km": [
+    2612.0,
+    1443.8
+   ],
+   "world": [
+    22920.3,
+    11674.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对中程/弹道导弹的要地反导（红方 DF-26 想定目标）",
+   "units": [
+    "THAAD 连（6 发射车 ×8 枚）",
+    "AN/TPY-2"
+   ],
+   "conf": "B",
+   "note": "gfix 标记同址",
+   "src": [
+    {
+     "ref": "条目汇编：安德森 13th AF / B-1B、B-52H、B-2 轮驻；阿普拉 SSN 轮驻 + 潜艇支援设施",
+     "url": "https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%A3%AE%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/466744",
+     "date": "2026-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_guam_pac3",
+   "side": "green",
+   "name": "爱国者 PAC-3 连·关岛",
+   "nm": "爱国者 PAC-3 连·关岛",
+   "type": "site_sam",
+   "geo": [
+    144.9,
+    13.53
+   ],
+   "km": [
+    2618.8,
+    1433.8
+   ],
+   "world": [
+    22988.1,
+    11575.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "机场/港口的末段反导与防空",
+   "units": [
+    "PAC-3 MSE 连"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "条目汇编：安德森 13th AF / B-1B、B-52H、B-2 轮驻；阿普拉 SSN 轮驻 + 潜艇支援设施",
+     "url": "https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%A3%AE%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/466744",
+     "date": "2026-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_kadena_pac3",
+   "side": "green",
+   "name": "爱国者 PAC-3 连·嘉手纳",
+   "nm": "爱国者 PAC-3 连·嘉手纳",
+   "type": "site_sam",
+   "geo": [
+    127.77,
+    26.35
+   ],
+   "km": [
+    960.3,
+    16.4
+   ],
+   "world": [
+    6402.8,
+    -2598.6
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "要地防空（与那国/宫古方向拦截）",
+   "units": [
+    "PAC-3 连（轮换）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "条目汇编：嘉手纳 18th WG、MQ-4C（2025-04 常驻）、MQ-9（USMC VMU-3 ≤6 自 2024-08、USAF 8 自 2023-11）",
+     "url": "https://baike.baidu.com/item/%E5%98%89%E6%89%8B%E7%BA%B3%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/8959361",
+     "date": "2026-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_tinian",
+   "side": "green",
+   "name": "天宁岛（关岛第二机场 / 轰炸机疏散）",
+   "nm": "天宁岛",
+   "type": "base_air",
+   "geo": [
+    145.617,
+    15.063
+   ],
+   "km": [
+    2688.2,
+    1264.3
+   ],
+   "world": [
+    23682.3,
+    9880.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "二战跑道复活计划与关岛备份着陆场",
+   "units": [
+    "国际跑道 + 油料设施"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "条目汇编：安德森 13th AF / B-1B、B-52H、B-2 轮驻；阿普拉 SSN 轮驻 + 潜艇支援设施",
+     "url": "https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%A3%AE%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/466744",
+     "date": "2026-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "us_saipan",
+   "side": "green",
+   "name": "塞班（关岛北方后勤/港池）",
+   "nm": "塞班",
+   "type": "base_navy",
+   "geo": [
+    145.752,
+    15.19
+   ],
+   "km": [
+    2701.3,
+    1250.3
+   ],
+   "world": [
+    23813.0,
+    9739.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "两栖与后勤中转（CNMI 海域内）",
+   "units": [
+    "港口 + GROT 训练区"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "us_diego",
+   "side": "green",
+   "name": "迪戈加西亚（印度洋预置 + 轰炸机前进场）",
+   "nm": "迪戈加西亚",
+   "type": "base_navy",
+   "geo": [
+    72.42,
+    -6.0
+   ],
+   "km": [
+    -4398.7,
+    3593.1
+   ],
+   "world": [
+    -47187.0,
+    33167.6
+   ],
+   "in_block": false,
+   "in_region": false,
+   "role": "B-2/B-52 印度洋出发场与舰载预置船基地（战役尺度外的战略纵深）",
+   "units": [
+    "MSC 海上预置群",
+    "B-2 远征打击群（历史）"
+   ],
+   "conf": "C",
+   "note": "★ 越出外图范围（in_region=false），只作战略注记",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jp_yonaguni",
+   "side": "green",
+   "name": "陆自 沿岸监视队·与那国（2016-03-24 设）",
+   "nm": "陆自 沿岸监视队·与那国",
+   "type": "site_radar",
+   "geo": [
+    122.99,
+    24.47
+   ],
+   "km": [
+    497.5,
+    224.3
+   ],
+   "world": [
+    1774.8,
+    -520.1
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "台岛以东监视；2026-10 与美军 NMESIS/MADIS 同址，拟接 25式高速滑翔弹",
+   "units": [
+    "沿岸监视队（100m 高地雷达）",
+    "03式中防空（2030 前）"
+   ],
+   "conf": "B",
+   "note": "★ in_block=true：与 us_nmesis_yonaguni 同点，标记合并显示",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    },
+    {
+     "ref": "Military Times 2026-10-05：NMESIS+MADIS 首次部署与那国（距台约110km，Keen Sword 27），日 88/25 式同址",
+     "url": "http://www.militarytimes.com/global/asia-pacific/2026-10-05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan/",
+     "date": "2026-10-05",
+     "conf": "B"
+    },
+    {
+     "ref": "日 MoD 2026-10-06：Keen Edge/Keen Sword 27 与那国首次 NMESIS+MADIS、石垣 HIMARS，260 机/40 舰",
+     "url": "https://www.mod.go.jp/j/press/news/2026/10/06.html",
+     "date": "2026-10-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jp_ishigaki",
+   "side": "green",
+   "name": "陆自 石垣驻屯地（303舰对舰连队 + 348高射连队，2023-04-01）",
+   "nm": "陆自 石垣驻屯地",
+   "type": "site_ssm",
+   "geo": [
+    124.13,
+    24.34
+   ],
+   "km": [
+    607.9,
+    238.7
+   ],
+   "world": [
+    2878.6,
+    -376.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "八八式 SSM 封控宫古海峡—台岛东南；配 03式中防空",
+   "units": [
+    "第303舰对舰诱导弹连队（88式）",
+    "第348高射特科连队",
+    "潜艇/水面部队石垣分遣队"
+   ],
+   "conf": "B",
+   "note": "★ 东界 124.13E 距方块东界 124.462 仅 3.3km",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_miyako",
+   "side": "green",
+   "name": "陆自/空自 宫古（302观测警戒队 + 156派遣队 + 45警戒航空队）",
+   "nm": "陆自/空自 宫古",
+   "type": "site_radar",
+   "geo": [
+    125.3,
+    24.8
+   ],
+   "km": [
+    721.1,
+    187.8
+   ],
+   "world": [
+    4011.4,
+    -884.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "宫古海峡扼口监视；E-767 常驻",
+   "units": [
+    "第302观测警戒队",
+    "第156普通科派遣队",
+    "第45警戒航空队 E-767"
+   ],
+   "conf": "B",
+   "note": "越出方块东界（124.462），只进外图/小地图",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_naha",
+   "side": "green",
+   "name": "陆自 第15（西南）旅团 / 那霸 + 空自第303飞行队",
+   "nm": "陆自 第15",
+   "type": "base_navy",
+   "geo": [
+    127.7,
+    26.2
+   ],
+   "km": [
+    953.5,
+    33.0
+   ],
+   "world": [
+    6335.1,
+    -2432.8
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "西南方向地面兵力核心与 F-15 拦截值班",
+   "units": [
+    "第15旅团（扩编为师）",
+    "那霸航空基地 F-15J/DJ×约40",
+    "海上自卫队 第1水上反应群"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_guni",
+   "side": "green",
+   "name": "陆自 国头（88式舰对舰导弹连队，冲绳本岛北）",
+   "nm": "陆自 国头",
+   "type": "site_ssm",
+   "geo": [
+    128.1,
+    26.67
+   ],
+   "km": [
+    992.2,
+    -18.9
+   ],
+   "world": [
+    6722.3,
+    -2952.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对台海北侧海域的岸基反舰火力",
+   "units": [
+    "第7特科连队 / 88式 SSM 连"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jp_msdf_sq1",
+   "side": "green",
+   "name": "海上自卫队 第1水上舰队（横须贺）与水上警戒群（2026-03-23 改组）",
+   "nm": "海上自卫队 第1水上舰队",
+   "type": "sqdn",
+   "geo": [
+    139.67,
+    35.29
+   ],
+   "km": [
+    2112.4,
+    -972.0
+   ],
+   "world": [
+    17924.4,
+    -12482.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "东海—台海方向护航与警戒主兵力",
+   "units": [
+    "第1护卫队群（DDG/DD）",
+    "第3/第5护卫队群（舞鹤）",
+    "水陸両用戦機雷戦群（新设）"
+   ],
+   "conf": "B",
+   "note": "改组细节以 ja.wikipedia 为准，编制表待逐队复核",
+   "src": [
+    {
+     "ref": "海上自卫队 2026-03-23 改组（水上戦群・水陸両用戦機雷戦群等）与基地配分（ja.wikipedia）",
+     "url": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%8A%9A",
+     "date": "2026-03-23",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_ise",
+   "side": "green",
+   "name": "JMSDF DDH-182 伊势（舞鹤，准航母）",
+   "nm": "JMSDF DDH-182 伊势",
+   "type": "sqdn",
+   "geo": [
+    135.39,
+    35.48
+   ],
+   "km": [
+    1698.1,
+    -993.0
+   ],
+   "world": [
+    13780.5,
+    -12692.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "VS26 联合反潜/编队训练平台",
+   "units": [
+    "DDH-182 伊势",
+    "SH-60K"
+   ],
+   "conf": "C",
+   "note": "母港=舞鹤（流传值）",
+   "src": [
+    {
+     "ref": "海上自卫队 2026-03-23 改组（水上戦群・水陸両用戦機雷戦群等）与基地配分（ja.wikipedia）",
+     "url": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%8A%9A",
+     "date": "2026-03-23",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jp_kaga",
+   "side": "green",
+   "name": "JMSDF DDH-184 加贺（VS26 参演 + F-35B 改装）",
+   "nm": "JMSDF DDH-184 加贺",
+   "type": "sqdn",
+   "geo": [
+    132.56,
+    34.23
+   ],
+   "km": [
+    1424.1,
+    -854.8
+   ],
+   "world": [
+    11040.5,
+    -11310.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "VS26 内与 GWCSG 同训的日方直升机驱逐舰",
+   "units": [
+    "DDH-184 加贺",
+    "F-35B（2026 起驻新田原）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "DVIDS：Valiant Shield 2026 闭幕（22 Jun–1 Jul；ex-LPD-10 Juno SINKEX 6-27）",
+     "url": "https://www.dvidshub.net/news/569105/valiant-shield-2026-concludes-western-pacific",
+     "date": "2026-07-01",
+     "conf": "A"
+    },
+    {
+     "ref": "海上自卫队 2026-03-23 改组（水上戦群・水陸両用戦機雷戦群等）与基地配分（ja.wikipedia）",
+     "url": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E4%B8%8A%E8%87%AA%E8%A1%9B%E9%8A%9A",
+     "date": "2026-03-23",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jp_kanoya",
+   "side": "green",
+   "name": "航空自卫队 鹿屋基地（反舰/巡逻 + Typhon 共训）",
+   "nm": "航空自卫队 鹿屋基地",
+   "type": "base_air",
+   "geo": [
+    130.94,
+    31.37
+   ],
+   "km": [
+    1267.2,
+    -538.6
+   ],
+   "world": [
+    9472.0,
+    -8148.7
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "AS-21 SSM（12式改）与 P-1 巡逻机前进场",
+   "units": [
+    "第5航空团?",
+    "HC-1/HU-1",
+    "Typhon 共训场"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "The War Zone：Typhon 2025 首次入日（岩国/Resolute Dragon）→ 鹿屋（VS26/Orient Shield）→ 2026-10 冲绳存储",
+     "url": "https://www.twz.com/land/army-deploys-typhon-missile-system-to-japan-for-the-first-time",
+     "date": "2026-01",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_tsushima",
+   "side": "green",
+   "name": "陆自 対馬驻屯地（134雷达群 + 88式连队）",
+   "nm": "陆自 対馬驻屯地",
+   "type": "site_radar",
+   "geo": [
+    129.32,
+    34.68
+   ],
+   "km": [
+    1110.4,
+    -904.5
+   ],
+   "world": [
+    7903.6,
+    -11808.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "对马海峡—东海监视与岸基反舰",
+   "units": [
+    "第134高地防御队?",
+    "第2特科连队（88式）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "日本防衛省：西南诸岛守备（石垣 303舰对舰+348高射 2023-04-01、宫古、与岛、与那国 2016 + 03式中防空至2030）",
+     "url": "https://www.mod.go.jp/j/press/daily/2023/04/01.html",
+     "date": "2023-04-01",
+     "conf": "B"
+    },
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "jp_ks27",
+   "side": "green",
+   "name": "Keen Edge / Keen Sword 27 联合演训（含 HIMARS 石垣）",
+   "nm": "Keen Edge / Keen Sword 27 联合演训",
+   "type": "unit_group",
+   "geo": [
+    124.13,
+    24.34
+   ],
+   "km": [
+    607.9,
+    238.7
+   ],
+   "world": [
+    2878.6,
+    -376.3
+   ],
+   "in_block": true,
+   "in_region": true,
+   "role": "2026-10 美日联合演习首次大规模覆盖西南诸岛（260 机/40 舰）",
+   "units": [
+    "4.5 万日 + 1.2 万美",
+    "HIMARS 石垣",
+    "NMESIS/MADIS 与那国",
+    "25式 与 88式同址"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "日 MoD 2026-10-06：Keen Edge/Keen Sword 27 与那国首次 NMESIS+MADIS、石垣 HIMARS，260 机/40 舰",
+     "url": "https://www.mod.go.jp/j/press/news/2026/10/06.html",
+     "date": "2026-10-06",
+     "conf": "B"
+    },
+    {
+     "ref": "Reuters/Daily Excelsior：Keen Sword 27（10-19~29，4.5万日+1.2万美，HIMARS 石垣、NMESIS 与那国、CVN-71）",
+     "url": "https://www.dailyexcelsior.com/japan-us-kick-off-joint-drills-around-islands-as-regional-tensions-rise/",
+     "date": "2026-10-19",
+     "conf": "B"
+    },
+    {
+     "ref": "Military Times 2026-10-05：NMESIS+MADIS 首次部署与那国（距台约110km，Keen Sword 27），日 88/25 式同址",
+     "url": "http://www.militarytimes.com/global/asia-pacific/2026-10-05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan/",
+     "date": "2026-10-05",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_osias",
+   "side": "green",
+   "name": "EDCA·Camilo Osias（卡加延省圣安娜）",
+   "nm": "EDCA·Camilo Osias",
+   "type": "base_air",
+   "geo": [
+    122.18,
+    18.67
+   ],
+   "km": [
+    419.1,
+    865.5
+   ],
+   "world": [
+    990.6,
+    5892.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "吕宋东北角，直面巴士海峡与台岛南口",
+   "units": [
+    "跑道 + 机堡 + 油料（美军轮驻）",
+    "HIMARS/NMESIS 训练位"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_lallo",
+   "side": "green",
+   "name": "EDCA·Lal-lo（卡加延省）",
+   "nm": "EDCA·Lal-lo",
+   "type": "base_air",
+   "geo": [
+    120.83,
+    18.23
+   ],
+   "km": [
+    288.4,
+    914.2
+   ],
+   "world": [
+    -316.5,
+    6378.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "吕宋东北内侧备份场",
+   "units": [
+    "C-130 装卸区",
+    "预置物资"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_basa",
+   "side": "green",
+   "name": "EDCA·Basa（邦板牙）",
+   "nm": "EDCA·Basa",
+   "type": "base_air",
+   "geo": [
+    120.05,
+    15.15
+   ],
+   "km": [
+    212.8,
+    1254.7
+   ],
+   "world": [
+    -1071.7,
+    9784.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "吕宋湾侧战斗机前进场（南海方向）",
+   "units": [
+    "F/A-18 轮驻",
+    "Red Flag-Philippines"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_magsaysay",
+   "side": "green",
+   "name": "EDCA·Fort Magsaysay（新埃西哈）",
+   "nm": "EDCA·Fort Magsaysay",
+   "type": "base_navy",
+   "geo": [
+    120.63,
+    16.33
+   ],
+   "km": [
+    269.0,
+    1124.3
+   ],
+   "world": [
+    -510.1,
+    8479.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "陆战队远征与弹药储存区",
+   "units": [
+    "弹药储存设施",
+    "MEU 训练区"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_elmoro",
+   "side": "green",
+   "name": "EDCA·Elmoro–Andyfield（塔拉克）",
+   "nm": "EDCA·Elmoro–Andyfield",
+   "type": "base_air",
+   "geo": [
+    120.62,
+    15.97
+   ],
+   "km": [
+    268.0,
+    1164.1
+   ],
+   "world": [
+    -519.8,
+    8877.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "机场 + 联合训练场",
+   "units": [
+    "B-52 起降测试",
+    "空降训练"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_crow",
+   "side": "green",
+   "name": "EDCA·Crow Valley（西内格罗斯）",
+   "nm": "EDCA·Crow Valley",
+   "type": "base_air",
+   "geo": [
+    122.98,
+    10.18
+   ],
+   "km": [
+    496.5,
+    1804.2
+   ],
+   "world": [
+    1765.2,
+    15278.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "实弹射击与轰炸训练场",
+   "units": [
+    "空中/weapons range"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_balabac",
+   "side": "green",
+   "name": "EDCA·Balabac（巴拉巴克岛）",
+   "nm": "EDCA·Balabac",
+   "type": "base_navy",
+   "geo": [
+    117.17,
+    7.98
+   ],
+   "km": [
+    -66.0,
+    2047.4
+   ],
+   "world": [
+    -3860.1,
+    17711.3
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "巴拉巴克海峡扼口，南沙—台海后勤通道",
+   "units": [
+    "跑道扩建",
+    "海岸监视"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_lumban",
+   "side": "green",
+   "name": "EDCA·Lumban-Cabalian（东内格罗斯）",
+   "nm": "EDCA·Lumban-Cabalian",
+   "type": "base_air",
+   "geo": [
+    123.92,
+    12.78
+   ],
+   "km": [
+    587.5,
+    1516.7
+   ],
+   "world": [
+    2675.3,
+    12404.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "苏禄海侧前进场",
+   "units": [
+    "预置 + 跑道"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_edca_bautista",
+   "side": "green",
+   "name": "EDCA·Antonio Bautista（提提威）",
+   "nm": "EDCA·Antonio Bautista",
+   "type": "base_air",
+   "geo": [
+    119.83,
+    5.13
+   ],
+   "km": [
+    191.5,
+    2362.5
+   ],
+   "world": [
+    -1284.7,
+    20862.2
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "苏禄海—南沙最南支点",
+   "units": [
+    "跑道 + 海上监视"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_subic",
+   "side": "green",
+   "name": "苏比克湾（西乐 + 轮驻后勤）",
+   "nm": "苏比克湾",
+   "type": "base_navy",
+   "geo": [
+    120.28,
+    14.79
+   ],
+   "km": [
+    235.1,
+    1294.5
+   ],
+   "world": [
+    -849.0,
+    10182.1
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "补给/靠港与沿海战区演习（SAMSAH/Mano Malas）",
+   "units": [
+    "USNS/补给舰轮靠",
+    "SEA-LIGHT/SAMSAH"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_clark",
+   "side": "green",
+   "name": "克拉克（后勤与无人机/轮驻）",
+   "nm": "克拉克",
+   "type": "base_air",
+   "geo": [
+    120.56,
+    15.19
+   ],
+   "km": [
+    262.2,
+    1250.3
+   ],
+   "world": [
+    -577.9,
+    9739.9
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "吕宋北部空运与油料",
+   "units": [
+    "KC-135 中转",
+    "MQ-9 轮驻（报道）"
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "条目汇编：嘉手纳 18th WG、MQ-4C（2025-04 常驻）、MQ-9（USMC VMU-3 ≤6 自 2024-08、USAF 8 自 2023-11）",
+     "url": "https://baike.baidu.com/item/%E5%98%89%E6%89%8B%E7%BA%B3%E7%A9%BA%E5%86%9B%E5%9F%BA%E5%9C%B0/8959361",
+     "date": "2026-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "ph_pprincessa",
+   "side": "green",
+   "name": "公主港海军基地（巴拉望，Western Command）",
+   "nm": "公主港海军基地",
+   "type": "base_navy",
+   "geo": [
+    118.75,
+    9.54
+   ],
+   "km": [
+    87.0,
+    1875.0
+   ],
+   "world": [
+    -2330.3,
+    15986.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "南海东岸前出；战役中牵制红方南海舰队",
+   "units": [
+    "BRP 舰艇",
+    "跑道（EDCA 候选）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": "标准地名词书城市中心（±5km，可作地图锚点；精确阵地坐标一律 NOT VERIFIED）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "C"
+    },
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ph_itbayat",
+   "side": "green",
+   "name": "Itbayat（巴丹群岛最北，Balikatan 火力位）",
+   "nm": "Itbayat",
+   "type": "site_ssm",
+   "geo": [
+    121.92,
+    20.79
+   ],
+   "km": [
+    393.9,
+    631.2
+   ],
+   "world": [
+    738.9,
+    3548.5
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "距台岛南端约 155 km，岸置火力封锁巴士海峡",
+   "units": [
+    "NMESIS",
+    "HIMARS 实弹（Balikatan 2026）"
+   ],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": " Balikatan 2026（4-20~5-08，约1.7万人，日 1400 人 + Ise + 88式；Itbayat NMESIS/HIMARS）",
+     "url": "https://m.baike.so.com/doc/30563722.html",
+     "date": "2026-05",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "id": "ph_bali26",
+   "side": "green",
+   "name": "Balikatan 2026（菲美 + 日/澳/加/法/新）",
+   "nm": "Balikatan 2026",
+   "type": "unit_group",
+   "geo": [
+    120.6,
+    18.5
+   ],
+   "km": [
+    266.1,
+    884.3
+   ],
+   "world": [
+    -539.2,
+    6080.4
+   ],
+   "in_block": false,
+   "in_region": true,
+   "role": "首次成建制日军参与（约1400人 + JS 伊势 + 88式）；Typhon 首射战斧",
+   "units": [
+    "约 1.7 万人",
+    "JGSDF 88式 + JS Ise",
+    "Typhon 战斧 5/5",
+    "Itbayat NMESIS/HIMARS"
+   ],
+   "conf": "C",
+   "note": "无 A/B 级原文可取，日期为汇编值",
+   "src": [
+    {
+     "ref": " Balikatan 2026（4-20~5-08，约1.7万人，日 1400 人 + Ise + 88式；Itbayat NMESIS/HIMARS）",
+     "url": "https://m.baike.so.com/doc/30563722.html",
+     "date": "2026-05",
+     "conf": "C"
+    },
+    {
+     "ref": "Naval News：Typhon 连 2026-05-05 在菲律宾首次发射战斧（约 630km 落区）",
+     "url": "https://www.navalnews.com/naval-news/2026/05/us-fires-tomahawk-missile-from-typhon-launcher-in-philippines-for-the-first-time/",
+     "date": "2026-05-05",
+     "conf": "B"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "jm2025",
+   "name": "正义使命-2025",
+   "when": "2025-12-29 08:00 → 12-31",
+   "side": "red",
+   "forces": [
+    "陆/海/空/火箭军 五方向（台湾海峡、台岛北部、西南、东南、以东）",
+    "29日 09:30 宝鸡(西南)/衢州(北)/太原(东) 编队序列主副炮实弹 + 防空反导/联合反潜/联合海上突击",
+    "首现 075 两栖攻击舰编队于台岛东南（与轰炸机编队 + 反舰常导 舰机协同/对海打击/远程奔袭）",
+    "30日 09:00 陆军远程火力实弹（北部海域）；13:00 陆海空火箭军远程联合火力突击（南部海域）",
+    "空军多机场 歼击/轰炸/特种/无人机 集群；火箭军多部队实弹广域机动 + 多波次模拟打击",
+    "画面装备：J-20 / J-16 / H-6K 实弹、PHL-191 远程箱火、DF-17、DF-15 系列",
+    "海警 parallel：福建海警编队 + 马祖/乌丘屿，查证识别/警告驱离/临检拿捕/拦截查扣",
+    "台方口径：截至 12-29 15:00 共机 89 架次、其中 67 架次入应变区域；共舰 14 艘 + 海警 14 艘（含马祖/乌坵）；两栖攻击舰编队 4 艘位于东太平洋；9 艘共舰入 24 浬线、5 艘越中线",
+    "台军应对：海锋机动中队分赴宜兰壮围过岭保安宫（首次曝光预设阵地）与台东方向，苍穹远程雷达车进淡水河口；花莲—台东车队 12-29 午后机动"
+   ],
+   "areas": [
+    "零预警冷启动：公告 07:30 → 起演 08:00（CSIS：通告—发射 12 天 vs 2025-04 的 19 天）",
+    "发言人 施毅陆军大校；国防部 张晓刚 关联 111 亿美元对台军售"
+   ],
+   "boxes": [
+    {
+     "n": "Z1 台岛东北",
+     "geo": "25°43′–26°32′N / 121°40′–122°36′E",
+     "corners_geo": [
+      [
+       121.6667,
+       26.5333
+      ],
+      [
+       122.6,
+       26.5333
+      ],
+      [
+       122.6,
+       25.7167
+      ],
+      [
+       121.6667,
+       25.7167
+      ]
+     ],
+     "poly_world": [
+      [
+       493.6,
+       -2801.3
+      ],
+      [
+       1397.2,
+       -2801.3
+      ],
+      [
+       1397.2,
+       -1898.4
+      ],
+      [
+       493.6,
+       -1898.4
+      ]
+     ],
+     "in_block": false,
+     "clip": [
+      "北界越出方块 3.7 km"
+     ]
+    },
+    {
+     "n": "Z2 台岛北",
+     "geo": "24°59′–26°17′N / 120°04′–121°13′E",
+     "corners_geo": [
+      [
+       120.0667,
+       26.2833
+      ],
+      [
+       121.2167,
+       26.2833
+      ],
+      [
+       121.2167,
+       24.9833
+      ],
+      [
+       120.0667,
+       24.9833
+      ]
+     ],
+     "poly_world": [
+      [
+       -1055.5,
+       -2524.9
+      ],
+      [
+       57.9,
+       -2524.9
+      ],
+      [
+       57.9,
+       -1087.6
+      ],
+      [
+       -1055.5,
+       -1087.6
+      ]
+     ],
+     "in_block": true,
+     "clip": []
+    },
+    {
+     "n": "Z3 台岛西南",
+     "geo": "22°13′–23°27′N / 118°14′–119°44′E",
+     "corners_geo": [
+      [
+       118.2333,
+       23.45
+      ],
+      [
+       119.7333,
+       23.45
+      ],
+      [
+       119.7333,
+       22.2167
+      ],
+      [
+       118.2333,
+       22.2167
+      ]
+     ],
+     "poly_world": [
+      [
+       -2830.6,
+       607.6
+      ],
+      [
+       -1378.3,
+       607.6
+      ],
+      [
+       -1378.3,
+       1971.2
+      ],
+      [
+       -2830.6,
+       1971.2
+      ]
+     ],
+     "in_block": true,
+     "clip": []
+    },
+    {
+     "n": "Z4 台岛南（巴布延—巴士）",
+     "geo": "21°05′–21°49′N / 119°16′–121°00′E",
+     "corners_geo": [
+      [
+       119.2667,
+       21.8167
+      ],
+      [
+       121.0,
+       21.8167
+      ],
+      [
+       121.0,
+       21.0833
+      ],
+      [
+       119.2667,
+       21.0833
+      ]
+     ],
+     "poly_world": [
+      [
+       -1830.1,
+       2413.4
+      ],
+      [
+       -151.9,
+       2413.4
+      ],
+      [
+       -151.9,
+       3224.3
+      ],
+      [
+       -1830.1,
+       3224.3
+      ]
+     ],
+     "in_block": false,
+     "clip": [
+      "南界越出方块 46.0 km"
+     ]
+    },
+    {
+     "n": "Z5 台岛东",
+     "geo": "21°58′–23°23′N / 121°40′–122°28′E",
+     "corners_geo": [
+      [
+       121.6667,
+       23.3833
+      ],
+      [
+       122.4667,
+       23.3833
+      ],
+      [
+       122.4667,
+       21.9667
+      ],
+      [
+       121.6667,
+       21.9667
+      ]
+     ],
+     "poly_world": [
+      [
+       493.6,
+       681.4
+      ],
+      [
+       1268.2,
+       681.4
+      ],
+      [
+       1268.2,
+       2247.6
+      ],
+      [
+       493.6,
+       2247.6
+      ]
+     ],
+     "in_block": true,
+     "clip": []
+    }
+   ],
+   "conf": "A",
+   "note": "演训区纳入台方 12 海里基线：东南箱距恒春/垦丁约 5 nmi，东箱距长滨/丰滨约 9.7 nmi（18km）；CCTV 杜文龙「有些地点距台岛海岸线不到九公里」",
+   "src": [
+    {
+     "ref": "东部战区「正义使命-2025」公告（施毅陆军大校，五方向+演训区坐标）",
+     "url": "http://www.mod.gov.cn/gfbw/qwfb/yw_214049/16429650.html",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "正义使命-2025 条目（编队/海警/演训区汇编，引东部战区与中国军号）",
+     "url": "https://baike.baidu.com/item/%E6%AD%A3%E4%B9%89%E4%BD%BF%E5%91%BD-2025/67141606",
+     "date": "2025-12-31",
+     "conf": "B"
+    },
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "中国日报：J-20/J-16/H-6K 实弹与 PHL-191、DF-17 画面",
+     "url": "https://www.chinadaily.com.cn/a/202512/29/WS69520dc7a310d6866eb30f80.html",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "中央社（游凯翔）：截至 12-29 15:00 共机 89 架次、67 架次入应变区域；共舰 14 艘 + 海警 14 艘；两栖攻击舰编队 4 艘位于东太平洋",
+     "url": "https://www.cna.com.tw/news/aipl/202512290243.aspx",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "联合报同日报道补充：9 艘共舰入 24 浬线、5 艘越中线；海南舰 LHA-31 编队在台岛东南外海",
+     "url": "https://udn.com/news/story/10930/9232941",
+     "date": "2025-12-29",
+     "conf": "B"
+    },
+    {
+     "ref": "腾讯新闻独家：台军应对正义使命-2025 多地出动陆基反舰导弹梳理（宜兰壮围乡保安宫前停车场 4 发射车+1 火控车；研判车组自苏澳基地机动；第6机动中队驻地桃园龟山大岗营区）",
+     "url": "https://view.inews.qq.com/wxn/20251230A05OMZ00",
+     "date": "2025-12-30",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jm2025-ccg",
+   "name": "正义使命-2025 海警环台执法巡查",
+   "when": "2025-12-29 → 12-31",
+   "side": "red",
+   "forces": [
+    "福建海警编队：台岛周边邻近海域 + 马祖岛/乌丘屿",
+    "科目：查证识别、警告驱离、临检拿捕、拦截查扣",
+    "海警局发布「环台岛执法巡查示意图」",
+    "首现 5000 吨级新船体 2503（052B 型线 + 燃气轮机）"
+   ],
+   "areas": [
+    "与军事演训同步的执法封控层"
+   ],
+   "boxes": [],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "正义使命-2025 条目（编队/海警/演训区汇编，引东部战区与中国军号）",
+     "url": "https://baike.baidu.com/item/%E6%AD%A3%E4%B9%89%E4%BD%BF%E5%91%BD-2025/67141606",
+     "date": "2025-12-31",
+     "conf": "B"
+    },
+    {
+     "ref": "中国海警位台湾岛以东执法巡查（姜略通报，2026 逐月轮换）",
+     "url": "https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E6%B5%B7%E8%AD%A6%E4%BD%8D%E4%B8%AD%E5%9B%BD%E5%8F%B0%E6%B9%BE%E5%B2%9B%E4%BB%A5%E4%B8%9C%E6%B5%B7%E5%9F%9F%E5%BC%80%E5%B1%95%E6%89%A7%E6%B3%95%E5%B7%A1%E6%9F%A5/67882679",
+     "date": "2026-10-31",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jl2024a",
+   "name": "联合利剑-2024A",
+   "when": "2024-05-23 → 05-24",
+   "side": "red",
+   "forces": [
+    "战区海军驱护舰编队「多个」、空军环台战巡数十架次、轰炸机前出岛链、陆军 + 火箭军发射梯队、机动岸导火力单元",
+    "054A 南通舰(533) 台海战备警巡，台军郑和舰 0.6 nmi 跟监",
+    "海警 14606编队(乌丘屿)、14607编队(东引岛)、2304编队(台岛以东)"
+   ],
+   "areas": [
+    "台湾海峡 + 台岛北/南/东 + 金门、马祖、乌丘屿、东引岛周边"
+   ],
+   "boxes": [],
+   "conf": "A",
+   "note": "官方未公布演训区四点坐标 → 只记区域文本，不画 box",
+   "src": [
+    {
+     "ref": "东部战区「联合利剑-2024A」（解放军报/新华网）",
+     "url": "https://www.xinhuanet.com/politics/20240524/b6c31a24b7584c6386373becc7badb2b/c.html",
+     "date": "2024-05-24",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "jl2024b",
+   "name": "联合利剑-2024B",
+   "when": "2024-10-14 05:00 公告 → 18:00 完成",
+   "side": "red",
+   "forces": [
+    "辽宁舰航母编队首次参加围台演训（1 CV + 护航，数量未公布）",
+    "丽水舰编队多路抵近三岛与基隆港外",
+    "海警 2901/1305/1303/2102 编队环台巡航管控 + 东引、马祖登临检查"
+   ],
+   "areas": [
+    "辽宁舰群：台岛以东，据报推进至巴士海峡以东航道"
+   ],
+   "boxes": [],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "「联合利剑-2024B」条目（辽宁舰编队首次围台 + 海警编队表）",
+     "url": "https://baike.baidu.com/item/%E8%81%94%E5%90%88%E5%88%A9%E5%89%91%EF%BC%8D2024B/64995627",
+     "date": "2024-10-14",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "st2025a",
+   "name": "海峡雷霆-2025A + 4·1 联合演训",
+   "when": "2025-04-01 → 04-02",
+   "side": "red",
+   "forces": [
+    "山东舰航母编队台岛以东（舰机协同/区域制空/对海对陆）",
+    "驱护舰 + 战机协同常导、PHL-191 远箱火",
+    "海警多编队于基隆/高雄/台中/花莲外海 + 东引、乌丘屿",
+    "台方统计 4-1/4-2：21 艘解放军舰 + 4 艘海警"
+   ],
+   "areas": [
+    "雷霆-2025A 仅指海峡中部与南部；4·1 演训为另一命名序列"
+   ],
+   "boxes": [],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "「海峡雷霆-2025A」+ 4·1 联合演训（施毅/朱安庆通报）",
+     "url": "https://baike.baidu.com/item/%E6%B5%B7%E5%B3%A1%E9%9B%B7%E9%9C%86-2025A/65546627",
+     "date": "2025-04-02",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "mj2026",
+   "name": "2026 年台方向常态（无「联合利剑-2026」官方命名）",
+   "when": "2026-01 → 2026-11",
+   "side": "red",
+   "forces": [
+    "2026-04-18 徐承华：东海联合战备巡航；2026-04-19 133号舰艇编队经横当水道入西太，4-22 经与西水道返航",
+    "2026-05-25 辽宁舰群西太（>40 天）；2026-10-20 辽宁舰群台以东 + 第5次联合战备警巡",
+    "海警台以东轮换：岱山(6-01)、秀山(7-04/7-31 常态化)、普陀山(9-03)、朱家尖(9-29)、虎狮+梅山(10-31)",
+    "月度：4 月 229 架次绕台（169 入西南空域）；11-02/03 24h 49 架次（年度纪录）+ 6 舰 + 6 海警",
+    "闽航警126/26（漳州海事局 2026-07-22）：7-23/24 06:00–18:00 东山岛以东海空域禁航"
+   ],
+   "areas": [
+    "台岛以东已成主轴；台方口径 2026 前 9 月 >1,450 架次 vs 2025 全年 >3,000"
+   ],
+   "boxes": [
+    {
+     "n": "闽航警126/26 A 区",
+     "geo": "23°33.00′–23°41.31′N / 117°26.50′–117°36.21′E",
+     "corners_geo": [
+      [
+       117.4417,
+       23.6885
+      ],
+      [
+       117.6035,
+       23.6885
+      ],
+      [
+       117.6035,
+       23.55
+      ],
+      [
+       117.4417,
+       23.55
+      ]
+     ],
+     "poly_world": [
+      [
+       -3597.0,
+       344.0
+      ],
+      [
+       -3440.4,
+       344.0
+      ],
+      [
+       -3440.4,
+       497.1
+      ],
+      [
+       -3597.0,
+       497.1
+      ]
+     ],
+     "in_block": false,
+     "clip": [
+      "西界越出方块 40.2 km"
+     ]
+    }
+   ],
+   "conf": "B",
+   "note": "博客流传的「正义使命-2026」/「联合利剑-2026」/「七个射击区」在 mod.gov.cn、新华社、东部战区公告中均无对应 → 不采信",
+   "src": [
+    {
+     "ref": "中国海警位台湾岛以东执法巡查（姜略通报，2026 逐月轮换）",
+     "url": "https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E6%B5%B7%E8%AD%A6%E4%BD%8D%E4%B8%AD%E5%9B%BD%E5%8F%B0%E6%B9%BE%E5%B2%9B%E4%BB%A5%E4%B8%9C%E6%B5%B7%E5%9F%9F%E5%BC%80%E5%B1%95%E6%89%A7%E6%B3%95%E5%B7%A1%E6%9F%A5/67882679",
+     "date": "2026-10-31",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（演习编组/舰队 OOB/CSG-ARG TO&E）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（正义使命-2025 逐条 FACT/OB/GAP）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "hw41",
+   "name": "汉光41号（台军）",
+   "when": "兵推 2025-04-05 → 04-18；实弹 2025-07-09 → 07-18",
+   "side": "blue",
+   "forces": [
+    "HIMARS 首次实弹（2025-07-10，九鹏）",
+    "史上最长寿弹阶段"
+   ],
+   "areas": [
+    "台岛北部/中部/南部滩岸与外岛"
+   ],
+   "boxes": [],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    },
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "hw42",
+   "name": "汉光42号（台军）",
+   "when": "兵推 2026-04-11 → 04-24；实兵 2026-08-05 → 08-14",
+   "side": "blue",
+   "forces": [
+    "滨海作战指挥部首次参演 + 海巡首次整合",
+    "淡江大桥阻绝演练（沱江号护航）",
+    "玉山舰花莲港 cargo offload（08-13）",
+    "金门实弹（08-08）",
+    "本岛无实弹射击"
+   ],
+   "areas": [
+    "全岛 + 金门"
+   ],
+   "boxes": [],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "汉光42号：兵推 2026-04-11~24、实兵 08-05~14（滨海指挥部首次参演、金门实弹 08-08）",
+     "url": "https://baike.baidu.com/item/%E6%B1%89%E5%85%8942%E5%8F%B7%E6%BC%94%E4%B9%A0/68333378",
+     "date": "2026-08",
+     "conf": "B"
+    },
+    {
+     "ref": "上报/自由时报：滨海作战指挥部 2026-07-01 虎尾成军，简士渊首任，并入海锋大队+光六31艘",
+     "url": "https://www.storm.mg/article/11041719",
+     "date": "2026-07-28",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "vs26",
+   "name": "Valiant Shield 2026（美 + 日/加/新）",
+   "when": "2026-06-22 → 07-01",
+   "side": "green",
+   "forces": [
+    "GWCSG：CVN-73 + CVW-5 + CG-62 + DDG-65 + DDG-86",
+    "SSN-783 Minnesota、VP-26 P-8A、USAF F-35A",
+    "JMSDF：DDH-184 加贺、吹雪型 冬月、AOE-425  Mashu、SS 菱神",
+    "RCN FFH-339 Charlottetown、RNZAF P-8A",
+    "ex-LPD-10 Juno SINKEX（6-27）"
+   ],
+   "areas": [
+    "CNMI / 关岛 / 日本 / Mariana Islands Range Complex + 菲律宾海"
+   ],
+   "boxes": [],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "DVIDS：Valiant Shield 2026 闭幕（22 Jun–1 Jul；ex-LPD-10 Juno SINKEX 6-27）",
+     "url": "https://www.dvidshub.net/news/569105/valiant-shield-2026-concludes-western-pacific",
+     "date": "2026-07-01",
+     "conf": "A"
+    },
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ks27",
+   "name": "Keen Sword 27（美日）",
+   "when": "2026-10-19 → 10-29",
+   "side": "green",
+   "forces": [
+    "约 4.5 万自卫队 + 1.2 万美军；澳、加 + 首次法/德/荷/新/菲",
+    "NMESIS + MADIS 首次实战部署与那国（距台约 110km），日本 88式/25式同址",
+    "HIMARS 石垣岛；JGSDF 25式 SSM；CVN-71 罗斯福 CSG 参演",
+    "日 MoD：260 机 / 40 舰"
+   ],
+   "areas": [
+    "日本全域，含冲绳、九州、西南诸岛与菲律宾海"
+   ],
+   "boxes": [
+    {
+     "n": "与那国火力位",
+     "geo": "24°47′N / 122°59′E",
+     "corners_geo": [
+      [
+       122.94,
+       24.5
+      ],
+      [
+       123.04,
+       24.5
+      ],
+      [
+       123.04,
+       24.44
+      ],
+      [
+       122.94,
+       24.44
+      ]
+     ],
+     "poly_world": [
+      [
+       1726.4,
+       -553.2
+      ],
+      [
+       1823.3,
+       -553.2
+      ],
+      [
+       1823.3,
+       -486.9
+      ],
+      [
+       1726.4,
+       -486.9
+      ]
+     ],
+     "in_block": true,
+     "clip": []
+    }
+   ],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "Reuters/Daily Excelsior：Keen Sword 27（10-19~29，4.5万日+1.2万美，HIMARS 石垣、NMESIS 与那国、CVN-71）",
+     "url": "https://www.dailyexcelsior.com/japan-us-kick-off-joint-drills-around-islands-as-regional-tensions-rise/",
+     "date": "2026-10-19",
+     "conf": "B"
+    },
+    {
+     "ref": "日 MoD 2026-10-06：Keen Edge/Keen Sword 27 与那国首次 NMESIS+MADIS、石垣 HIMARS，260 机/40 舰",
+     "url": "https://www.mod.go.jp/j/press/news/2026/10/06.html",
+     "date": "2026-10-06",
+     "conf": "B"
+    },
+    {
+     "ref": "Military Times 2026-10-05：NMESIS+MADIS 首次部署与那国（距台约110km，Keen Sword 27），日 88/25 式同址",
+     "url": "http://www.militarytimes.com/global/asia-pacific/2026-10-05/us-marine-corps-anti-ship-weaponry-to-see-exercise-action-on-remote-japan-island-near-taiwan/",
+     "date": "2026-10-05",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "rimpac26",
+   "name": "RIMPAC 2026（第30届）",
+   "when": "2026-06-24 → 07-31",
+   "side": "green",
+   "forces": [
+    "官方 30 国（新闻称 31）；32 艘水面舰 + 5 艘潜艇",
+    "CVN-71 CSG、CG-65 Chosin、DDG-108 Wayne E. Meyer、LHD-2 Essex、SSN-766/771",
+    "JMSDF 金刚号 SM-2 实射"
+   ],
+   "areas": [
+    "夏威夷群岛/环太平洋（战役方块之外，无南海科目）"
+   ],
+   "boxes": [],
+   "conf": "A",
+   "note": "",
+   "src": [
+    {
+     "ref": "DVIDS：RIMPAC 2026 闭幕（30 国、32 水面舰 + 5 潜艇，夏威夷）",
+     "url": "https://www.dvidshub.net/news/571299/rimpac-2026-comes-successful-conclusion",
+     "date": "2026-07-31",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "bali26",
+   "name": "Balikatan 2026（菲美 + 日/澳/加/法/新）",
+   "when": "2026-04-20 → 05-08",
+   "side": "green",
+   "forces": [
+    "约 1.7 万人；JGSDF 首次成建制（约 1,400 人 + JS 伊势 + 88式）",
+    "Typhon 首次从菲律宾发射战斧（5-05，约 630km 落区）",
+    "NMESIS + HIMARS 前出 Itbayat（巴丹群岛，距台岛南端约 155km）"
+   ],
+   "areas": [
+    "吕宋、吕宋海峡、巴丹群岛、巴拉望"
+   ],
+   "boxes": [],
+   "conf": "C",
+   "note": "",
+   "src": [
+    {
+     "ref": " Balikatan 2026（4-20~5-08，约1.7万人，日 1400 人 + Ise + 88式；Itbayat NMESIS/HIMARS）",
+     "url": "https://m.baike.so.com/doc/30563722.html",
+     "date": "2026-05",
+     "conf": "C"
+    },
+    {
+     "ref": "Naval News：Typhon 连 2026-05-05 在菲律宾首次发射战斧（约 630km 落区）",
+     "url": "https://www.navalnews.com/naval-news/2026/05/us-fires-tomahawk-missile-from-typhon-launcher-in-philippines-for-the-first-time/",
+     "date": "2026-05-05",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "ts25",
+   "name": "Talisman Sabre 25（堤丰首次境外实射）",
+   "when": "2025-07-16 → 08",
+   "side": "green",
+   "forces": [
+    "3rd MDTF 用便携发射车（MK70/Typhon）以 SM-6 击沉海上靶船"
+   ],
+   "areas": [
+    "汤斯维尔/北澳（战役方块之外）"
+   ],
+   "boxes": [],
+   "conf": "B",
+   "note": "",
+   "src": [
+    {
+     "ref": "USNI：Talisman Sabre 25（3rd MDTF 用 SM-6 自便携发射车击沉海上靶船，首次境外 Typhon 实射）",
+     "url": "https://news.usni.org/2025-07-17/army-bullseyes-maritime-target-with-sm-6-fired-from-portal-launcher",
+     "date": "2025-07-17",
+     "conf": "B"
+    },
+    {
+     "ref": "CRS IF12135：Typhon 使用 SM-6 与战斧两种陆射改型；标准连制 4 发射车 + 拖车指挥所",
+     "url": "https://www.congress.gov/crs-product/IF12135",
+     "date": "2025-09-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "lm26",
+   "name": "利马 / Pacific Vanguard 等南海多边科目（2026）",
+   "when": "2026 全年",
+   "side": "green",
+   "forces": [
+    "美菲澳日联合巡逻、SAMSAH/Mano Malas 灾害救援科目、S-Bam 等"
+   ],
+   "areas": [
+    "南海与菲律宾海"
+   ],
+   "boxes": [],
+   "conf": "C",
+   "note": "细节未逐条查证，仅作存在性登记",
+   "src": [
+    {
+     "ref": "菲部 2023-02 公告 EDCA 9 站点官方名称与位置（新增 Camilo Osias/Lal-lo/Gamu/Balabac）",
+     "url": "https://en.wikipedia.org/wiki/EDCA_Sites_Agreement",
+     "date": "2023-02-03",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "topic": "台海军舰队—舰型归属",
+   "a": "巴哈姆特 2024-06 表：168=基隆+济阳(苏澳)、124=康定(左营)、146=成功+派里(马公)",
+   "b": "zh.wikipedia：124=成功+派里、146=基隆+康定（部分版本）",
+   "pick": "a",
+   "conf": "C",
+   "why": "巴哈姆特表为逐战队舷号级明细，且与 146 驻马公（料罗湾）一致；wiki 条目版本存在分歧，未复核",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "topic": "256 战队（潜艇）母港",
+   "a": "左营（联合报/巴哈姆特，海鲲成军目标 256战队左营）",
+   "b": "苏澳（个别汇编）",
+   "pick": "a",
+   "conf": "B",
+   "why": "海鲲试航与成军报道均以左营为归建地；另设 blue_256_suwao 条目留痕",
+   "src": [
+    {
+     "ref": "联合报：海鲲号舷号 SS-711，第23次海上测放/第17次下潜（2026-10-02），成军目标 2026 底→256战队左营",
+     "url": "https://udn.com/news/story/10930/9678492",
+     "date": "2026-10-01",
+     "conf": "B"
+    },
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "海鲲号舷号",
+   "a": "SS-711",
+   "b": "SS-501（早期来源口径）",
+   "pick": "a",
+   "conf": "B",
+   "why": "联合报明示 SS-711；",
+   "src": [
+    {
+     "ref": "联合报：海鲲号舷号 SS-711，第23次海上测放/第17次下潜（2026-10-02），成军目标 2026 底→256战队左营",
+     "url": "https://udn.com/news/story/10930/9678492",
+     "date": "2026-10-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "前沿部署航母",
+   "a": "CVN-73 乔治·华盛顿（2025-26 横须贺）",
+   "b": "CVN-73 里根（早期来源口径）",
+   "pick": "a",
+   "conf": "B",
+   "why": "Reagan 2024-05 离岗进 Bremerton PIA；USNI  trackers 持续记 GW 为唯一 FDNF 航母",
+   "src": [
+    {
+     "ref": "USNI Fleet & Marine Tracker 2026-06-29：CVN-73 华盛顿号为唯一前沿部署航母（Reagan 2024-05 离岗进 Bremerton）",
+     "url": "https://news.usni.org/2026-06-29/usni-news-fleet-and-marine-tracker-june-29-2026",
+     "date": "2026-06-29",
+     "conf": "B"
+    },
+    {
+     "ref": "USNI WestPAC Pulse 2026-07-03：GWCSG = CVN-73+CVW-5+CG-62+DDG-65+DDG-86；VS26 含 SSN-783、VP-26",
+     "url": "https://news.usni.org/2026-07-03/usni-news-western-pacific-pulse-july-3-2026",
+     "date": "2026-07-03",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "ATACMS 射程",
+   "a": "约 300 km（M57）",
+   "b": "420 km（早期来源口径）",
+   "pick": "a",
+   "conf": "B",
+   "why": "公开军售公告与报道口径为 ~300km；420km 无源",
+   "src": [
+    {
+     "ref": "美华/腾讯：HIMARS 29 套（11→58炮兵指挥部，18 提前至 2026 Q4）+82 套获批，ATACMS 约 300km；拟驻澎湖/东引",
+     "url": "https://www.i-meihua.com/Article/Detail/45208",
+     "date": "2026-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "MQ-9B 驻地",
+   "a": "花莲（组装/首飞）+ 嘉义地面站",
+   "b": "仅嘉义（早期来源口径）",
+   "pick": "a",
+   "conf": "B",
+   "why": "2026-09-14 花莲首飞、高雄港卸货后陆运花莲组装",
+   "src": [
+    {
+     "ref": "Yahoo/SETN：MQ-9B Sea Guardian ×4（2026-09-14 花莲首飞，地面站花莲+嘉义）",
+     "url": "https://tw.news.yahoo.com/%E8%BB%8D%E5%82%B3%E5%AA%92-mq-9b%E8%8A%B1%E8%93%AE%E9%A6%96%E9%A3%9B%E4%B9%8B%E6%97%A5-%E5%AE%83%E7%9A%84%E6%8E%A5%E7%8F%AD%E4%BA%BA%E5%B7%B2%E5%9C%A8%E7%BE%8E%E5%9C%8B%E7%99%BB%E5%A0%B4-230000206.html",
+     "date": "2026-10-01",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "E-2K / P-3C 驻地",
+   "a": "屏东第6混合联队",
+   "b": "花莲/台东（早期来源口径）",
+   "pick": "a",
+   "conf": "B",
+   "why": "第20电战大队与反潜大队 33/34 中队均隶屏东；P-3C 仅派分遣驻花莲",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（台军 OOB 与部署）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "鱼叉阵地是否含「台中大安」",
+   "a": "公开 6 处不含大安（虎尾/新中/左营军港/东岸/埔墘/太平）",
+   "b": "引擎 BLUE_SHORE 现有『鱼叉·台中大安阵地』",
+   "pick": "a",
+   "conf": "B",
+   "why": "",
+   "src": [
+    {
+     "ref": "军闻社/新浪引联合报：6 处岸置鱼叉营区（虎尾/新中/左营军港/东岸/埔墘/太平），100套400枚",
+     "url": "https://mil.sina.cn/2024-03-19/detail-inanvpwx7282666.d.html",
+     "date": "2024-03-19",
+     "conf": "B"
+    },
+    {
+     "ref": "引擎内既有：index.html BLUE_SHORE『鱼叉·台中大安阵地』",
+     "url": "local://index.html",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "吕宋堤丰连点位",
+   "a": "引擎常量 km(266,884) → 120.60E/18.50N",
+   "b": "env.js gfix 标记 120.59E/18.19N",
+   "pick": "a",
+   "conf": "B",
+   "why": "",
+   "src": [
+    {
+     "ref": "index.html:1683 TYPHON 常量",
+     "url": "local://index.html",
+     "date": "2026-11-09",
+     "conf": "A"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "DDG Paul Hamilton 舷号",
+   "a": "DDG-60（一份 tracker）",
+   "b": "DDG-67（另一份 tracker）",
+   "pick": "none",
+   "conf": "C",
+   "why": "两源互斥且均未回原文核对 → 编成表内并列标注",
+   "src": [
+    {
+     "ref": "USNI Tracker 2026-10-13：CVN-71 罗斯福号 CSG（CVW-11/CG-65/DDG-73/DDG-120/保罗·汉密尔顿）参加 Keen Sword 27",
+     "url": "https://news.usni.org/2026-10-13/usni-news-fleet-and-marine-tracker-oct-13-2026",
+     "date": "2026-10-13",
+     "conf": "B"
+    },
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（FACT/EXER/SPEC/GAP 分级原始报告）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "成功级 vs 派里级驻地（马公/料罗湾）",
+   "a": "马公",
+   "b": "料罗湾（C 级）",
+   "pick": "a",
+   "conf": "C",
+   "why": "纬度差 <3km，对战役无影响，取城市级",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    },
+    {
+     "ref": "维基百科（中文）台海军舰队条目：舰队—战队—舰型对照（与上表在基隆级/成功级归属上冲突，见 conflicts）",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "topic": "PGG-627 舰名",
+   "a": "丹江",
+   "b": "淡江",
+   "pick": "none",
+   "conf": "C",
+   "why": "沱江 II 首舰命名两源冲突且无 A 级原文",
+   "src": [
+    {
+     "ref": "巴哈姆特：台海军 2024-06 调整后舰队/战队编制表（124/131/146/168/192/151）",
+     "url": "https://home.gamer.com.tw/artwork.php?sn=5959346",
+     "date": "2024-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "汉光42 成军日 vs 1 月新编制",
+   "a": "滨海指挥部实际成军 2026-07-01",
+   "b": "2026-01-01（原计划/换番号）",
+   "pick": "a",
+   "conf": "B",
+   "why": "1 月为计划日与换番号时点，首演为汉光42",
+   "src": [
+    {
+     "ref": "上报/自由时报：滨海作战指挥部 2026-07-01 虎尾成军，简士渊首任，并入海锋大队+光六31艘",
+     "url": "https://www.storm.mg/article/11041719",
+     "date": "2026-07-28",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "乌丘/马祖精确坐标",
+   "a": "24°55′N/119°21′E（流传）",
+   "b": "南竿 26°13′N/20°00′E（经度明显可疑）",
+   "pick": "a",
+   "conf": "C",
+   "why": "流传集存在经度串栏错误，逐条降级为 C 并在 note 标注 NOT VERIFIED",
+   "src": [
+    {
+     "ref": "本次调研汇总：`DATA_SOURCES.md`（含 ✓OS 精确点与 NOT VERIFIED 清单）",
+     "url": "local://DATA_SOURCES.md",
+     "date": "2026-11-09",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "131 太原 / 106 延安 的站位归属",
+   "a": "演训实证：太原舰在台岛以东实弹（A 级央视画面）；延安舰随 075 编队台岛东南（C 级汇编）",
+   "b": "按支队推定：两舰同属东部战区海军，编进福建舰航母群（red_e_ddg3 / red_e_ddg6）",
+   "pick": "a",
+   "conf": "A",
+   "why": "同一舷号不能同时站两个位置。",
+   "src": [
+    {
+     "ref": "央视《新闻联播》东部战区海军宝鸡/衢州/太原舰编队实弹",
+     "url": "https://www.bilibili.com/video/BV1rbvWBWEYE",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "075 编队舷号清单（31海南+106延安+554通辽+907骆马湖）",
+     "url": "https://cj.sina.cn/articles/view/5729800514/15585d142001022rjy",
+     "date": "2026-01-01",
+     "conf": "C"
+    },
+    {
+     "ref": "同上（抓取受限/2025 年前的汇编值，逐条降级为 C）",
+     "url": "https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E8%A7%A3%E6%94%BE%E5%86%9B%E4%B8%9C%E9%83%A8%E6%88%98%E5%8C%BA%E6%B5%B7%E5%86%9B",
+     "date": "2026-11-09",
+     "conf": "C"
+    }
+   ]
+  },
+  {
+   "topic": "614 旅（永安）装备弹型",
+   "a": "DF-11A（Jamestown 2021-11-19 Base 61 表 / Kristensen 2020-12 旧版「First DF-11A brigade」）",
+   "b": "DF-17（Kristensen《Chinese nuclear weapons, 2026》Table 2「First DF-17 brigade」）",
+   "pick": "b",
+   "conf": "B",
+   "why": "同一作者在 2020→2026 之间自行更新；较新表逐字给出 614 旅坐标 26.0596N/117.3151E 与 DF-17。",
+   "src": [
+    {
+     "ref": "BAS Kristensen《Chinese nuclear weapons, 2026》Table 2：614 Brigade / Yongan 26.0596N 117.3151E / DF-17 / 「First DF-17 brigade」",
+     "url": "https://thebulletin.org/wp-content/uploads/2026/07/rbul_a_2691662_t0002.pdf",
+     "date": "2026-07",
+     "conf": "B"
+    },
+    {
+     "ref": "BAS Kristensen-Korda 2020-12 Table 2（历史对照：614=DF-11A「First DF-11A brigade」，作者本人 2026 版已更新）",
+     "url": "https://thebulletin.org/wp-content/uploads/2020/12/Kristensen-Korda_Nov-Dec-China-Table2_final.pdf",
+     "date": "2020-12",
+     "conf": "B"
+    },
+    {
+     "ref": "Jamestown：PLARF 旅级驻地与装备（Base 61 各营）",
+     "url": "https://jamestown.org/program/evolving-missions-and-capabilities-of-the-pla-rocket-force-implications-for-taiwan-and-beyond/",
+     "date": "2021-11-19",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "正义使命-2025 的舰机总数",
+   "a": "20 艘共舰（首轮所引低质汇编）",
+   "b": "共舰 14 + 海警 14、共机 89 架次（67 入应变区域）、两栖编队 4（台国防部情次室经中央社等多源一致）",
+   "pick": "b",
+   "conf": "A",
+   "why": "中央社/自由/中时/公视/联合报同日报道一致，未检索到任何台官方「20 舰」口径 → 20 舰判定为误记并已在各页校正",
+   "src": [
+    {
+     "ref": "中央社（游凯翔）：截至 12-29 15:00 共机 89 架次、67 架次入应变区域；共舰 14 艘 + 海警 14 艘；两栖攻击舰编队 4 艘位于东太平洋",
+     "url": "https://www.cna.com.tw/news/aipl/202512290243.aspx",
+     "date": "2025-12-29",
+     "conf": "A"
+    },
+    {
+     "ref": "联合报同日报道补充：9 艘共舰入 24 浬线、5 艘越中线；海南舰 LHA-31 编队在台岛东南外海",
+     "url": "https://udn.com/news/story/10930/9232941",
+     "date": "2025-12-29",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "SubRON-15 关岛在役名单",
+   "a": "含 Jefferson City SSN-759 / Springfield（USNI 2024 与维基 2025-09 旧版）",
+   "b": "Asheville 758 / Annapolis 760 / Tucson 770 + Minnesota 783（csp.navy.mil 现役页）",
+   "pick": "b",
+   "conf": "A",
+   "why": "官方中队页逐字列出 3 艘洛杉矶级 + 1 艘弗吉尼亚级；DVIDS 证实 Tucson 2026-07-10 抵关岛、Jefferson City 同期转珍珠港 → 旧名单过期",
+   "src": [
+    {
+     "ref": "美海军 SubRON-15 官网潜艇页：3 艘洛杉矶级 + 1 艘弗吉尼亚级 = Asheville 758 / Annapolis 760 / Tucson 770 / Minnesota 783",
+     "url": "https://www.csp.navy.mil/css15/submarines/",
+     "date": "2026-11-09",
+     "conf": "A"
+    },
+    {
+     "ref": "DVIDS：USS Tucson SSN-770 2026-07-10 抵达关岛新母港（Jefferson City SSN-759 同期转驻珍珠港）",
+     "url": "https://www.dvidshub.net/news/569753/uss-tucson-arrives-new-homeport-guam",
+     "date": "2026-07",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "topic": "基隆级是否已全部退废",
+   "a": "「4 艘全部退废」（单一 C 级 PRC 汇编 163/sohu）",
+   "b": "4 艘在役、驻苏澳、隶 168 舰队（台海军官网 2024-04-12 更新页 + 自由时报 2026-06-06 汰除报告不含基隆级）",
+   "pick": "b",
+   "conf": "A",
+   "why": "当事方官网 + 后续官方汰除清单双向印证；真正逐艘退役的是济阳级（5 艘）与锦江级（2 艘）",
+   "src": [
+    {
+     "ref": "台海军官网 基隆级页（2024-04-12 更新）：2005-2006 交舰，基隆/苏澳/左营/马公，驻地苏澳港、隶属 168 舰队；无退役记载",
+     "url": "https://navy.mnd.gov.tw/AboutUs/Other_Info.aspx?AID=30035&ID=1",
+     "date": "2024-04-12",
+     "conf": "A"
+    },
+    {
+     "ref": "自由时报军武：2026-06-06 国防部汰除报告点名 5 艘济阳级 + 2 艘锦江级，不含基隆级（「基隆级全退废」证伪）",
+     "url": "https://def.ltn.com.tw/article/breakingnews/5462705",
+     "date": "2026-06-06",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "「USNI News 2026-03-21 Maritime Restructure」引用",
+   "a": "2026-03-21 的 USNI 台海军重组稿",
+   "b": "原文实为 2016-03-25（Michal Thim）；2026-03-21 是 Taipei Times/USNI 同步转载的《Two submarines set to test system upgrades next year》（海龙/海虎作战系统升级）",
+   "pick": "b",
+   "conf": "B",
+   "why": "两篇并列导致本项目首轮误标日期与标题；本表引用改挂 2016-03-25 真链接",
+   "src": [
+    {
+     "ref": "USNI News（Michal Thim）原文日期考订＝2016-03-25「Taiwan Navy Emphasizing Domestic Shipbuilding…Maritime Restructure」（此前本项目误记为 2026-03-21，该日实为海龙/海虎作战系统升级稿）",
+     "url": "https://news.usni.org/2016-03-25/taiwan-navy-emphasizing-domestic-shipbuilding-program-in-ongoing-maritime-restructure",
+     "date": "2016-03-25",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "topic": "LRASM 服役口径用词",
+   "a": "IOC（首轮报告用词）",
+   "b": "EOC（洛马官方 Fast Facts：2018 B-1B EOC / 2019 F/A-18E/F EOC）",
+   "pick": "b",
+   "conf": "A",
+   "why": "官方文件写 Early Operational Capability；射程官方不公布，参数页不得填估算值",
+   "src": [
+    {
+     "ref": "Lockheed Martin《LRASM Fast Facts》PDF",
+     "url": "https://www.lockheedmartin.com/content/dam/lockheed-martin/mfc/documents/business-area-landing/Fast-Facts-LRASM.pdf",
+     "date": "无日期",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "topic": "引擎 BLUE_SHORE 的「坪林」爱国者点位",
+   "a": "地名按台中市太平区坪林落位（调研后的点位 120.735/24.150）",
+   "b": "沿用引擎现值反推点 (295.1,237.6) → 120.900/24.350",
+   "pick": "a",
+   "conf": "B",
+   "why": "这不是\"为了对上名字凭空平移\"：平移量由带坐标的来源给定，来源等级 B（连级归属在不同稿件间不一致）。",
+   "src": [
+    {
+     "ref": "台「国防部」记者会（中新网/新浪军事转述）：中南部 6 处 PAC-3 阵地公布，含「台中县太平市坪林」；北部南港/新店/万里已部署",
+     "url": "http://jczs.news.sina.com.cn/2007-03-30/1700437629.html",
+     "date": "2007-03-30",
+     "conf": "A"
+    },
+    {
+     "ref": "中国时报〈爱国者飞弹坪林阵地 鬼月已动工〉：台中市太平区坪林废弃靶场建为爱国者三型阵地，也是台湾 5 个爱国者阵地最后一座；中部＝坪林、南部＝考潭；天弓三另算 12 阵地",
+     "url": "https://www.chinatimes.com/newspapers/20161009000344-260102",
+     "date": "2016-10-09",
+     "conf": "A"
+    },
+    {
+     "ref": "自由时报〈化解居民疑虑 台中飞弹基地 军方沟通奏效〉：台中太平坪林爱国者飞弹基地「部队已进驻」（成军事实），地名带出坪林里/大兴里/坪林路",
+     "url": "https://news.ltn.com.tw/news/politics/paper/1410002",
+     "date": "2020-11-01",
+     "conf": "A"
+    },
+    {
+     "ref": "联合报（洪哲政）〈扬弃都会防御 最强防空飞弹爱国者3型东部野战大部署〉：台中＝太平（坪林）＋清泉岗机场；北部＝安坑／南港；南部＝新化／拷潭／屏东机场",
+     "url": "https://news.housefun.com.tw/news/article/119306202127.html",
+     "date": "2018-07-22",
+     "conf": "A"
+    },
+    {
+     "ref": "OSINT《情报实战》/cn-sec 转载：防空炮兵 795 旅 633 营（中部 PAC-3）「1 连部署在台中市坪林区阵地（24°09′01″N，120°44′07″E）」→ 十进制 120.7353/24.1503；旁证：台中市观光局开放数据「坪林森林公园」120.72996/24.14812（同区、差 <1km）",
+     "url": "https://cn-sec.com/archives/569935.html",
+     "date": "2019-03-11",
+     "conf": "B"
+    },
+    {
+     "ref": "index.html BLUE_SHORE g2『爱国者·台中坪林阵地』旧值 295.1/237.6",
+     "url": "local://index.html",
+     "date": "2026-11-10",
+     "conf": "C"
+    }
+   ]
+  }
+ ],
+ "engine_hints": {
+  "js/env.js:bases": [
+   "us_andersen",
+   "us_apra",
+   "us_kadena",
+   "us_whitebeach",
+   "ph_clark",
+   "ph_subic",
+   "us_sasebo",
+   "us_yokosuka",
+   "us_atsugi",
+   "jp_kanoya"
+  ],
+  "js/env.js:gfix": [
+   "us_typhon_luzon",
+   "us_camp_hansen",
+   "us_guam_thaad",
+   "us_guam_pac3",
+   "us_kadena_pac3",
+   "us_nmesis_yonaguni",
+   "us_typhon_okinawa",
+   "us_typhon_kanoya"
+  ],
+  "js/env.js:city": [
+   "blue_coastal_cmd",
+   "blue_hcds_taiping",
+   "blue_af_7",
+   "blue_af_5",
+   "blue_f168",
+   "blue_isle_jinmen",
+   "blue_dongsha",
+   "jp_ishigaki",
+   "jp_yonaguni",
+   "jp_miyako"
+  ],
+  "index.html:EXT_PLACES": [
+   "us_andersen",
+   "us_apra",
+   "us_tinian",
+   "us_saipan",
+   "us_kadena",
+   "us_futenma",
+   "us_whitebeach",
+   "ph_clark",
+   "ph_subic",
+   "us_sasebo",
+   "us_yokosuka"
+  ],
+  "index.html:BLUE_SHORE": [
+   "blue_hcds_huwei",
+   "blue_hcds_xinzhong",
+   "blue_hcds_zuoying",
+   "blue_hcds_dongan",
+   "blue_hcds_puqian",
+   "blue_hcds_taiping",
+   "blue_hf_heping",
+   "blue_hf_siaoliu",
+   "blue_hf_sanzhi",
+   "blue_hf_dongyin",
+   "blue_hf_xiyu",
+   "blue_hf_hetianshan",
+   "blue_pavepaws",
+   "blue_pac3_nangang",
+   "blue_pac3_wanli",
+   "blue_pac3_pinglin",
+   "blue_hf_mob_taitung",
+   "blue_hf_mob_yilan",
+   "blue_hf_site_hualien",
+   "blue_hf_mob_maobitou",
+   "blue_radar_cangqiong"
+  ],
+  "greenDeploy('full')": [
+   "us_gwcsg",
+   "us_trcsg",
+   "us_arg_boxer",
+   "us_arg_makin",
+   "us_lha6",
+   "us_nmesis_yonaguni",
+   "us_batan_nmesis",
+   "us_batan_nmesis2",
+   "us_typhon_luzon"
+  ],
+  "L4_strategy:red_groups": [
+   "red_e_hq",
+   "red_e_ddg3",
+   "red_e_ddg6",
+   "red_e_ffg1416",
+   "red_jm25_075grp",
+   "red_e_lsd5",
+   "red_e_sub22",
+   "red_e_sub42",
+   "red_rf_617",
+   "red_rf_616",
+   "red_jm25_baoji",
+   "red_jm25_quzhou",
+   "red_jm25_taiyuan",
+   "red_jm25_118"
+  ],
+  "minimap:ex_boxes": [
+   "jm2025",
+   "ks27",
+   "mj2026"
+  ]
+ }
+}

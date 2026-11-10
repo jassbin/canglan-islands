@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 舰队编成</title>
+<link rel="stylesheet" href="js/page.css">
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<div class="page-wrap">
+  <div class="page-head">
+    <h1>舰队编成 · 战斗序列</h1>
+    <span class="ph-sub" id="phSub">按打击群列出编成、驻位与战术要点；点任一行进入装备性能页</span>
+    <span class="ph-sp"></span>
+    <div class="ph-tabs" id="sideTabs"></div>
+  </div>
+  <div class="fl-layout">
+    <aside class="fl-groups" id="groupList"></aside>
+    <main>
+      <section class="panel-x" id="groupHead"></section>
+      <section class="panel-x" style="margin-top:12px;padding:6px 0 0">
+        <table class="tbl" id="unitTable"></table>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script type="module">
+import { nav, S, esc, initTips } from './js/theme.js';
+
+const qs = new URLSearchParams(location.search);
+const _sv = qs.get('side');
+const side = _sv === 'blue' ? 'blue' : _sv === 'green' ? 'green' : 'red';
+const sd = S(side);
+document.getElementById('navSlot').outerHTML = nav('fleet', side);
+document.body.style.setProperty('--ac', sd.color);
+document.title = '苍澜群岛 · 舰队编成 · ' + sd.cn + ' [v0.4]';
+initTips();
+
+document.getElementById('sideTabs').innerHTML =
+  `<button data-s="red" class="${side === 'red' ? 'on' : ''}">◆ 红方·突击</button>` +
+  `<button data-s="blue" class="${side === 'blue' ? 'on' : ''}">▲ 蓝方·拒止</button>` +
+  `<button data-s="green" class="${side === 'green' ? 'on' : ''}">● 绿方·美军</button>`;
+document.querySelectorAll('#sideTabs button').forEach(b => {
+  b.onclick = () => { location.href = 'fleet.html?side=' + b.dataset.s; };
+});
+
+const CLS = {
+  CV: '航母', CVN: '核动力航母', CG: '导弹巡洋舰', DDG: '驱逐舰', FFG: '护卫舰', FFL: '轻型护卫舰',
+  LHA: '两栖攻击舰', LPD: '船坞登陆舰', LSD: '船坞登陆舰',
+  AOE: '综合补给舰', AOR: '油船', SS: '潜艇', SSK: '常规潜艇', SSN: '攻击核潜艇', FPB: '导弹艇',
+  LCAC: '气垫登陆艇', LC: '登陆艇', LCM: '气垫登陆船',
+  'ASM-TEL': '反舰发射车', SAM: '防空导弹', MLRS: '火箭炮', MBT: '主战坦克',
+  IFV: '步兵战车', ATK: '攻击直升机', HELI: '直升机', FGTR: '战斗机', AEW: '预警机',
+  MPA: '海上巡逻机', TKR: '加油机', BMB: '战略轰炸机', TILT: '倾转旋翼机',
+  PGG: '导弹巡逻舰', FAC: '导弹快艇', ARTY: '岸防火炮', RADAR: '雷达', ATGM: '反坦克导弹',
+  AFV: '两栖战车', ART: '岸炮阵地', RDR: '雷达站', SSM: '岸舰导弹', SRBM: '弹道导弹', CM: '巡航导弹',
+  'CM-TEL': '巡航导弹发射连', 'SAM-F': '固定防空阵地', UGB: '地下洞库基地', CHQ: '地下指挥所',
+  FUEL: '油料储存区', AFB: '空军基地'
+};
+const clsOf = c => CLS[c] || c || '—';
+
+
+const j = async f => (await fetch('data/' + f + '?v=' + Date.now())).json();
+const [L1, L2R, L2B, L4R, L4B, L2G, L4G] = await Promise.all([
+  j('L1_static.json'), j('L2_params.json'), j('L2_blue_params.json'),
+  j('L4_strategy.json'), j('L4_blue_denial.json'),
+  j('L2_green_params.json'), j('L4_green_ops.json')
+]);
+
+
+const GRP_META = [
+  { n: '第1打击群 · 航母打击群（福建舰）', sub: '制空 / 制海', role: 'CV-18 + 055 延安 + 052D×2 + 054A×2 + 901 + 039B 水下警戒——对齐航母编队标准编组（2024 官方公布山东舰完整编组 CV+055+052D+054A×2+901+潜艇；福建舰电磁弹射版预测 055×1-2+052D×2-3）。央视 2025-11-18 实拍福建舰首次编队训练。' },
+  { n: '第2编队 · 两栖编队·安徽舰群（主登陆方向）', sub: '登陆输送+自带警戒扫雷', role: '075 安徽舰 + 071 + 052D 南京舰（中远程防空）+ 054A×2（反潜近防）+ 056A + 081 扫雷 + 903 补给——对齐央视 7 舰编队实证（075+071+052D/054A 混合护航三层防御圈）与登陆编队五队制（登陆输送队建制内含警戒舰与扫雷舰）。' },
+  { n: '第3编队 · 两栖编队·广西舰群（第二梯队）', sub: '后续波次输送', role: '075 广西舰 + 071×2 + 052D 包头舰 + 054A + 056A + 081 扫雷——与安徽舰群同构的完整两栖编队，承担第二波次与南走廊。' },
+  { n: '第4编队 · 先遣突击群（野牛）', sub: '野牛自航突击', role: '欧洲野牛气垫艇自航高速突入，抢先投送一个加强连夺占滩头接应点。' },
+  { n: '第5编队 · 舰艇火力支援队', sub: '舰炮对地压制', role: '现代级 杭州/福州舰（130mm 舰炮对地 + 白蛉反舰）——对齐登陆编队五队制的「舰艇火力支援队」：在滩头外海阵位压制守方岸防与火力点。' },
+  { n: '第6编队 · 北封锁群', sub: '海峡北口封锁', role: '现代级 泰州/宁波（反舰+舰炮）+ 052C 郑州舰（区域防空）+ 054A + 056A×2——反舰/防空/反潜三层混编，封锁海峡北口。' },
+  { n: '第7编队 · 南封锁群', sub: '南口封锁 / 区域防空', role: '052C×3（区域防空核心）+ 052D 厦门舰 + 056A×2——封锁海峡南口，盯澎湖方向。' },
+  { n: '第8编队 · 潜艇伏击群（潜22/42支）', sub: '外线伏击', role: '039A/B×4 + 基洛 636M×2：宫古/巴士海峡与海峡南口分散设伏，监视美日潜艇动向。潜艇独立行动，不编入水面群。' },
+  { n: '第9编队 · 联合航空兵群（海航+空军）', sub: '制空 / SEAD / 对海', role: '歼-16/歼-10C 制空与 SEAD，歼-20 隐身踹门，轰-6K 挂鹰击-12/长剑-20 防区外打击，空警-500 掌空情、运-8Q 反潜（数量为推演估算）。' },
+  { n: '第10编队 · 火箭军与远火群', sub: '联合火力准备', role: '东风-17/16 弹道导弹 + 东风-26 反航母 + 长剑-10A 巡航导弹 + PHL-191 远火：H-40h 首波 900+ 枚齐射的火力来源，兼负反介入威慑。' },
+  { n: '第11编队 · 民船第二梯队（动员）', sub: '后续梯队输送', role: '万吨级滚装船 8~12 艘（民船动员）+ 陆军第一梯队（2 个陆战旅+1 个两栖合成旅，约 2.5 万人）：港口稳固后转入正式卸载的主力运力。' },
+  { n: '第12编队 · 战役预备队（冗余）', sub: '第二梯队 / 替补', role: '039B 长征35号水下屏卫、基洛 636M 366 艇（潜42支设伏）、054A 滨州舰（驱6支战役预备）、022 导弹艇群近岸突击预备——任何群战损即由此补位。' }
+];
+const GRP_EXTRA_NOTE = '混编依据：登陆编队五队制（军语：输送队=登陆舰+运输船+警戒舰混编，掩护/火力支援/扫雷/保障分列）＋ 央视 7 舰编队（075+071+052D/054A 混合护航三层圈）＋ 航母编队标准编组（2024 官方）。战场推演按 3 群简化生成（游戏 red_groups），此处为完整任务编组。';
+
+const groups = [];
+if (side === 'red') {
+  
+
+
+  const _sch = (L4R.schemes || []).find(s => s.status === 'adopted' && s.composition) || (L4R.schemes || []).find(s => s.composition) || {};
+  const C = L4R.composition || _sch.composition || {};
+  const sc_src = _sch.composition_src || [];
+  
+
+  (C.red_order || []).forEach(g => {
+    const m = GRP_META[g.gi] || { n: '第' + (g.gi + 1) + '编队', sub: '', role: '' };
+    groups.push({ id: 'b' + g.gi, n: m.n, sub: m.sub, role: m.role, list: g.units.map(u => ({ k: u.kind, name: u.name, lead: !!u.lead, n: u.n || 1 })) });
+  });
+  if (groups[0]) {
+    if (GRP_EXTRA_NOTE) groups[0].note = GRP_EXTRA_NOTE;
+    if (sc_src) groups[0].src = sc_src;
+  }
+} else if (side === 'green') {
+  
+  (L4G.groups || []).forEach(g => {
+    groups.push({
+      id: g.id, n: g.n, sub: g.area, role: g.role, hq: g.hq, geo: true, conf: 'A',
+      tactics: g.tactics || [], src: g.src || [],
+      list: (g.composition || []).map(c => ({ k: c.k, name: c.name || (L2G.units[c.k] && L2G.units[c.k].n) || c.k, n: c.n, lead: !!c.lead }))
+    });
+  });
+} else {
+  (L4B.groups || []).forEach(g => {
+    groups.push({
+      id: g.id, n: g.n, sub: g.area, role: g.role, hq: g.hq, conf: g.conf,
+      tactics: g.tactics || [], src: g.src || [],
+      list: (g.composition || []).map(c => ({ k: c.k, name: L2B.units[c.k]?.n || c.k, n: c.n }))
+    });
+  });
+}
+
+
+let cur = 0;
+
+function stat(k, n) {
+  if (side === 'red') {
+    const p = L2R.units[k] || {}, l = L1.units[k] || {};
+    const bits = [];
+    if (l.n) bits.push(l.n);                    
+    if (p.maxs) bits.push(p.maxs + ' 节');
+    if (p.range) bits.push('续航 ' + p.range + ' nm');
+    if (l.len_m) bits.push('全长 ' + l.len_m + ' m');
+    
+
+
+    return { cls: clsOf(l.t), spec: bits.join(' · ') || '—', conf: p.conf || '—' };
+  }
+  const p = (side === 'green' ? L2G.units[k] : L2B.units[k]) || {};
+  const bits = [];
+  if (p.maxs) bits.push(p.maxs + ' 节');
+  if (p.len_m) bits.push('全长 ' + p.len_m + ' m');
+  if (p.range_km) bits.push('射/航程 ' + p.range_km + ' km');
+  if (p.salvo) bits.push(p.salvo + ' 联装');
+  if (p.speed_mach) bits.push(p.speed_mach + ' 马赫');
+  if (p.warhead_kg) bits.push(p.warhead_kg + ' kg 战斗部');
+  return { cls: clsOf(p.cls), spec: bits.join(' · ') || '—', conf: p.conf || '—' };   
+}
+
+function renderGroups() {
+  document.getElementById('groupList').innerHTML = groups.map((g, i) => {
+    const tot = g.list.reduce((a, u) => a + (u.n || 1), 0);
+    return `<button class="fl-g ${i === cur ? 'on' : ''}" data-i="${i}">
+      <span class="fl-n">${tot} 个单位</span>
+      <b>${esc(g.n)}</b>
+      <small>${esc(g.sub || '')}</small>
+      <p>${esc(g.role || '')}</p>
+    </button>`;
+  }).join('');
+  document.querySelectorAll('.fl-g').forEach(el => {
+    el.onclick = () => { cur = +el.dataset.i; renderGroups(); renderDetail(); };
+  });
+}
+
+function renderDetail() {
+  const g = groups[cur];
+  if (!g) return;
+  const rows = g.list.map(u => {
+    const st = stat(u.k, u.n);
+    return `<tr data-k="${esc(u.k)}">
+      <td><span class="tname">${esc(u.name)}</span>${u.lead ? ' <span class="tagc">旗舰</span>' : ''}</td>
+      <td><span class="tagc">${esc(st.cls)}</span></td>
+      <td>${u.n || 1}</td>
+      <td class="tsub">${esc(st.spec)}</td>
+      <td><span class="conf ${st.conf}">${esc(st.conf)}</span></td>
+    </tr>`;
+  }).join('');
+
+  const hqTxt = g.geo
+    ? `<span class="tagc">母港/驻位 ${g.hq[0]}°E, ${g.hq[1]}°N</span>`
+    : g.hq ? `<span class="tagc">驻位 ${g.hq[0]},${g.hq[1]} km</span>` : `<span class="tagc">编队阵位由方案决定</span>`;
+  const tac = (g.tactics || []).map(t => `<li>${esc(t)}</li>`).join('');
+  const src = (g.src || []).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.ref)}
+      <span class="sl-meta"> · ${esc(s.date || '')} · 置信度 ${esc(s.conf || '—')}</span></a>`).join('');
+
+  document.getElementById('groupHead').innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <b style="font-size:16px">${esc(g.n)}</b>
+      <span style="color:var(--tx2);font-size:12px">${esc(g.sub || '')}</span>
+      ${hqTxt}
+      ${g.conf ? `<span class="conf ${g.conf}">编成置信度 ${g.conf}</span>` : ''}
+    </div>
+    <p style="margin:10px 0 0;color:#a9c1d2;font-size:12.5px">${esc(g.role || '')}</p>
+    ${tac ? `<div class="ut-sec"><h3>战术要点</h3><ul style="margin:0;padding-left:18px;color:#a9c1d2;font-size:12px;line-height:1.8">${tac}</ul></div>` : ''}
+    ${src ? `<div class="ut-sec"><h3>依据</h3><div class="src-list">${src}</div></div>` : ''}`;
+
+  document.getElementById('unitTable').innerHTML = `
+    <thead><tr><th>型号 / 舷号</th><th>类别</th><th>数量</th><th>关键参数</th><th>置信度</th></tr></thead>
+    <tbody>${rows}</tbody>`;
+  document.querySelectorAll('#unitTable tbody tr').forEach(tr => {
+    tr.onclick = () => { location.href = 'unit.html?side=' + side + '&id=' + encodeURIComponent(tr.dataset.k); };
+  });
+}
+
+renderGroups();
+renderDetail();
+if (qs.has('diag')) {
+  document.title = 'FL|' + side + '|g=' + groups.length + '|u=' +
+    groups.reduce((a, g) => a + g.list.reduce((x, y) => x + (y.n || 1), 0), 0) +
+    '|cur=' + (groups[cur] ? groups[cur].n : '-');
+}
+</script>
+</body>
+</html>

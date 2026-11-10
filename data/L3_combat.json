@@ -1,0 +1,379 @@
+{
+  "$layer": "L3 客观拟合层（交战结算模型）",
+  "$policy": "认识论定位：战损/攻防规律是客观存在的，本层候选方案是不同的『拟合器』，只能逼近不能随意选择——换方案的理由必须是『拟合质量更高』（依据更强/更符合实测），而不是『我喜欢这个』。与 L4 策略层的区别：策略是对局里可检验的主观决策，赢不赢要看打的结果；本层只回答『物理上一发命中会发生什么』。",
+  "version": "2.1.0",
+  "updated": "2026-11-04",
+  "combat_model": {
+    "adopted": "hughes_salvo_v3",
+    "candidates": [
+      {
+        "id": "hughes_salvo_v3",
+        "name": "Hughes 齐射模型 v3（双阈值版）",
+        "status": "adopted",
+        "score": {
+          "依据强度": 5,
+          "实时可算": 5,
+          "可解释": 5,
+          "可调参": 4,
+          "保真度": 4,
+          "_weights": [
+            0.3,
+            0.15,
+            0.2,
+            0.15,
+            0.2
+          ]
+        },
+        "total": 4.55,
+        "mechanism": "齐射方程：失能数 = (弹数×Pk − Σ防御力dp) ÷ 抗沉力sp。命中后分两阈值：结构≤35% 失能(OOA，退出战斗但可能不沉)，≤0% 沉没。",
+        "pros": "唯一有 222 枚实战反舰弹统计支撑；区分'打瘫'与'击沉'符合实战（命中后仅约四成沉没）；O(1) 计算量",
+        "cons": "齐射波次粒度较粗；psam 把多层防御压缩成单一合成率",
+        "src": [
+          {
+            "ref": "Wayne P. Hughes, Fleet Tactics and Coastal Combat（齐射方程与 1967-1992 年 222 枚反舰弹统计）",
+            "url": "https://www.usni.org/press/books/fleet-tactics-and-coastal-combat",
+            "date": "2000/2018",
+            "conf": "A"
+          },
+          {
+            "ref": "NPS 教材 ch6 齐射模型参数与算例",
+            "url": "https://calhoun.nps.edu",
+            "date": "2010",
+            "conf": "A"
+          },
+          {
+            "ref": "本游戏完整推导与验算",
+            "url": "canglan/战损模型说明.md",
+            "date": "2026-10-30",
+            "conf": "A"
+          }
+        ]
+      },
+      {
+        "id": "hughes_salvo_v4_layered",
+        "name": "Hughes 分层防御齐射 v4",
+        "status": "backup",
+        "score": {
+          "依据强度": 5,
+          "实时可算": 4,
+          "可解释": 3,
+          "可调参": 3,
+          "保真度": 5,
+          "_weights": [
+            0.3,
+            0.15,
+            0.2,
+            0.15,
+            0.2
+          ]
+        },
+        "total": 4.3,
+        "mechanism": "把防御拆成 远程SAM/中程/近防/电子战诱饵 四层逐层过滤来袭弹，每层独立命中概率，剩余突防数再进齐射方程。",
+        "pros": "保真度最高，能体现舰队防御纵深",
+        "cons": "层参数依赖各国保密的试验数据，公开可查值极少；调参易变成'拍脑袋'，违背可溯源原则",
+        "upgrade_path": "若公开数据足够，以 v3 的 psam 字段逐层拆分升级，接口不变"
+      },
+      {
+        "id": "lanchester_square",
+        "name": "Lanchester 平方律",
+        "status": "rejected",
+        "score": {
+          "依据强度": 4,
+          "实时可算": 5,
+          "可解释": 4,
+          "可调参": 3,
+          "保真度": 2,
+          "_weights": [
+            0.3,
+            0.15,
+            0.2,
+            0.15,
+            0.2
+          ]
+        },
+        "total": 3.55,
+        "reject_reason": "平方律假设连续瞄准射击，损耗是连续函数；反舰导弹是离散'脉冲齐射'，Hughes 在 Fleet Tactics ch5 明确指出该场景下齐射方程才是正确抽象。"
+      },
+      {
+        "id": "agent_monte_carlo",
+        "name": "MANA 类智能体 + 蒙特卡洛",
+        "status": "rejected",
+        "score": {
+          "依据强度": 4,
+          "实时可算": 1,
+          "可解释": 2,
+          "可调参": 2,
+          "保真度": 5,
+          "_weights": [
+            0.3,
+            0.15,
+            0.2,
+            0.15,
+            0.2
+          ]
+        },
+        "total": 3.1,
+        "reject_reason": "需要上千次 Monte Carlo 复盘，浏览器实时对局跑不动；结果难以解释。"
+      }
+    ],
+    "params": {
+      "OOA_pct": 35,
+      "OOA_note": "剩余结构≤35%判失能。锚点：Hughes 统计 124 枚命中→沉14/瘫17；SINKEX 中 Buchanan 驱逐舰挨3鱼叉+3地狱火+1枚2400磅炸弹仍浮着。",
+      "PK_baseline": {
+        "note": "单发名义命中率基准（打无防御目标）。对有防御目标实际突防率由 dp/psam 结算。",
+        "no_defense": 0.91,
+        "defensible_undefended": 0.68,
+        "defended": 0.26,
+        "src": [
+          {
+            "ref": "Hughes 汇编 1967-1992 年 222 枚反舰弹实战统计（Fleet Tactics）",
+            "url": "https://www.usni.org/press/books/fleet-tactics-and-coastal-combat",
+            "date": "1967-1992数据",
+            "conf": "A"
+          }
+        ]
+      },
+      "warhead": {
+        "yj62": 1.0,
+        "yj83": 0.85,
+        "torp": 2.5,
+        "hq9": 1.0,
+        "sam40": 1.0,
+        "bomb": 1.2,
+        "pl15": 1.0,
+        "note": "战斗部系数（相对'名义反舰弹'，基准=鹰击-62 的 210kg 半穿甲高爆战斗部，NDU 报告 Table 2.1）。鹰击-83 战斗部 165kg(NDU)~190kg(人民网)，比值 0.79~0.90，取中值 0.85。鱼雷 2.5：鱼-6 约 200kg 战斗部，但水下爆破对船体结构的破坏远超同质量空气爆破（自由面效应+全船纵向弯矩），实战一发重型鱼雷常断轴/瘫痪驱逐舰。",
+        "src": [
+          {
+            "ref": "美国国防大学 INSS Table 2.1：YJ-62 战斗部 210kg、YJ-83 165kg",
+            "url": "https://www.govinfo.gov/content/pkg/GOVPUB-D5-PURL-gpo76796/pdf/GOVPUB-D5-PURL-gpo76796.pdf",
+            "date": "2014",
+            "conf": "A"
+          },
+          {
+            "ref": "人民网（美方分析转载）：鹰击-8 族 165kg、鹰击-83/83K 190kg 高爆破片",
+            "url": "https://military.people.com.cn/n/2014/1020/c1011-25868449-2.html",
+            "date": "2014-10-20",
+            "conf": "B"
+          },
+          {
+            "ref": "新浪军事：鱼-6 战斗部 205kg、50节/30km",
+            "url": "https://mil.sina.cn/sd/2018-06-25/detail-iheirxyf4506139.d.html",
+            "date": "2018-06-25",
+            "conf": "B"
+          },
+          {
+            "ref": "战损模型说明.md 换算与验算",
+            "url": "canglan/战损模型说明.md",
+            "date": "2026-10-30",
+            "conf": "A"
+          }
+        ],
+        "hf2": 0.86,
+        "hf3": 1.07,
+        "harpoon": 1.05,
+        "tk3": 1.0,
+        "aim120": 1.0
+      },
+      "damage_effects": {
+        "note": "损伤累积对战斗力的影响：Hughes 原文不含此项（齐射模型只算整舰失能），属工程近似，C 级。结构≥70% 无影响；50~70% 轻损（射速×1.35、拦截率×0.90）；35~50% 重伤（射速×1.8、拦截率×0.78）；≤35% 失能 OOA。",
+        "thresholds": [
+          {
+            "min_hull": 70,
+            "rof": 1.0,
+            "psam": 1.0,
+            "label": ""
+          },
+          {
+            "min_hull": 50,
+            "rof": 1.35,
+            "psam": 0.9,
+            "label": "轻损"
+          },
+          {
+            "min_hull": 0,
+            "rof": 1.8,
+            "psam": 0.78,
+            "label": "重伤"
+          }
+        ],
+        "conf": "C"
+      },
+      "resolution": {
+        "note": "逐发掷骰（Armstrong 2005 随机齐射模型的直接实现），不是确定性平均值：① 发射（发射可靠率 0.9，Tiah 2007）② 防御方按火控通道 dp 逐发拦截，每发以 psam 概率击落，通道用满则漏 ③ 突防弹按末制导命中率 pk 掷骰 ④ 命中→损伤 100/sp×战斗部系数 ⑤ 阈值判定：≤35% 失能、≤0% 击沉。确定性期望见 Hughes 式 Δ=(攻击力−防御力)/抗沉力，UI 里以『有效命中率×齐射数 − dp×psam』给出。",
+        "steps": [
+          "launch",
+          "channel_limited_intercept",
+          "terminal_hit_roll",
+          "damage_apply",
+          "threshold_check"
+        ],
+        "src": [
+          {
+            "ref": "Michael J. Armstrong, A Stochastic Salvo Model for Naval Surface Combat, Operations Research 53(5), 2005（导弹与拦截弹均为伯努利随机变量）",
+            "url": "https://doi.org/10.1287/opre.1040.0195",
+            "date": "2005",
+            "conf": "A"
+          },
+          {
+            "ref": "WSC 2019 论文：对 Armstrong 随机齐射模型的仿真分析（N_o、N_d 服从二项分布，命中=max(N_o−N_d,0)）",
+            "url": "https://www.informs-sim.org/wsc19papers/238.pdf",
+            "date": "2019",
+            "conf": "A"
+          },
+          {
+            "ref": "NPS 硕士论文 Modified Hughes Salvo Model：打击力=齐射数×发射可靠率×命中率；防御力=火控通道数；抗沉力=失能所需命中数",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/An_analysis_of_small_navy_tactics_using_a_modified_Hughes%27_Salvo_Model_%28IA_annalysisofsmall109453615%29.pdf",
+            "date": "2007",
+            "conf": "A"
+          }
+        ]
+      },
+      "unit_params": {
+        "cv": {
+          "sp": 6,
+          "dp": 4,
+          "psam": 0.72,
+          "note": "sp6：大型航母吨位大+损管强；dp4/psam.72：HQ-10 24联装+1130近防+护航舰协同（山东舰自卫武备公开影像确认）"
+        },
+        "ddg055": {
+          "sp": 4,
+          "dp": 5,
+          "psam": 0.75,
+          "note": "112垂发(HHQ-9B/YJ-18)+双波段雷达+HQ-10+1130近防；sp4 参照 Adams 级驱逐舰 SINKEX 记录（3鱼叉+3地狱火+1×2400磅炸弹仍浮）；dp5=远程/中程/近弹/近炮/电子五层取整"
+        },
+        "ddg": {
+          "sp": 3,
+          "dp": 4,
+          "psam": 0.68,
+          "note": "64垂发(HHQ-9B)+HQ-10 24联装+730/1130近防+346A AESA（seaforces 武备表确认）；比055少中段照射通道"
+        },
+        "ffg": {
+          "sp": 2,
+          "dp": 3,
+          "psam": 0.55,
+          "note": "32垂发 HHQ-16 半主动制导需照射通道（同时接战数受限）+730近防；sp2：Perry 级 SINKEX 3发鱼叉+1制导炸弹才沉，游戏取2发名义失能"
+        },
+        "lha": {
+          "sp": 5,
+          "dp": 2,
+          "psam": 0.45,
+          "note": "075 自卫武备仅 HQ-10+近防炮（公开影像），区域防空靠护航舰"
+        },
+        "lpd": {
+          "sp": 4,
+          "dp": 1,
+          "psam": 0.35
+        },
+        "aoe": {
+          "sp": 5,
+          "dp": 1,
+          "psam": 0.3,
+          "note": "Hughes 统计中 3 万吨级油轮命中沉没率 0%"
+        },
+        "aor": {
+          "sp": 4,
+          "dp": 1,
+          "psam": 0.3
+        },
+        "sub": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0,
+          "note": "水下目标对反舰导弹天然免疫（导弹不入水），仅鱼雷可伤；sp1=3000t级艇体一发重型鱼雷即瘫痪"
+        },
+        "fpb": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0,
+          "note": "220t 艇体，实战一发即失能"
+        },
+        "zubr": {
+          "sp": 2,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "lcac": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "j15": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "j10c": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "aew": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "heli": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "z8": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "ztd": {
+          "sp": 1.6,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "zbd": {
+          "sp": 1.6,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "hq9": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0,
+          "note": "阵地单元：radar 支撑下对飞机 pk0.5；对掠海反舰导弹拦截率低（公开无实战数据，取保守）"
+        },
+        "yj62": {
+          "sp": 1,
+          "dp": 0,
+          "psam": 0.0
+        },
+        "radar": {
+          "sp": 3,
+          "dp": 0,
+          "psam": 0.0,
+          "note": "雷达方舱+天线，价值高但无防护；一发名义命中即失能（长白车载）"
+        },
+        "gun": {
+          "sp": 3,
+          "dp": 0,
+          "psam": 0.0,
+          "note": "土木工事+炮位（155mm 岸防炮），3 发名义命中失能"
+        }
+      }
+    },
+    "derived_pk_check": {
+      "note": "玩家可验算的换算（v3 公式：突防数 = 弹数×Pk − dp，突防数 ≥ sp 即失能/击沉）",
+      "cases": [
+        {
+          "case": "8发鹰击-62 打 055",
+          "expect": "两波齐射后大概率打瘫"
+        },
+        {
+          "case": "4发鹰击-62 打 054A",
+          "expect": "失能"
+        },
+        {
+          "case": "1发打 022",
+          "expect": "一发即沉"
+        }
+      ]
+    },
+    "updated": "2026-11-04"
+  }
+}

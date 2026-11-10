@@ -1,0 +1,740 @@
+{
+ "kind": "L2_params",
+ "theater": "red",
+ "title": "红方（岛内拒止）装备参数层",
+ "version": "1.6.0",
+ "updated": "2026-11-05",
+ "note": "弹量为发射箱内实弹数，不含再装填梯队；反映机动发射车“打了就跑”的实际持续作战能力。",
+ "units": {
+  "hf2": {
+   "n": "雄风二型机动发射车",
+   "cls": "ASM-TEL",
+   "thumb": "hf2",
+   "speed_kmh": 65,
+   "range_km": 150,
+   "range_max_km": 200,
+   "warhead_kg": 180,
+   "speed_mach": 0.85,
+   "salvo": 4,
+   "ammo": 4,
+   "reload_s": 90,
+   "spec": "8×8 机动发射车 / 4 联装 / 射程 150km（改良型 160~200km）/ 0.85 马赫 / 180kg 战斗部",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "中时新闻网：现役雄二射程约 150km",
+     "url": "https://www.chinatimes.com/newspapers/20250716000444-260118",
+     "date": "2025-07-16",
+     "conf": "A"
+    },
+    {
+     "ref": "自由时报：现役雄二标准接战 80 海里（148km），新量产型 160~200km",
+     "url": "https://news.ltn.com.tw/news/def/breakingnews/4558241",
+     "date": "2024-01-20",
+     "conf": "A"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "hf3": {
+   "n": "雄风三型机动发射车",
+   "cls": "ASM-TEL",
+   "thumb": "hf3",
+   "speed_kmh": 60,
+   "range_km": 200,
+   "range_max_km": 250,
+   "warhead_kg": 225,
+   "speed_mach": 3.0,
+   "salvo": 2,
+   "ammo": 2,
+   "reload_s": 120,
+   "spec": "8×8 机动发射车 / 2 联装 / 射程 150~200km（最大 250km）/ 2.5~3 马赫 / 225kg 战斗部",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "自由时报：雄三标准接战 150~200km，最大射程 250km；增程型 400km",
+     "url": "https://news.ltn.com.tw/news/def/breakingnews/4558241",
+     "date": "2024-01-20",
+     "conf": "A"
+    },
+    {
+     "ref": "中时新闻网：海锋大队机动中队，雄三增程型 400km 首次曝光",
+     "url": "https://www.chinatimes.com/newspapers/20250716000444-260118",
+     "date": "2025-07-16",
+     "conf": "A"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "hf3er": {
+   "n": "雄三增程型机动发射车",
+   "cls": "ASM-TEL",
+   "thumb": "hf3er",
+   "speed_kmh": 55,
+   "range_km": 400,
+   "range_max_km": 400,
+   "warhead_kg": 225,
+   "speed_mach": 3.0,
+   "salvo": 2,
+   "ammo": 2,
+   "reload_s": 150,
+   "spec": "重型 8×8 发射车 / 2 联装 / 最大射程 400km / 专打东部海域航母编队",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "note": "增程型 350~400km 为台媒一致口径，官方未公布；弹箱体积明显大于雄三基本型。",
+   "src": [
+    {
+     "ref": "中时新闻网：增程型雄三最大射程 400km，部署东部",
+     "url": "https://www.chinatimes.com/newspapers/20230626000270-260118",
+     "date": "2023-06-26",
+     "conf": "B"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "tk3": {
+   "n": "天弓三型防空连",
+   "cls": "SAM",
+   "thumb": "tk3",
+   "speed_kmh": 55,
+   "range_km": 200,
+   "range_min_km": 5,
+   "warhead_kg": 90,
+   "speed_mach": 5.5,
+   "salvo": 4,
+   "ammo": 16,
+   "reload_s": 75,
+   "pk": 0.7,
+   "channels": 9,
+   "spec": "四联装机动发射车 + 机动长白雷达 / 拦截 200km / 5.5 马赫 / 单发 Pk≈0.7 / 同时接战 9 目标",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "note": "接战目标数由天弓二的 24 个降为 9 个，抗饱和能力有限。",
+   "src": [
+    {
+     "ref": "科普中国：天弓三拦截 200km、5.5 马赫、单发 Pk≈0.7、接战 9 目标、机动长白雷达",
+     "url": "https://www.kepuchina.cn/article/articleinfo?business_type=100&ar_id=864",
+     "date": "2019-05-01",
+     "conf": "A"
+    }
+   ]
+  },
+  "lt2000": {
+   "n": "雷霆2000多管火箭",
+   "cls": "MLRS",
+   "thumb": "lt2000",
+   "speed_kmh": 80,
+   "range_km": 45,
+   "range_min_km": 10,
+   "salvo": 12,
+   "ammo": 36,
+   "reload_s": 180,
+   "spec": "8×8 底盘 / MK45 弹箱 2×6 联装 / 射程 25~45km / 一次齐射覆盖约 20 万 m²",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "note": "MK45 高爆弹单发 25,000 枚钢珠；MK30 射程 15~32km（27 发/车）；MK15 10~15km（60 发/车）。营辖 2 连、连 9 门。",
+   "src": [
+    {
+     "ref": "国家中山科学研究院：雷霆2000 官方产品页（MK15/30/45，7~45km）",
+     "url": "https://www.ncsist.org.tw/csistdup/products/product.aspx?product_Id=282&catalog=8",
+     "date": "2024-01-01",
+     "conf": "A"
+    },
+    {
+     "ref": "台湾国防部：反登陆作战雷霆多管火箭火力运用与战术作为研析（MK45 25~45km、营2连、连9门）",
+     "url": "https://www.mnd.gov.tw/en/File/18221",
+     "date": "2021-01-01",
+     "conf": "A"
+    }
+   ]
+  },
+  "m1a2t": {
+   "n": "M1A2T 主战坦克",
+   "cls": "MBT",
+   "thumb": "m1a2t",
+   "speed_kmh": 65,
+   "range_km": 3.0,
+   "salvo": 1,
+   "ammo": 40,
+   "reload_s": 8,
+   "hull": 100,
+   "spec": "66t / 120mm 滑膛炮 / 车长独立热像仪 / 108 辆全部交付（584 旅、269 旅）",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "中时新闻网：108 辆 M1A2T 首度投入汉光演习，584 旅与 269 旅运用",
+     "url": "https://www.chinatimes.com/realtimenews/20260807002105-260417",
+     "date": "2026-08-07",
+     "conf": "A"
+    }
+   ]
+  },
+  "cm34": {
+   "n": "CM-34 云豹装甲车",
+   "cls": "IFV",
+   "thumb": "cm34",
+   "speed_kmh": 100,
+   "range_km": 2.5,
+   "salvo": 1,
+   "ammo": 200,
+   "reload_s": 4,
+   "hull": 60,
+   "spec": "8×8 / 30mm 机炮 / 可加挂反无人机网笼 / 滩岸与城镇机动防御",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "自由时报：汉光41 纵深防御，CM-34 云豹甲车与拖式2B 协同",
+     "url": "https://news.ltn.com.tw/news/politics/paper/1716226",
+     "date": "2025-07-16",
+     "conf": "A"
+    }
+   ]
+  },
+  "m60a3": {
+   "n": "M60A3 主战坦克",
+   "cls": "MBT",
+   "thumb": "m60a3",
+   "speed_kmh": 48,
+   "range_km": 2.5,
+   "salvo": 1,
+   "ammo": 60,
+   "reload_s": 9,
+   "hull": 80,
+   "spec": "52t / 105mm 线膛炮 / 台军装甲部队仍占多数的主力",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "readmil：M1A2T 服役前台军主力为 CM 系列与 M60A3，仍占大多数",
+     "url": "https://www.readmil.com/news/2026-08-19/nkvklefj",
+     "date": "2026-08-19",
+     "conf": "B"
+    }
+   ]
+  },
+  "ah64": {
+   "n": "AH-64E 阿帕奇",
+   "cls": "HELI",
+   "thumb": "ah64",
+   "speed_kmh": 280,
+   "range_km": 8,
+   "salvo": 4,
+   "ammo": 16,
+   "reload_s": 25,
+   "hull": 30,
+   "spec": "29 架 / AGM-114 地狱火（8~16 发）+ 30mm 链炮 / 反装甲与滩头火力急袭",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "公开资料汇总：台陆军 AH-64E 共 29 架（2014 年交付完毕）",
+     "url": "https://en.wikipedia.org/wiki/List_of_equipment_of_the_Republic_of_China_Army",
+     "date": "2024-01-01",
+     "conf": "B"
+    }
+   ]
+  },
+  "f16v": {
+   "n": "F-16V 战斗机",
+   "cls": "FGTR",
+   "thumb": "f16v",
+   "speed_kmh": 900,
+   "range_km": 124,
+   "salvo": 2,
+   "ammo": 4,
+   "reload_s": 60,
+   "hull": 12,
+   "spec": "F-16A/B 升级 141 架 / AGM-84 鱼叉（~124km）+ AIM-120 / 东部战力保存与海上打击",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "note": "机队数量 141 架为公开升级总数口径；挂载方案为想定配置，非官方公布。",
+   "src": [
+    {
+     "ref": "公开资料：F-16A/B Block 20 升级 F-16V 共 141 架",
+     "url": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon",
+     "date": "2024-01-01",
+     "conf": "B"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "tajiang": {
+   "n": "塔江级导弹巡逻舰",
+   "cls": "PGG",
+   "speed_kmh": 56,
+   "range_km": 150,
+   "salvo": 4,
+   "ammo": 4,
+   "reload_s": 40,
+   "hull": 90,
+   "spec": "685t / 65m / 30 节 / 8×雄二 + 4×雄三 + 16×海剑二 / 76mm + 方阵",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "中央社：塔江舰 685 吨、30 节、雄二雄三 + 海剑二",
+     "url": "https://www.cna.com.tw/news/firstnews/202012150103.aspx",
+     "date": "2020-12-15",
+     "conf": "A"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "gh6": {
+   "n": "光华六号导弹快艇",
+   "cls": "FAC",
+   "speed_kmh": 61,
+   "range_km": 150,
+   "salvo": 2,
+   "ammo": 2,
+   "reload_s": 30,
+   "hull": 20,
+   "spec": "约 186t / 47m / 33 节 / 4×雄二 / 滨海打击群快艇兵力（现役 31 艘）",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "note": "数量 31 艘见滨海作战指挥部编成报道；单艇吨位/航速为公开汇总值。",
+   "src": [
+    {
+     "ref": "台军滨海作战指挥部：纳编 31 艘光华六号飞弹快艇，下辖北中南东四大打击群",
+     "url": "http://mp.weixin.qq.com/s?__biz=Mzk0MDM5ODA2Mw==&mid=2247485259",
+     "date": "2025-12-01",
+     "conf": "B"
+    }
+   ],
+   "ammo_note": "发射箱内弹量（不含再装填）；战术推演按单次装填计，符合“打了就跑”实际"
+  },
+  "gun": {
+   "n": "岸防炮阵地",
+   "cls": "ART",
+   "speed_kmh": 0,
+   "range_km": 15,
+   "salvo": 6,
+   "ammo": 999,
+   "reload_s": 20,
+   "hull": 80,
+   "spec": "155mm 岸炮 / 固定工事 + 沙袋掩体 / 滩头与近岸拦阻",
+   "conf": "C",
+   "updated": "2026-10-31",
+   "note": "固定岸炮的具体口径与数量未公开，取 155mm 典型值估算。",
+   "src": [
+    {
+     "ref": "游戏抽象（岸防火力）",
+     "url": "",
+     "date": "2026-10-31",
+     "conf": "C"
+    }
+   ]
+  },
+  "radar": {
+   "n": "机动雷达车（长白）",
+   "cls": "RDR",
+   "speed_kmh": 50,
+   "range_km": 270,
+   "salvo": 0,
+   "ammo": 0,
+   "hull": 60,
+   "spec": "机动长白相控阵 / 探测 2~270km / 目标指示与天弓三制导 / 反辐射导弹首要目标",
+   "conf": "A",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "科普中国：机动长白雷达探测 2~270km、90° 扇区",
+     "url": "https://www.kepuchina.cn/article/articleinfo?business_type=100&ar_id=864",
+     "date": "2019-05-01",
+     "conf": "A"
+    }
+   ]
+  },
+  "tow": {
+   "n": "拖式 2B 反装甲车",
+   "cls": "ATGM",
+   "thumb": "tow",
+   "speed_kmh": 90,
+   "range_km": 4,
+   "salvo": 1,
+   "ammo": 12,
+   "reload_s": 15,
+   "hull": 40,
+   "spec": "悍马底盘 / TOW-2B 顶攻 / 4km / 专打登陆战车顶部",
+   "conf": "B",
+   "updated": "2026-10-31",
+   "src": [
+    {
+     "ref": "自由时报：TOW-2B 无线导引、顶攻能力，适合打击战甲车顶部",
+     "url": "https://news.ltn.com.tw/news/politics/paper/1716226",
+     "date": "2025-07-16",
+     "conf": "B"
+    }
+   ]
+  },
+  "pac3": {
+   "n": "爱国者三型（PAC-3）连",
+   "cls": "SAM",
+   "thumb": "pac3",
+   "speed_kmh": 0,
+   "range_km": 100,
+   "range_min_km": 3,
+   "warhead_kg": 0,
+   "speed_mach": 5.0,
+   "salvo": 4,
+   "ammo": 32,
+   "reload_s": 150,
+   "pk": 0.72,
+   "channels": 6,
+   "spec": "MSE 型拦截 ~100km / 主动雷达导引命中杀伤 / 每连 6~8 发射架 / 台北周边南港、新店、万里等阵地",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "全台爱国者三型连：北中南多阵地（万里/南港/新店 + 台中坪林 + 高雄考潭 + 台南新化等），可机动移防。",
+   "src": [
+    {
+     "ref": "今日头条/自由时报：北部 PAC-3 阵地位于南港、新店与万里；全台北中南均有爱国者三型阵地，可机动部署",
+     "url": "https://m.toutiaocdn.com/i7094960505718489638",
+     "date": "2022-06",
+     "conf": "B"
+    },
+    {
+     "ref": "LINE TODAY/NowNews：国军现有 400 余枚爱国者防空导弹，北中南均有 PAC-3 阵地",
+     "url": "https://today.line.me/tw/v3/article/kEXVQ8J",
+     "date": "2024-01-09",
+     "conf": "B"
+    }
+   ]
+  },
+  "pavepaws": {
+   "n": "铺路爪长程预警雷达（乐山）",
+   "cls": "RDR",
+   "thumb": "pavepaws",
+   "speed_kmh": 0,
+   "range_km": 460,
+   "salvo": 0,
+   "ammo": 0,
+   "hull": 150,
+   "spec": "AN/FPS-115 PAVE PAWS / 三面阵 UHF / 有效侦测 ~3,000km（宣称 5,000km）/ 同时跟踪 1,000 批目标",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "note": "2013-02 启用，台美共同操作；位于新竹五峰乡乐山（海拔约 2,600m）。为台军争取约 6 分钟预警时间，是首轮打击高价值目标。 range_km 取 460＝战术引导半径（对海峡与东南沿海目标指示）；战略预警距离（~3,000km）见 spec。",
+   "src": [
+    {
+     "ref": "环球网（引美国防务新闻）：乐山铺路爪可跟踪 3,000km 内喷气式目标，同时跟踪 1,000 批",
+     "url": "https://mil.huanqiu.com/article/9CaKrnJDiML",
+     "date": "2013-11-25",
+     "conf": "B"
+    },
+    {
+     "ref": "腾讯新闻：台军宣称探测距离达 5,000km，战时争取约 6 分钟预警；周边有弓三/爱三/天兵多层防护",
+     "url": "https://news.qq.com/rain/a/20260313A07Z5N00",
+     "date": "2026-03-13",
+     "conf": "B"
+    }
+   ]
+  },
+  "harpoon": {
+   "n": "岸基鱼叉（RGM-84L-4）发射连",
+   "cls": "ASM-TEL",
+   "thumb": "harpoon",
+   "speed_kmh": 0,
+   "range_km": 130,
+   "salvo": 4,
+   "ammo": 8,
+   "reload_s": 100,
+   "pk": 0.6,
+   "speed_mach": 0.85,
+   "spec": "RGM-84L-4 Block II(U) / 射程 ~130km / 0.85马赫 / 4联装机动发射车 / 100套400枚（美售）",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "note": "2021-2030 采购 100 套 400 枚，编入滨海作战指挥部各打击群；规划 6 座固定阵地（云林虎尾、台南新中、左营、屏东东岸、屏东埔墘、台东太平）+ 机动中队。",
+   "src": [
+    {
+     "ref": "环球网/凤凰网：台军采购 100 套 400 枚岸基鱼叉，新建 6 座阵地（云林虎尾、台南新中、左营、屏东东岸、埔墘、台东太平），移交海锋大队",
+     "url": "https://3w.huanqiu.com/a/de583b/4H1Hpu04aPs",
+     "date": "2024-03",
+     "conf": "B"
+    }
+   ]
+  },
+  "keel": {
+   "n": "基隆级驱逐舰（基德级）",
+   "cls": "DDG",
+   "speed_kmh": 56,
+   "range_km": 8900,
+   "aaw": 180,
+   "salvo": 8,
+   "hull": 95,
+   "spec": "9,800t / 172m / 30 节 / SM-2MR 44+20 备弹（防空为主）+ 2×127mm / 雄二×8 / 方阵×2",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基：基隆级（原基德级）178×1,000t 满载、SM-2MR 区域防空",
+     "url": "https://zh.wikipedia.org/wiki/%E5%9F%BA%E9%9A%86%E7%B4%9A%E9%A9%85%E9%80%90%E8%89%A6",
+     "date": "2026-10",
+     "conf": "A"
+    },
+    {
+     "ref": "青年日报：168 舰队以基隆级及济阳级为主编成",
+     "url": "https://www.ydn.com.tw/tw/News/ugC_News_Detail.aspx?ID=615718",
+     "date": "2025-11",
+     "conf": "A"
+    }
+   ]
+  },
+  "chengkung": {
+   "n": "成功级巡防舰（派里级改）",
+   "cls": "FFG",
+   "speed_kmh": 52,
+   "range_km": 7600,
+   "aaw": 40,
+   "salvo": 8,
+   "hull": 78,
+   "spec": "4,200t / 138m / 28 节 / 雄二×4 + 雄三×4 + 海榭树 / 76mm 速射炮 / 方阵 / S-70C 反潜直升机",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基：成功级 PFG-1101~1110，雄二/雄三 8 枚混装",
+     "url": "https://zh.wikipedia.org/wiki/%E6%88%90%E5%8A%9F%E7%B4%9A%E5%B7%A1%E9%98%B2%E8%89%A6",
+     "date": "2026-10",
+     "conf": "A"
+    }
+   ]
+  },
+  "kangding": {
+   "n": "康定级巡防舰（拉法叶级）",
+   "cls": "FFG",
+   "speed_kmh": 46,
+   "range_km": 8300,
+   "aaw": 35,
+   "salvo": 8,
+   "hull": 80,
+   "spec": "3,680t / 125m / 25 节 / 雄二×4 + 雄三×4（战系改装修复后）+ 海榭树 / 76mm / 隐匿性佳",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基：一二四舰队现役六艘康定级巡防舰",
+     "url": "https://hackcn.de/wiki/%E6%B5%B7%E8%BB%8D%E4%B8%80%E4%BA%8C%E5%9B%9B%E8%89%A6%E9%9A%8A%E8%89%9A%E9%9A%8A",
+     "date": "2026-10",
+     "conf": "A"
+    }
+   ]
+  },
+  "chiyang": {
+   "n": "济阳级巡防舰（诺克斯级）",
+   "cls": "FFG",
+   "speed_kmh": 50,
+   "range_km": 6900,
+   "aaw": 30,
+   "salvo": 4,
+   "hull": 72,
+   "spec": "4,100t / 134m / 27 节 / 反潜为主：阿斯洛克 + 533mm 鱼雷 / 海榭树 / SQS-26 声呐",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "青年日报：168 舰队以基隆级及济阳级为主编成",
+     "url": "https://www.ydn.com.tw/tw/News/ugC_News_Detail.aspx?ID=615718",
+     "date": "2025-11",
+     "conf": "A"
+    }
+   ]
+  },
+  "hailung": {
+   "n": "海龙级常规潜艇（旗鱼级）",
+   "cls": "SSK",
+   "speed_kmh": 40,
+   "range_km": 16000,
+   "salvo": 6,
+   "ammo": 6,
+   "hull": 70,
+   "spec": "2,600t 水下 / 66m / 20 节 / 533mm 鱼雷管×6 / SUT 线导鱼雷 / 老旧但静音性能尚可",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基：二五六战队海狮/海豹/海龙/海虎四艘",
+     "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%B5%B7%E8%BB%8D%E4%BA%8C%E4%BA%94%E5%85%AD%E6%88%B0%E9%9A%8A",
+     "date": "2026-10",
+     "conf": "B"
+    }
+   ]
+  },
+  "yushan": {
+   "n": "玉山号船坞运输舰 LPD-1401",
+   "cls": "LPD",
+   "speed_kmh": 39,
+   "range_km": 11500,
+   "hull": 90,
+   "spec": "10,600t / 153m / 21 节 / 坞舱 LCAC×2 + 直升机甲板×2 挂点 / 雄二×8 + 海剑二 / 76mm / 兼两栖旗舰",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "中央社：玉山舰 10,600 吨 2023 年成军",
+     "url": "https://www.cna.com.tw/news/firstnews/202309180003.aspx",
+     "date": "2023-09",
+     "conf": "A"
+    }
+   ]
+  },
+  "panshih": {
+   "n": "盘石号油弹补给舰 AOE-532",
+   "cls": "AOE",
+   "speed_kmh": 41,
+   "range_km": 16000,
+   "hull": 88,
+   "spec": "20,859t / 196m / 22 节 / 油水+弹药+干货横向补给 4 站 / 直升机甲板 / 舰队伴随保障",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "维基：盘石级 fast combat support ship",
+     "url": "https://zh.wikipedia.org/wiki/%E7%9B%A4%E7%9F%B3%E7%B4%9A%E8%BB%8D%E7%94%A8%E8%89%A6",
+     "date": "2026-10",
+     "conf": "B"
+    }
+   ]
+  },
+  "anping": {
+   "n": "安平级巡防舰（海巡·平战转换）",
+   "cls": "PGG",
+   "speed_kmh": 74,
+   "range_km": 220,
+   "salvo": 2,
+   "ammo": 2,
+   "reload_s": 60,
+   "hull": 60,
+   "spec": "600t / 60m / 40 节（双水喷射）/ 平战转换加装 2×雄二 / 20mm 遥控机炮",
+   "conf": "A",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "自由时报：安平级 600 吨、40 节，战时加装雄二纳入海军 62 特遣部队（国防部立法院报告）",
+     "url": "https://def.ltn.com.tw/article/breakingnews/4647267",
+     "date": "2024-04",
+     "conf": "A"
+    }
+   ]
+  },
+  "hf2e": {
+   "n": "雄风-2E巡航导弹发射连（791旅）",
+   "cls": "CM-TEL",
+   "speed_kmh": 80,
+   "range_km": 600,
+   "salvo": 4,
+   "ammo": 12,
+   "reload_s": 600,
+   "hull": 40,
+   "spec": "射程600km级（增程型说法至1,200km）/ 一连3部4联装 / 打机场港口等固定目标 / 台军唯一纵深反击手段",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "台空军防空791旅 641/642营装备增程型雄风-2E：一连3部4联装发射架，部署台岛西北部",
+     "url": "http://mp.weixin.qq.com/s?__biz=MzA5MDI1MTkyNQ==&mid=2247489126&idx=1&sn=1ba3b947d60e8d155c2f29a7bb03d5ea",
+     "date": "2025-10",
+     "conf": "B"
+    }
+   ]
+  },
+  "tk1": {
+   "n": "天弓一/二型防空连（天龙阵地）",
+   "cls": "SAM-F",
+   "speed_kmh": 0,
+   "range_km": 200,
+   "salvo": 1,
+   "ammo": 0,
+   "reload_s": 0,
+   "hull": 60,
+   "spec": "天弓一机动发射架＋天弓二地下发射井混编×6连（793旅611营/794旅612营）/ 射程100~200km / 长白雷达固定部署、阵地坐标公开",
+   "conf": "B",
+   "updated": "2026-11-10",
+   "src": [
+    {
+     "ref": "防空793旅611营3连+794旅612营3连装备天弓一/二，混凝土固定阵地；792旅613营装备天弓三",
+     "url": "http://mp.weixin.qq.com/s?__biz=MzA5MDI1MTkyNQ==&mid=2247489126&idx=1&sn=1ba3b947d60e8d155c2f29a7bb03d5ea",
+     "date": "2025-10",
+     "conf": "B"
+    },
+    {
+     "ref": "天龙阵地部署口径：长白雷达太庞大只能固定部署，故采取「地下发射井＋机动发射架」结合——天弓二（约200km）走地下井，井内弹药打光后由机动发射的天弓一（约100km）接续；天弓一/二皆可用车载发射箱机动，但受雷达约束移动不远",
+     "url": "http://mil.news.sina.com.cn/p/2008-01-19/1011481872.html",
+     "date": "2008-01-19",
+     "conf": "B"
+    },
+    {
+     "ref": "卫星图核对：阵地采用天弓二标准 5 座发射井（一井 4 组 4 联装共 16 枚）+2 部 CS/MPG-25 照射雷达说明混装天弓一；全岛天弓固定发射井 27 座，机动的是天弓三（每连 8 车 32 枚）",
+     "url": "https://www.163.com/dy/article/G2846HG10511DV4H.html",
+     "date": "2021-02-07",
+     "conf": "B"
+    }
+   ]
+  },
+  "jiashan": {
+   "n": "佳山地下机库基地（建安三号）",
+   "cls": "UGB",
+   "speed_kmh": 0,
+   "range_km": 0,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "hull": 500,
+   "spec": "花岗岩山体坑道可停250架战机 / 2500m跑道直连花莲机场 / 洞门60秒开启 / 配弹药库油料库医院 / 志航基地+苏花战备道呼应",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "佳山基地：花莲花岗岩山体坑道可停250架战机，2500m跑道连接花莲机场，8吨铁门60秒开启；台东志航基地三座大型机库相呼应；苏花公路80km按跑道标准改造为战备道",
+     "url": "https://mil.sohu.com/a/1076254070_121973710",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  },
+  "hengshan": {
+   "n": "衡山地下指挥所（鸡南山）",
+   "cls": "CHQ",
+   "speed_kmh": 0,
+   "range_km": 0,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "hull": 500,
+   "spec": "三层坑道20余公里 / 防爆门+独立发电+储水供氧 / 数周独立运转 / 圆山龙山备用 / 台军战时指挥中枢",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "衡山指挥所：台北鸡南山山体三层坑道20余公里，防爆大门/独立发电/储水供氧，可数周独立运转；圆山、龙山备用指挥所同步建成",
+     "url": "https://m.toutiaocdn.com/a7676845214593466909",
+     "date": "2026-09",
+     "conf": "B"
+    }
+   ]
+  },
+  "fueldepot": {
+   "n": "左营军港油库与弹药总库",
+   "cls": "FUEL",
+   "speed_kmh": 0,
+   "range_km": 0,
+   "salvo": 0,
+   "ammo": 0,
+   "reload_s": 0,
+   "hull": 30,
+   "spec": "油库总储量14万吨（多为地下/半地下）/ 弹药总库1.37万吨（寿山隧道式）/ 干船坞3座——台海军持续作战的命脉",
+   "conf": "B",
+   "updated": "2026-11-04",
+   "src": [
+    {
+     "ref": "左营港油库数十座总储油量14万吨（地下/半地下），寿山海军弹药总库储量1.37万吨（隧道山洞式掩体）；左营造船厂干船坞3座为最大修舰基地",
+     "url": "https://baike.baidu.com/item/左营港/3296650",
+     "date": "2024",
+     "conf": "B"
+    }
+   ]
+  }
+ }
+}

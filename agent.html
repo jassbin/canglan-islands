@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 三方 agent</title>
+<link rel="stylesheet" href="js/page.css">
+<style>
+
+:root { --ac: #8fd3e6; --ok: #57c46a; --bad: #e8786a; }
+.ag-wrap { max-width: 1560px; margin: 0 auto; padding: 18px 22px 70px; }
+.ag-go { font-size: 12px; color: var(--ac); text-decoration: none; border: 1px solid var(--ac);
+  border-radius: 12px; padding: 3px 13px; white-space: nowrap; }
+
+.ag-note { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 2px 0 14px;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+  background: linear-gradient(90deg, rgba(143,211,230,.09), transparent 72%);
+  font-size: 12px; color: #8fa8ba; line-height: 1.75; }
+.ag-note b { color: #cfe3f2; font-weight: 500; }
+.ag-note .k { color: #8fd3e6; }
+
+.ag-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; align-items: start; }
+@media (max-width: 1180px) { .ag-grid { grid-template-columns: 1fr; } }
+
+.ag-card { border: 1px solid var(--line2); border-radius: 12px; background: rgba(9,19,29,.72);
+  padding: 13px 14px 14px; position: relative; overflow: hidden; }
+.ag-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px;
+  background: linear-gradient(90deg, var(--sc), transparent 85%); }
+.ag-card h3 { margin: 2px 0 2px; font-size: 14px; letter-spacing: .5px; color: #eaf6ff; }
+.ag-card h3 i { font-style: normal; color: var(--sc); margin-right: 6px; }
+.ag-card .sub { font-size: 11px; color: #6f899b; margin-bottom: 10px; }
+
+.ag-sec { font-size: 11px; color: #7d95a8; margin: 10px 0 3px; letter-spacing: .5px;
+  border-top: 1px dashed rgba(120,180,220,.18); padding-top: 8px; }
+.ag-sec:first-of-type { border-top: 0; padding-top: 0; }
+
+.ag-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ag-chip { display: inline-flex; align-items: baseline; gap: 6px; padding: 5px 10px;
+  border: 1px solid var(--line2); border-radius: 7px; background: rgba(10,24,36,.6);
+  color: #b6cbdb; font-size: 12px; cursor: pointer; transition: .15s; }
+.ag-chip:hover { border-color: var(--sc); color: #eaf6ff; }
+.ag-chip.on { border-color: #57c46a; background: rgba(87,196,106,.15); color: #d8ffd9; }
+.ag-chip.off { border-style: dashed; color: #8fa8ba; }
+.ag-chip .tag { font-size: 10px; color: #7890a2; }
+.ag-chip.on .tag { color: #9fd6a8; }
+
+.ag-row { display: flex; align-items: center; gap: 8px; margin: 7px 0; font-size: 12px; color: #b6cbdb; }
+.ag-row > i { font-style: normal; color: #7890a2; flex: 0 0 74px; font-size: 11.5px; }
+.ag-row input[type=text] { flex: 1; background: rgba(10,24,36,.85); border: 1px solid var(--line2);
+  border-radius: 6px; color: #eaf6ff; font: 12px/1.6 "Microsoft YaHei", system-ui, sans-serif;
+  padding: 5px 8px; outline: none; }
+.ag-row input[type=text]:focus { border-color: var(--sc); }
+.ag-row select { flex: 1; background: rgba(10,24,36,.85); border: 1px solid var(--line2);
+  border-radius: 6px; color: #eaf6ff; font: 12px/1.6 "Microsoft YaHei", system-ui, sans-serif;
+  padding: 5px 8px; outline: none; cursor: pointer; }
+.ag-row select:focus { border-color: var(--sc); }
+.ag-row input[type=range] { flex: 1; accent-color: var(--sc); height: 18px; }
+.ag-row b { font-weight: 600; color: #eaf6ff; flex: 0 0 34px; text-align: right; font-variant-numeric: tabular-nums; }
+.ag-hint { font-size: 10.5px; color: #6f899b; margin: -2px 0 6px 82px; line-height: 1.5; }
+
+.ag-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.ag-btn { padding: 5px 11px; border: 1px solid var(--line2); border-radius: 7px;
+  background: rgba(10,24,36,.6); color: #b6cbdb; font-size: 12px; cursor: pointer; transition: .15s; }
+.ag-btn:hover { border-color: var(--sc); color: #eaf6ff; }
+.ag-btn.go { border-color: var(--sc); color: #eaf6ff; background: color-mix(in srgb, var(--sc) 14%, transparent); }
+.ag-btn.warn:hover { border-color: #e8786a; color: #ffc9c1; }
+.ag-btn[disabled] { opacity: .35; cursor: not-allowed; }
+
+.ag-cap { margin-top: 10px; font-size: 11px; color: #7b93a6; line-height: 1.7; }
+.ag-cap b { color: #a9c4d6; font-weight: 500; }
+.ag-cap .no { color: #d69a8f; }
+.ag-msg { font-size: 11px; color: #8fd3e6; min-height: 16px; margin-top: 7px; }
+</style>
+</head>
+<body class="page">
+<div id="navSlot"></div>
+<div class="ag-wrap">
+  <div class="page-head">
+    <h1>三方 agent · 独立指挥源</h1>
+    <span class="ph-sub">三方各一个独立 agent：各自只有<b>本方情报视图</b>（探测到的接触 + 航迹 + 战前已知），据此<b>估计对手在打哪一案</b>——看不到对手真实战略战术；按决策节拍实时调整。与手动战略（预案 A/B/C · 我的战略）是同一「指挥源」的<b>互斥单选</b>。</span>
+    <span class="ph-sp"></span>
+    <a class="ag-go" href="index.html">→ 作战页（战略台 ⚙ 组可切换）</a>
+  </div>
+
+  <div class="ag-note" id="agNote"></div>
+  <div class="ag-grid" id="agGrid"></div>
+</div>
+
+<script type="module">
+const __hbOff=()=>Promise.resolve({ok:false,status:0,json:()=>Promise.resolve(null),text:()=>Promise.resolve('')});
+
+import { nav, S, esc, initTips } from './js/theme.js';
+import * as AG from './js/agents.js';
+import * as MS from './js/mystrat.js';   
+
+const qs = new URLSearchParams(location.search);
+const _sv = qs.get('side');
+const focus = _sv === 'blue' ? 'blue' : _sv === 'green' ? 'green' : 'red';
+document.getElementById('navSlot').outerHTML = nav('agent', focus);
+document.title = '苍澜群岛 · 三方 agent [v0.4]';
+initTips();
+
+const canDo = {
+  red: '改停船线（advance）· 压制岸基（strike）· 改登陆滩头（beach）· 起飞（launchAir）· 机降（heli）· 换乘上陆（amphib）',
+  blue: '调伏击圈（ambit：远界先打 / 收圈节弹）· 声明与请求（claim）',
+  green: '介入姿态（posture：ISR → 有限 → 全面）· 声明（claim）',
+};
+const sees = {
+  red: '天基侦察 + 舰载雷达：蓝方陆军阵位与调动趋势、绿方航母距离/是否上岛、各接触的航向与航速。',
+  blue: '岸基/舰载雷达（绿方 ISR 时获美方情报共享 820km）：红方船团停船线、放艇时刻与方向、两栖群航向→预测主攻滩头。',
+  green: '天基（NRO/商业 SAR）+ 在空巡逻（P-8A/MQ-4C，给连续航迹）+ 台军岛基雷达网转抄（快照）+ 舰载：红方主力位置与航向、蓝方岸防状态。',
+};
+const cant = {
+  red: '看不见蓝方选了哪一案、预备队营数、岸导待机线',
+  blue: '看不见红方内部决心与目标顺序、潜艇阵位',
+  green: '看不见红方 A2/AD 的真实强度与政治门槛',
+};
+
+
+
+
+
+const SEED_OPTS = {
+  red:   [['auto', 'agent 自选（按 persona）'], ['pa', 'A · 快刀'], ['pb', 'B · 斩首'], ['pc', 'C · 绞索']],
+  blue:  [['auto', 'agent 自选（按 persona）'], ['pa', 'A · 刺猬'], ['pb', 'B · 滩岸决战'], ['pc', 'C · 城市持久']],
+  green: [['auto', 'agent 自选（按 persona）'], ['pa', 'A · 分布式'], ['pb', 'B · 前沿封锁'], ['pc', 'C · 航母威慑']],
+};
+function seedOpts(side, cur) {
+  const out = SEED_OPTS[side].slice();
+  const mine = MS.list(side);
+  if (mine.length) out.push(...mine.map(r => ['ms:' + r.id, '我的战略 · ' + r.name]));
+  
+  if (cur && cur.indexOf('ms:') === 0 && !mine.some(r => 'ms:' + r.id === cur))
+    out.push([cur, '我的战略（已删除 · 将回退自选）']);
+  return out;
+}
+
+let edit = {};      
+
+function chipHtml(side, cur) {
+  return AG.list(side).map(a => {
+    const on = cur === a.id;
+    return '<span class="ag-chip' + (on ? ' on' : '') + '" data-side="' + side + '" data-id="' + a.id + '"'
+      + ' title="' + esc(AG.summary(a)) + '">' + esc(a.name)
+      + '<span class="tag">' + (a.def ? '默认' : '进攻' + Math.round(a.persona.aggression * 100) + '/谨慎' + Math.round(a.persona.caution * 100)) + '</span>'
+      + (on ? ' ✓' : '') + '</span>';
+  }).join('');
+}
+
+function card(side) {
+  const sd = S(side);
+  const sel = AG.getSel();
+  const cur = sel[side] || '';
+  const rec = edit[side] || (cur ? AG.get(side, cur) : AG.DEFAULTS[side]) || AG.DEFAULTS[side];
+  const p = rec.persona || { aggression: 0.5, caution: 0.5 };
+  const isCustom = !rec.def;
+  return '<div class="ag-card" style="--sc:' + sd.color + '">'
+    + '<h3><i>' + sd.glyph + '</i>' + esc(sd.cn) + ' · agent</h3>'
+    + '<div class="sub">当前指挥源：' + (cur ? ('⚙ ' + esc((AG.get(side, cur) || {}).name || cur)) : '手动战略（未接管）') + '</div>'
+
+    + '<div class="ag-sec">选择谁接管（与手动战略互斥）</div>'
+    + '<div class="ag-chips">' + chipHtml(side, cur)
+    + '<span class="ag-chip off' + (cur ? '' : ' on') + '" data-side="' + side + '" data-id="" title="摘掉 agent，回到手动战略（预案 / 我的战略）">─ 不接管</span>'
+    + '</div>'
+
+    + '<div class="ag-sec">persona（点上面 chip 载入，改完存成自定义）</div>'
+    + '<div class="ag-row"><i>名字</i><input type="text" id="nm_' + side + '" maxlength="20" value="' + esc(rec.name) + '"></div>'
+    + '<div class="ag-row"><i>进攻性</i><input type="range" id="ag_' + side + '" min="0" max="100" step="5" value="' + Math.round(p.aggression * 100) + '"><b id="agv_' + side + '">' + Math.round(p.aggression * 100) + '</b></div>'
+    + '<div class="ag-hint">高＝敢抢窗口、敢前推火力（红·速决派 80）</div>'
+    + '<div class="ag-row"><i>谨慎性</i><input type="range" id="ca_' + side + '" min="0" max="100" step="5" value="' + Math.round(p.caution * 100) + '"><b id="cav_' + side + '">' + Math.round(p.caution * 100) + '</b></div>'
+    + '<div class="ag-hint">高＝情报不足先侦察、升级门槛高（绿·风险规避 70）</div>'
+    + '<div class="ag-row"><i>说明</i><input type="text" id="nt_' + side + '" maxlength="60" value="' + esc(rec.note || '') + '"></div>'
+    + '<div class="ag-row"><i>开局引导</i><select id="sp_' + side + '">'
+    + seedOpts(side, rec.seedPlan || 'auto').map(o => '<option value="' + o[0] + '"' + ((rec.seedPlan || 'auto') === o[0] ? ' selected' : '') + '>' + esc(o[1]) + '</option>').join('')
+    + '</select></div>'
+    + '<div class="ag-hint">接管即开局选案：自选＝按 persona 定开局执行案（速决→快刀 / 持久→城市持久 / 规避→航母威慑）；选固定预案或「我的战略」＝人给战略指导，agent 从这一案出发，战中仍按态势实时调整</div>'
+
+    + '<div class="ag-btns">'
+    + '<button class="ag-btn go" data-act="save" data-side="' + side + '">＋ 存为自定义 agent</button>'
+    + '<button class="ag-btn" data-act="apply" data-side="' + side + '" title="把上方 chip 选中的 agent 写进本场，作战页刷新即生效">↻ 应用到作战页</button>'
+    + '<button class="ag-btn warn" data-act="del" data-side="' + side + '"' + (isCustom ? '' : ' disabled') + ' title="删除当前编辑中的自定义 agent（默认不可删）">✕ 删除</button>'
+    + '</div>'
+    + '<div class="ag-msg" id="msg_' + side + '"></div>'
+
+    + '<div class="ag-cap"><b>它能做：</b>' + canDo[side] + '<br>'
+    + '<b>它看得到：</b>' + sees[side] + '<br>'
+    + '<span class="no">它看不到：' + cant[side] + '</span></div>'
+    + '</div>';
+}
+
+function render() {
+  document.getElementById('agNote').innerHTML =
+    '<b>怎么打：</b>每个 agent 每 <span class="k">5 战役分钟</span>（真实至少 4 秒）重新判断一次 —— '
+    + '读自己那份快照 → 用方案特征（航迹 / 放艇时刻与方向 / 陆军阵位趋势 / 航母距离）估对手在用哪一案 → '
+    + '下 1~2 条命令（越权或未登记的动作直接拒绝）。<b>意图不变就不重复下令</b>，改了才下新令。'
+    + '<br><b>开局选案（v0.4）：</b>接管的那一刻 agent 就按 persona（或上面的「开局引导」——内置预案或你的某套战略）选定开局执行案并宣告 —— '
+    + '不再踩着人留下的残留案打；作战页战略台在接管期间把该方预案 / 我的战略 / 介入姿态按钮只读化，换案的显式路径是「✋ 解除接管」。'
+    + '<br><b>互斥：</b>这里选了 agent，该方手动战略（预案 / 我的战略）自动失效；在作战页战略台选了手动战略，agent 也自动摘掉 —— 同一"指挥源"只能选一个。'
+    + '<br><b>思路可见（v0.4）：</b>作战中 agent 每次下了新命令，右上角弹阵营色提示条（意图一句话）；'
+    + '战略台「📋 决策档案」与战后弹窗「📋 agent 决策复盘」按时间线看全程：开局选案 → 每次研判的信念估计 / 意图 / 命令。';
+  document.getElementById('agGrid').innerHTML = ['red', 'blue', 'green'].map(card).join('');
+  wire();
+}
+
+function say(side, t) { const el = document.getElementById('msg_' + side); if (el) el.textContent = t; }
+
+function wire() {
+  document.querySelectorAll('.ag-chip').forEach(el => {
+    el.onclick = () => {
+      const side = el.dataset.side, id = el.dataset.id;
+      if (!id) {
+        AG.clearSide(side);
+        edit[side] = null;
+      } else {
+        AG.setSelSide(side, id);
+        const rec = AG.get(side, id);
+        edit[side] = rec ? { id: rec.id, name: rec.name, persona: { ...rec.persona }, note: rec.note || '', seedPlan: rec.seedPlan || 'auto', def: rec.def } : null;
+      }
+      render();
+      say(side, id ? '已写入本场选择：' + (AG.get(side, id) || {}).name + '（作战页刷新后生效）'
+                   : '已摘掉 agent —— 该方回到手动战略（预案 / 我的战略）');
+      try { __hbOff('beacon?stage=' + encodeURIComponent('AGENT sel ' + side + ' ' + (id || 'off'))).catch(() => {}); } catch (e) {}
+    };
+  });
+  ['red', 'blue', 'green'].forEach(side => {
+    const a = document.getElementById('ag_' + side), av = document.getElementById('agv_' + side);
+    if (a) a.oninput = () => { av.textContent = a.value; };
+    const c = document.getElementById('ca_' + side), cv = document.getElementById('cav_' + side);
+    if (c) c.oninput = () => { cv.textContent = c.value; };
+  });
+  document.querySelectorAll('.ag-btn').forEach(b => {
+    b.onclick = () => {
+      const side = b.dataset.side, act = b.dataset.act;
+      const nm = (document.getElementById('nm_' + side) || {}).value || '';
+      const ag = parseFloat((document.getElementById('ag_' + side) || {}).value || 50) / 100;
+      const ca = parseFloat((document.getElementById('ca_' + side) || {}).value || 50) / 100;
+      const nt = (document.getElementById('nt_' + side) || {}).value || '';
+      const sp = (document.getElementById('sp_' + side) || {}).value || 'auto';
+      if (act === 'save') {
+        const cur = AG.getSel()[side];
+        const curRec = cur ? AG.get(side, cur) : null;
+        const rec = AG.save(side, {
+          
+          id: (curRec && !curRec.def) ? curRec.id : '',
+          name: nm || AG.suggestName(side),
+          persona: { aggression: ag, caution: ca },
+          note: nt,
+          seedPlan: sp,
+        });
+        AG.setSelSide(side, rec.id);
+        edit[side] = { ...rec };
+        render();
+        say(side, '已保存并接管：' + rec.name + '（进攻 ' + Math.round(ag * 100) + ' / 谨慎 ' + Math.round(ca * 100) + '）');
+        try { __hbOff('beacon?stage=' + encodeURIComponent('AGENT save ' + side + ' ' + rec.name)); } catch (e) {}
+      }
+      if (act === 'apply') {
+        const cur = AG.getSel()[side];
+        say(side, cur ? ('本场已选中 ' + (AG.get(side, cur) || {}).name + ' —— 打开或刷新作战页即生效')
+                      : '当前未接管（手动战略）；点一个 chip 或「存为自定义 agent」即可接管');
+      }
+      if (act === 'del') {
+        const cur = AG.getSel()[side];
+        const rec = cur ? AG.get(side, cur) : null;
+        if (!rec || rec.def) { say(side, '默认 agent 不可删除（可在它基础上改参数另存一条）'); return; }
+        if (!confirm('删除 agent「' + rec.name + '」？')) return;
+        AG.remove(side, rec.id);
+        edit[side] = null;
+        render();
+        say(side, '已删除，该方回到手动战略');
+      }
+    };
+  });
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+{
+ "kind": "L4_strategy",
+ "theater": "green",
+ "title": "绿方 · 美军西太前沿部署编成",
+ "version": "1.0.0",
+ "updated": "2026-11-04",
+ "note": "按 2025~2026 公开部署事实编成：横须贺 CSG-5 / 佐世保 America ARG+31st MEU / 关岛潜艇与轰炸机特遣队 / 嘉手纳第18联队轮换 / 冲绳12th MLR / 菲律宾 EDCA 堤丰。装备参数一律引用 L2_green_params.json。",
+ "doctrine": {
+  "name": "分布式海上作战 + 远征前进基地",
+  "summary": "以第一岛链盟国基地群为骨架（横须贺/佐世保/嘉手纳/关岛/吕宋），航母打击群与两栖戒备群维持海上机动兵力，岸基中程火力（堤丰/NMESIS）前出岛链卡口，关岛为第二岛链后勤与轰炸机轮换枢纽。",
+  "principles": [
+   "前进部署：CSG-5 与 America ARG 常驻日本母港，危机时 72 小时内前出至冲突海域。",
+   "分布式杀伤：NMESIS/堤丰以小分队上岛链节点（巴丹、石垣、吕宋北部），打了就转移。",
+   "纵深韧性：关岛为轰炸机特遣队轮换基地与潜艇母港，正向 EIAMD 多层反导体系过渡。",
+   "盟国基地：嘉手纳（冲绳）、克拉克/苏比克（吕宋）等基地使用权是兵力投送前提，也是首要受威胁资产。"
+  ]
+ },
+ "groups": [
+  {
+   "id": "csg5",
+   "n": "第5航母打击群（CSG-5 · 华盛顿号）",
+   "short": "CSG-5",
+   "area": "母港横须贺 · 印太海域机动",
+   "hq": [
+    139.67,
+    35.29
+   ],
+   "role": "前沿部署航母打击群：华盛顿号 + CVW-5 舰载机联队 + 提康级巡洋舰与伯克级驱逐舰，危机时前出至冲突海域建立制空/制海。",
+   "composition": [
+    {
+     "k": "cvn73",
+     "n": 1,
+     "lead": true
+    },
+    {
+     "k": "cg47",
+     "n": 1,
+     "name": "CG-62 罗伯特·斯莫尔斯"
+    },
+    {
+     "k": "ddg51",
+     "n": 3,
+     "name": "DDG-86 肖普 / DDG-85 麦克坎贝尔 / DDG-93 钟云"
+    },
+    {
+     "k": "ssnla",
+     "n": 1,
+     "name": "伴随攻击核潜艇"
+    },
+    {
+     "k": "f35c",
+     "n": 4,
+     "name": "CVW-5 F-35C 中队"
+    },
+    {
+     "k": "fa18ef",
+     "n": 4,
+     "name": "CVW-5 F/A-18E/F 中队"
+    },
+    {
+     "k": "e2d",
+     "n": 1,
+     "name": "VAW-125 E-2D 分队"
+    }
+   ],
+   "tactics": [
+    "第15驱逐舰中队（DESRON 15）另辖多艘伯克级可临时加强（如 DDG-69 米利厄斯）",
+    "E-2D 通过 NIFC-CA 把超地平线目标指示交给舰射 SM-6 / 空射 LRASM",
+    "2025 年度部署：塔利斯曼军刀、CSGEX（釜山）、访问马尼拉/关岛"
+   ],
+   "src": [
+    {
+     "ref": "美海军第7舰队（2025-12-11）：CSG-5 = CVN-73 + CVW-5 + CG-62 + DDG-86 + DDG-85",
+     "url": "https://www.globalsecurity.org/military///library/news/2025/12/mil-251211-seventhfleet02.htm",
+     "date": "2025-12-11",
+     "conf": "A"
+    },
+    {
+     "ref": "DVIDS：Task Force 70 统辖 DESRON 15 与 CVW-5",
+     "url": "https://www.dvidshub.net/news/500277",
+     "date": "2025-06-10",
+     "conf": "A"
+    },
+    {
+     "ref": "DVIDS：CTF-70 辖 DESRON-15 与 CSG-5（CVN-73 华盛顿号 + CG-62 + CVW-5）",
+     "url": "https://www.dvidshub.net/news/491071",
+     "date": "2025-02-19",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "arg31",
+   "n": "的黎波里号两栖戒备群 + 第31陆战远征队",
+   "short": "ARG-31",
+   "area": "母港佐世保 · 第一岛链海域",
+   "hq": [
+    129.72,
+    33.16
+   ],
+   "role": "前沿两栖兵力：LHA-6 + LPD-22 + LSD-47 搭载 31st MEU（F-35B 航空战斗元素 + BLT 2/4 地面战斗元素 + CLB-31 后勤），5000 余人。",
+   "composition": [
+    {
+     "k": "lha6",
+     "name": "LHA-7 的黎波里号（旗舰）",
+     "n": 1
+    },
+    {
+     "k": "lpd22",
+     "name": "LPD-18 新奥尔良 / LPD-22 圣地亚哥",
+     "n": 2
+    },
+    {
+     "k": "lsd47",
+     "name": "LSD-47 拉什莫尔",
+     "n": 1
+    },
+    {
+     "k": "f35b",
+     "name": "VMFA-242 F-35B 分队",
+     "n": 4
+    },
+    {
+     "k": "mv22",
+     "name": "VMM-262（加强）MV-22B",
+     "n": 3
+    }
+   ],
+   "tactics": [
+    "三舰编组（LHA+LPD+LSD）为美军两栖戒备群标准构型，LPD-18 新奥尔良号可临时并入成四舰",
+    "2025 年首巡逻参加 Iron Fist 2025（与日本水陆机动团）",
+    "F-35B 从两栖攻击舰出击，可前出夺取岛链节点制空"
+   ],
+   "src": [
+    {
+     "ref": "DVIDS：America ARG = PHIBRON 11 + LHA-6/LPD-22/LSD-47，搭载 31st MEU（5000+人）",
+     "url": "https://www.dvidshub.net/news/489965",
+     "date": "2025-01-28",
+     "conf": "A"
+    },
+    {
+     "ref": "DVIDS：31st MEU 航空=VMM-262(加强)+VMFA-242 分队 / 地面=BLT 2/4 / 后勤=CLB-31",
+     "url": "https://www.dvidshub.net/news/492452",
+     "date": "2025-03-06",
+     "conf": "A"
+    },
+    {
+     "ref": "USNI Fleet Tracker 2025-12-15：Tripoli ARG = PHIBRON 11（Rushmore/New Orleans/San Diego）+ 31st MEU",
+     "url": "https://news.usni.org?p=119697/",
+     "date": "2025-12-15",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "subron15",
+   "n": "关岛 · 第15潜艇中队",
+   "short": "SubRon 15",
+   "area": "阿普拉港波拉里斯角（关岛）",
+   "hq": [
+    144.645,
+    13.439
+   ],
+   "role": "前沿攻击核潜艇部队：5 艘洛杉矶级以关岛为母港，配两艘潜艇供应舰；关岛是美本土外唯一能维修核潜艇的港口。",
+   "composition": [
+    {
+     "k": "ssnla",
+     "n": 5
+    }
+   ],
+   "tactics": [
+    "前沿部署省去夏威夷—西太往返航程，部署在航率显著高于本土母港艇",
+    "12 具垂发战斧可对地打击；4 具鱼雷管反舰/反潜",
+    "规划中的弗吉尼亚级关岛驻泊将进一步增强水下兵力"
+   ],
+   "src": [
+    {
+     "ref": "美海军新闻（2025-12-19）：SSN-760 安纳波利斯号返关岛，第15潜艇中队为太平洋前沿 5 艘快速攻击核潜艇",
+     "url": "https://ludesocial.ludepress.com/2025/12/30/",
+     "date": "2025-12-19",
+     "conf": "A"
+    },
+    {
+     "ref": "CRS R47643：波拉里斯角 5 艘洛杉矶级母港化，附两艘供应舰",
+     "url": "https://sgp.fas.org/sgp/crs/natsec/R47643.pdf",
+     "date": "2024",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "andersen",
+   "n": "关岛 · 安德森空军基地（轰炸机特遣队 + 反导枢纽）",
+   "short": "安德森",
+   "area": "关岛北部",
+   "hq": [
+    144.925,
+    13.584
+   ],
+   "role": "第二岛链核心基地：常态 6~12 架 B-52H/B-1B 轮换（BTF），F-22（199中队）与 F-35A 中队驻训；地面由 THAAD + PAC-3 + 陆基宙斯盾构成增强型综合防空反导（EIAMD）。",
+   "composition": [
+    {
+     "k": "b52h",
+     "n": 6,
+     "name": "轰炸机特遣队轮换"
+    },
+    {
+     "k": "kc135",
+     "n": 4,
+     "name": "第43加油机中队（轮换）"
+    },
+    {
+     "k": "thaad",
+     "n": 1,
+     "name": "Task Force Talon（6发射架/48弹）"
+    },
+    {
+     "k": "pac3mse",
+     "n": 1,
+     "name": "关岛爱国者连"
+    }
+   ],
+   "tactics": [
+    "BTF 轮换确保任何时刻有关岛基地的战略轰炸机可携 JASSM/LRASM 出击",
+    "MQ-4C 海神无人机提供西太广域海上监视",
+    "反导分层：THAAD（高空末段）+ PAC-3（低空）+ 陆基宙斯盾 SM-3 IIA（中段，2025 起）"
+   ],
+   "src": [
+    {
+     "ref": "澎湃新闻：关岛常态 6~12 架 B-52H/B-1B、F-22 中队、F-35A 中队、KC-135、MQ-4C；THAAD/PAC-3/铁穹，2025 增陆基宙斯盾",
+     "url": "https://www.thepaper.cn/newsDetail_forward_30579071",
+     "date": "2025",
+     "conf": "B"
+    },
+    {
+     "ref": "HiWars/CSIS：关岛 6 具 THAAD 发射架 48 枚拦截弹，EIAMD 建设中",
+     "url": "https://hiwars.com/zh/intel/is-the-us-militarys-most-important-island-in-the-p",
+     "date": "2025-05",
+     "conf": "B"
+    }
+   ]
+  },
+  {
+   "id": "kadena18",
+   "n": "冲绳 · 嘉手纳基地第18联队（战斗机轮换）",
+   "short": "嘉手纳",
+   "area": "冲绳中部（距台湾约 450 海里）",
+   "hq": [
+    127.768,
+    26.351
+   ],
+   "role": "美空军距台海最近的大型基地：常驻 48 架 F-15C/D 已退役，现以轮换中队维持存在（2026 年为 27th/90th EFS 双 F-22 中队 + 122nd EFS 的 F-15C），配 KC-135 加油机与 P-8A 轮换分队。",
+   "composition": [
+    {
+     "k": "f22",
+     "n": 4,
+     "name": "27th/90th EFS 轮换（约12架）"
+    },
+    {
+     "k": "f15cm",
+     "n": 2,
+     "name": "122nd EFS 轮换"
+    },
+    {
+     "k": "kc135",
+     "n": 4,
+     "name": "第909空中加油中队"
+    },
+    {
+     "k": "p8a",
+     "n": 2,
+     "name": "海上巡逻分队（轮换）"
+    }
+   ],
+   "tactics": [
+    "轮换制（2022 年底起）：F-22/F-35A/F-15E/F-16 各中队 4~6 个月一班",
+    "2027 年起换装 36 架 F-15EX 常驻（原计划 2026 春，因波音罢工推迟）",
+    "敏捷战斗部署（ACE）：向西南诸岛疏散起降，降低被集中打击风险"
+   ],
+   "src": [
+    {
+     "ref": "Stars and Stripes：嘉手纳 F-15C 常驻机队 2025 年初退役完毕；2026-05 两支 F-22 中队抵达（12架自阿拉斯加）；2026-10 F-15C（122nd EFS）轮换抵达；F-15EX 推迟至 2027",
+     "url": "https://www.stripes.com/branches/air_force/2026-10-27/fighter-squadron-rotations-kadena-okinawa-23274756.html",
+     "date": "2026-10-27",
+     "conf": "A"
+    },
+    {
+     "ref": "Air & Space Forces Magazine：嘉手纳为距台最近的美空军基地（约450英里）",
+     "url": "https://www.airandspaceforces.com/f-22s-arrive-kadena-delayed-f-15exs/",
+     "date": "2026-05-05",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "mlr12",
+   "n": "冲绳 · 第12海军陆战滨海团（NMESIS）",
+   "short": "12th MLR",
+   "area": "汉森营（冲绳金武町）",
+   "hq": [
+    127.78,
+    26.47
+   ],
+   "role": "滨海团以岸基反舰火力封锁岛链水道：NMESIS 连（NSM 185km）2025-03 列装，可空运前出至西南诸岛（石垣、与那国）实施岛链卡口。",
+   "composition": [
+    {
+     "k": "nmesis",
+     "n": 1,
+     "name": "第12滨海战斗团中程导弹连"
+    }
+   ],
+   "tactics": [
+    "1 连 = 2 排 × 3 组，每组指挥车 + 最多 3 部 ROGUE-Fires 无人发射车",
+    "2025-09 石垣岛 Resolute Dragon 演习：日空自 C-130 空运 NMESIS 上岛（与日本 12 式岸舰导弹协同）",
+    "发射车可遥控（视距外 ~200 码），打了就撤，依赖机动生存"
+   ],
+   "src": [
+    {
+     "ref": "Army Recognition：12th MLR 于 2025-03-03 在冲绳汉森营编入 NMESIS 连",
+     "url": "https://www.armyrecognition.com/archives/archives-land-defense/defense-news-army-2025/flash-news-us-marines-deploy-nmesis-anti-ship-missile-systems-in-japan-to-counter-indo-pacific-maritime-threats",
+     "date": "2025-03-03",
+     "conf": "A"
+    },
+    {
+     "ref": "Stars and Stripes：2025-09 NMESIS+MADIS 首次上石垣岛，与日本陆自西部方面队协同",
+     "url": "https://www.stripes.com/branches/marine_corps/2025-09-17/nmesis-madis-missiles-ishigaki-okinawa-19122648.html",
+     "date": "2025-09-17",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "edca",
+   "n": "菲律宾方向 · EDCA 前沿（吕宋堤丰 + 巴丹 NMESIS）",
+   "short": "吕宋方向",
+   "area": "吕宋北部 / 巴丹群岛",
+   "hq": [
+    120.59,
+    18.19
+   ],
+   "role": "第一岛链南翼：堤丰中程导弹连 2024-04 起常驻吕宋北部（1st MDTF），一套发射装置两种弹——SM-6（对海模式 ~370km）覆盖吕宋海峡、战斧反舰型 MST（~1,600km）触及东南沿海；3rd MLR 的 NMESIS 于 2025-04 巴丹群岛前出部署，卡住巴士海峡。",
+   "composition": [
+    {
+     "k": "typhon",
+     "n": 1,
+     "name": "C/5-3野战炮兵营堤丰连"
+    },
+    {
+     "k": "nmesis",
+     "n": 1,
+     "name": "3rd MLR 巴丹分遣队"
+    }
+   ],
+   "tactics": [
+    "堤丰原为演习临时部署，美菲决定无限期保留；2026-02 宣布增派第二套",
+    "美陆军菲律宾轮换部队（ARF-P，2026-01 成立）专责维持堤丰持续在位",
+    "吕宋北发射位：SM-6 ~370km 覆盖吕宋海峡航道，战斧反舰型 MST ~1,600km（带末端导引头，打海上运动目标）触及东南沿海与南海大部",
+    "跨图那一发按 kind='mst' 结算（战斧 340kg WDU-36/B，系数 1.62），不再拿发射车名 'typhon' 当弹名。"
+   ],
+   "src": [
+    {
+     "ref": "Army Recognition / AP：2026-02-17 美菲宣布增派堤丰系统，2024-04-08 起 C/5-3FA（1st MDTF）部署吕宋北部",
+     "url": "https://www.armyrecognition.com/news/army-news/2026/u-s-to-deploy-additional-typhon-missile-systems-to-philippines-in-2026",
+     "date": "2026-02-17",
+     "conf": "A"
+    },
+    {
+     "ref": "Defence Blog：2025-04 Balikatan 期间 3rd MLR 的 NMESIS 部署巴丹群岛巴斯科，俯瞰巴士海峡",
+     "url": "https://defence-blog.com/u-s-marines-buy-more-unmanned-anti-ship-missile-launchers/",
+     "date": "2025-04",
+     "conf": "B"
+    },
+    {
+     "ref": "US Missile Designations：RIM-174 SM-6 战斗部 64kg Mk125 / Mach 3.5（对海模式的伤害档位来源）",
+     "url": "https://www.designation-systems.net/dusrm/m-174.html",
+     "date": "2025-01-27",
+     "conf": "A"
+    },
+    {
+     "ref": "US Missile Designations：战斧 WDU-36/B 340kg、880km/h，MST 海上打击型带末端导引头可打海上运动目标（跨图那一发的真身）",
+     "url": "https://www.designation-systems.net/dusrm/m-109.html",
+     "date": "2025",
+     "conf": "A"
+    }
+   ]
+  },
+  {
+   "id": "csg3",
+   "n": "第3航母打击群（CSG-3 · 林肯号）· 战时增援",
+   "area": "美西出发 · 菲律宾海方向",
+   "hq": [
+    132.0,
+    15.0
+   ],
+   "conf": "A",
+   "role": "2025 年 12 月实际部署菲律宾海的增援群：CVW-9 联队（含 VMFA-314 F-35C）+ DESRON-21 驱逐舰×3；台海想定下为第二航母梯队，与 CSG-5 构成双航母组织。",
+   "tactics": [
+    "CVW-9：VFA-14/41/151 超级大黄蜂 + VMFA-314 F-35C + VAW-117 预警机",
+    "DESRON-21：DDG-121 皮特森（防空指挥舰）/ DDG-112 墨菲 / DDG-111 斯普鲁恩斯",
+    "航渡 5~7 天进入西太，正好落在红方第二波次窗口"
+   ],
+   "src": [
+    {
+     "ref": "USNI Fleet Tracker 2025-12-15/22：CVN-72 林肯号在菲律宾海（CSG-3，DESRON-21 伴随）",
+     "url": "https://news.usni.org?p=119697/",
+     "date": "2025-12-15",
+     "conf": "A"
+    }
+   ],
+   "composition": [
+    {
+     "k": "cvn73",
+     "name": "CVN-72 林肯号（尼米兹级）",
+     "n": 1
+    },
+    {
+     "k": "fa18ef",
+     "name": "CVW-9 VFA-14/41/151 中队",
+     "n": 3
+    },
+    {
+     "k": "f35c",
+     "name": "VMFA-314 黑骑士 F-35C",
+     "n": 1
+    },
+    {
+     "k": "e2d",
+     "name": "VAW-117 墙头王牌 E-2D",
+     "n": 1
+    },
+    {
+     "k": "ddg51",
+     "name": "DDG-121 皮特森 / 112 墨菲 / 111 斯普鲁恩斯",
+     "n": 3
+    },
+    {
+     "k": "ssnla",
+     "name": "伴随攻击核潜艇",
+     "n": 1
+    }
+   ]
+  }
+ ]
+}

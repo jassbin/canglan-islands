@@ -1,0 +1,158 @@
+
+#pbOpen{position:fixed;right:14px;top:96px;z-index:60;padding:7px 12px;font:600 12px/1 "Microsoft YaHei",system-ui;
+  color:#dff3ff;background:rgba(10,26,42,.82);border:1px solid rgba(120,190,220,.45);border-radius:8px;
+  cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.5px}
+#pbOpen:hover{background:rgba(20,48,72,.95);border-color:var(--pb-ac,#4fc3d9)}
+#planboard{position:fixed;inset:0;z-index:200;display:none;background:rgba(4,10,18,.72);backdrop-filter:blur(3px)}
+#planboard.show{display:block}
+#planboard .pb-wrap{position:absolute;inset:18px;display:flex;flex-direction:column;
+  background:linear-gradient(160deg,rgba(9,20,32,.985),rgba(12,26,40,.985));
+  border:1px solid rgba(120,190,220,.28);border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,.6);overflow:hidden;
+  font:13px/1.5 "Microsoft YaHei",system-ui;color:#cfe0ee}
+#planboard .pb-head{display:flex;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid rgba(120,190,220,.16);
+  background:linear-gradient(90deg,rgba(79,195,217,.10),transparent)}
+#planboard .pb-title{font-size:16px;letter-spacing:1px}
+#planboard .pb-title b{color:#eaf6ff}
+#planboard .pb-side{font-size:12px;color:var(--pb-ac,#4fc3d9);margin-left:10px;opacity:.9}
+#planboard .pb-status{margin-left:auto;display:flex;gap:8px}
+#planboard .pill{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid rgba(160,190,210,.28);color:#9fb4c4}
+#planboard .pill.ok{border-color:rgba(120,220,160,.6);color:#8fd6a8;background:rgba(60,140,90,.16)}
+#planboard .pill.dim{opacity:.55}
+#planboard .pill.live{border-color:rgba(255,180,90,.6);color:#ffc879;background:rgba(150,90,20,.18)}
+#planboard .pb-x{background:none;border:none;color:#8fa4b6;font-size:16px;cursor:pointer;padding:2px 6px}
+#planboard .pb-x:hover{color:#fff}
+#planboard .pb-body{flex:1;display:grid;grid-template-columns:minmax(360px,420px) 1fr;gap:14px;padding:14px 16px;min-height:0}
+#planboard .pb-left{overflow:auto;padding-right:4px}
+#planboard .pb-sec-t{font-size:11px;color:#8fa4b6;letter-spacing:1px;margin:2px 0 8px}
+#planboard .pb-card{display:block;width:100%;text-align:left;margin-bottom:9px;padding:10px 12px;cursor:pointer;
+  background:rgba(16,34,52,.72);border:1px solid rgba(120,170,200,.2);border-radius:10px;color:#cfe0ee;
+  transition:.14s;position:relative}
+#planboard .pb-card:hover{border-color:rgba(120,200,230,.5);background:rgba(22,46,68,.9)}
+#planboard .pb-card.on{border-color:var(--pb-ac,#4fc3d9);box-shadow:0 0 0 1px rgba(79,195,217,.35),0 6px 22px rgba(0,0,0,.35);
+  background:linear-gradient(180deg,rgba(30,66,94,.95),rgba(18,38,58,.95))}
+#planboard .pb-card-h{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#planboard .pb-card-h b{font-size:14px;color:#eaf6ff}
+#planboard .pb-card-h code{font-size:10px;color:#7f97a8;letter-spacing:.5px}
+#planboard .pb-style{font-size:10px;padding:1px 7px;border-radius:4px;border:1px solid;white-space:nowrap}
+#planboard .st-aggressive{color:#ff9a7a;border-color:rgba(255,120,90,.5);background:rgba(150,50,30,.18)}
+#planboard .st-conservative{color:#8fd6a8;border-color:rgba(120,210,160,.5);background:rgba(40,110,70,.18)}
+#planboard .st-unorthodox{color:#c9a4ff;border-color:rgba(170,130,255,.5);background:rgba(80,50,140,.18)}
+#planboard .st-balanced{color:#7fd0f0;border-color:rgba(110,200,240,.5);background:rgba(30,90,130,.18)}
+#planboard .pb-tag{margin-top:5px;font-size:12px;color:#b9cede}
+#planboard .pb-doc{margin-top:4px;font-size:11px;color:#8aa4b8;line-height:1.45}
+#planboard .pb-est{display:flex;gap:16px;margin-top:7px;font-size:11.5px;color:#9fb4c4}
+#planboard .pb-est b{color:#eaf6ff;font-size:13px}
+#planboard .pb-est small{color:#7f97a8}
+#planboard .pb-pw b{color:#ffd479}
+#planboard .pb-risk{margin-left:auto;font-size:10px;color:#8fa4b6;white-space:nowrap}
+#planboard .rk-high{color:#ff9a7a}#planboard .rk-medium{color:#ffd479}#planboard .rk-low{color:#8fd6a8}
+#planboard .pb-right{display:flex;flex-direction:column;min-height:0;overflow:auto}
+#planboard .pb-mtx-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:11px;color:#8fa4b6;margin-bottom:7px}
+#planboard .pb-mtx-t b{display:block;font-size:12px;color:#cfe2f0;font-weight:600;margin-bottom:3px}
+#planboard .pb-mtx-t small{display:block;font-size:10.5px;line-height:1.55;color:#7d95a8;max-width:560px}
+#planboard .pb-mtx-t .ax-self,#planboard .pb-mtx-t .ax-foe{display:inline-block;font-style:normal;font-size:9.5px;
+  border-radius:3px;padding:0 4px;margin-right:5px;letter-spacing:.02em}
+#planboard .pb-mtx-t .ax-self{color:#04202c;background:#4fc3d9}
+#planboard .pb-mtx-t .ax-foe{color:#2a0f06;background:#ff9a6a;margin-left:8px}
+#planboard .pb-legend i{display:inline-block;width:12px;height:9px;border-radius:2px;margin:0 3px 0 10px;vertical-align:middle}
+#planboard .lg0{background:#2f6b4a}#planboard .lg1{background:#5a7a3c}#planboard .lg2{background:#8a6a30}#planboard .lg3{background:#8c3a30}
+#planboard .pb-mtx{display:grid;grid-template-columns:104px repeat(4,1fr);grid-auto-rows:minmax(52px,auto);gap:5px;font-size:11px;flex:0 0 auto}
+#planboard .pb-mtx-corner{display:flex;flex-direction:column;justify-content:center;gap:1px;line-height:1.2}
+#planboard .pb-mtx-corner b{font-size:10.5px;font-weight:600;color:var(--pb-ac,#4fc3d9)}
+#planboard .pb-mtx-corner span{font-size:9px;color:#5f7a90;letter-spacing:.04em}
+
+#planboard .pb-mtx-axis{display:flex;align-items:center;gap:6px;margin:0 0 5px 0;padding:3px 8px;
+  border-radius:5px;font-size:10.5px;color:#c9dbe8;background:rgba(255,255,255,.045);
+  border-left:2px solid var(--pb-ac,#4fc3d9)}
+#planboard .pb-mtx-axis b{color:var(--pb-ac,#4fc3d9);font-weight:600;flex:none}
+#planboard .pb-mtx-axis span{margin-left:auto;color:#6f8798;font-size:9.5px}
+#planboard .pb-mtx-col{text-align:center;padding:4px 0;color:#9fb4c4;background:rgba(16,34,52,.7);border-radius:6px;cursor:pointer;border:1px solid transparent}
+#planboard .pb-mtx-col.on{color:#eaf6ff;border-color:rgba(150,200,230,.5)}
+#planboard .pb-mtx-row{display:flex;align-items:center;color:#b6cbdb;padding-left:6px;line-height:1.3;font-size:10.5px;
+  border-left:2px solid var(--pb-ac,#4fc3d9);opacity:.72;cursor:pointer}
+#planboard .pb-mtx-row.on{color:#eaf8ff;opacity:1;background:rgba(255,255,255,.05)}
+#planboard .pb-mtx-col{line-height:1.3;font-size:10.5px}
+#planboard .pb-cell{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 0;border-radius:7px;
+  cursor:pointer;border:1px solid rgba(255,255,255,.06);transition:.12s}
+#planboard .pb-cell b{font-size:14px;color:#fff;line-height:1.1}
+#planboard .pb-cell small{font-size:9.5px;color:rgba(255,255,255,.66)}
+#planboard .pb-cell.c0{background:rgba(47,107,74,.55)}
+#planboard .pb-cell.c1{background:rgba(90,122,60,.55)}
+#planboard .pb-cell.c2{background:rgba(138,106,48,.58)}
+#planboard .pb-cell.c3{background:rgba(140,58,48,.62)}
+#planboard .pb-cell:hover{filter:brightness(1.18)}
+#planboard .pb-cell.cur{outline:2px solid var(--pb-ac,#4fc3d9);outline-offset:1px}
+#planboard .pb-detail{margin-top:10px;padding:10px 12px;background:rgba(14,30,46,.75);border:1px solid rgba(120,170,200,.18);border-radius:10px}
+#planboard .pb-det-h{font-size:13px;color:#eaf6ff;display:flex;align-items:center;gap:8px}
+#planboard .pb-vs{color:#7f97a8;font-size:11px}
+#planboard .pb-det-g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
+#planboard .pb-det-g>div{display:flex;flex-direction:column;gap:1px}
+#planboard .pb-det-g span{font-size:10.5px;color:#8fa4b6}
+#planboard .pb-det-g b{font-size:15px;color:#eaf6ff}
+#planboard .pb-det-g small{font-size:10px;color:#7f97a8}
+#planboard .pb-det-f{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;line-height:1.45}
+#planboard .pb-det-f .up{color:#a8d8bc}#planboard .pb-det-f .dn{color:#e8b0a0}
+#planboard .pb-det-f i{font-style:normal;margin-right:4px;opacity:.8}
+#planboard .pb-note{font-size:10.5px;color:#6f8798;margin:8px 0 0;line-height:1.5}
+#planboard .pb-foot{display:flex;align-items:center;gap:16px;padding:10px 16px;border-top:1px solid rgba(120,190,220,.16);
+  background:linear-gradient(0deg,rgba(79,195,217,.07),transparent)}
+#planboard .pb-lb{font-size:11px;color:#8fa4b6;margin-right:6px}
+#planboard .pb-mode{padding:6px 14px;margin-right:6px;font:600 12px/1 "Microsoft YaHei";cursor:pointer;
+  background:rgba(18,38,58,.9);color:#9fb4c4;border:1px solid rgba(120,170,200,.28);border-radius:7px}
+#planboard .pb-mode.on{color:#04121e;background:var(--pb-ac,#4fc3d9);border-color:var(--pb-ac,#4fc3d9)}
+#planboard .pb-hint{font-size:11px;color:#7f97a8}
+#planboard .pb-actions{margin-left:auto;display:flex;gap:8px}
+#planboard .pb-btn{padding:8px 16px;font:600 12.5px/1 "Microsoft YaHei";cursor:pointer;border-radius:8px;
+  background:rgba(24,50,72,.95);color:#cfe0ee;border:1px solid rgba(120,170,200,.32)}
+#planboard .pb-btn:hover{border-color:rgba(160,220,240,.6)}
+#planboard .pb-btn.primary{background:linear-gradient(180deg,#2f8fa8,#1d6d84);border-color:#4fc3d9;color:#eaf9ff}
+#planboard .pb-btn.primary:disabled{opacity:.35;cursor:not-allowed}
+#planboard .pb-btn.ghost{background:transparent;color:#8fa4b6}
+#planboard .pb-btn.warn{background:linear-gradient(180deg,#a8621f,#7d4413);border-color:#d08a3a;color:#ffe9cf}
+@media (max-width:1180px){#planboard .pb-body{grid-template-columns:1fr}#planboard .pb-mtx{grid-template-columns:70px repeat(4,1fr)}}
+
+
+#planboard .pb-num{width:17px;height:17px;flex:none;display:grid;place-items:center;border-radius:4px;
+  font:700 10.5px/1 "Microsoft YaHei";color:#04202c;background:var(--pb-ac,#4fc3d9);opacity:.9}
+#planboard .pb-sec-h{float:right;font-size:10px;color:#5f7a90;letter-spacing:0}
+#planboard .pb-m-hint{margin-top:6px;font-size:10.5px;color:#607b90}
+#planboard .pb-card.on .pb-m-hint{color:#7fa6bd}
+#planboard .pb-more{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(120,170,200,.26);
+  font-size:11.5px;line-height:1.6;text-align:left;cursor:default}
+#planboard .pb-m-k{display:inline-block;margin-right:6px;font-size:10px;color:#04202c;
+  background:rgba(150,200,225,.85);border-radius:3px;padding:0 5px;letter-spacing:.3px}
+#planboard .pb-m-intro{color:#b7cddd}
+#planboard .pb-m-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+#planboard .pm-col b{display:block;font-size:10.5px;letter-spacing:.05em;margin-bottom:3px}
+#planboard .pm-pro b{color:#8fd6a8}
+#planboard .pm-con b{color:#ff9a7a}
+#planboard .pm-col ul{margin:0;padding:0;list-style:none}
+#planboard .pm-col li{position:relative;padding-left:9px;margin-bottom:3px;color:#a6bccd;font-size:11px;line-height:1.5}
+#planboard .pm-col li::before{content:"·";position:absolute;left:0;color:#7f97a8}
+#planboard .pb-m-risk{margin-top:8px;padding:5px 8px;border-radius:5px;font-size:11px;line-height:1.5;
+  color:#efc3b2;background:rgba(255,110,70,.10);border-left:2px solid rgba(255,140,100,.75)}
+#planboard .pb-m-risk b{color:#ff9a7a;margin-right:6px;font-weight:600}
+#planboard .pb-m-when{margin-top:6px;font-size:11px;color:#9fb8cc}
+#planboard .pb-m-when b,.pb-m-doc b{color:#7fd0f0;margin-right:6px;font-weight:600}
+#planboard .pb-m-doc{margin-top:4px;font-size:10.5px;color:#88a2b6;line-height:1.5}
+
+
+#planboard .pb-det-risk{margin-top:7px;padding:5px 8px;border-radius:5px;font-size:11px;line-height:1.5;
+  color:#efc3b2;background:rgba(255,110,70,.10);border-left:2px solid rgba(255,140,100,.7)}
+#planboard .pb-det-risk b{color:#ff9a7a;margin-right:6px}
+#planboard .pb-det-foe{margin-top:6px;font-size:11px;color:#8fa8bc}
+#planboard .pb-det-foe b{color:#7fd0f0;margin-right:6px}
+
+#planboard .pb-mtx-sum{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:7px;
+  padding:5px 9px;border-radius:6px;font-size:10.5px;line-height:1.5;
+  background:rgba(255,255,255,.04);border:1px solid rgba(120,170,200,.16)}
+#planboard .pb-mtx-sum>b{color:#7d95a8;font-weight:600;flex:none;letter-spacing:.06em}
+#planboard .pb-mtx-sum .ms-item{color:#b6cbdb}
+#planboard .pb-mtx-sum .ms-item i{font-style:normal;color:#7d95a8;margin-left:5px;font-size:10px}
+#planboard .pb-mtx-sum .ms-good b,#planboard .pb-mtx-sum .ms-good{color:#9ad9ae}
+#planboard .pb-mtx-sum .ms-bad{color:#ffab8b}
+#planboard .pb-mtx-sum .ms-bad i{color:#ff8f6a}
+
+#planboard .pb-cell-pw{position:absolute;top:2px;right:5px;font-style:normal;
+  font-size:8.5px;letter-spacing:.02em;color:rgba(255,255,255,.78)}
+#planboard .pb-cell{cursor:help}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>苍澜群岛 · 三方推演控制台 [v0.4]</title>
+<link rel="stylesheet" href="js/page.css">
+<script src="js/wgcloud.js?v=1"></script>
+<style>
+  html,body{margin:0;min-height:100%;background:#0c1a20;font:13px/1.6 "Microsoft YaHei",system-ui,sans-serif;color:#e6eef2}
+  .wrap{max-width:980px;margin:0 auto;padding:22px 18px 60px}
+  h1{font-size:19px;margin:0 0 4px;letter-spacing:.06em}
+  h1 .v{font-size:11px;color:#7d95a8;font-weight:400;margin-left:8px}
+  .sub{font-size:12px;color:#8aa6bd;margin-bottom:18px;line-height:1.7}
+  .sub b{color:#cfe0ec}
+
+  
+  .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .sidecard{background:rgba(14,30,38,.95);border:1px solid rgba(120,180,220,.26);border-radius:10px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .sidecard.red{border-top:3px solid #ff5b4a}
+  .sidecard.blue{border-top:3px solid #4da3ff}
+  .sidecard.green{border-top:3px solid #48d98a}
+  .sidecard h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:7px}
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .sidecard.red .dot{background:#ff5b4a}.sidecard.blue .dot{background:#4da3ff}.sidecard.green .dot{background:#48d98a}
+  .kv{font-size:11.5px;color:#a9c2d6;margin:3px 0;display:flex;gap:6px}
+  .kv b{color:#dff2ff;font-weight:600;flex:none}
+  .kv .brain{color:#ffd27f}
+  .rat{margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.045);border-left:2px solid rgba(120,180,220,.4);border-radius:4px;font-size:12px;color:#cfe0ec;line-height:1.7}
+
+  
+  .tl-h{font-size:14px;font-weight:600;margin:22px 0 10px;color:#cfe0ec;letter-spacing:.05em}
+  .ev{background:rgba(14,30,38,.95);border:1px solid rgba(120,180,220,.22);border-radius:10px;padding:11px 14px;margin-bottom:11px;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+  .ev-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .ev-t{font-family:Consolas,monospace;font-size:11px;color:#9fc0d8;background:rgba(18,46,73,.8);padding:1px 7px;border-radius:4px}
+  .ev-side{font-size:11px;padding:1px 8px;border-radius:4px;font-weight:600}
+  .ev-side.red{background:rgba(255,91,74,.16);color:#ff8f7a}
+  .ev-side.blue{background:rgba(77,163,255,.16);color:#8fc3ff}
+  .ev-side.green{background:rgba(72,217,138,.14);color:#8fe6ae}
+  .ev-lv{font-size:10.5px;color:#7d95a8;border:1px solid rgba(120,180,220,.25);padding:0 6px;border-radius:4px}
+  .ev-trig{font-size:11.5px;color:#ffd27f}
+  .ev-sit{font-size:12px;color:#c4d6e4;margin:6px 0;line-height:1.7}
+  .opts{margin:7px 0 0;padding:0;list-style:none}
+  .opts li{font-size:11.5px;color:#8aa6bd;padding:2.5px 8px;border-left:2px solid transparent}
+  .opts li.sel{color:#eaf6ff;border-left-color:#ffa04d;background:rgba(255,160,77,.07);border-radius:0 4px 4px 0}
+  .opts li.sel::after{content:' ✓ 决策';color:#ffa04d;font-size:10px}
+  .ev-rat{margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.045);border-left:2px solid #ffa04d;border-radius:4px;font-size:12px;color:#e8dcc8;line-height:1.75}
+  .ev-chg{margin-top:7px;font-family:Consolas,monospace;font-size:10.5px;color:#9fd0e8;background:rgba(10,26,40,.8);border:1px solid rgba(120,180,220,.18);padding:6px 9px;border-radius:5px;white-space:pre-wrap;word-break:break-all}
+
+  
+  .pick{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  .pick select{background:#122e49;color:#dff0ff;border:1px solid rgba(120,180,220,.38);border-radius:6px;padding:5px 9px;font:inherit;font-size:12.5px}
+  .btn{display:inline-block;background:rgba(60,140,220,.25);border:1px solid #63b3ff;color:#dff0ff;border-radius:7px;padding:6px 16px;font:inherit;font-size:12.5px;cursor:pointer;text-decoration:none}
+  .btn:hover{background:rgba(60,140,220,.4)}
+  .btn.go{background:rgba(72,160,90,.25);border-color:#63d98a}
+  .empty{color:#7d95a8;font-size:12px;padding:30px;text-align:center;border:1px dashed rgba(120,180,220,.25);border-radius:10px}
+  .outc{background:rgba(14,30,38,.95);border:1px solid rgba(255,160,77,.4);border-radius:10px;padding:12px 14px;margin-top:18px}
+  .outc h3{margin:0 0 6px;font-size:13.5px;color:#ffd27f}
+
+  
+  .newg{background:rgba(14,30,38,.95);border:1px solid rgba(120,180,220,.3);border-radius:10px;padding:13px 15px;margin-bottom:20px;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .ng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:10px}
+  .ng-side{border:1px solid rgba(120,180,220,.2);border-radius:8px;padding:9px 10px;background:rgba(255,255,255,.03)}
+  .ng-side.red{border-top:3px solid #ff5b4a}
+  .ng-side.blue{border-top:3px solid #4da3ff}
+  .ng-side.green{border-top:3px solid #48d98a}
+  .ng-side h4{margin:0 0 7px;font-size:12.5px;color:#dff2ff}
+  .ng-side select{width:100%;margin:4px 0;background:#122e49;color:#dff0ff;border:1px solid rgba(120,180,220,.38);border-radius:6px;padding:5px 7px;font:inherit;font-size:12px;box-sizing:border-box}
+  .ng-side .lab{font-size:10.5px;color:#7d95a8;margin-top:6px}
+  .ng-note{font-size:11.5px;color:#8aa6bd;line-height:1.8;margin:4px 0 10px}
+  .ng-note b{color:#cfe0ec}
+  .ng-note .brain{color:#ffd27f}
+  @media (max-width:720px){.ng-grid{grid-template-columns:1fr}.tri{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>三方推演控制台 <span class="v">v0.4 · 红大陆 / 蓝台军 / 绿美国</span></h1>
+  <div class="sub">
+    战略决策归 agent，战术执行归确定性引擎。每场对抗一份 <b>DecisionLog</b>：战前选案 + 战中按<b>决策窗口</b>（阶段转换 / 战力损失 / 对手行动 / 定时）触发的决策记录。
+    大脑档位：<b class="brain" style="color:#ffd27f">human</b>（会话生成）· <b>builtin</b>（L0 规则引擎）· <b>llm:&lt;model&gt;</b>（serve.py 代理，M3）。
+    本页 = 三方 agent 配置页 + 每场对抗的决策档案页。
+  </div>
+
+  <div class="pick">
+    <label style="font-size:12px;color:#a9c2d6">对抗场次</label>
+    <select id="gameSel"><option>加载中…</option></select>
+    <a class="btn go" id="goBtn" href="#" title="在战场页回放本场的战前部署与战中决策注入">▶ 战场回放</a>
+  </div>
+
+  
+  <div class="newg">
+    <div class="tl-h" style="margin:0 0 10px">▍开一场新对抗（战略战术层）
+      <a class="btn" href="preset.html" target="_blank" style="float:right;font-size:11.5px;padding:4px 12px"
+         title="三方各一条独立战略树：选战略 + 定分支走向（登陆滩头/火力准备/街战强度/交战规则），保存后回到本页开演；看两图进 strategy.html">⚙ 战略树自定义</a>
+    </div>
+    <div class="ng-grid">
+      <div class="ng-side red">
+        <h4>红方 · PLA 突击</h4>
+        <select id="ngRed"></select>
+        <div class="lab">快刀（速决）/ 斩首（垂直包围）/ 绞索（分阶段）</div>
+      </div>
+      <div class="ng-side blue">
+        <h4>蓝方 · 台军守备</h4>
+        <select id="ngBlue"></select>
+        <div class="lab">刺猬（分散拒止）/ 滩岸决战 / 城市持久</div>
+      </div>
+      <div class="ng-side green">
+        <h4>绿方 · 美军介入</h4>
+        <select id="ngPost"></select>
+        <select id="ngGreen"></select>
+        <div class="lab">介入姿态（上）＋ 出兵预案：分布式 / 前沿封锁 / 航母威慑</div>
+      </div>
+    </div>
+    <div class="ng-note">
+      留 <b class="brain">agent 自动</b> ＝ 该侧由 agent 决策：<b>关键变量按最高概率</b>（红·快刀 50% / 蓝·刺猬 45% / 绿·有限介入 35%），<b>次级变量随机</b>（绿方预案三选一）——<b>事后全部记入 DecisionLog</b>（本场档案实时落盘，本页可查）。<br>
+      开演后可随时<b>人为打断</b>（战场页顶栏方案名 → 战略台：⏸ 停止 / ✋ 人工接管）与<b>战中换案</b>（战略台切换任一方预案，战果保留）；<b>终局胜利＝攻入台北</b>（核心城市），不再是上陆数矩阵。
+    </div>
+    <button class="btn go" id="ngGo" style="font-size:13.5px;padding:8px 22px">▶ 锁定方案 · 开演</button>
+    
+    <div class="ng-url" style="margin-top:10px;font-size:11.5px;color:#9db4c6">
+      三方交战页面地址：<code id="ngUrl" style="color:#8fd89b;background:rgba(20,50,40,.5);padding:2px 7px;border-radius:5px;user-select:all">—</code>
+      　（选案后生成 · 回放场：<code id="rvUrl" style="color:#ffd27f;background:rgba(60,45,20,.5);padding:2px 7px;border-radius:5px;user-select:all">—</code>）
+    </div>
+  </div>
+
+  <div class="tri" id="triBox"></div>
+  <div class="tl-h">▍决策时间线（战前 → 战中）</div>
+  <div id="evBox"></div>
+  <div id="outcBox"></div>
+</div>
+
+<script>
+const SIDE_CN={red:'红方 · 大陆（PLA 突击）',blue:'蓝方 · 台军（守备）',green:'绿方 · 美国（西太前沿）'};
+const POSTURE_CN={none:'观望',isr:'情报支援',limited:'有限介入',full:'全面介入'};
+const TRIG_CN={phase:'阶段转换',loss:'战力损失',foe_action:'对手行动',timer:'定时复查',prewar:'战前'};
+const fmtT=t=>{const m=Math.floor(t/60),s=Math.round(t%60);return 'T+'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');};
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function sideCard(p){
+  if(!p)return '<div class="sidecard"><h3>—</h3><div class="kv">本场无该方记录</div></div>';
+  const side=p.side;
+  const planLine = side==='green'
+    ? '<div class="kv"><b>姿态</b>'+(POSTURE_CN[p.posture]||p.posture||'—')+'</div>'
+    : '<div class="kv"><b>预案</b>'+esc(p.preset||'—')+'</div>'
+     +'<div class="kv"><b>执行案</b>'+esc(p.scheme||'—')+'</div>';
+  return '<div class="sidecard '+side+'">'
+    +'<h3><span class="dot"></span>'+SIDE_CN[side]+'</h3>'
+    +'<div class="kv"><b>大脑</b><span class="brain">'+esc((WB&&WB.brains&&WB.brains[side])||'—')+'</span></div>'
+    +planLine
+    +'<div class="rat">'+esc(p.rationale||'（无 rationale）')+'</div>'
+    +'</div>';
+}
+
+function evCard(e){
+  const opts=(e.options||[]).map(o=>'<li class="'+(o.id===e.decision?'sel':'')+'">'+esc(o.n)+'</li>').join('');
+  let chg='';
+  if(e.changes){
+    const bits=[];
+    if(e.changes.DOCTRINE&&Object.keys(e.changes.DOCTRINE).length)bits.push('DOCTRINE '+JSON.stringify(e.changes.DOCTRINE));
+    (e.changes.orders||[]).forEach(o=>bits.push('order '+o.op+' '+JSON.stringify(o.args||{})));
+    if(bits.length)chg='<div class="ev-chg">'+esc(bits.join('\n'))+'</div>';
+  }
+  return '<div class="ev">'
+    +'<div class="ev-h"><span class="ev-t">'+fmtT(e.t)+'</span>'
+    +'<span class="ev-side '+e.side+'">'+SIDE_CN[e.side].split(' ')[0]+SIDE_CN[e.side].split(' ')[1]+'</span>'
+    +'<span class="ev-lv">'+(e.level==='operational'?'战役级':'战略级')+'</span>'
+    +'<span class="ev-trig">触发：'+esc((e.trigger&&e.trigger.detail)||TRIG_CN[e.trigger&&e.trigger.type]||'—')+'</span></div>'
+    +'<div class="ev-sit">'+esc(e.situation||'')+'</div>'
+    +(opts?'<ul class="opts">'+opts+'</ul>':'')
+    +'<div class="ev-rat">'+esc(e.rationale||'（无 rationale）')+'</div>'
+    +chg+'</div>';
+}
+
+let WB=null;
+async function loadGame(id){
+  
+  const r=await fetch('data/wargames/'+encodeURIComponent(id)+'.json?v='+Date.now());
+  if(r.ok)return r.json();
+  if(window.WGCLOUD&&WGCLOUD.active){
+    const d=await WGCLOUD.loadWg(id);
+    if(d)return d;
+  }
+  throw new Error('日志不存在');
+}
+
+(function(){
+  const sel=(id,opts)=>{ const e=document.getElementById(id); if(!e)return;
+    e.innerHTML=opts.map(o=>'<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>').join(''); };
+  (async()=>{
+    let P={red:[],blue:[],green:[]};   
+    try{
+      const r=await fetch('data/L5_strategy_ops.json?v='+Date.now());
+      const j=await r.json(); if(j&&j.presets)P=j.presets;
+    }catch(e){}
+    const auto=[['','— agent 自动（概率选案）—']];
+    sel('ngRed' ,auto.concat((P.red||[]).map(p=>[p.id,p.n])));
+    sel('ngBlue',auto.concat((P.blue||[]).map(p=>[p.id,p.n])));
+    sel('ngGreen',auto.concat((P.green||[]).map(p=>[p.id,p.n])));
+    sel('ngPost',[['','— agent 自动（概率）—'],['none','观望 · 不介入'],['isr','情报支援 ISR'],
+      ['limited','有限介入（岸基+空中）'],['full','全面介入（CSG+ARG）']]);
+  })();
+  document.getElementById('ngGo').onclick=()=>{
+    location.href=ngBuildUrl();
+  };
+  
+  function ngBuildUrl(){
+    const q=new URLSearchParams();
+    const rv=document.getElementById('ngRed').value;
+    const bv=document.getElementById('ngBlue').value;
+    const gv=document.getElementById('ngGreen').value;
+    const pv=document.getElementById('ngPost').value;
+    if(rv)q.set('l5red',rv);
+    if(bv)q.set('l5blue',bv);
+    if(gv)q.set('l5green',gv);
+    if(pv)q.set('gposture',pv);
+    return location.origin+'/index.html'+(q.toString()?'?'+q.toString():'');
+  }
+  ['ngRed','ngBlue','ngGreen','ngPost'].forEach(id=>{
+    const e=document.getElementById(id);
+    if(e)e.addEventListener('change',()=>{document.getElementById('ngUrl').textContent=ngBuildUrl();});
+  });
+  setTimeout(()=>{document.getElementById('ngUrl').textContent=ngBuildUrl();},600);
+})();
+function render(g){
+  WB=g;
+  document.getElementById('triBox').innerHTML=(g.prewar||[]).map(sideCard).join('');
+  const evs=(g.events||[]).slice().sort((a,b)=>a.t-b.t);
+  document.getElementById('evBox').innerHTML=evs.length?evs.map(evCard).join('')
+    :'<div class="empty">本场暂无战中决策记录</div>';
+  const o=g.outcome;
+  document.getElementById('outcBox').innerHTML=(o&&(o.winner||o.end_phase))
+    ?'<div class="outc"><h3>▍战果</h3><div class="kv">胜方 '+(o.winner?SIDE_CN[o.winner]:'—')+' · 上陆 '+o.landed+' · 终局阶段 0'+o.end_phase+' · 历时 '+Math.round((o.duration_s||0)/60)+' 分钟</div></div>'
+    :'';
+  document.getElementById('goBtn').href='index.html?wg='+encodeURIComponent(g.id);
+  document.getElementById('rvUrl').textContent=location.origin+'/index.html?wg='+encodeURIComponent(g.id);
+}
+
+(async function(){
+  const sel=document.getElementById('gameSel');
+  
+
+  let games=[];
+  try{
+    const r=await fetch('data/wargames/index.json?v='+Date.now());
+    const idx=await r.json();
+    if(idx.games)games=idx.games.slice();
+  }catch(e){}
+  if(window.WGCLOUD&&WGCLOUD.active){
+    try{
+      const cl=await WGCLOUD.listWg(50);
+      if(cl){
+        const seen=new Set(games.map(g=>g.id));
+        cl.forEach(g=>{ if(!seen.has(g.id)){ seen.add(g.id); games.push(g); } });
+      }
+    }catch(e){}
+  }
+  games.sort((a,b)=>String(b.created||'').localeCompare(String(a.created||'')));
+  try{
+    if(!games.length)throw new Error('空');
+    sel.innerHTML=games.map(g=>'<option value="'+esc(g.id)+'">'+esc(g.title)+'（'+esc(String(g.created||'').slice(0,10))+'）</option>').join('');
+    const load=async()=>{ try{ render(await loadGame(sel.value)); }catch(e){ document.getElementById('evBox').innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'; } };
+    sel.onchange=load;
+    
+    const q=new URLSearchParams(location.search).get('g');
+    if(q&&games.some(x=>x.id===q)){ sel.value=q; }
+    await load();
+  }catch(e){
+    sel.innerHTML='<option>—</option>';
+    document.getElementById('evBox').innerHTML='<div class="empty">没有对抗日志（本地 index.json 与云端均为空）</div>';
+  }
+})();
+</script>
+</body>
+</html>

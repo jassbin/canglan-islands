@@ -1,0 +1,730 @@
+{
+  "$layer": "L1 稳定层",
+  "$policy": "几乎不变的事实：型号→类别码/显示名/3D模型文件/真实全长/服役时间。变更门槛：官方或权威媒体确认。len_m 为全长（米），游戏内单位 = len_m / 10（游戏约定 1单位=10米）。",
+  "version": "1.1.0",
+  "updated": "2026-11-04",
+  "units": {
+    "cv": {
+      "n": "航母（山东舰级）",
+      "t": "CV",
+      "glb": "cv",
+      "len_m": 306,
+      "first": "2019-12-17",
+      "builder": "大连造船厂",
+      "src": [
+        {
+          "ref": "中国国防部：山东舰入列报道",
+          "url": "http://www.mod.gov.cn/big5/topnews/2019-12/17/content_4864874.htm",
+          "date": "2019-12-17",
+          "conf": "A"
+        }
+      ]
+    },
+    "ddg055": {
+      "n": "055型驱逐舰",
+      "t": "DDG",
+      "glb": "ddg055",
+      "len_m": 180,
+      "first": "2020-01-12",
+      "builder": "江南造船厂",
+      "src": [
+        {
+          "ref": "新华网/国防部：南昌舰入列",
+          "url": "http://www.mod.gov.cn/big5/topnews/2020-01/12/content_4857345.htm",
+          "date": "2020-01-12",
+          "conf": "A"
+        },
+        {
+          "ref": "Naval News: Type 055 analysis",
+          "url": "https://www.navalnews.com/naval-events/2021/03/chinas-type-055-cruiser/",
+          "date": "2021-03",
+          "conf": "B"
+        }
+      ]
+    },
+    "ddg": {
+      "n": "052D型驱逐舰",
+      "t": "DDG",
+      "glb": "ddg",
+      "len_m": 156,
+      "first": "2014-03-21",
+      "builder": "江南造船厂",
+      "src": [
+        {
+          "ref": "维基百科 Type 052D destroyer（多方一致）",
+          "url": "https://en.wikipedia.org/wiki/Type_052D_destroyer",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "ffg": {
+      "n": "054A型护卫舰",
+      "t": "FFG",
+      "glb": "ffg",
+      "len_m": 134,
+      "first": "2008-06-30",
+      "builder": "黄埔文冲/沪东中华",
+      "src": [
+        {
+          "ref": "维基百科 Type 054A frigate",
+          "url": "https://en.wikipedia.org/wiki/Type_054A_frigate",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "lha": {
+      "n": "075型两栖攻击舰",
+      "t": "LHA",
+      "glb": "lhd",
+      "len_m": 250,
+      "first": "2021-04-23",
+      "builder": "沪东中华",
+      "src": [
+        {
+          "ref": "新华网：海南舰入列",
+          "url": "http://www.xinhuanet.com/mil/2021-04/25/c_1211118822.htm",
+          "date": "2021-04-25",
+          "conf": "A"
+        }
+      ]
+    },
+    "lpd": {
+      "n": "071型船坞登陆舰",
+      "t": "LPD",
+      "glb": "lpd071",
+      "len_m": 210,
+      "first": "2007-11-30",
+      "builder": "沪东中华",
+      "src": [
+        {
+          "ref": "维基百科 Type 071 amphibious transport dock",
+          "url": "https://en.wikipedia.org/wiki/Type_071_amphibious_transport_dock",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "aoe": {
+      "n": "901型补给舰",
+      "t": "AOE",
+      "glb": "aoe901",
+      "len_m": 241,
+      "first": "2017-09-01",
+      "builder": "广船国际",
+      "src": [
+        {
+          "ref": "维基百科 Type 901 replenishment ship",
+          "url": "https://en.wikipedia.org/wiki/Type_901_replenishment_ship",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "aor": {
+      "n": "903型补给舰",
+      "t": "AOR",
+      "glb": "aor",
+      "len_m": 178,
+      "first": "2004-05",
+      "builder": "沪东中华",
+      "src": [
+        {
+          "ref": "维基百科 Type 903 replenishment ship",
+          "url": "https://en.wikipedia.org/wiki/Type_903_replenishment_ship",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "sub": {
+      "n": "039B型潜艇",
+      "t": "SSK",
+      "glb": "sub",
+      "len_m": 77,
+      "first": "~2014",
+      "builder": "武昌造船厂",
+      "src": [
+        {
+          "ref": "简氏战舰年鉴（Jane's Fighting Ships）常规潜艇条目",
+          "url": "https://www.janes.com",
+          "date": "2023",
+          "conf": "B"
+        }
+      ]
+    },
+    "fpb": {
+      "n": "022型导弹快艇",
+      "t": "FAC",
+      "glb": "fpb022",
+      "len_m": 42.6,
+      "first": "2004",
+      "builder": "求新造船厂",
+      "src": [
+        {
+          "ref": "维基百科 Type 022 missile boat",
+          "url": "https://en.wikipedia.org/wiki/Type_022_missile_boat",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "zubr": {
+      "n": "欧洲野牛气垫船",
+      "t": "LCM",
+      "glb": "zubr",
+      "len_m": 57.3,
+      "first": "1988(原型)",
+      "builder": "(原型)苏联海洋造船厂",
+      "src": [
+        {
+          "ref": "维基百科 Zubr-class LCAC",
+          "url": "https://en.wikipedia.org/wiki/Zubr-class_LCAC",
+          "date": "2024",
+          "conf": "A"
+        }
+      ]
+    },
+    "lcac": {
+      "n": "726型气垫登陆艇",
+      "t": "LC",
+      "glb": "lcac",
+      "len_m": 30,
+      "first": "~2010",
+      "builder": "江南造船厂",
+      "src": [
+        {
+          "ref": "维基百科 Type 726 LCAC",
+          "url": "https://en.wikipedia.org/wiki/Type_726_LCAC",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "j15": {
+      "n": "歼-15舰载机",
+      "t": "FGTR",
+      "glb": "j15",
+      "len_m": 21.2,
+      "first": "2012-11",
+      "builder": "沈飞",
+      "src": [
+        {
+          "ref": "新华网：歼-15舰载战斗机公开报道",
+          "url": "http://www.xinhuanet.com",
+          "date": "2012-11",
+          "conf": "A"
+        }
+      ]
+    },
+    "j10c": {
+      "n": "歼-10C",
+      "t": "FGTR",
+      "glb": "j10c",
+      "len_m": 16.4,
+      "first": "2017",
+      "builder": "成飞",
+      "src": [
+        {
+          "ref": "中国航空工业集团产品页/珠海航展报道",
+          "url": "http://www.avic.com",
+          "date": "2021",
+          "conf": "A"
+        }
+      ]
+    },
+    "aew": {
+      "n": "空警-600预警机",
+      "t": "AEW",
+      "glb": "aew",
+      "len_m": 18.1,
+      "first": "~2023(推测)",
+      "builder": "西飞",
+      "note": "尺寸为公开影像推算，未官方确认",
+      "src": [
+        {
+          "ref": "Naval News: KJ-600 carrier AEW analysis（推算）",
+          "url": "https://www.navalnews.com",
+          "date": "2023",
+          "conf": "C"
+        }
+      ]
+    },
+    "heli": {
+      "n": "直-20",
+      "t": "HELI",
+      "glb": "heli",
+      "len_m": 15.2,
+      "first": "~2018",
+      "builder": "哈飞",
+      "note": "机身长 15.2（天津直博会公开参数牌）；同牌另有「加旋翼 20 米」，那是含旋翼外伸/停放的外廓口径，不是本机建模用的机身轴长度",
+      "src": [
+        {
+          "ref": "维基百科 Harbin Z-20",
+          "url": "https://en.wikipedia.org/wiki/Harbin_Z-20",
+          "date": "2024",
+          "conf": "C"
+        }
+      ]
+    },
+    "z8": {
+      "n": "直-8C运输直升机",
+      "t": "HELI",
+      "glb": "z8",
+      "len_m": 20.27,
+      "first": "~2018",
+      "builder": "昌飞",
+      "note": "机身长 20.27（AVIC 规格表）；同表「机长 23.035」是旋翼＋尾桨转动外廓口径，本表 L 一律取机身",
+      "src": [
+        {
+          "ref": "维基百科 Changhe Z-8",
+          "url": "https://en.wikipedia.org/wiki/Changhe_Z-8",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "ztd": {
+      "n": "ZTD-05两栖突击车",
+      "t": "AFV",
+      "glb": "ztd05",
+      "len_m": 10,
+      "first": "~2006",
+      "builder": "兵器工业集团",
+      "src": [
+        {
+          "ref": "珠海航展公开展示/维基百科 ZTD-05",
+          "url": "https://en.wikipedia.org/wiki/Type_05_amphibious_armored_vehicle",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "zbd": {
+      "n": "ZBD-05两栖步战车",
+      "t": "AFV",
+      "glb": "zbd05",
+      "len_m": 9.5,
+      "first": "~2006",
+      "builder": "兵器工业集团",
+      "src": [
+        {
+          "ref": "同 ZTD-05 车族",
+          "url": "https://en.wikipedia.org/wiki/Type_05_amphibious_armored_vehicle",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "hq9": {
+      "n": "红旗-9防空营",
+      "t": "SAM",
+      "glb": "hq9",
+      "len_m": 11,
+      "first": "~2005",
+      "builder": "航天科工",
+      "note": "导弹弹体约6.5m；阵地为营级单元",
+      "src": [
+        {
+          "ref": "维基百科 HQ-9",
+          "url": "https://en.wikipedia.org/wiki/HQ-9",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "yj62": {
+      "n": "鹰击-62岸舰导弹营",
+      "t": "SSM",
+      "glb": "yj62",
+      "len_m": 11.5,
+      "first": "~2006",
+      "builder": "航天科工",
+      "note": "导弹弹体约7m",
+      "src": [
+        {
+          "ref": "维基百科 YJ-62",
+          "url": "https://en.wikipedia.org/wiki/YJ-62",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "radar": {
+      "n": "岸基雷达站",
+      "t": "RDR",
+      "glb": null,
+      "thumb": "radar",
+      "len_m": 8.4,
+      "first": null,
+      "builder": null,
+      "note": "虚构阵地单元，无固定型号",
+      "src": [
+        {
+          "ref": "游戏抽象（虚构）",
+          "url": "",
+          "date": "2026-10-30",
+          "conf": "C"
+        }
+      ]
+    },
+    "gun": {
+      "n": "岸炮阵地",
+      "t": "ART",
+      "glb": null,
+      "thumb": "gun",
+      "len_m": 10,
+      "first": null,
+      "builder": null,
+      "note": "虚构阵地单元，无固定型号",
+      "src": [
+        {
+          "ref": "游戏抽象（虚构）",
+          "url": "",
+          "date": "2026-10-30",
+          "conf": "C"
+        }
+      ]
+    },
+    "fujian": {
+      "n": "福建舰（003型电磁弹射航母）",
+      "t": "CV",
+      "glb": "",
+      "thumb": "fujian",
+      "len_m": 316,
+      "first": "2025-11-05",
+      "builder": "江南造船厂",
+      "src": [
+        {
+          "ref": "新华社：福建舰 2025-11-05 在海南三亚入列；海军发言人证实歼-35/歼-15T/歼-15D/空警-600/直-20系列研制配套",
+          "url": "https://www.fujian.gov.cn/jdhy/hygq/202511/t20251109_7031692.htm",
+          "date": "2025-11-08",
+          "conf": "A"
+        }
+      ]
+    },
+    "j35": {
+      "n": "歼-35隐身舰载战斗机",
+      "t": "FGTR",
+      "glb": "",
+      "thumb": "j35",
+      "len_m": 17.4,
+      "first": "2025",
+      "builder": "沈阳飞机工业集团",
+      "src": [
+        {
+          "ref": "环球网：2025-09 歼-35 在福建舰完成弹射起飞与着舰训练，与歼-15T 高低搭配",
+          "url": "https://3w.huanqiu.com/a/24d596/4ScNSkPPu7J",
+          "date": "2025-09",
+          "conf": "A"
+        }
+      ]
+    },
+    "j16": {
+      "n": "歼-16多用途战斗机",
+      "t": "FGTR",
+      "glb": "",
+      "thumb": "j16",
+      "len_m": 21.9,
+      "first": "2015",
+      "builder": "沈阳飞机工业集团",
+      "src": [
+        {
+          "ref": "维基百科 Shenyang J-16（侧卫家族 21.9m，东部战区对海打击主力挂载鹰击-83K/鹰击-91）",
+          "url": "https://en.wikipedia.org/wiki/Shenyang_J-16",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "h6k": {
+      "n": "轰-6K轰炸机",
+      "t": "BMB",
+      "glb": "",
+      "thumb": "h6k",
+      "len_m": 34.8,
+      "first": "2013",
+      "builder": "西安飞机工业集团",
+      "src": [
+        {
+          "ref": "维基百科 Xi'an H-6（H-6K 换 D-30KP-2 涡扇，可挂 6 枚鹰击-12/LRKJ-900）",
+          "url": "https://en.wikipedia.org/wiki/Xi%27an_H-6",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "f056a": {
+      "n": "056A型轻型护卫舰",
+      "t": "FFL",
+      "glb": "",
+      "thumb": "f056a",
+      "len_m": 89.5,
+      "first": "2017",
+      "builder": "黄埔文冲/沪东中华",
+      "ship": [
+        "ffg",
+        8.95
+      ],
+      "src": [
+        {
+          "ref": "维基百科 Type 056A corvette（89m/1,500t，反潜型加装拖曳声呐，海峡/近海巡逻）",
+          "url": "https://en.wikipedia.org/wiki/Type_056_corvette",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "j20": {
+      "n": "歼-20隐身战斗机",
+      "t": "FGTR",
+      "glb": "",
+      "thumb": "j20",
+      "len_m": 20.3,
+      "first": "2017",
+      "builder": "成都飞机工业集团",
+      "src": [
+        {
+          "ref": "维基百科 Chengdu J-20",
+          "url": "https://en.wikipedia.org/wiki/Chengdu_J-20",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "kj500": {
+      "n": "空警-500预警机",
+      "t": "AEW",
+      "glb": "",
+      "thumb": "kj500",
+      "len_m": 34.0,
+      "first": "2015",
+      "builder": "陕西飞机工业集团",
+      "src": [
+        {
+          "ref": "维基百科 Shaanxi KJ-500（运-9 平台、碟形有源相控阵雷达）",
+          "url": "https://en.wikipedia.org/wiki/Shaanxi_KJ-500",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "y8q": {
+      "n": "运-8Q反潜巡逻机（高新六号）",
+      "t": "MPA",
+      "glb": "",
+      "thumb": "y8q",
+      "len_m": 34.0,
+      "first": "2015",
+      "builder": "陕西飞机工业集团",
+      "src": [
+        {
+          "ref": "维基百科 Shaanxi Y-8 变型（Y-8Q 高新六号反潜机）",
+          "url": "https://en.wikipedia.org/wiki/Shaanxi_Y-8",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "df16": {
+      "n": "东风-16短程弹道导弹",
+      "t": "SRBM",
+      "glb": "",
+      "len_m": 0,
+      "first": "2011",
+      "builder": "火箭军",
+      "src": [
+        {
+          "ref": "维基百科 DF-16（射程约 1,000km，常规弹头）",
+          "url": "https://en.wikipedia.org/wiki/DF-16",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "df17": {
+      "n": "东风-17高超音速弹道导弹",
+      "t": "SRBM",
+      "glb": "",
+      "len_m": 0,
+      "first": "2019",
+      "builder": "火箭军",
+      "src": [
+        {
+          "ref": "维基百科 DF-17（乘波体弹头，射程 1,800~2,500km）",
+          "url": "https://en.wikipedia.org/wiki/DF-17",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "df26": {
+      "n": "东风-26中远程弹道导弹",
+      "t": "SRBM",
+      "glb": "",
+      "len_m": 0,
+      "first": "2016",
+      "builder": "火箭军",
+      "src": [
+        {
+          "ref": "维基百科 DF-26（射程约 4,000km，具备反航母能力）",
+          "url": "https://en.wikipedia.org/wiki/DF-26",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "cj10a": {
+      "n": "长剑-10A陆射巡航导弹",
+      "t": "CM",
+      "glb": "",
+      "len_m": 0,
+      "first": "2012",
+      "builder": "火箭军",
+      "src": [
+        {
+          "ref": "维基百科 CJ-10 巡航导弹家族（射程约 1,500km）",
+          "url": "https://en.wikipedia.org/wiki/CJ-10",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "phl191": {
+      "n": "PHL-191远程箱式火箭炮",
+      "t": "MLRS",
+      "glb": "",
+      "len_m": 0,
+      "first": "2019",
+      "builder": "中国兵器工业集团",
+      "src": [
+        {
+          "ref": "维基百科 PHL-16/PHL-191（370mm 箱式，射程 350km 级，750mm 火箭弹更远）",
+          "url": "https://en.wikipedia.org/wiki/PHL-16",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "yj12b": {
+      "n": "鹰击-12B岸舰导弹团",
+      "t": "SSM",
+      "glb": "",
+      "len_m": 0,
+      "first": "2015",
+      "builder": "东部战区海军岸导团",
+      "src": [
+        {
+          "ref": "海峡雷霆-2025A 官方画面：东海舰队岸舰导弹第3团鹰击-12 前出浙东海岛预设阵地（射程400km+、4马赫）",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzU4MTkyNTE5Mg==&mid=2247484318&idx=1&sn=67bd02699bc6bed452dce335903afb86",
+          "date": "2025-04",
+          "conf": "A"
+        }
+      ]
+    },
+    "airbase": {
+      "n": "前线机场（龙田/惠安/漳州/汕头/兴宁）",
+      "t": "AFB",
+      "glb": "",
+      "len_m": 2500,
+      "first": "1956",
+      "builder": "东部战区空军",
+      "src": [
+        {
+          "ref": "联合早报：福建龙田（170km）、惠安（190km）、漳州直升机基地扩建跑道/弹药掩体/机堡；汕头外砂部署运-8Q/空警-500，兴宁部署轰-6K",
+          "url": "https://www.zaobao.com/news/china/story20221024-1325786",
+          "date": "2022-10-24",
+          "conf": "B"
+        }
+      ]
+    },
+    "hf2e": {
+      "n": "雄风-2E巡航导弹发射连（791旅）",
+      "t": "CM-TEL",
+      "glb": "",
+      "len_m": 0,
+      "first": "2008",
+      "builder": "中山科学研究院",
+      "src": [
+        {
+          "ref": "台空军防空791旅 641/642营装备增程型雄风-2E：一连3部4联装发射架，部署台岛西北部",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA5MDI1MTkyNQ==&mid=2247489126&idx=1&sn=1ba3b947d60e8d155c2f29a7bb03d5ea",
+          "date": "2025-10",
+          "conf": "B"
+        }
+      ]
+    },
+    "tk1": {
+      "n": "天弓一/二型防空连（天龙阵地）",
+      "t": "SAM-F",
+      "glb": "",
+      "thumb": "tk1",
+      "len_m": 9,
+      "first": "1993",
+      "builder": "中山科学研究院",
+      "src": [
+        {
+          "ref": "防空793旅611营3连+794旅612营3连装备天弓一/二，混凝土固定阵地；792旅613营装备天弓三",
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA5MDI1MTkyNQ==&mid=2247489126&idx=1&sn=1ba3b947d60e8d155c2f29a7bb03d5ea",
+          "date": "2025-10",
+          "conf": "B"
+        },
+        {
+          "ref": "「天龙阵地」部署口径：长白雷达太庞大只能固定部署，阵地内「地下发射井（天弓二，约200km）＋车载发射架（天弓一，约100km）」混编；卫星图核对为每阵地 5 座井、全岛 27 座井，机动的是天弓三",
+          "url": "http://mil.news.sina.com.cn/p/2008-01-19/1011481872.html",
+          "date": "2008-01-19",
+          "conf": "B"
+        }
+      ]
+    },
+    "jiashan": {
+      "n": "佳山地下机库基地（建安三号）",
+      "t": "UGB",
+      "glb": "",
+      "len_m": 2500,
+      "first": "1992",
+      "builder": "台军828工程",
+      "src": [
+        {
+          "ref": "佳山基地：花莲花岗岩山体坑道可停250架战机，2500m跑道连接花莲机场，8吨铁门60秒开启；台东志航基地三座大型机库相呼应；苏花公路80km按跑道标准改造为战备道",
+          "url": "https://mil.sohu.com/a/1076254070_121973710",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    },
+    "hengshan": {
+      "n": "衡山地下指挥所（鸡南山）",
+      "t": "CHQ",
+      "glb": "",
+      "len_m": 0,
+      "first": "1970s",
+      "builder": "台军",
+      "src": [
+        {
+          "ref": "衡山指挥所：台北鸡南山山体三层坑道20余公里，防爆大门/独立发电/储水供氧，可数周独立运转；圆山、龙山备用指挥所同步建成",
+          "url": "https://m.toutiaocdn.com/a7676845214593466909",
+          "date": "2026-09",
+          "conf": "B"
+        }
+      ]
+    },
+    "fueldepot": {
+      "n": "左营军港油库与弹药总库",
+      "t": "FUEL",
+      "glb": "",
+      "len_m": 0,
+      "first": "1937",
+      "builder": "台海军",
+      "src": [
+        {
+          "ref": "左营港油库数十座总储油量14万吨（地下/半地下），寿山海军弹药总库储量1.37万吨（隧道山洞式掩体）；左营造船厂干船坞3座为最大修舰基地",
+          "url": "https://baike.baidu.com/item/左营港/3296650",
+          "date": "2024",
+          "conf": "B"
+        }
+      ]
+    }
+  }
+}
